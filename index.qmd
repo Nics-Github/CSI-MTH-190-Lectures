@@ -120,6 +120,26 @@ h1{font-weight: 400;}
 
 <!-- # This is where you got to Fall 2024 -->
 
+# Day 37-39
+
+A short bit on common website troubles. 
+
+A 404.qmd page for those interested. 
+
+Lab 8/ Project 3/ website workdays
+
+
+::: {.callout-warning collapse="false"}
+# This week's office hours: 
+
+Monday 8:15 am - 9:15 and 2 - 3 pm
+
+Wednesday 8:15-9:20 am 
+
+Friday 2:30-3:50 pm
+
+:::
+
 # Day 36 Lab -8 - SQL
 
 [lab 8](https://classroom.github.com/a/eoVloa7S)
