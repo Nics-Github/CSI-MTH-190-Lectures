@@ -83,9 +83,6 @@ h1{font-weight: 400;}
 
 <!-- ::: -->
 
-<!-- Website/Project 3 work day.  -->
-
-<!-- Late work for labs 5,6,7 and 8 is due Wednesday May 1. [Fill out this form](https://forms.gle/VJZy56Y5GStmgjtC8) -->
 
 <!-- # Day 37 -->
 
@@ -123,25 +120,22 @@ h1{font-weight: 400;}
 
 <!-- # This is where you got to Fall 2024 -->
 
-<!-- # Day 36 Project 3 and Final Project -->
+# Day 36 Lab -8 - SQL
 
-<!-- The final project instructions can be found [here](./course-materials/Final-Project/Project.qmd).  -->
+[lab 8](https://classroom.github.com/a/eoVloa7S)
 
-<!-- Today and Wednesday you should mostly work on Project 3 in class -->
-
-<!-- # Day 35 Project 3 -->
-
-<!-- [Here is the link to project 3.](https://classroom.github.com/a/byNX6O7W)  -->
-
-<!-- I encourage you to work with a new partner in the class to experiance what it is like working with another person on github.  -->
-
-<!-- # Day 34 SAL guests -->
-
-<!-- [Jon Caris and Kala'i Ellis](https://docs.google.com/presentation/d/1s6YGENIbpoSxuAcfiv_E6Lv5kRv15lDMJ9BE8BNS2uU/edit?usp=sharing) -->
 
 # Day 34 and 35 Project 3
 
 Project 3 work days. 
+
+::: {.callout-note collapse="false"}
+
+# Office hours
+I'll hold some additional office hours this afternoon from 1:30-2:30.
+
+Monday April 28 I have to push my office hours to later time: 2-3pm.
+:::
 
 ::: {.callout-note collapse="true"}
 
