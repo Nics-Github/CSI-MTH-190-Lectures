@@ -1,0 +1,14 @@
+---
+title: "just to get and shink the world cube data"
+
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+wc_data = read_tar("https://www.worldcubeassociation.org/export/results/v2/tsv",
+skipNul)
+
+```

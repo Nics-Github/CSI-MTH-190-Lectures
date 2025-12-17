@@ -1,0 +1,180 @@
+---
+title: "CSI-MTH 190: Intro to Data Science"
+subtitle: "Lab 4: Intro to Wrangling and Cleaning"
+author: "Nicholas Schwab"
+date: "today"
+format:
+  html:
+    embed-resources: true
+---
+
+Introduction: In this lab you will practice with some data manipulation functions. They come from the `dplyr` package. Their cheatsheet can be found [here](https://rstudio.github.io/cheatsheets/html/data-transformation.html).
+
+Specifically we'll practice with:
+
+- filter() 
+- mutate() 
+- case_when() 
+- slice_*() 
+- group_by() and 
+- sumarize()
+
+We'll practice on the dataset `babynames`, which lists a summary of every name of every child born in the US and given a social security number since 1880. I'll start with an example then give you some practice problems at the end.
+
+## Install a package
+
+It is not difficult to install packages in R. You only need to know the name of the package, and be sure its on CRAN. With the install.packages() function R will reach out to CRAN and download the package we want. Here is its [CRAN page](https://cran.r-project.org/web/packages/babynames/index.html).
+
+Together let's navigate to the [github](https://github.com/hadley/babynames) repository to see how to install the released version `babynames`. Then make a new chunk and paste that command:
+
+```{r}
+#install.packages("babynames")
+```
+
+After you install babynames once, be sure to comment that line of code out.
+
+## Understand the data
+
+```{r}
+#Load the packages we need
+library(tidyverse)
+library(babynames)
+```
+
+You should always understand what your data look like. Call up the help menu or view the data with `head()` or `view` in a chunk below. The data, like the package is called `babynames`.
+
+```{r}
+?babynames
+# warning sometimes data is so big it is challenging to view it this way, and head() is better.
+view(babynames)
+```
+
+## mutate()
+
+`mutate()` creates new columns. I'd like to add a column that shows the total number of babies born to a name in a given year. To do this we'll have to manipulate n - the number of babies born with a name in a `year` and `prop` - the proportion of the total babies born that year with that name. You'll have to do some algebra:
+
+Start with n/total = prop and solve for total.
+
+Then you'll pipe babynames into mutate(total = ...)
+
+**Example:** Make a new column that shows the total number of babies born in a given year. Save your data frame as babynames, overwriting the original babynames.
+
+```{r}
+babynames = babynames|>
+    mutate(total_births = n/prop)
+view(babynames)
+```
+
+**Example:** After viewing the data why is total_births not exactly the same in a given year?
+
+## case_when()
+
+Sometimes we'd like to rename the levels of a column based on what they currently say. For example sometimes data is stored as 0 for 'no' and 1 for 'yes'. If you want your data to say 'no' and 'yes' instead of 0 and 1 you can change the levels with a case_when(). `case_when()` comes from the `dplyr` package and the arguments are formulas (i.e y~x). It looks like this: `case_when(old_value~new_value)`
+
+For example let's change all of the years from before 1900 to "pre-1900", all the years from before 2000 to "pre-2000" and all the years after 2000 to "post-2000"
+
+```{r}
+babynames = 
+    babynames |> mutate(
+    # Note we are making a new column called year_str.
+    year_str = case_when(
+        year < 1900 ~ "pre-1900",
+        year < 2000 ~ "pre-2000",
+        year >= 2000 ~ "post-2000" ,
+        # Think of the True as the else, or catch all in case we missed a year.
+        TRUE ~ NA
+        )
+)
+
+```
+
+## slice_*()
+
+The slice family will subset rows based on conditions. `slice_max()` grabs the thes with maximum value. `slice_min()` the rows with the minimum value, there are also other slice_*() functions. Let's use `slice_max()` to find the five years when the most babies were born.
+
+```{r}
+babynames |>
+    # note that the first n, is the column name in babynames
+    # the second n is a parameter of slice_max, it is the number of rows we want. 
+    slice_max(order_by = n, n=5)
+```
+
+This is not quite what we want. Its the largest number of births per name/sex by year. If we want to get the largest five years we'll have to summarize a bit first.
+
+## group_by and sumarize()
+
+If we want to find the top five years, for all the babies born in that year we'll have to first group_by() year. Summarize accordingly then slice_max().
+
+```{r}
+babynames |>
+    group_by(year)|>
+    summarise(total = sum(n)) |>
+    slice_max(total, n=5)
+
+```
+
+Which gives years that coincide with the boomer generation.
+
+## filter()
+
+If you wanted to see what year had the highest total births for a given name you could filter by that name first. For example I might filter for Nic or Nicholas as those are two names I go by often. Then I would repeat the analysis above to find which year had the most children named Nicholas born.
+
+```{r}
+babynames |>
+    filter(name %in% c("Nic", "Nick", "Nicholas"))|>
+    group_by(year)|>
+    summarise(total = sum(n)) |>
+    slice_max(total, n=10)
+
+```
+
+When filtering by multiple values its important to use the %in% operator. When just one value you can use == instead. Also the c() struture in R is called a vector. It is similar to a list or an array in other languages. Data Frames are really just a bunch of vectors put together.
+
+## Exercises Part 1
+
+```{r}
+# This just resets the babynames dataframe to the original, not the one we edited in the lines above. 
+babynames = babynames::babynames
+```
+
+In the following set of exercises I will guide you through the process of making a graph of your name for the years 1880- 2017.
+
+**Problem 1:** The first thing you want to do is filter() the data so that is only includes your name and similar nicknames. After you filter save your data to a variable like babyname_yourname.
+
+**Solution:** Make a chunk for the filtering below.
+
+**Problem 2:** Now that we've filtered we should make a line graph of the number of babies born n by the year they were born.
+
+**Solution:** Make a chunk and use `ggplot()` and `geom_line()` complete problem 2.
+
+**Problem 3:** You'll notice there is a problem, depending on your name, your graph probably oscillates to make a jagged appearance. Your task is to figure out why its happening and fix it with `group_by()` and `summarize()`, then pipe it into a new line graph without it oscillating. Then tidy up your line graph with a title, better axes labels and a better looking theme.
+
+**Solution:**
+
+## Excercises Part 2
+
+What I'd like to do now is divide up the years by generations then make a bar graph of the total births by generation. The goal is to understand the total number of births in each generation.
+
+To do this we'll have to agree on dates for common generation names in the US. Here is one breakdown listed on [wikipedia](https://en.wikipedia.org/wiki/Generation#List_of_social_generations).
+
+| Years        | Name                |
+|--------------|---------------------|
+| 1883-1900    | Lost Generation     |
+| 1901-1927    | Greatest Generation |
+| 1928-1945    | Silent Generation   |
+| 1946-1964    | Baby Boomers        |
+| 1965-1980    | Generation X        |
+| 1981-1996    | Milennials          |
+| 1997-2012    | Zoomers             |
+| 2013-present | Generation Alpha    |
+
+
+**Problem 4:** Use `case_when()` and `mutate()` to add a new column called "generation_name" that takes the year column and labels it with the correct generation. Save this dataframe as `generations`.
+
+**Solution:**
+
+**Problem 5:** Using the `generations` dataframe, group_by() and summarize() find the total number of births by generation, then use geom_col() to make a nice bar graph showing the generation_name on the y-axis and the total births on the x-axis.
+
+**Solution:**
+
+**Problem 6:** Edit the code above to group by biological sex as well as years. Then remake the graph to color by sex. What do you notice?  

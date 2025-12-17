@@ -1,0 +1,265 @@
+---
+title: "CSI-MTH 190: Intro to Data Science"
+subtitle: "Lab 1: Intro to RStudio"
+author: "Nicholas Schwab"
+date: "today"
+format:
+  html:
+    embed-resources: true
+---
+
+```{r global_options, include = FALSE}
+# This chunk is used to load in one of the main libraries we'll be using in this course. To run the chunk press the little green triangle in the upper right hand corner. 
+library(tidyverse)
+```
+
+## Introduction and goal:
+
+The goal of this assignment is to get you familiarized with R, Rstudio and working in an Quarto file. These types of files have the suffix .qmd. If you took MTH 142/192 statistics with me, they are the new version of Rmarkdownfiles. You will have to read the text in this file to learn and type code into the code chunks. There is also a video of me working through this assignment available on canvas. At the end you will render this file as a self-contained html file and turn it in by uploading it to canvas. This file will be graded by your peers (and me) using an answer key provided after the assignment is due.  
+
+Most importantly if you find yourself getting stuck on this assignment post to the forums with a screen shot of where you are stuck or a question. Don't get stuck for hours, just ask for help. 
+
+## The yaml
+
+The little bit of code at the top of this document, between some hyphens - - - , is called the yaml. The yaml for this document starts at line 1 and ends at line 9. The line numbers are on the left hand side of this document. If you don't see them you may need to switch from visual mode to source mode. You can add your name to the yaml, but you don't need to as this assignment will be peer graded, and canvas keeps track of the work you turn in. 
+
+## A note on labs
+
+In MTH 190 you will get lots of practice doing data science through these labs. You will have several labs during this course that will help you do this with one of my favorite R packages: the tidyverse. The tidyverse is a collection of subpackages, which you will get to know as the course builds. If you are familiar with python (another language popular with data scienctists) the tidyverse is the equilvalent to numpy, pandas, and matplotlib. To load the tidyverse into RStudio you need to press the green triangle of the grey rectangle above (look around line 11 to 15). That grey rectangle is called a code chunk. We type code into chunks to get R to do things.  The white space is for normal text. 
+
+In this lab the goal is to warm up with some plotting. You will have 5 questions at the end which will be graded. Finally you will know if you have done your lab correctly if you are able to render without errors. (Getting errors is normal and common. If you are unable to fix them, go to office hours, tutoring, or post a screen shot to the discussion). Turn in the rendered .pdf to canvas before the due date (or the 24 hour grace period). You will grade your peers' labs, as labs are not accepted after the grace period. One lab will be dropped. You can do it. 
+
+## The RStudio Interface
+
+This platform your are working in is called Rstudio. In my lectures you will hear words like: **console**, **r-markdown**, and **environment pane**. Take a moment to get to know more about the four main panes of RStudio.[See this site for info on the panes](https://teacherscollege.screenstepslive.com/a/1426910-panes-in-rstudio). If you watch the video for this assignment I will point the panes out to you. 
+
+## Part 1 Code Chunks 
+
+Code chunks are grey and look like this:
+
+```{r}
+#This is an empty code chunk. The computer will not evaluate this green text with a leading # sign. It is called a comment. 
+
+```
+
+To make a new chunk you can copy and paste the one above, click on the little green square with a c on the upper right, or manually type ```{r}   then ```. Those symbols are called "back ticks" and they live above the tab key on your keyboard. 
+
+To run a code chunk you press the little green triangle. (You should have already done this to load the tidyverse package, if you haven't, do it now).
+
+# Part 2 Look at Data
+
+To look at data you can simply type the name of the data frame into a code chunk. Let's look at a classic: the `faithfuld` dataset, which is built into the tidyverse, specifically the package `ggplot`.
+
+```{r}
+faithfuld
+
+```
+
+If you get a red message : "Error: object 'faithfuld' not found" You need to go back up to line 10 or 11 and click the green triangle to load the openintro package.  
+
+You should see a spreadsheet-looking-grid called a dataframe. It has 3 variables: eruptions, waiting, density. We will discuss more on variables in the next few assignments and readings.
+
+Where does the data come from? What are the units for price and weight? To answer these questions we can use the ? operator to pull up the documentation of this data. The chunk below does this for you. Run the chunk below by pressing the green triangle.  
+
+```{r, eval=FALSE}
+# This will bring up the cars93 documentation in the help menu to the right. 
+?faithfuld
+
+```
+
+`faithfuld` is actually an updated `faithful` dataset. To find where the data is from we need to click the hyperlink in the description. 
+
+It also says there are 5625 observations in the dataset which means 5625 eruptions represented in the data. Each observation is one row. Each row is information on one eruption. This is a tidy layout for data.
+
+## Part 3 Functions
+
+There are several functions we will use during this course. There are a lot to remember and you can find them on various cheatsheets that I'll show you as the course progresses. You may want to write down some that you think will be useful later, or at least keep a seperate file where you put your favorite bits of code. All functions when programming in R have parenthesis () after them. 
+
+Some functions are built into R and some come from the tidyverse package. I'll try to distingish where each function comes from as we learn about it, this will help you find it on the cheat sheet. Let's take a look as one function that is built into R, `head()`.
+
+`head()` allows you to take a look at the first 6 rows of a dataset, it lists variables and their types in a convienient way. 
+
+```{r}
+# we put the data faithfuld into the head() function
+head(faithfuld)
+
+```
+
+
+## Part 4 Plotting
+
+When getting acquainted with data there are several different plots that we will look at to help us visualize data. One plot that is useful for visualizing numeric data is the histogram. Let's plot a histogram showing the waiting time by running the chunk below. 
+
+```{r}
+# This is code for a histogram
+ggplot(data = faithfuld)+
+  geom_histogram(mapping = aes(x= waiting))
+
+```
+
+Every time we make a plot we will put our data into the ggplot() function as above. The second line tells R what kind of plot we want to make, it is called a geom. We will make many geoms in this class and there are examples of them on the cheat sheets. Notice that these two functions are connected with a plus (+) symbol.
+
+This graphic isn't great, and we can adjust it by changing the arguments within the geom_histogram function. Let's add a binwidth parameter and change its values from 10,20,30,40. Just to see what happens and what we can learn form the data. 
+
+```{r}
+# This is code for a histogram
+ggplot(data = faithfuld)+
+  geom_histogram(mapping = aes(x= waiting), binwidth = 10)
+
+```
+
+## Part 5 Variables
+
+All computer languages utilize the concept of variables to store data, which is different from the variables we saw in the dataframe `faithfuld`. For example the variable `a_number` below is not a data frame variable. 
+
+```{r}
+a_number = 2
+```
+
+This can be confusing. In the sense above we are saving the variable a_number so we can use it later. We can even do this with the graph made above. I'll save it as `old_faithful_bins_10`.
+
+```{r}
+old_faithful_bins_10 = ggplot(data = faithfuld)+
+    geom_histogram(mapping = aes(x= waiting), binwidth = 10)
+
+```
+
+
+Now if I make a chunk an run `old_faithful_bins_10` I'll see the graph. 
+
+```{r}
+old_faithful_bins_10
+```
+
+## Practice
+
+The following problems will be graded by your peers. You will be looking at a new dataset called mpg. All problems are similar to those discussed above. If you need help check out the examples above first. If you are stuck for a few minutes post a screenshot to the discussion forum or come to office hours. I usually reply to posts within 24 hours, unless its the weekend. Whatever happens don't get stuck for hours, that's no fun. 
+
+
+1. Make a chunk below and use it to view mpg. 
+
+**Answer by typing into the chunk below**
+
+```{r}
+
+
+```
+
+
+
+2. In the chunk below use the ? operator to take a look at the documentation for mpg.  Type the code in the chunk, but type your answers to the questions outside of a chunk in the whitespace. 
+
+```{r, eval=FALSE}
+
+
+```
+
+2a. How many cars are in this data frame? 
+
+**Answer:**
+
+
+2b. How many variables are in this data frame?
+
+**Answer:**
+
+2c. How many observations are in this data frame? Note: this question should be different than part 2a. 
+
+**Answer:**
+
+
+3. Use head() to take a look at the first 6 rows of data.
+
+**Answer by making and typing into the chunk below**
+
+
+
+4. Make a histogram of the cty variable. hint: There is nothing wrong with copy and pasting the code from above then editing it for the mpg data. There is a parameter called bins, add it to the geom_histrogram() function and set the number of bins to 10.  What is one interesting thing this hisogram shows you about the data? 
+
+**Answer by making and typing into the chunk below**
+
+```{r}
+ggplot(data = mpg)+
+    geom_histogram(aes(cty),
+                    bins = 10
+    )
+```
+
+
+**Answer: **
+
+Nice work on the 4 parts above. 
+
+5. Take your plot from part 4 and save it as the variable `mpg_cty_bins_10`. 
+
+
+
+
+<!-- 
+Note: This section has been commented out as we'll be working with html files instead of pdfs as I've done in the past. 
+
+5. This is not really an exercise, but something you have to do once. You have to install tinytex on your instance of RStudio. Tinytex helps us turn .rmd files into .pdf files. You will never have to do this again for this class. Carefully run the chunks below to install Tinytex.
+
+First see if you have tinytext. If the output below is false then you do not have tinytex installed and you need to go to the next chunk. 
+```{r, eval=FALSE}
+tinytex::is_tinytex()
+```
+If you got a false, you need to install tinytex. Run the chunk below. This takes a few moments. 
+
+```{r, eval=FALSE}
+#This installs tinytex
+tinytex::install_tinytex()
+```
+We need to restart before we check again to see if you have successfully installed tinytex. Go to the menu above to Session > Restart R. Then run the chunk below. Hopefully you get "true" and you can skip to part 6.  
+
+```{r, eval=FALSE}
+tinytex::is_tinytex()
+```
+
+Don't run the chunk below if you just got True, skip to part 6. If you do not get true, don't worry, there's a backup method to install. Run the chunk below.
+
+```{r, eval=FALSE}
+#This is the backup
+install.packages("tinytex")
+
+```
+
+Run the chunk below to hopefully get true. If you do not get true, try to restart and run the chunk below again. If that doesn't work please send me a message in the forums. 
+
+```{r, eval=FALSE}
+tinytex::is_tinytex()
+```
+
+6. Assuming you successfully installed tinytex, you can now render this file to a pdf then download this file to your computer and upload to canvas for grading. There are several ways to download this file, but here is one method:
+
+-   Click "render" at the top. If you get an error while renderting, post a screen shot of the problematic lines to the R_Assignment_0 discussion forum. You can also see me do this whole assignment in the video. 
+
+-   In the files pane to the right find the R_Assignment_0.pdf and click the box next to it. 
+
+-   Click the little gear icon and then export. 
+
+-   Find the file on your computer (probably in downloads) and upload it to canvas for peer grading. 
+
+
+
+Wooo you are warmed up to do statistics with R.  -->
+
+
+
+## Resources for learning R and working in RStudio
+
+If you are very interested, see the resources below. This is totally optional.  
+
+That was a short introduction to R and RStudio, but we will provide you with more functions and a more complete sense of the language as the course progresses.
+
+In this course we will be using the suite of R packages from the **tidyverse**. The book [R For Data Science](https://r4ds.had.co.nz/) by Grolemund and Wickham is a fantastic resource for data analysis in R with the tidyverse. If you are Goggling for R code, make sure to also include these package names in your search query. For example, instead of Goggling "scatterplot in R", Goggle "scatterplot in R with the tidyverse".
+
+These may come in handy throughout the semester:
+
+-   [RMarkdown cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/rmarkdown-2.0.pdf)
+-   [Data transformation cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/data-transformation.pdf)
+-   [Data visualization cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/data-visualization-2.1.pdf)
+
+Note that some of the code on these cheatsheets may be too advanced for this course. However the majority of it will become useful throughout the semester.
+
+This lab was modified from the labs on openintro stats 

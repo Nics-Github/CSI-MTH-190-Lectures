@@ -1,6 +1,6 @@
 ---
 title: "Course Overview"
-subtitle: "SDS 192"
+subtitle: "CSI-MTH-190"
 author: "Schwab"
 editor: visual
 format: 
@@ -14,7 +14,7 @@ execute:
 
 -   Take a look at R Studio together
 
--   [Short History of R](https://nics-github.github.io/SDS192/course-materials/lectures/Brief-R-history.html)
+-   [Short History of R](https://nics-github.github.io/SDS192/course-materials/lectures/2_Brief-R-history.html)
 
 ## Data Science Life Cycle
 
@@ -26,7 +26,11 @@ execute:
 
 ## Data Collection
 
-[Collect student data here](https://forms.gle/FQhAau8GuKURoH2p9)
+[Collect student data here](https://forms.gle/s5ZKKf7WNAUvJtVJA)
+
+https://forms.gle/s5ZKKf7WNAUvJtVJA
+
+You must be signed into your HCC email account to fill out form. 
 
 ## Web Scraping and Importing Data ( and a tiny bit of cleaning)
 
@@ -85,20 +89,8 @@ student_data |>
 
 ## Data Ethics
 
-How we use data without doing harm.
+How we collect and use data without doing harm.
 
-## Iteration
-
-```{r}
-# have r do many repeat steps for us. 
-
-print(student_data$one_word_summer_highlight)
-
-```
-
-## Verson Control
-
-With git and github.
 
 ## Introduction to Database Querying with SQL
 
@@ -114,4 +106,12 @@ Wrangle some data with the classic SQL.
 -   Geospatial Data and Maps
 
 -   Learning with AI
+```
+
+## Optional and Advnaced Topics:
+
+```
+-   Function writing and data masking in R
+
+-   Iteration
 ```

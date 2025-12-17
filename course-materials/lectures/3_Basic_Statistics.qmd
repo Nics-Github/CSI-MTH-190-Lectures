@@ -1,0 +1,114 @@
+---
+title: "Basic Statistics"
+subtitle: "CSI-MTH-190"
+author: "Schwab"
+editor: visual
+format: 
+  revealjs: 
+    theme: beige
+execute: 
+  echo: true
+---
+
+# Statistics
+
+If you've taken statistics before this will be a bit of review:
+
+I'll briefly discuss these topics and how to compute them in R.
+
+-   Measures of Center
+
+-   Sample Size
+
+-   Population Size
+
+-   Measures of Spread
+
+## Measures of center
+
+Often we want to know the average of some data.
+
+There are three common ways of doing this.
+
+mean - sum of all values divided by the number of values.
+
+median - the number in the middle of the values.
+
+mode - the most common number.
+
+## The data
+
+Let's make some data. Pretend I went out and asked 4 people who live in Holyoke, MA their salary. Below is a summary of the answers:
+
+| person | salary  |
+|--------|---------|
+| 1      | 40000   |
+| 2      | 50000   |
+| 3      | 60000   |
+| 4      | 1000000 |
+
+: fictional annual salaries from 4 people
+
+To bring these salaries into R we can create a vector with the c() function, and save it to a variable called salaries
+
+```{r}
+salaries = c(40000,50000,60000,1000000) 
+```
+
+##  
+
+## Mean of the Data
+
+We can find the mean of the data with the `mean()` function.
+
+```{r}
+mean(salaries)
+```
+
+In this case r adds up the values and divides by 4.
+
+The mean of the data, in this case, is not a good representation of the people surveyed.
+
+The mean is sensitive to outliers.
+
+## Median of the Data
+
+To find the median we use the `median()` function.
+
+```{r}
+median(salaries)
+```
+
+In this case R finds the number in the middle of the 4. Note there is no number exactly in the middle so R finds the mean of the two closest to the middle (50,000 and 60,000).
+
+In this case the median is a better representation of most of the people we surveyed.
+
+The Median is not sensitive to outliers.
+
+## The Mode
+
+There is no mode function in R, and usually we find the mode just by inspection of the data. We can use the `table()` function for this.
+
+```{r}
+table(salaries)
+```
+
+We can see this data has no mode.
+
+## Sample size
+
+The sample size of our data is the number of observations made. An observation in this case is a person's salary. For our data above the sample size is 4.
+
+## Population size
+
+The population is the total size of the thing you are studying. So the population of the salary data may be everyone that lives in Holyoke, MA.
+
+## Measures of Spread
+
+There are two measures of spread that I'll mention from time to time in this course.
+
+Inner Quartile Range. This is the width between 25% and 75% of the data. We can find it with the `IQR()` function
+
+Standard Deviation. This is the average distance from the mean of the data. We calculate it with the `sd()` function.
+
+We'll discuss these two more as they come up in the course.

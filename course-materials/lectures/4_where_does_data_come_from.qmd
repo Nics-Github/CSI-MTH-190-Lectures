@@ -1,0 +1,122 @@
+---
+title: "Where Does Data Come From"
+subtitle: "CSI-MTH-190"
+author: "Schwab"
+editor: visual
+format: 
+  revealjs: 
+    theme: beige
+execute: 
+  echo: true
+---
+
+## Data is collected by
+
+#### Polling Organizations
+
+example: [Yougov and The Economist Collect Data on the most important issues facing the US](https://today.yougov.com/topics/politics/trackers/most-important-issues-facing-the-us)
+
+#### Researchers
+
+example: [Nihart et al find plastics n brain tissue](https://www.nature.com/articles/s41591-024-03453-1)
+
+#### Companies
+
+example: [Meta Collects Data On Its Users](https://www.facebook.com/privacy/policy/)
+
+#### Governments
+
+example: [The Bureau of Labor Statistics Collects and Publishes Employment figures](https://www.bls.gov/data/#employment)
+
+## We will not be collecting Data
+
+That task is for a methods course. When you collect data you need to do it in a thoughtful way, which requires a fair amount of training.
+
+## We will be using Data
+
+We want to use data to gleen information.
+
+## Import Data
+
+We first have to import data into whatever software we are using to analyze it.
+
+We'll import using three methods in this lecture and We'll see more as the semester progresses.
+
+1.  read_csv()
+2.  read_sheets()
+3.  packages
+
+## Importing a .csv file.
+
+A .csv file is a special type of text document. .csv is short for comma seperated values. Essentially its a text file with commas seperating the data within the file.
+
+The tidyverse has a function called `read_csv()` which will take a .csv file and read it into memory so you can use it.
+
+## Importing a google sheets file
+
+Googlesheets are also very common ways of storing data. There is a package called `googlesheets4` that has the function `read_sheets()` for reading in data from a google sheet.
+
+## Importing from a package
+
+Packages like the tidyverse already have data built in. Often times these data are for educational purposes and are sometimes very out of date.
+
+We'll do this first, as it is the easiest.
+
+## Example 1.
+
+Let's import `txhousing` with the tidyverse. This data is loaded automatically when we load the tidyverse.
+
+```{r}
+# first load the tidyverse
+library(tidyverse)
+# next call the data with txhousing to view it.
+txhousing
+```
+
+Benefiets: Data is easy to import. Documentation is often provided with package. Trust the data is good.
+
+Cons: The data is often outdated. Mostly just for educational purposes.
+
+## Example 2
+
+Let's read in the data from the plastics in brains study.
+
+First we have to download the data from [here](https://datadryad.org/dataset/doi:10.5061/dryad.b8gtht7p8).
+
+Next we have to move it to our current working directory. In most cases this is folder the file is in, if not we can set it.
+
+Finally we have to load the tidyverse and read in the data and save it to memory.
+
+```{r}
+plastic_in_brains = read_csv("path/to/name_of_csv.csv")
+```
+
+## Pros and Cons
+
+Benefiets: The data is current and exactly what we are interested in.
+
+Cons: The documentation is elsewhere. We have to be sure we trust the supplier of data.
+
+## Read from a google sheet.
+
+Finally I'll show how we can read in data from a google sheet.
+
+We collected class data in a google form. That data is now accessible to us as a sheet.
+
+To read in the data: 1. load the tidyverse 2. run `read_sheet()` with the url from our sheet.
+
+```{r}
+class_data = read_sheet("https://docs.google.com/spreadsheets/d/1e9RC6pd5oiBKHxbNc0HrnsW4To_vL7qomnGS43rTsto/edit?usp=sharing")
+```
+
+3.  You will be prompted in the console to cache OAuth Tokens. Select 1 for Yes.
+4.  You might be asked to install `httpuv`, you should do that. Finally You may be taken to a webpage to authorize the tidyverse access, do that too.
+5.  You should only have to do the steps above once.
+
+## Pros and Cons
+
+Same as those from importing .csv files.
+
+## You are ready to go on to the next lecture.
+
+You will need to read in our class data using google sheets to go on to the next lecture and homework assignment.

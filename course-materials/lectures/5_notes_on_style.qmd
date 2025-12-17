@@ -1,21 +1,20 @@
 ---
-title: "Notes on Style"
+title: "Notes On Style"
+subtitle: "CSI-MTH-190"
 author: "Schwab"
+editor: visual
 format: 
-  revealjs:
+  revealjs: 
     theme: beige
-    controls: 
-      true
 execute: 
   echo: true
-editor: visual
 ---
 
 ## The Tidyverse Style Guide
 
 [Tidyverse style guide](https://style.tidyverse.org/index.html)
 
-## 1. files
+## 1. files names
 
 I will use underscores `_`, not spaces to name your files. You can also use `-`
 
@@ -39,18 +38,30 @@ syntax is how the code looks
 
 -   variables should be nouns
 
--   functions should be verbs
+-   functions should be verbs (functions is an optional topic)
 
 -   names should be meaningful and concise.
 
--   Don't reuse built in R names (True, False, c, n)
+-   Don't reuse built in R names (TRUE, mean, c, n, etc. )
 
 ```{r}
 # good
-first_name <- "Nic"
+first_name = "Nic" 
 
 # nmean is a built in function and should not be overwritten
-mean <- "Schwab"
+mean = "Schwab"
+```
+
+## \<- or =
+
+The R community likes to use the \<- for variable assignment. However in most other languages = is used, and it works in R.
+
+I will generally use = in this course. For us they are effectly the same.
+
+```{r}
+first_name = "Nic"
+# same as 
+first_name <- "Nic"
 ```
 
 ## 2.5 More Syntax
@@ -73,7 +84,8 @@ sum( c( x , y , total ) )
 
 ```
 
-## Functions
+````{=html}
+<!-- ## Functions
 
 Indent long lines (R does this automatically)
 
@@ -86,7 +98,9 @@ add <- function(a = "first number",
   a + b + c
   # As usual code is indented by two spaces.
 }
-```
+``` 
+-->
+````
 
 ## Pipes and plus
 

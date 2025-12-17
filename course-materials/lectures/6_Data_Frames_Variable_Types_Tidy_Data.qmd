@@ -1,0 +1,64 @@
+---
+title: "Data Frames Variable Types and Tidy Data"
+subtitle: "CSI-MTH-190"
+author: "Schwab"
+editor: visual
+format: 
+  revealjs: 
+    theme: beige
+execute: 
+  echo: true
+---
+
+## Tidy Data
+
+![](https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png)
+
+Columns are variables.
+
+Rows are observations.
+
+Individual entries are called values.
+
+The data we will deal with in this course is rectangular.
+
+## Variables
+
+Variables can be categorical or numeric.
+
+Variable names should be descriptiver and conform to the style guide.
+
+## Observations
+
+Each observation represents one member of the sample.
+
+If the data is tidy the number of rows equals the number of observations.
+
+## Values
+
+All the values of one variable should be the same type (either numic or categorical).
+
+## Example
+
+Let's `view()` the Violations data from mdsr
+
+```{r}
+# You may need to install mdsr uncomment the line below, then recommend it. 
+#install.packages("mdsr")
+library(mdsr)
+view(Violations)
+
+```
+
+1.  Is each row an observation?
+2.  Is each column a variable?
+3.  Are all values the same type?
+4.  Is the data tidy?
+
+## How R code variables
+
+R give you a hint as to the types of variables in each column, look at the variable names.
+
+categorical: str
+
+numeric: int, dbl (float), POSIXct (times)

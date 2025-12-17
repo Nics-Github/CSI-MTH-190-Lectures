@@ -38,24 +38,43 @@ library(knitr)
 
 
 ## Lectures
+Part 1: Visualizations
 
 -   [1. Overview of Intro to Data Science](./course-materials/lectures/1_Overview_of_the_course.qmd)
 
 -   [2. Brief History of R](./course-materials/lectures/Brief-R-history.qmd)
 
+-   [3. Basic Statistics](./course-materials/lectures/3_Basic_Statistics.qmd)
+
 -   Understand File Structure and Filing system
+
+-   [4. Where does Data Comes From](./course-materials/lectures/4_where_does_data_come_from.qmd)
 
 This can be toned down, students will not be writing functions in this class. 
 [Lecture: Intro to functions](course-materials/lectures/23_functions.qmd) 
 
--   [Notes on Style](course-materials/lectures/5_notes_on_style.qmd)
+-   [5. Notes on Style](course-materials/lectures/5_notes_on_style.qmd)
+
+-   [6 Data Frames Variable Types Tidy Data](course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.qmd)
 
 Should take out the no computers part.
 -   [Data Viz No Computers](./course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.qmd)
 
 -   [Taxonomy of graphs](course-materials/lectures/2_mdsr_viz_1_taxonomy.qmd)
 
+-   [7 Data Ethics part 1]()
+
+-   [8 Taxonomy of Graphs (categorical)](course-materials/lectures/8_taxonomy_of_graphs.qmd)
+
+-   [11 Taxonomy of Graphs (numeric)](course-materials/lectures/11_taxonomy_of_graphics_part_2.qmd)
+
 -   [Discussion: Taxonomy of Graphics](./course-materials/in-class-activies/3Activity_Taxonomy_of_Graphics.qmd)
+
+-   [12 Building a graph](./course-materials/lectures/12_Building_a_graph.qmd)
+
+-   []
+
+Part 2: Wrangling
 
 -   [Color talk](course-materials/lectures/10_color_theory.qmd)
 
