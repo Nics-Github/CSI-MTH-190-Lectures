@@ -9,9 +9,6 @@ about:
     - icon: github
       text: GitHub
       href: https://github.com/Nics-Github
-    - icon: bookmark
-      text: Smith
-      href: https://www.smith.edu/academics/faculty/nicholas-schwab
 ---
 
 **Nicholas Schwab** is a lecture in Statistical and Data Sciences. He is a tenured professor at Holyoke Community College. When not teaching data science, he enjoys rock climbing, biking, and reading childrens' books with his kids.
@@ -47,6 +44,10 @@ about:
     Santa Cruz, CA
 
 ## Experience
+
+-   Professor of Computer Science\
+    [Holyoke Community College](https://www.hcc.edu)\
+    Holyoke, MA 2025--present
 
 -   Lecturer Statistics and Data Sciences\
     [Smith College](https://www.smith.edu)\

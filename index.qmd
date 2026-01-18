@@ -43,6 +43,8 @@ Part 1: Visualizations
 
 -   [1. Overview of Intro to Data Science](./course-materials/lectures/1_Overview_of_the_course.qmd)
 
+-   [Live Coding: Introduction to R and RStudio](https://rstudio.hcc.edu/auth-sign-in?appUri=%2F)
+
 -   [2. Brief History of R](./course-materials/lectures/2_Brief-R-history.qmd)
 
 -   [3. Basic Statistics](./course-materials/lectures/3_Basic_Statistics.qmd)

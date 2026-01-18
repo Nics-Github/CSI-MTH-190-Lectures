@@ -36,12 +36,10 @@ website:
       href: https://mdsr-book.github.io/mdsr3e/
     - text: T & T
       href: https://moderndive.com/C-appendixC.html
-    - icon: slack
-      href: https://www.slack.com
     - text: R
-      href: https://rstudio.smith.edu/auth-sign-in?appUri=%2F
-    - text: m
-      href: https://moodle.smith.edu/
+      href: https://rstudio.hcc.edu/auth-sign-in?appUri=%2F
+    - text: canvas
+      href: https://canvas.hcc.edu
     
     right:
     # - icon: github
@@ -52,8 +50,6 @@ website:
   #    href: projects.Rmd
   # - text: Midterms
   #   href: midterms.html
-    - text: Syllabus
-      href: ./course-materials/syllabus/syllabus.qmd
     - text: Schwab
       href: course-materials/website/schwab.qmd
     # - text: "drop down"
