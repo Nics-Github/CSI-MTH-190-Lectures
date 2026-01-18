@@ -1,6 +1,6 @@
-# SDS 192
+# CSI-MTH 190
 
-Source code to generate the course webpage for Smith College: Introduction to Data Science <https://nics-github.github.io/SDS192/>. Most of the content is in either:
+Source code to generate the course lecture page for Holyoke Community College: Introduction to Data Science <https://nics-github.github.io/CSI-MTH-190-Lectures/>. Most of the content is in either:
 
 -   `_quarto.yml`: Set theme of webpage along with links in navigational bar.
 -   `index.qmd`: A single Moodle-style page that lists all announcements and lectures notes in reverse-chronological order.

@@ -23,8 +23,8 @@ format:
 
 website:   
   page-navigation: true
-  favicon: course-materials/website//images/192.png
-  title: "SDS 192"
+  favicon: course-materials/website/images/US_190.jpg
+  title: "CSI-MTH-190"
   
   
   navbar:
@@ -44,8 +44,8 @@ website:
       href: https://moodle.smith.edu/
     
     right:
-    - icon: github
-      href: https://classroom.github.com/classrooms/196546846-sds-192-spring-2025
+    # - icon: github
+    #   href: https://classroom.github.com/classrooms/196546846-sds-192-spring-2025
   # - text: Problem Sets
   #   href: PS.html
   #  - text: Mini-Projects

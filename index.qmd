@@ -36,10 +36,10 @@ library(knitr)
 ```
 
 
-## Lectures
+# Lectures
 Part 1: Visualizations
 
-### Week 1
+# Week 1
 
 -   [1. Overview of Intro to Data Science](./course-materials/lectures/1_Overview_of_the_course.qmd)
 
@@ -47,7 +47,7 @@ Part 1: Visualizations
 
 -   [3. Basic Statistics](./course-materials/lectures/3_Basic_Statistics.qmd)
 
-### Week 2
+# Week 2
 
 -   [4. Where does Data Comes From](./course-materials/lectures/4_where_does_data_come_from.qmd)
 
@@ -55,7 +55,7 @@ Part 1: Visualizations
 
 -   [6 Data Frames Variable Types Tidy Data](./course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.qmd)
 
-### Week 3 
+# Week 3 
 
 -   [7 Taxonomy of Graphs (categorical)](course-materials/lectures/7_taxonomy_of_graphs_categorical.qmd)
 
@@ -65,7 +65,7 @@ Part 1: Visualizations
 
 -   [10 Color talk](./course-materials/lectures/10_color_theory.qmd)
 
-### Week 4
+# Week 4
 
 -   [11 Taxonomy of Graphs (numeric)](./course-materials/lectures/11_taxonomy_of_graphics_part_3.qmd)
 
@@ -75,11 +75,11 @@ Part 1: Visualizations
 
 -   [13 Data Ethics part 1]()
 
-### Week 5
+# Week 5
 
 -   [Project 1 Intro](./course-materials/lectures/14_2_introduce_project_1.qmd)
 
-### Week 6
+# Week 6
 
 Part 2: Wrangling
 
@@ -89,7 +89,7 @@ Part 2: Wrangling
 
 -   [16 Dplyr Cheat sheet](https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-transformation.pdf)
 
-### Week 7
+# Week 7
 
 -   [17 What you can do in sumarize]()
 
@@ -97,7 +97,7 @@ Part 2: Wrangling
 
 -   [19 Joins part 1 an exploration]()
 
-### Week 8
+# Week 8
 
 -   [20 Joins part 2 an exploration]()
 
@@ -105,11 +105,11 @@ Part 2: Wrangling
 
 -   [22 Placeholder]()
 
-### Week 9 
+# Week 9 
 
 -   [Project 2 Intro]()
 
-### Week 10
+# Week 10
 
 Part 3: Application - Maps
 
@@ -119,33 +119,33 @@ Part 3: Application - Maps
 
 -   [25 Maps part 3]
 
-### Week 11
+# Week 11
 
 -   [26 Maps part 4]
 
-### Week 12
+# Week 12
 
 -   [Project 3 Intro]()
 
-### Week 13
+# Week 13
 
 Part 4: Parallel to SQL
 
 -   [27 SQL]
 
-### Week 14
+# Week 14
 
 -   [28 SQL 1]()
 
 -   [29 SQL 2]()
 
-### Week 15
+# Week 15
 
 -   [30 SQL 3]()
 
 
 
-Discuss the difference between `%in%` and `==`
+<!-- Discuss the difference between `%in%` and `==`
 
 -   [Lecture on Joins](Make this lecture)
 
@@ -305,7 +305,7 @@ Help us help you: take screenshots of your screen and post them to Canvas.
 -   Chromebook: Shift + Ctrl + Show windows
 :::
 
-#### colors
+## colors
 ## Note on colors
 
 We will discuss colors on Monday when you get to them in ex 6:
@@ -316,7 +316,7 @@ Or check out the colors examples on the [cheat sheet](https://posit.co/wp-conten
 
 Intuitive [Color Examples](https://jhudatascience.org/tidyversecourse/dataviz.html#colors)
 
-#### wrangling
+## wrangling
 [dpylr cheatsheet for wrangling](https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf)
 
-[Wrangle babynames](/course-materials/in-class-activies/Wrangling_Baby_Names.qmd)
+[Wrangle babynames](/course-materials/in-class-activies/Wrangling_Baby_Names.qmd) -->
