@@ -46,6 +46,7 @@ Let's `view()` the Violations data from mdsr
 # You may need to install mdsr uncomment the line below, then recommend it. 
 #install.packages("mdsr")
 library(mdsr)
+library(tidyverse)
 view(Violations)
 
 ```

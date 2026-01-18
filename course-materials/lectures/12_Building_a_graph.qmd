@@ -23,8 +23,8 @@ When building graphs with the tidyverse we want the data to be a dataframe. You 
 
 ```{r}
 library(tidyverse)
-#install.packages(mosaicData)
-library(mosaicData)
+#install.packages(mdsr)
+library(mdsr)
 # In OO class() returns the object type. 
 class(iris)
 ```

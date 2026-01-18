@@ -1,0 +1,127 @@
+---
+title: "The Verbs"
+author: "Nic Schwab" 
+format: 
+  revealjs:
+    theme: beige
+editor: visual
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.path = 'figures/', fig.height = 5)
+```
+
+## dplyr lives in the tidyverse
+
+![](https://raw.githubusercontent.com/tidyverse/dplyr/master/man/figures/logo.png){fig-align="center"}
+
+## SDS 100 Lab 4
+
+::::: columns
+::: {.column width="50%"}
+You've learned about these verbs:
+
+-   `select()`
+
+    -   subsets columns
+
+-   `filter()`
+
+    -   subsets rows
+
+-   `mutate()`
+
+    -   creates new variables (or columns)
+
+-   `arrange()` / `arrange(desc())`
+:::
+
+::: {.column width="50%"}
+We will also use:
+
+-   `group_by()`
+
+    -   to group the data before summarizing
+
+-   `summarize()`
+
+    -   to summarize data
+
+-   `rename()`
+
+    -   to rename columns
+:::
+:::::
+
+## Recall SQL Queries
+
+| SQL      | dplyr                           |
+|----------|---------------------------------|
+| SELECT   | select(), mutate(), summarise() |
+| FROM     | the data frame. data=           |
+| WHERE    | filter()                        |
+| ORDER BY | arrange()                       |
+| LIMIT    | slice_head()                    |
+| GROUP BY | group_by                        |
+
+## The idea
+
+You can get good at a few functions and do a lot.
+
+The first argument is a data frame.
+
+-   its a special kind called a tibble.
+
+The output of the wrangling functions is a data frame.
+
+When we wrangle we are not altering the original data.
+
+-   It still exists.
+
+-   You can start over.
+
+## What is a tibble?
+
+::::: columns
+::: {.column width="50%"}
+![](http://hexb.in/hexagons/tibble.png){width="90%"}
+:::
+
+::: {.column width="50%"}
+-   Object of class `tbl`
+
+-   [Its different from a data frame.](https://jtr13.github.io/cc21fall1/tibble-vs.-dataframe.html)
+:::
+:::::
+
+## Group by example
+
+Live code with the `mpg` data frame.
+
+Open R or Smith's [RStudio Server](https://rstudio.smith.edu/auth-sign-in?appUri=%2F)
+
+## Practice wrangling
+
+[In class MDSR Problems 1 and 2](https://mdsr-book.github.io/mdsr2e/ch-dataI.html#dataI-exercises)
+
+```{r, Random_subset }
+#| code-summary: "Make the Random_subset data frame."
+#| echo: TRUE
+
+ # Copy this code into a chunk in R to make the Random_subset data frame from problem 1 and 2.
+ # Use the verbs we've discussed to make the subsets from the text.
+ Random_subset <-  tibble::tribble(
+     ~year,~sex,   ~name,         ~n, ~prop,
+      2003, "M",     "Bilal",        146, 0.0000695,
+      1999, "F",     "Terria",        23, 0.0000118,
+      2010, "F",     "Naziyah",       45, 0.0000230,
+      1989, "F",     "Shawana",       41, 0.0000206,
+      1989, "F",     "Jessi",        210, 0.000105,
+      1928, "M",     "Tillman",       43, 0.0000377,
+      1981, "F",     "Leslee",        83, 0.0000464,
+      1981, "F",     "Sherise",       27, 0.0000151,
+      1920, "F",     "Marquerite",    26, 0.0000209,
+      1941, "M",     "Lorraine",      24, 0.0000191
+   )
+```

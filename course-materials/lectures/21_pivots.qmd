@@ -1,0 +1,149 @@
+---
+title: "Tidy data and pivots"
+author: "Schwab"
+format: 
+  revealjs:
+    theme: beige
+editor: visual
+---
+
+```{r libraries}
+#| echo: FALSE
+#| include: FALSE
+
+library(tidyverse)
+library(mdsr)
+library(googlesheets4)
+
+```
+
+## Tidydata
+
+![](https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png)
+
+## First Job
+
+You need to get data into machine readable format. What do you do?
+
+`pivot_longer()`
+
+`pivot_wider()`
+
+What do these functions do?
+
+## Some built in tables
+
+## `pivot_longer()`
+
+This data is not tidy how can we make it longer for computers?
+
+```{r}
+#| echo: FALSE
+
+gs4_deauth()
+hiv_key <- "1kWH_xdJDM4SMfT_Kzpkk-1yuxWChfurZuWYjfmv51EA"
+hiv <- read_sheet(hiv_key) |>
+  rename(Country = 1) |>
+  filter(
+    Country %in% c("United States", "France", "South Africa")
+  ) |>
+  select(Country, `1979`, `1989`, `1999`, `2009`) |>
+  unnest(cols = c(`2009`)) |>
+  mutate(across(matches("[0-9]"), as.double))
+hiv
+```
+
+Write down how you think we could do that with `pivot_longer()`
+
+## `pivot_wider()`
+
+This data is tidy how could we make it wider for humans?
+
+```{r}
+#| echo: false
+library(babynames)
+babynames |>
+     filter(name %in% c("Sue", "Robin", "Leslie")) |>
+     group_by(name, sex) |>
+     summarize(total = sum(n))
+```
+
+Write down how you think we could do that with `pivot_wider()`
+
+## `pivot_longer()`
+
+Let's try our code on the examples above. Pivot this longer.
+
+```{r}
+#| echo: true
+
+library(tidyverse)
+library(mdsr)
+library(googlesheets4)
+gs4_deauth()
+hiv_key <- "1kWH_xdJDM4SMfT_Kzpkk-1yuxWChfurZuWYjfmv51EA"
+hiv <- read_sheet(hiv_key) |>
+  rename(Country = 1) |>
+  filter(
+    Country %in% c("United States", "France", "South Africa")
+  ) |>
+  select(Country, `1979`, `1989`, `1999`, `2009`) |>
+  unnest(cols = c(`2009`)) |>
+  mutate(across(matches("[0-9]"), as.double))
+hiv
+
+```
+
+## `pivot_wider()`
+
+```{r}
+#| echo: true
+library(babynames)
+babynames |>
+     filter(name %in% c("Sue", "Robin", "Leslie")) |>
+     group_by(name, sex) |>
+     summarize(total = sum(n))
+```
+
+## Not Tidy -\> Tidy
+
+This table is not tidy can you make it so?
+
+```{r}
+#|echo: true
+#|
+table4b 
+```
+
+## More practice
+
+This dataframe is tidy but can you make it easier for a human to read?
+
+```{r}
+fish_encounters |>
+  pivot_wider(names_from = station,values_from = "seen")
+```
+
+## consider some tables
+
+Are these tables tidy, do we need to pivot wider or longer?
+
+-   table1,
+
+-   table2,
+
+-   table3,
+
+-   table4a,
+
+-   table4b,
+
+-   table5
+
+-   [Problem 5 from chapter 6](https://mdsr-book.github.io/mdsr3e/06-dataII.html#dataII-exercises)
+
+# Reading
+
+[Read Chapter 6.](https://mdsr-book.github.io/mdsr3e/06-dataII.html)
+
+[Futher reading on tidy data](https://r4ds.had.co.nz/tidy-data.html)

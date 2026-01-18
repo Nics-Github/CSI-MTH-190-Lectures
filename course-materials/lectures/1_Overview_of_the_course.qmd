@@ -26,11 +26,11 @@ execute:
 
 ## Data Collection
 
-[Collect student data here](https://forms.gle/s5ZKKf7WNAUvJtVJA)
+[Collect student data here](https://forms.gle/uRxF8UTkgp45ofY46)
 
-https://forms.gle/s5ZKKf7WNAUvJtVJA
+https://forms.gle/uRxF8UTkgp45ofY46
 
-You must be signed into your HCC email account to fill out form. 
+You must be signed into your HCC email account to fill out form.
 
 ## Web Scraping and Importing Data ( and a tiny bit of cleaning)
 
@@ -38,7 +38,7 @@ You must be signed into your HCC email account to fill out form.
 library(googlesheets4)
 library(janitor)
 
-student_data <- read_sheet('https://docs.google.com/spreadsheets/d/1k9qA7XldtHB8-FZjmEymoUoeZJArS4tGy5gyVsvyLB0/edit?usp=sharing')
+student_data <- read_sheet('https://docs.google.com/spreadsheets/d/1aNrNX5xWkrtuJHc-bsCC7e07KbnRbVIxaWdbblOCyxA/edit?usp=sharing')
 
 student_data <- clean_names(student_data)
 
@@ -65,9 +65,9 @@ student_data |>
 # wrangle student data. edit plot
 student_data |>
   
-  select(briefly_describe_any_previous_experience_you_have_with_r) |>
+  select(do_you_have_experience_with_the_statistical_computer_language_r) |>
   
-  rename(r_experiance = briefly_describe_any_previous_experience_you_have_with_r )|>
+  rename(r_experiance = do_you_have_experience_with_the_statistical_computer_language_r )|>
   
   group_by(r_experiance)|>
   
@@ -91,7 +91,6 @@ student_data |>
 
 How we collect and use data without doing harm.
 
-
 ## Introduction to Database Querying with SQL
 
 Wrangle some data with the classic SQL.
@@ -110,7 +109,7 @@ Wrangle some data with the classic SQL.
 
 ## Optional and Advnaced Topics:
 
-```
+```         
 -   Function writing and data masking in R
 
 -   Iteration

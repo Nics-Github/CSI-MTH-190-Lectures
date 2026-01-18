@@ -1,0 +1,119 @@
+---
+title: "Taxonomy of Graphs part 2"
+subtitle: "CSI-MTH-190"
+author: "Schwab"
+editor: visual
+format: 
+  revealjs: 
+    theme: beige
+execute: 
+  echo: true
+---
+
+## PreReqs
+
+I assume you've read chapter 2.2, if you haven't, go back and read it before this lecture. Also I assume you saw the previous lecture on taxonomy.
+
+## The Data
+
+Here's the starwars data again.
+
+```{r}
+library(tidyverse)
+library(mdsr)
+head(starwars)
+```
+
+##  {background-image="https://s-media-cache-ak0.pinimg.com/originals/c2/46/92/c24692fd95dbfb89f772613a316a5405.png" background-size="contain"}
+
+## Visual Cues Position
+
+Show position with a point plot. You will need to map two asthetics.
+
+```{r}
+starwars |>
+    ggplot()+
+    geom_point(aes(x = height, y = mass))
+```
+
+## Visual Cues position again
+
+I'm going to remove the really heavy character with a filter.
+
+```{r}
+starwars |>
+    filter(mass < 250)|>
+    ggplot()+
+    geom_point(aes(x = height, y = mass))
+```
+
+## Visual Cues Shape
+
+We can map the categorical variable shape.
+
+```{r}
+starwars |>
+    filter(mass < 250)|>
+    ggplot()+
+    geom_point(aes(x=height, 
+            y = mass,
+            shape = gender
+            ))
+    
+```
+
+## Visual Cues Shape Clean
+
+We can map the categorical variable shape.
+
+```{r}
+starwars |>
+    filter(mass < 250)|>
+    ggplot()+
+    geom_point(aes(x=height, 
+            y = mass,
+            shape = gender
+            ))+
+    theme_minimal()
+    
+```
+
+## You try:
+
+Take a moment and copy the code below into r. Change the x-axis to be birth_year, and the y-axis to be height. Are older characters taller? Color by sex, what do you notice?
+
+```{r}
+#| eval: False
+
+starwars |>
+    filter(mass < 250)|>
+    ggplot()+
+    geom_point(aes(x= , 
+            y =  ,
+            color = 
+            ))+
+    theme_minimal()
+```
+
+##  {background-image="https://i.pinimg.com/736x/62/c6/ee/62c6ee636c47dccad00e7e56c268c3bf--data-visualization-points.jpg" background-size="contain"}
+
+## Visual Cues Context
+
+Here I add a title, x and y axes and a source of the data.
+
+```{r}
+
+starwars |>
+    filter(mass < 250)|>
+    ggplot()+
+    geom_point(aes(x = birth_year, 
+            y = height,
+            color = sex
+            ))+
+    labs( x = "year character was born",
+        y = "height (cm)" ,
+        title = "Starwars Characters",
+        caption = "source: https://swapi.py4e.com/"
+        )+
+    theme_minimal()
+```

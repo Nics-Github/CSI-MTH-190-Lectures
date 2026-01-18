@@ -1,0 +1,7 @@
+---
+title: "Data Viz Cheatsheet"
+---
+
+This is only a placeholder for the [cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf). 
+
+

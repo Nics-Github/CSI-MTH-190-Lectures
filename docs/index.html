@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.7.33">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Nicholas Schwab">
-<meta name="dcterms.date" content="2025-04-25">
+<meta name="dcterms.date" content="2026-01-18">
 
-<title>SDS 192: Intro to Data Science – SDS 192</title>
+<title>CSI-MTH 190: Intro to Data Science – SDS 192</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -67,17 +33,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./course-materials/website//images/192.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-d64559d910ec87c4ee681e1e2f97436f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ccd81253fefb92e9cd3f9eb5b5d87b54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-d64559d910ec87c4ee681e1e2f97436f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -110,7 +79,169 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="floating nav-fixed">
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -184,42 +315,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#schedule" id="toc-schedule" class="nav-link active" data-scroll-target="#schedule">Schedule</a></li>
-  <li><a href="#day-37-39" id="toc-day-37-39" class="nav-link" data-scroll-target="#day-37-39">Day 37-39</a></li>
-  <li><a href="#day-36-lab--8---sql" id="toc-day-36-lab--8---sql" class="nav-link" data-scroll-target="#day-36-lab--8---sql">Day 36 Lab -8 - SQL</a></li>
-  <li><a href="#day-34-and-35-project-3" id="toc-day-34-and-35-project-3" class="nav-link" data-scroll-target="#day-34-and-35-project-3">Day 34 and 35 Project 3</a></li>
+  <li><a href="#project-3-info" id="toc-project-3-info" class="nav-link active" data-scroll-target="#project-3-info">Project 3 info</a></li>
   <li><a href="#day-33-lab-7-mapping-monarchs." id="toc-day-33-lab-7-mapping-monarchs." class="nav-link" data-scroll-target="#day-33-lab-7-mapping-monarchs.">Day 33 Lab 7 Mapping Monarchs.</a></li>
-  <li><a href="#day-32-sal" id="toc-day-32-sal" class="nav-link" data-scroll-target="#day-32-sal">Day 32 SAL</a></li>
   <li><a href="#day-31-choropleth-mapping-and-leaflet" id="toc-day-31-choropleth-mapping-and-leaflet" class="nav-link" data-scroll-target="#day-31-choropleth-mapping-and-leaflet">Day 31 Choropleth Mapping and Leaflet</a></li>
   <li><a href="#day-30-mapping-with-simple-features-sf-and-shape-files" id="toc-day-30-mapping-with-simple-features-sf-and-shape-files" class="nav-link" data-scroll-target="#day-30-mapping-with-simple-features-sf-and-shape-files">Day 30 Mapping with simple features (sf) and shape files</a></li>
   <li><a href="#day-29-maps" id="toc-day-29-maps" class="nav-link" data-scroll-target="#day-29-maps">Day 29: Maps</a></li>
   <li><a href="#day-28-final-project-website" id="toc-day-28-final-project-website" class="nav-link" data-scroll-target="#day-28-final-project-website">Day 28: Final Project: Website</a></li>
-  <li><a href="#day-27-lab-6" id="toc-day-27-lab-6" class="nav-link" data-scroll-target="#day-27-lab-6">Day 27 Lab 6</a></li>
-  <li><a href="#day-26-no-class" id="toc-day-26-no-class" class="nav-link" data-scroll-target="#day-26-no-class">Day 26: No class</a></li>
-  <li><a href="#day-25-iteration" id="toc-day-25-iteration" class="nav-link" data-scroll-target="#day-25-iteration">Day 25: Iteration</a></li>
-  <li><a href="#day-24-functions-and-the-tidyverse" id="toc-day-24-functions-and-the-tidyverse" class="nav-link" data-scroll-target="#day-24-functions-and-the-tidyverse">Day 24 Functions and The Tidyverse</a></li>
-  <li><a href="#day-2223-project-2-workday" id="toc-day-2223-project-2-workday" class="nav-link" data-scroll-target="#day-2223-project-2-workday">Day 22/23: Project 2 workday</a></li>
-  <li><a href="#day-21-lab-5" id="toc-day-21-lab-5" class="nav-link" data-scroll-target="#day-21-lab-5">Day 21 lab 5</a></li>
-  <li><a href="#day-20-pivots" id="toc-day-20-pivots" class="nav-link" data-scroll-target="#day-20-pivots">Day 20 Pivots</a></li>
-  <li><a href="#day-19-joining-tables" id="toc-day-19-joining-tables" class="nav-link" data-scroll-target="#day-19-joining-tables">Day 19 Joining tables</a></li>
-  <li><a href="#day-1718-lab-4" id="toc-day-1718-lab-4" class="nav-link" data-scroll-target="#day-1718-lab-4">Day 17/18 Lab 4</a></li>
-  <li><a href="#day-1617-wrangling-on-one-table" id="toc-day-1617-wrangling-on-one-table" class="nav-link" data-scroll-target="#day-1617-wrangling-on-one-table">Day 16/17 Wrangling on one table</a></li>
-  <li><a href="#day-1516-wrangling-on-one-table." id="toc-day-1516-wrangling-on-one-table." class="nav-link" data-scroll-target="#day-1516-wrangling-on-one-table.">Day 15/16 Wrangling on one table.</a></li>
-  <li><a href="#day-1415-ethics" id="toc-day-1415-ethics" class="nav-link" data-scroll-target="#day-1415-ethics">Day 14/15 Ethics</a></li>
-  <li><a href="#day-1314-project-1-work-day" id="toc-day-1314-project-1-work-day" class="nav-link" data-scroll-target="#day-1314-project-1-work-day">Day 13/14 Project 1 work day</a></li>
-  <li><a href="#day-1213-project-1-work-day" id="toc-day-1213-project-1-work-day" class="nav-link" data-scroll-target="#day-1213-project-1-work-day">Day 12/13 Project 1 work day</a></li>
-  <li><a href="#day-1112-lab-3-nytbooks" id="toc-day-1112-lab-3-nytbooks" class="nav-link" data-scroll-target="#day-1112-lab-3-nytbooks">Day 11/12 Lab 3: NYTBooks</a></li>
-  <li><a href="#day-1011-practice-with-git-project-1" id="toc-day-1011-practice-with-git-project-1" class="nav-link" data-scroll-target="#day-1011-practice-with-git-project-1">Day 10/11 Practice with git/ Project 1</a></li>
-  <li><a href="#day-10-color-theory" id="toc-day-10-color-theory" class="nav-link" data-scroll-target="#day-10-color-theory">Day 10 Color theory</a></li>
-  <li><a href="#day-9-lab-2" id="toc-day-9-lab-2" class="nav-link" data-scroll-target="#day-9-lab-2">Day 9 Lab 2</a></li>
-  <li><a href="#day-8-taxonomy" id="toc-day-8-taxonomy" class="nav-link" data-scroll-target="#day-8-taxonomy">Day 8 Taxonomy</a></li>
-  <li><a href="#day-7-intro-to-data-viz" id="toc-day-7-intro-to-data-viz" class="nav-link" data-scroll-target="#day-7-intro-to-data-viz">Day 7 Intro to Data Viz</a></li>
-  <li><a href="#day-6-making-functions-cont." id="toc-day-6-making-functions-cont." class="nav-link" data-scroll-target="#day-6-making-functions-cont.">Day 6 Making Functions (cont.)</a></li>
-  <li><a href="#day-5-intro-to-functions" id="toc-day-5-intro-to-functions" class="nav-link" data-scroll-target="#day-5-intro-to-functions">Day 5 Intro to Functions</a></li>
-  <li><a href="#day-4-file-struture-final-project" id="toc-day-4-file-struture-final-project" class="nav-link" data-scroll-target="#day-4-file-struture-final-project">Day 4 File Struture/ Final Project</a></li>
-  <li><a href="#day-3-r-ecosystem-and-more-sql" id="toc-day-3-r-ecosystem-and-more-sql" class="nav-link" data-scroll-target="#day-3-r-ecosystem-and-more-sql">Day 3 R Ecosystem and More SQL</a></li>
-  <li><a href="#day-2-github-lab" id="toc-day-2-github-lab" class="nav-link" data-scroll-target="#day-2-github-lab">Day 2 Github Lab</a></li>
-  <li><a href="#day-1-welcome-and-sql" id="toc-day-1-welcome-and-sql" class="nav-link" data-scroll-target="#day-1-welcome-and-sql">Day 1 Welcome and SQL</a></li>
   </ul>
 </nav>
 </nav>
@@ -230,9 +331,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">SDS 192: Intro to Data Science</h1>
+<h1 class="title">CSI-MTH 190: Intro to Data Science</h1>
 </div>
 
 
@@ -249,7 +351,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 25, 2025</p>
+      <p class="date">January 18, 2026</p>
     </div>
   </div>
   
@@ -264,108 +366,133 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <style>
 h1{font-weight: 400;}
 </style>
-<style>
-h1{font-weight: 400;}
-</style>
-<section id="schedule" class="level1">
-<h1>Schedule</h1>
-<!-- The the wesbite for the schedule below:  -->
-<!-- https://docs.google.com/spreadsheets/d/1j1Mub7lb1CJKpG-PySzdbzzgvryVQ3XrlvNgPRUcN0I/edit?usp=sharing -->
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTG_b6upDZcPxXB92LHYIhV1uAXgeVGaMsZ3sDRPuSQN74JdhkKhZQVjw6T68I3zsP8KGYzDSVTZW64/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false&amp;gid=0&amp;range=A1:E41" width="100%" height="300">
-</iframe>
-<!-- # Day 38  -->
-<!-- [Prof Cao's Post Course Survey](https://smithcollege.qualtrics.com/jfe/form/SV_dh7rSgiH2AvNUj4) -->
-<!-- ::: {.callout-note collapse="FALSE"} -->
-<!-- #Couple notes on website building  -->
-<!-- -   Publishing the website -->
-<!-- -   Adjusting the theme -->
-<!-- -   Changing the icon -->
-<!-- ::: -->
-<!-- # Day 37 -->
-<!-- [Prof Cao's Post Course Survey](https://smithcollege.qualtrics.com/jfe/form/SV_dh7rSgiH2AvNUj4) -->
-<!-- Intro to website building.  -->
-<!-- [Final project.](https://classroom.github.com/a/LGiuwAy_)  -->
-<!-- # Day 36  -->
-<!-- [Prof Cao's Post Course Survey](https://smithcollege.qualtrics.com/jfe/form/SV_dh7rSgiH2AvNUj4) -->
-<!-- # Day 34 SQL lab -->
-<!-- Prof Cao will be in to help with the lab.  -->
-<!-- [Tim made a schema for imdb](./course-materials/lectures/32_Tim_s_SQL/imdb_schema.pdf) -->
-<!-- [Lab 8 SQL](https://classroom.github.com/a/ehcYv9eT) -->
-<!-- # Day 33 SQL in R -->
-<!-- [SQL part 2](./course-materials/in-class-activies/33_SQL-examples.qmd) -->
-<!-- [dbplyr introduction](https://dbplyr.tidyverse.org/articles/dbplyr.html) -->
-<!-- # Day 32 SQL with Tim Martyn -->
-<!-- [SQL part 1](./course-materials/lectures/32_Tim_s_SQL/Smith-Part-I.pdf) -->
-<!-- [SQL starter code](./course-materials/in-class-activies/32_SQL_starter_code.qmd) -->
-<!-- [SQL Notes](./course-materials/lectures/32_Tim_s_SQL/Smith-SQL-Notes-I.pdf) -->
-<!-- # This is where you got to Fall 2024 -->
+<section id="lectures" class="level2">
+<h2 class="anchored" data-anchor-id="lectures">Lectures</h2>
+<p>Part 1: Visualizations</p>
+<section id="week-1" class="level3">
+<h3 class="anchored" data-anchor-id="week-1">Week 1</h3>
+<ul>
+<li><p><a href="./course-materials/lectures/1_Overview_of_the_course.html">1. Overview of Intro to Data Science</a></p></li>
+<li><p><a href="./course-materials/lectures/2_Brief-R-history.html">2. Brief History of R</a></p></li>
+<li><p><a href="./course-materials/lectures/3_Basic_Statistics.html">3. Basic Statistics</a></p></li>
+</ul>
 </section>
-<section id="day-37-39" class="level1">
-<h1>Day 37-39</h1>
-<p>A short bit on common website troubles.</p>
-<p>A 404.qmd page for those interested.</p>
-<p>Lab 8/ Project 3/ website workdays</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-This week’s office hours:
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>Monday 8:15 am - 9:15 and 2 - 3 pm</p>
-<p>Wednesday 8:15-9:20 am</p>
-<p>Friday 2:30-3:50 pm</p>
-</div>
-</div>
-</div>
+<section id="week-2" class="level3">
+<h3 class="anchored" data-anchor-id="week-2">Week 2</h3>
+<ul>
+<li><p><a href="./course-materials/lectures/4_where_does_data_come_from.qmd">4. Where does Data Comes From</a></p></li>
+<li><p><a href="./course-materials/lectures/5_notes_on_style.html">5. Notes on Style</a></p></li>
+<li><p><a href="./course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html">6 Data Frames Variable Types Tidy Data</a></p></li>
+</ul>
 </section>
-<section id="day-36-lab--8---sql" class="level1">
-<h1>Day 36 Lab -8 - SQL</h1>
-<p><a href="https://classroom.github.com/a/eoVloa7S">lab 8</a></p>
+<section id="week-3" class="level3">
+<h3 class="anchored" data-anchor-id="week-3">Week 3</h3>
+<ul>
+<li><p><a href="./course-materials/lectures/7_taxonomy_of_graphs_categorical.html">7 Taxonomy of Graphs (categorical)</a></p></li>
+<li><p><a href="https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-visualization.pdf">8 The ggplot cheatsheet</a></p></li>
+<li><p><a href="./course-materials/lectures/9_taxonomy_of_graphs_numeric_part_2.html">9 Taxonomy of Graphs (numeric)</a></p></li>
+<li><p><a href="./course-materials/lectures/10_color_theory.qmd">10 Color talk</a></p></li>
+</ul>
 </section>
-<section id="day-34-and-35-project-3" class="level1">
-<h1>Day 34 and 35 Project 3</h1>
-<p>Project 3 work days.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Office hours
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>I’ll hold some additional office hours this afternoon from 1:30-2:30.</p>
-<p>Monday April 28 I have to push my office hours to later time: 2-3pm.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Project 3 info
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><a href="https://classroom.github.com/a/lEaHigyH">Project 3</a></p>
-<p>After you know your group name in github classroom (or if you need a partner) fill out this form to tell me your <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgnj_qMUuWGNCCeez2dnFYTa3Am2HzTo8Whd5YbBqsy0cE4Q/viewform?usp=header">Project 3 groups</a></p>
-</div>
-</div>
-</div>
-<p>SOme places to find data:</p>
+<section id="week-4" class="level3">
+<h3 class="anchored" data-anchor-id="week-4">Week 4</h3>
+<ul>
+<li><p><a href="./course-materials/lectures/11_taxonomy_of_graphics_part_3.html">11 Taxonomy of Graphs (numeric)</a></p></li>
+<li><p><a href="./course-materials/in-class-activies/3Activity_Taxonomy_of_Graphics.qmd">Discussion: Taxonomy of Graphics</a></p></li>
+<li><p><a href="./course-materials/lectures/12_Building_a_graph.html">12 Building a graph</a></p></li>
+<li><p><a href="">13 Data Ethics part 1</a></p></li>
+</ul>
+</section>
+<section id="week-5" class="level3">
+<h3 class="anchored" data-anchor-id="week-5">Week 5</h3>
+<ul>
+<li><a href="./course-materials/lectures/14_2_introduce_project_1.html">Project 1 Intro</a></li>
+</ul>
+</section>
+<section id="week-6" class="level3">
+<h3 class="anchored" data-anchor-id="week-6">Week 6</h3>
+<p>Part 2: Wrangling</p>
+<ul>
+<li><p><a href="./course-materials/lectures/14_ethics_part_2.html">14 Ethics Part 2</a></p></li>
+<li><p><a href="course-materials/lectures/mdsr-the-verbs.qmd">15 Lecture on the five verbs</a></p></li>
+<li><p><a href="https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-transformation.pdf">16 Dplyr Cheat sheet</a></p></li>
+</ul>
+</section>
+<section id="week-7" class="level3">
+<h3 class="anchored" data-anchor-id="week-7">Week 7</h3>
+<ul>
+<li><p><a href="">17 What you can do in sumarize</a></p></li>
+<li><p><a href="">18 Ethics part 3</a></p></li>
+<li><p><a href="">19 Joins part 1 an exploration</a></p></li>
+</ul>
+</section>
+<section id="week-8" class="level3">
+<h3 class="anchored" data-anchor-id="week-8">Week 8</h3>
+<ul>
+<li><p><a href="">20 Joins part 2 an exploration</a></p></li>
+<li><p><a href="./course-materials/lectures/21_pivots.html">21 Pivots</a></p></li>
+<li><p><a href="">22 Placeholder</a></p></li>
+</ul>
+</section>
+<section id="week-9" class="level3">
+<h3 class="anchored" data-anchor-id="week-9">Week 9</h3>
+<ul>
+<li><a href="">Project 2 Intro</a></li>
+</ul>
+</section>
+<section id="week-10" class="level3">
+<h3 class="anchored" data-anchor-id="week-10">Week 10</h3>
+<p>Part 3: Application - Maps</p>
+<ul>
+<li><p><a href="./course-materials/lectures/23_maps-ggplot.html">23 Maps part 1</a></p></li>
+<li><p><a href="./course-materials/lectures/23_maps-ggplot.html">24 Maps part 2</a></p></li>
+<li><p>[25 Maps part 3]</p></li>
+</ul>
+</section>
+<section id="week-11" class="level3">
+<h3 class="anchored" data-anchor-id="week-11">Week 11</h3>
+<ul>
+<li>[26 Maps part 4]</li>
+</ul>
+</section>
+<section id="week-12" class="level3">
+<h3 class="anchored" data-anchor-id="week-12">Week 12</h3>
+<ul>
+<li><a href="">Project 3 Intro</a></li>
+</ul>
+</section>
+<section id="week-13" class="level3">
+<h3 class="anchored" data-anchor-id="week-13">Week 13</h3>
+<p>Part 4: Parallel to SQL</p>
+<ul>
+<li>[27 SQL]</li>
+</ul>
+</section>
+<section id="week-14" class="level3">
+<h3 class="anchored" data-anchor-id="week-14">Week 14</h3>
+<ul>
+<li><p><a href="">28 SQL 1</a></p></li>
+<li><p><a href="">29 SQL 2</a></p></li>
+</ul>
+</section>
+<section id="week-15" class="level3">
+<h3 class="anchored" data-anchor-id="week-15">Week 15</h3>
+<ul>
+<li><a href="">30 SQL 3</a></li>
+</ul>
+<p>Discuss the difference between <code>%in%</code> and <code>==</code></p>
+<ul>
+<li><p><a href="Make this lecture">Lecture on Joins</a></p></li>
+<li><p><a href="course-materials/lectures/18_pivots.qmd">Pivots</a></p></li>
+<li><p>Short <code>kable()</code> <a href="https://www.geeksforgeeks.org/kable-method-in-r/">demo</a></p></li>
+<li><p>Functions and the tidyverse (Advanced)</p></li>
+<li><p>Iteration (Advanced)</p></li>
+</ul>
+</section>
+</section>
+<section id="project-3-info" class="level1">
+<h1>Project 3 info</h1>
+<p>Some places to find data:</p>
 <p><a href="https://www.kaggle.com/">Kaggle</a></p>
 <p><a href="https://data.fs.usda.gov">US forest service</a></p>
 <p><a href="https://data.mass.gov/">Mass data website</a></p>
@@ -378,13 +505,6 @@ Project 3 info
 <p><a href="www/Alum_Panel.pdf">Alumani Panel</a></p>
 <p><a href="https://classroom.github.com/a/QxAl2Zx9">Here is the lab for today.</a></p>
 <p>It is due next Wednesday</p>
-<!-- # Day 32 Choropleth Mapping and Leaflet -->
-</section>
-<section id="day-32-sal" class="level1">
-<h1>Day 32 <a href="https://www.science.smith.edu/sal/">SAL</a></h1>
-<p>Quiz 3 is open and due Sunday April 27.</p>
-<p><a href="https://docs.google.com/presentation/d/1whClXFOTzLDBaFNTpw_ShyhHXVkj47YpVviwzUvXybU/edit?usp=sharing">SAL slides</a></p>
-<p><a href="https://smithcollege.maps.arcgis.com/home/index.html">Spacial Analysis Lab</a></p>
 </section>
 <section id="day-31-choropleth-mapping-and-leaflet" class="level1">
 <h1>Day 31 Choropleth Mapping and Leaflet</h1>
@@ -399,7 +519,7 @@ Project 3 info
 </div>
 <p><a href="./course-materials/in-class-activies/29_Choropleth_and_Leaflet.qmd">Choropleth Mapping</a></p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -408,7 +528,7 @@ Project 3 info
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><a href="https://classroom.github.com/a/lEaHigyH">Project 3</a></p>
 <p>After you know your group name in github classroom (or if you need a partner) fill out this form to tell me your <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgnj_qMUuWGNCCeez2dnFYTa3Am2HzTo8Whd5YbBqsy0cE4Q/viewform?usp=header">Project 3 groups</a></p>
@@ -425,7 +545,7 @@ Project 3 info
 <section id="day-29-maps" class="level1">
 <h1>Day 29: Maps</h1>
 <!-- [Mapping Review](course-materials/lectures/30_map_review.qmd) -->
-<p><a href="./course-materials/lectures/26_maps-ggplot.html">Example: static maps</a></p>
+<p><a href="./course-materials/lectures/26_maps-ggplot.qmd">Example: static maps</a></p>
 <p>Simple features and Shape files.</p>
 <ul>
 <li><p><a href="https://geodata.vermont.gov/">Vermont’s Geospacial Data</a></p></li>
@@ -441,7 +561,7 @@ Project 3 info
 <p>Start thinking about who you want to work with on project 3: 2 or 3 people.</p>
 <p>The final project instructions can be found <a href="./course-materials/Final-Project/Project.html">here</a>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -450,7 +570,7 @@ Website work
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><p><a href="https://classroom.github.com/a/BrlY_cSN">Empty repo</a></p></li>
@@ -468,7 +588,7 @@ Website work
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -477,7 +597,7 @@ Clean up your project
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><p>#| echo: False - to hide code from a code chunk.</p></li>
@@ -489,1072 +609,308 @@ Clean up your project
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Customize
+Day 24 Functions and The Tidyverse
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ul>
-<li><p><a href="https://smithcollege-sds.github.io/sds100/lab_08_formatting.html">Formatting, sds 100 :lab 8</a></p></li>
-<li><p><a href="https://quarto.org/docs/authoring/markdown-basics.html">Markdown Basics</a></p></li>
-<li><p><a href="https://quarto.org/docs/websites/#website-theme">set a theme</a></p></li>
-<li><p><a href="https://quarto.org/docs/websites/website-navigation.html#pages-404">make a custom 404</a></p></li>
-</ul>
-</div>
-</div>
-</div>
-<p>What more to do?</p>
-</section>
-<section id="day-27-lab-6" class="level1">
-<h1>Day 27 Lab 6</h1>
-<p><a href="https://classroom.github.com/a/OvEKpt9p">Lab 6</a></p>
-<p>Today: Bonus office hour at 2:30-3:30.</p>
-</section>
-<section id="day-26-no-class" class="level1">
-<h1>Day 26: No class</h1>
-</section>
-<section id="day-25-iteration" class="level1">
-<h1>Day 25: Iteration</h1>
-<p><a href="./course-materials/lectures/24_across_maps.html">Lecture: <code>across()</code> and <code>map()</code></a></p>
-<p><a href="./course-materials/in-class-activies/24_Iteration.qmd">In class activity</a></p>
-<p><a href="./course-materials/lectures/30_anonymous_functions.html">Anonymous functions</a></p>
-<!-- # Day 25: Function refresher -->
-</section>
-<section id="day-24-functions-and-the-tidyverse" class="level1">
-<h1>Day 24 Functions and The Tidyverse</h1>
 <p>No class next Wednesday April 2, finish up your projects.</p>
-<p><a href="./course-materials/lectures/24_data_masking.html">Data Masking</a></p>
+<p><a href="course-materials/lectures/24_data_masking.qmd">Data Masking</a></p>
 <p><a href="course-materials/in-class-activies/function_writing_practice.qmd">Practice function writing</a></p>
 <p><a href="https://rlang.r-lib.org/reference/topic-data-mask.html">More on masking</a></p>
-<!-- <!-- [Solution to Monday's in class activity](/course-materials/in-class-activies/day_25solutions_function_writing.html) -->
+<section id="links-worth-keeping" class="level2">
+<h2 class="anchored" data-anchor-id="links-worth-keeping">Links worth keeping</h2>
+<p><a href="https://www.sql-practice.com/">sql-practice</a></p>
 </section>
-<section id="day-2223-project-2-workday" class="level1">
-<h1>Day 22/23: Project 2 workday</h1>
-<p>Thursday <a href="SDS_POM.pdf">Presentation of Major</a></p>
-<p>Short <code>kable()</code> <a href="https://www.geeksforgeeks.org/kable-method-in-r/">demo</a></p>
-<p>Project 1 grades are up and current. Please let me know if you cannot see grades on moodle.</p>
-<p><a href="project-1-notes/project-1-notes.html">Project 1 notes</a></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Git workflow
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/configuring-issues/quickstart">Issues</a></p></li>
-<li><p><a href="https://github.blog/developer-skills/github/beginners-guide-to-github-creating-a-pull-request/">Pull Requests</a></p></li>
-</ul>
-</div>
-</div>
-</div>
-<!-- # Day 21  -->
-<!-- Lab 5 reflection - personal information -->
-<!-- Many to one join warning. -->
-<!-- [Pivot Practice - Problem 5 chapter 6 ](https://mdsr-book.github.io/mdsr3e/06-dataII.html#dataII-exercises) -->
-<!-- [Project 2](https://classroom.github.com/a/kprELIeW) -->
-<!-- ::: {.callout-tip collapse="true"} -->
-<!-- # lab 4 rendering/submission issues -->
-<!-- before rendering: -->
-<!-- -   remove the `#| eval: FALSE` in lab 4 (due Friday) -->
-<!-- gitignore: -->
-<!-- Don't push the `sqf_2011.csv` to github you will get an error! Its too big -->
-<!-- <!-- -->
-<!-- -   First save your qmd somewhere. -->
-<!-- -   Uncommit your commit with `git reset --hard HEAD^` or `git reset --hard HEAD~2` -->
-<!-- -   You may need to add a `.gitignore` file.-->
-<!-- -   Open the `.gitignore` file and add `sqf_2011.csv` to it. -->
-<!-- ::: -->
-</section>
-<section id="day-21-lab-5" class="level1">
-<h1>Day 21 lab 5</h1>
-<p><a href="https://classroom.github.com/a/GpWfJRyo">Intro to Project 2</a></p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Project 2 Details
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p>Project 2 groups on Moodle</p></li>
-<li><p>Monday and Wednesday after break are dedicated project 2 days</p></li>
-<li><p>More on git work flow. (Issues)</p></li>
-<li><p>Due: Friday: April 4th.</p></li>
-</ul>
-</div>
-</div>
-</div>
-<p><a href="https://classroom.github.com/a/zhMWEXc7">Lab 5</a></p>
-</section>
-<section id="day-20-pivots" class="level1">
-<h1>Day 20 Pivots</h1>
-<p>Project 1 notes</p>
-<p><a href="./course-materials/lectures/18_pivots.html">Pivots</a></p>
-<p>We’ll do Problems <a href="https://mdsr-book.github.io/mdsr3e/06-dataII.html#dataII-exercises">Chapter 6: 5 a-c,</a> in class today. <a href="https://mdsr-book.github.io/mdsr3e/05-joins.html#join-exercises">Chapter 5: 3,4</a></p>
-</section>
-<section id="day-19-joining-tables" class="level1">
-<h1>Day 19 Joining tables</h1>
-<p><a href="./course-materials/lectures/20_SQF.html">Reflection Lab 4</a></p>
-<p>Quiz 2 will open in Wednesday and be due the Friday after break.</p>
-<p>Exploration: How to join tables in R?</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Simple Join data frame
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>These data are from <code>dplyr</code></p>
-<p><code>band_members</code></p>
-<p><code>band_band_instruments</code></p>
-</div>
-</div>
-</div>
-<p><a href="https://scao53.github.io/sds192spring2023/in-class_exercises/Lec17In-classExercise-JoinTables.zip">Joining two tables in class exercise</a></p>
-<p><a href="https://mdsr-book.github.io/mdsr3e/05-joins.html#join-exercises">Problems 1</a></p>
-</section>
-<section id="day-1718-lab-4" class="level1">
-<h1>Day 17/18 Lab 4</h1>
-<p>Section 1: The difference between <code>%in%</code> and <code>==</code></p>
-<p><a href="./course-materials/lectures/20_SQF.html">Intro to Lab 4</a></p>
-<p><a href="https://classroom.github.com/a/USBgQ3MW">Lab 4 SQF</a></p>
-<!-- The below is based on my NECOMMIT keynote. -->
-<!-- [Stop and Frisk Wrangling](/course-materials/lectures/15_Wrangling_1_SQF.qmd) -->
-<!-- ::: {.callout-tip collapse="true"} -->
-<!-- # lab 4 rendering/submission issues -->
-<!-- rendering: -->
-<!-- -   Note on `#| eval: FALSE` in lab 4 (due Friday) -->
-<!-- gitignore: -->
-<!-- Don't push the `sqf_2011.csv` to github you will get an error! Its too big -->
-<!-- -   First save your qmd somewhere. -->
-<!-- -   Uncommit your commit with `git reset --hard HEAD^` or `git reset --hard HEAD~2` -->
-<!-- -   You may need to add a `.gitignore` file. -->
-<!-- -   Open the `.gitignore` file and add `sqf_2011.csv` to it. -->
-<!-- ::: -->
-</section>
-<section id="day-1617-wrangling-on-one-table" class="level1">
-<h1>Day 16/17 Wrangling on one table</h1>
-<p>(Section 1 is one day below)</p>
-<!-- The below is based on my NECOMMIT keynote. -->
-<!-- [Stop and Frisk Wrangling](/course-materials/lectures/15_Wrangling_1_SQF.qmd) -->
-<p>Discuss the difference between <code>%in%</code> and <code>==</code></p>
-<p><a href="./course-materials/in-class-activies/Wrangling_Baby_Names.html">Wrangle babynames</a></p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"babynames"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p><a href="./course-materials/lectures/solutions_wrangle_baby_names.html">solutions to wrangle babynames</a></p>
-</section>
-<section id="day-1516-wrangling-on-one-table." class="level1">
-<h1>Day 15/16 Wrangling on one table.</h1>
-<p>(Section 1 is one day below)</p>
-<p><a href="./course-materials/lectures/mdsr-the-verbs.html">Lecture on the five verbs</a></p>
-<p><a href="https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf">dpylr cheatsheet for wrangling</a></p>
-</section>
-<section id="day-1415-ethics" class="level1">
-<h1>Day 14/15 Ethics</h1>
-<p>(Section 1 is one day below)</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-RStudio tips and tricks.
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Running chunk tips</p>
-<p>Running all the above</p>
-</div>
-</div>
-</div>
-<p><a href="./course-materials/lectures/11_ethics.html">Data Ethics</a></p>
-</section>
-<section id="day-1314-project-1-work-day" class="level1">
-<h1>Day 13/14 Project 1 work day</h1>
-<p>(Section 1 is on day 12)</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Rendering notes
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Push all files to github.</p>
-<p>grader’s notes in grade.qmd.</p>
-</div>
-</div>
-</div>
-<p>Last day to work on Project 1 in class, due in a week.</p>
-</section>
-<section id="day-1213-project-1-work-day" class="level1">
-<h1>Day 12/13 Project 1 work day</h1>
-<p>(Section 1 is on day 10)</p>
-<p>Quiz 1 due tonight (both sections).</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Interested in mapping?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><a href="https://drive.google.com/file/d/1hjMORAGX-Dl1pWTl7Iy3gFuS3b5CkX4s/view">SAL offering workshops</a></p>
-<section id="teach-yourself-gis-resource-and-data-walk-through" class="level3">
-<h3 class="anchored" data-anchor-id="teach-yourself-gis-resource-and-data-walk-through">Teach yourself GIS: Resource and data walk-through</h3>
-<blockquote class="blockquote">
-<p>February 27th, 4:15-5:15pm, in the SAL</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Interested in teaching yourself some GIS or building on your existing GIS skills? This workshop will walk participants through various tutorials, online short courses, and major data sources, enabling you to find the resources you need. Participants will also create a map in ArcGIS Online from a Map in a Minute tutorial.</p>
-</blockquote>
-</section>
-<section id="mapping-political-data-with-flourish" class="level3">
-<h3 class="anchored" data-anchor-id="mapping-political-data-with-flourish">Mapping political data with Flourish</h3>
-<blockquote class="blockquote">
-<p>March 6th, 4:15-5:15pm, in the SAL</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Flourish is a web-based tool for mapping and data visualization. Using data about contemporary politics, learn how to bring in data, customize how it is displayed, and export it to Canva.</p>
-</blockquote>
-</section>
-<section id="georeferencing-historic-maps" class="level3">
-<h3 class="anchored" data-anchor-id="georeferencing-historic-maps">Georeferencing historic maps</h3>
-<blockquote class="blockquote">
-<p>March 13th, 4:15-5:15pm, in the SAL</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Learn how to create digital maps from paper ones through a process called georeferencing. Participants will explore historic maps of Massachusetts in Atlascope and gain practice georeferencing historic maps of Northampton using the AllMaps platform.</p>
-</blockquote>
-</section>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Working on projects together.
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p>You might realize you are sharing an API key. Consider what that means.</p></li>
-<li><p>Consider code layout.</p></li>
-<li><p>Remember to comment your code.</p></li>
-<li><p>Follow tidyverse style guide.</p></li>
-<li><p>Practice a pull request today.</p></li>
-<li><p>Make your graph legible to the lay person (title, labels, source, captions, etc).</p></li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="day-1112-lab-3-nytbooks" class="level1">
-<h1>Day 11/12 Lab 3: NYTBooks</h1>
-<p>Intro to paste()</p>
-<p><a href="https://classroom.github.com/a/PSzawcoR">lab 3</a></p>
-</section>
-<section id="day-1011-practice-with-git-project-1" class="level1">
-<h1>Day 10/11 Practice with git/ Project 1</h1>
-<p>(Section 1 is still on day 10)</p>
-<p>We’ll practice with git in our projects.</p>
-<p><a href="./course-materials/lectures/12_git.html">Another git lecture</a></p>
-<p><a href="https://classroom.github.com/a/YOE-nu6Z">Project 1</a></p>
-<p>See moodle for project groups.</p>
-<!-- # Day 11 Lab 3 -->
-<!-- [Link to lab 3](https://classroom.github.com/a/Nwp-FDXz) -->
-<!-- ::: {.callout-warning collapse="true"} -->
-<!-- # Lab 3 pitfalls -->
-<!-- Step 5: part 3. To set the line color do color="green" -->
-<!-- For some notes on skew: https://en.wikipedia.org/wiki/Skewness -->
-<!-- `geom_bar()` counts whatever variable you give it for x. -->
-<!-- reorder(categorical_var, numeric variable, function for reordering) -->
-<!-- We'll discuss ethics Monday or Wednesday, read chapter 8. -->
-<!-- ::: -->
-</section>
-<section id="day-10-color-theory" class="level1">
-<h1>Day 10 Color theory</h1>
-<!-- [ggplot cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf) -->
-<!-- ## Colors -->
-<!-- -   [Prof. Baumer's Color talk](https://beanumber.github.io/sds192/lectures/mdsr_viz_05-color.html) -->
-<ul>
-<li><p><a href="./course-materials/lectures/10_color_theory.html">Color talk</a></p></li>
-<li><p>Color Brewer <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">site</a></p></li>
-<li><p><a href="./course-materials/in-class-activies/colors_in_class_activity.qmd">In class exercise</a></p></li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://moderndive.com/ModernDive_files/figure-html/flights-dodged-bar-color-tweak-1.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 2.26 from Modern Dive</figcaption>
-</figure>
-</div>
-<p>Some time to finish up lab 2.</p>
-<!-- See moodle for project 1 partners. -->
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Lab requirements
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>All labs must be rendered as a pdf or self-contained html.</li>
-</ul>
-</div>
-</div>
-</div>
-<!-- # Day 9 Taxonomy part 2 -->
-<!-- <!-- [Check out lab 3](https://smithcollege-sds.github.io/sds100/lab_03_graphics.html) from sds 100 I might not have to do this. -->
-<!-- 1.  [Together: scatter plot](./course-materials/in-class-activies/3_Scatterplots.zip) -->
-<!-- -   We are halfway through this open Lec02In-classExercise -->
-<!-- 2.  [Solo: linegraph](./course-materials/in-class-activies/3_Line_Graph.qmd) -->
-<!-- 3.  [Frequency Plots](course-materials/lectures/9_frequency_plots.qmd) -->
-<!-- <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/IRJ2Ac9vI5o?si=JMeZEIQQNGNBscno" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen> -->
-<!-- <!-- </iframe> -->
-</section>
-<section id="day-9-lab-2" class="level1">
-<h1>Day 9 Lab 2</h1>
-<p>Quiz 1 is open. It is due in two Mondays.</p>
-<p>5 minutes about colors via the <a href="https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf">cheat sheet</a>.</p>
-<p>This lab is due Wednesday at Midnight.</p>
-<p><a href="https://classroom.github.com/a/KcegUyPW">Lab 2</a></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note on colors
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We will discuss colors on Monday when you get to them in ex 6:</p>
-<p>You can reread <a href="https://mdsr-book.github.io/mdsr3e/02-datavizI.html#sec-color">this section</a> if you forget what sequential,diverging,qualitative mean.</p>
-<p>Or check out the colors examples on the <a href="https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf">cheat sheet</a>.</p>
-<p>Intuitive <a href="https://jhudatascience.org/tidyversecourse/dataviz.html#colors">Color Examples</a></p>
-</div>
-</div>
-</div>
-</section>
-<section id="day-8-taxonomy" class="level1">
-<h1>Day 8 Taxonomy</h1>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Screenshots Help
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><a href="https://docs.google.com/document/d/1P7IyZ4On9OlrCOhygFxjC7XhQqyw8OludwChz-uFd_o/edit">The six-fixes</a></li>
-</ul>
-<p>Help us help you: take screenshots of your screen and post them to Slack.</p>
+<section id="add-this-to-canvas" class="level2">
+<h2 class="anchored" data-anchor-id="add-this-to-canvas">Add this to canvas</h2>
+<p>Help us help you: take screenshots of your screen and post them to Canvas.</p>
 <ul>
 <li><p>macOS: Command+Shift+3 to take shot of whole screen, Command+Shift+4 to take subportion</p></li>
 <li><p>Windows: Shift-Windows Key-S and Snip &amp; Sketch</p></li>
 <li><p>Linux: Print screen</p></li>
 <li><p>Chromebook: Shift + Ctrl + Show windows</p></li>
 </ul>
-</div>
-</div>
-</div>
-<!-- ### Lecture -->
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Make a graph from class data
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#googlesheets4::gs4_auth()</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#googlesheets4::deauth()</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>class_info <span class="ot">&lt;-</span> <span class="fu">read_sheet</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1k9qA7XldtHB8-FZjmEymoUoeZJArS4tGy5gyVsvyLB0/edit?usp=sharing"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li><p><a href="./course-materials/lectures/2_mdsr_viz_1_taxonomy.html">Taxonomy of graphs</a></p></li>
-<li><p>Exploratory Data analysis and How R builds a graph.</p></li>
-</ul>
-<p>If time:</p>
-<ul>
-<li><a href="./course-materials/in-class-activies/3Activity_Taxonomy_of_Graphics.html">Discussion: Taxonomy of Graphics</a></li>
-</ul>
 </section>
-<section id="day-7-intro-to-data-viz" class="level1">
-<h1>Day 7 Intro to Data Viz</h1>
-<p>Reflect on the functions <a href="./course-materials/in-class-activies/SOLUTIONS_function_examples.html">we made</a>, taking note of style.</p>
-<p><a href="./course-materials/lectures/5_notes_on_style.html">Notes on Style</a></p>
-<p><a href="./course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html">Data Viz No Computers</a></p>
-<!-- Cleaning up documents happens in sds100 [lab 8](https://smithcollege-sds.github.io/sds100/lab_08_formatting.html)
-
-<!-- [Cleaning up documents](https://quarto.org/docs/computations/execution-options.html)
-
--   [Spinelli Center](https://www.smith.edu/academics/applied-learning-research/spinelli-center-quantitative-learning#PanelDataCnslr) -->
+</div>
+</div>
+</div>
+<section id="colors" class="level4">
+<h4 class="anchored" data-anchor-id="colors">colors</h4>
 </section>
-<section id="day-6-making-functions-cont." class="level1">
-<h1>Day 6 Making Functions (cont.)</h1>
-<p><a href="https://github.com/Nics-Github/SDS192/blob/a9f20aec96c663da36227874d9649762b04db983/course-materials/in-class-activies/function_examples.qmd">Download this function practice</a>.</p>
-<p>Solutions will be posted later in the class.</p>
-<p><a href="./course-materials/in-class-activies/SOLUTIONS_function_examples.html">Solutions</a></p>
-</section>
-<section id="day-5-intro-to-functions" class="level1">
-<h1>Day 5 Intro to Functions</h1>
-<!-- Students know how to store variables -->
-<!-- - Students know about functions and arguments -->
-<p><a href="DataFest_Info_session_2025.pdf">Data Fest Info Session</a></p>
-<p>Datafest is April 4-6 at UMass</p>
-<p>Check lab 1 is successfully submitted on git.</p>
-<p>Intro to functions via first_map.qmd (see maps folder in lab 1)</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Learning Goals
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p>Pushing, commiting and pulling from git</p>
-<ul>
-<li>Students Errors and warnings and comments</li>
-</ul></li>
-<li><p>Strings and Vectors</p></li>
-<li><p>Libraries, functions, arguments and parameters</p></li>
-<li><p>Introduction to the pipe</p></li>
-<li><p>Getting data into R</p></li>
-</ul>
-</div>
-</div>
-</div>
-<p><a href="./course-materials/lectures/23_functions.html">Lecture: Intro to functions</a></p>
-<p>If time: <a href="./course-materials/lectures/30_anonymous_functions.html">Anonymous functions</a></p>
-</section>
-<section id="day-4-file-struture-final-project" class="level1">
-<h1>Day 4 File Struture/ Final Project</h1>
-<p>Where are we going?</p>
-<ul>
-<li>Final project Website</li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Learning Goals
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-20" class="callout-20-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p>Understand File Structure</p>
-<ul>
-<li>Filing system</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="day-3-r-ecosystem-and-more-sql" class="level1">
-<h1>Day 3 R Ecosystem and More SQL</h1>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Things I forgot from Monday
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p>Section 1 - about me</p></li>
-<li><p>Section 2 - variable types</p></li>
-</ul>
-</div>
-</div>
-</div>
-<ul>
-<li><a href="./course-materials/lectures/Brief-R-history.html">Brief History of R</a></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-SQL practice
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><a href="https://www.sql-practice.com/">sql-practice</a></p>
-<ul>
-<li><p>Problems 1-4 in pairs</p></li>
-<li><p>Problem 5 together</p></li>
-<li><p>Problems 6-9 in pairs</p></li>
-</ul>
-<p>Try without hints, then hints, finally solutions.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-If time: Final project introduction!
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-23" class="callout-23-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Open Lab 1</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="day-2-github-lab" class="level1">
-<h1>Day 2 Github Lab</h1>
-<!--Note to self update github lab 1 it is out of date. updating github username, email and password should be in the terminal.-->
-<p>Why do we do use git? <strong>Collaboration</strong></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-git started with Version Control
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-24" class="callout-24-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p>Sign up for <a href="https://github.com/">github here</a>, if you don’t already have an account. We will very carefully link your github account to our github classroom account.</p></li>
-<li><p>git vs github</p></li>
-<li><p>Optional Lab, to familiarize yourself with git: <a href="https://classroom.github.com/a/GG36O-3I">Github Fundamentals Lab 0</a></p></li>
-<li><p><a href="https://happygitwithr.com/">Happy Git and the UseR</a> is a helpful text.</p></li>
-</ul>
-</div>
-</div>
-</div>
-<p>You are only installing git today. There are other files, Ignore the other files until later</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Sign into githubclassroom
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-25" class="callout-25-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Link github account to github classroom - sign into github</p>
-<ul>
-<li><p>prereq -&gt; You need to have a github account</p></li>
-<li><p><a href="https://classroom.github.com/a/Ca2gHqyI">Click here</a> for lab 1. This is due in one week.</p></li>
-<li><p>very carefully find your name in the roster and click it.</p></li>
-<li><p>you should see todays lab in what is called a repository.</p></li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="day-1-welcome-and-sql" class="level1">
-<h1>Day 1 Welcome and SQL</h1>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Classic First Day Stuff
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-26" class="callout-26-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p><a href="./course-materials/syllabus/syllabus.html">Syllabus</a></p></li>
-<li><p>Log into <a href="https://www.slack.com">Slack</a></p></li>
-<li><p>Website tour</p></li>
-<li><p>Bring Computers to Class</p></li>
-</ul>
-</div>
-</div>
-</div>
-<ul>
-<li><p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdRR5mxYfqj5kSr1bu7dTGlMBdKdEhPG8wQ6o8iRMAY-wFAxQ/viewform?usp=sharing">Make some of our own class data</a></p></li>
-<li><p><a href="./course-materials/lectures/1_Overview_of_the_course.html">Overview of Intro to Data Science</a></p></li>
-<li><p><a href="./course-materials/lectures/0_First_Day_SQL.html">Intro to SQL</a></p></li>
-</ul>
-<section id="walk-to-mcconnell-215-and-214" class="level3">
-<h3 class="anchored" data-anchor-id="walk-to-mcconnell-215-and-214">Walk to MCConnell 215 and 214</h3>
-<p>My office and group study room.</p>
+<section id="note-on-colors" class="level2">
+<h2 class="anchored" data-anchor-id="note-on-colors">Note on colors</h2>
+<p>We will discuss colors on Monday when you get to them in ex 6:</p>
+<p>You can reread <a href="https://mdsr-book.github.io/mdsr3e/02-datavizI.html#sec-color">this section</a> if you forget what sequential,diverging,qualitative mean.</p>
+<p>Or check out the colors examples on the <a href="https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf">cheat sheet</a>.</p>
+<p>Intuitive <a href="https://jhudatascience.org/tidyversecourse/dataviz.html#colors">Color Examples</a></p>
+<section id="wrangling" class="level4">
+<h4 class="anchored" data-anchor-id="wrangling">wrangling</h4>
+<p><a href="https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf">dpylr cheatsheet for wrangling</a></p>
+<p><a href="./course-materials/in-class-activies/Wrangling_Baby_Names.qmd">Wrangle babynames</a></p>
 
 
+</section>
 </section>
 </section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1562,185 +918,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1753,7 +1085,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="./credits.qmd">
+    <a class="nav-link" href="./credits.html">
 <p>credits</p>
 </a>
   </li>  

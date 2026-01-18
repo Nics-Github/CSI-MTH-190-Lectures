@@ -36,51 +36,114 @@ library(knitr)
 ```
 
 
-
 ## Lectures
 Part 1: Visualizations
 
+### Week 1
+
 -   [1. Overview of Intro to Data Science](./course-materials/lectures/1_Overview_of_the_course.qmd)
 
--   [2. Brief History of R](./course-materials/lectures/Brief-R-history.qmd)
+-   [2. Brief History of R](./course-materials/lectures/2_Brief-R-history.qmd)
 
 -   [3. Basic Statistics](./course-materials/lectures/3_Basic_Statistics.qmd)
 
--   Understand File Structure and Filing system
+### Week 2
 
 -   [4. Where does Data Comes From](./course-materials/lectures/4_where_does_data_come_from.qmd)
 
-This can be toned down, students will not be writing functions in this class. 
-[Lecture: Intro to functions](course-materials/lectures/23_functions.qmd) 
+-   [5. Notes on Style](./course-materials/lectures/5_notes_on_style.qmd)
 
--   [5. Notes on Style](course-materials/lectures/5_notes_on_style.qmd)
+-   [6 Data Frames Variable Types Tidy Data](./course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.qmd)
 
--   [6 Data Frames Variable Types Tidy Data](course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.qmd)
+### Week 3 
 
-Should take out the no computers part.
--   [Data Viz No Computers](./course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.qmd)
+-   [7 Taxonomy of Graphs (categorical)](course-materials/lectures/7_taxonomy_of_graphs_categorical.qmd)
 
--   [Taxonomy of graphs](course-materials/lectures/2_mdsr_viz_1_taxonomy.qmd)
+-   [8 The ggplot cheatsheet](https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-visualization.pdf)
 
--   [7 Data Ethics part 1]()
+-   [9 Taxonomy of Graphs (numeric)](./course-materials/lectures/9_taxonomy_of_graphs_numeric_part_2.qmd)
 
--   [8 Taxonomy of Graphs (categorical)](course-materials/lectures/8_taxonomy_of_graphs.qmd)
+-   [10 Color talk](./course-materials/lectures/10_color_theory.qmd)
 
--   [11 Taxonomy of Graphs (numeric)](course-materials/lectures/11_taxonomy_of_graphics_part_2.qmd)
+### Week 4
+
+-   [11 Taxonomy of Graphs (numeric)](./course-materials/lectures/11_taxonomy_of_graphics_part_3.qmd)
 
 -   [Discussion: Taxonomy of Graphics](./course-materials/in-class-activies/3Activity_Taxonomy_of_Graphics.qmd)
 
 -   [12 Building a graph](./course-materials/lectures/12_Building_a_graph.qmd)
 
--   []
+-   [13 Data Ethics part 1]()
+
+### Week 5
+
+-   [Project 1 Intro](./course-materials/lectures/14_2_introduce_project_1.qmd)
+
+### Week 6
 
 Part 2: Wrangling
 
--   [Color talk](course-materials/lectures/10_color_theory.qmd)
+-   [14 Ethics Part 2](./course-materials/lectures/14_ethics_part_2.qmd)
 
--   [Data Ethics](/course-materials/lectures/11_ethics.qmd)
+-   [15 Lecture on the five verbs](course-materials/lectures/mdsr-the-verbs.qmd)
 
--   [Lecture on the five verbs](course-materials/lectures/mdsr-the-verbs.qmd)
+-   [16 Dplyr Cheat sheet](https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-transformation.pdf)
+
+### Week 7
+
+-   [17 What you can do in sumarize]()
+
+-   [18 Ethics part 3]()
+
+-   [19 Joins part 1 an exploration]()
+
+### Week 8
+
+-   [20 Joins part 2 an exploration]()
+
+-   [21 Pivots](./course-materials/lectures/21_pivots.qmd)
+
+-   [22 Placeholder]()
+
+### Week 9 
+
+-   [Project 2 Intro]()
+
+### Week 10
+
+Part 3: Application - Maps
+
+-   [23 Maps part 1](./course-materials/lectures/23_maps-ggplot.qmd)
+
+-   [24 Maps part 2](./course-materials/lectures/23_maps-ggplot.qmd)
+
+-   [25 Maps part 3]
+
+### Week 11
+
+-   [26 Maps part 4]
+
+### Week 12
+
+-   [Project 3 Intro]()
+
+### Week 13
+
+Part 4: Parallel to SQL
+
+-   [27 SQL]
+
+### Week 14
+
+-   [28 SQL 1]()
+
+-   [29 SQL 2]()
+
+### Week 15
+
+-   [30 SQL 3]()
+
+
 
 Discuss the difference between `%in%` and `==`
 

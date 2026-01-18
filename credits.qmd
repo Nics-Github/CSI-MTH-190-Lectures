@@ -1,0 +1,16 @@
+---
+title: "MTH 190 Intro To Data Science"
+author:
+  - name: "Nicholas Schwab"
+    roles: "Professor" # Free text roles
+---
+
+## Credit
+
+This course would not have been possible without the DSC-WAV grant that was put together by faculty at the [Five Colleges](https://dsc-wav.github.io/www/people.html). 
+
+The workshop during summer 2021 help inspire me to begin studying data science. Ben Baumer, Nick Horton and Ethan Meyers led that workshop.
+
+Finally the faculty at Smith College and UT Austin created or inspired many of the labs and projects in this course. Thie course incorporates work from Ben Baumer, Lindsay Poirier, Shiya Cao and Albert Kim. They are given credit on the appropriate labs and projects.
+
+

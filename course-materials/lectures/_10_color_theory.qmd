@@ -1,0 +1,301 @@
+---
+title: "Color Theory"
+subtitle: "CSI-MTH-190"
+author: "Schwab"
+format: 
+  revealjs:
+    theme: beige
+execute: 
+  echo: false
+  warning: false
+  message: false
+
+  
+---
+
+```{r}
+library(tidyverse)
+library(palmerpenguins) 
+```
+
+## Goal: Communication
+
+Remember the goal of making data graphics to to communicate some idea. 
+
+In this lecture we'll talk about different color palettes and when to use them. 
+
+We'll use the `starwars` data. 
+
+## Colors
+
+Big Idea:  **Color Choices Matter**
+
+General Color Palettes: 
+
+- Sequential Palettes
+
+- Diverging Palettes
+
+- Qualitative Palettes
+
+## R Color Brewer palletts
+
+![](https://r-graph-gallery.com/38-rcolorbrewers-palettes_files/figure-html/thecode-1.png)
+
+## The two functions
+
+The two functions we'll use for colors are
+
+sclae_*_discrete()
+scale_*_continuous()
+
+The * matches the aestheic we are trying to color. 
+
+scale_fill_brewer()     <- filling discrete
+scale_fill_distiller()  <- filling continuous
+scale_color_brewer()
+scale_color_distiller()
+
+## Base Graph
+
+Below is a scatter plot of `body_mass_g` vs `bill_depth_mm`.
+
+```{r}
+penguins |>
+  ggplot()+
+  geom_point(aes(x=body_mass_g,bill_depth_mm))
+```
+
+
+## Sequential 1
+
+I'd like to show the flipper length as a third variable.
+`flipper_length_mm` is a continuous and numeric variable. 
+We can color by it. 
+
+```{r}
+# Plot!
+penguins |>
+  ggplot()+
+  geom_point(aes(
+    x = body_mass_g, 
+    y = bill_depth_mm,
+    color = flipper_length_mm))
+  
+```
+
+## Sequential 2
+
+The lighter color should indicate less. 
+
+To reverse it I'll add scale_color_distiller(direction = 1) because we're working with a continuous variable and we're coloring. 
+
+```{r}
+# Plot!
+penguins |>
+  ggplot()+
+  geom_point(aes(
+    x = body_mass_g, 
+    y = bill_depth_mm,
+    color = flipper_length_mm))+
+  scale_color_distiller(direction = 1)
+  
+```
+
+## Sequential 3
+
+Using the default color isn't great. Let's choose a premade brewer palette. 
+
+To reverse it I'll add scale_color_distiller(direction = 1) because we're working with a continuous variable and we're coloring. 
+
+```{r}
+# Plot!
+penguins |>
+  ggplot()+
+  geom_point(aes(
+    x = body_mass_g, 
+    y = bill_depth_mm,
+    color = flipper_length_mm))+
+  scale_color_distiller(palette = "Greys",  direction = 1)
+  
+```
+
+## Sequential
+
+Notes: 
+
+- Used for continuous numeric variables
+
+- Darker should be used to show more
+
+## Diverging Palettes
+
+If we want to use two base colors, one to show high values and the other to show low. We can use a diverging palette. 
+
+Here the brown is long flipper and dark blue is short flipper. 
+
+```{r}
+# Plot!
+penguins |>
+  ggplot()+
+  geom_point(aes(
+    x = body_mass_g, 
+    y = bill_depth_mm,
+    color = flipper_length_mm))+
+  scale_color_distiller(palette = "BrBG")
+  
+```
+
+## Diverging Palettes 2
+
+It often makes more sense to use a diverging palette with the middle being zero. 
+
+Here I do a bit of wrangling to add a new column, which captures the difference from the average height. 
+
+```{r}
+ave_mass = mean(penguins$body_mass_g,na.rm = TRUE)
+
+penguins |>
+  mutate(diff_mass_from_avg =body_mass_g - ave_mass)|>
+  ggplot()+
+  geom_point(aes(
+    x = flipper_length_mm, 
+    y = bill_depth_mm,
+    color = diff_mass_from_avg))+
+  scale_color_distiller(palette = "BrBG")
+```
+
+## Diverging Palettes 3
+
+I'm adding a circle around each point so they are easier to see. 
+
+```{r}
+ave_mass = mean(penguins$body_mass_g,na.rm = TRUE)
+
+penguins |>
+  mutate(diff_mass_from_avg =body_mass_g - ave_mass)|>
+  ggplot()+
+  geom_point(aes(
+    x = flipper_length_mm, 
+    y = bill_depth_mm,
+    fill = diff_mass_from_avg,
+    color = "black",
+    stroke = 0.01))+
+  scale_fill_distiller(palette = "BrBG")
+```
+
+## Diverging Palettes
+
+Missing Data should be clearly represented with grey or a like color. 
+
+```{r}
+# Plot!
+mass_med_income$med_income_discrete[8] = NA
+
+ggplot() +
+  geom_sf(data = mass_med_income, aes(fill = med_income_discrete)) +
+ # geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +
+  labs(fill = "Median Income\n thousands dollars",
+       title = "Massachusetts Med Income 2020 ",
+       #subtitle = "Median income in 2020 was $91,842",
+       subtitle = "Hampshire county data is missing",
+       caption = "deptofnumbers.com")+
+  scale_fill_brewer(palette = "PuOr",na.value ="grey" )+
+  theme_classic()+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.line = element_blank()
+        )
+```
+
+
+## Qualitative Data
+
+If the variable is categorical use a qualitative palette. 
+
+Limit yourself to six categories. 
+
+```{r}
+
+fun_facts <- tribble(
+  ~fun_facts,
+  "County of Mass Bay Colony",
+  "County of Plymouth Colony",
+  "Newest",
+  "Island",
+  "County of Mass Bay Colony",
+  "County of Plymouth Colony",
+  "Newest",
+  "Smith College",
+  "County of Mass Bay Colony",
+  "Newest",
+  "County of Plymouth Colony",
+  "Boarders Three States",
+  "Boarders Three States",
+  "Island"
+)
+
+ggplot() +
+  geom_sf(data = bind_cols(mass_med_income, fun_facts), aes(fill = fun_facts)) +
+ # geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +
+  labs(fill = "",
+       title = "Massachusetts Med Income 2020 ",
+       #subtitle = "Median income in 2020 was $91,842",
+       subtitle = "Fun Facts about MA Counties",
+       caption = "source: https://en.wikipedia.org/wiki/List_of_counties_in_Massachusetts")+
+  scale_fill_brewer(palette = "Set2",na.value ="grey" )+
+  theme_classic()+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.line = element_blank()
+        )
+```
+
+## How do we do this? 
+
+Categorical/discrete variable
+
+add `scale_*_brewer()` to your plot
+
+Numeric/continuous Variable
+
+add `scale_*_distiller()` to your plot
+
+# Common Pitfalls
+
+## Too many categories and Rainbows!
+
+This is the default option in R
+
+```{r}
+ggplot() +
+  geom_sf(data = bind_cols(mass_med_income, fun_facts), aes(fill = County )) +
+ # geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +
+  labs(fill = "County Names",
+       title = "Counties in MA")+
+  theme_classic()+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.line = element_blank()
+        )
+
+```
+
+
+## Themes
+
+
+
+
