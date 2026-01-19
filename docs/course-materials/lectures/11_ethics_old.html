@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Schwab">
-  <title>CSI-MTH-190 – Map Review</title>
+  <title>CSI-MTH-190 – Data Ethics</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -122,25 +122,13 @@
       margin-right: 0; 
     }
   </style>
-  <link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-  <script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-  <script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="../../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
-  <script src="../../site_libs/leaflet-1.3.1/leaflet.js"></script>
-  <link href="../../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
-  <script src="../../site_libs/proj4-2.6.2/proj4.min.js"></script>
-  <script src="../../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-  <link href="../../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-  <script src="../../site_libs/leaflet-binding-2.2.3/leaflet.js"></script>
-  <link href="../../site_libs/leaflet-awesomemarkers-2.0.3/leaflet.awesome-markers.css" rel="stylesheet">
-  <script src="../../site_libs/leaflet-awesomemarkers-2.0.3/leaflet.awesome-markers.min.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Map Review</h1>
+  <h1 class="title">Data Ethics</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -151,145 +139,146 @@ Schwab
 </div>
 
 </section>
-<section id="map-code" class="slide level2">
-<h2>Map code</h2>
-<p>Your map code is probably in lab 1 or the website project.</p>
+<section>
+<section id="data-ethics" class="title-slide slide level1 center">
+<h1>Data Ethics</h1>
+<p>This is a squishy area.</p>
+<p>“Use Common Sense” - The authors of our textbook.</p>
 </section>
-<section id="quick-review" class="slide level2">
-<h2>Quick Review</h2>
-<p>Quick Review of maps from the beginning of the semester.</p>
-<p>Simple Maps with the <code>maps</code> package</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
+<section id="the-five-ps-of-ethical-data-handling." class="slide level2">
+<h2>The Five Ps of Ethical Data Handling.</h2>
+<p>The five Ps terminology comes from here the Harvard Business Review.</p>
+<p><a href="https://hbr.org/2023/07/the-ethics-of-managing-peoples-data">Here’s the link.</a></p>
+</section>
+<section id="copyright-and-chat-gpt" class="slide level2">
+<h2>Copyright and Chat GPT</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1920px-ChatGPT_logo.svg.png"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>Sarah Silverman, Mona Awad and Paul Tremplay sue Open AI for direct infringement.</p></li>
+<li><p>Using copyrighted materials to train their models.</p></li>
+<li><p><a href="https://originality.ai/blog/openai-chatgpt-lawsuit-list">List of suits is getting longer.</a></p></li>
+</ul>
+</div></div>
+</section>
+<section id="provenance" class="slide level2">
+<h2>Provenance</h2>
+<p>Where does the data originate?</p>
+<p>Was it acquired legally?</p>
+</section>
+<section id="github" class="slide level2">
+<h2>Github</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Github-desktop-logo-symbol.svg" width="354"></p>
+</div><div class="column" style="width:50%;">
+<div class="columns">
+<p>Microsoft (owner of github) uses code in repos to train copilot.</p><ul>
+<li><p>Ethical on public repositories?</p></li>
+<li><p>Private repositories?</p></li>
+<li><p>Copilot costs $20 a month or is free.</p></li>
+</ul>
+</div>
+</div></div>
+</section>
+<section id="purpose" class="slide level2">
+<h2>Purpose</h2>
+<p>Would the source of the data agree with how it is being used?</p>
+<p>What if the data is re-purposed?</p>
+</section>
+<section id="section" class="slide level2">
+<h2><img data-src="https://upload.wikimedia.org/wikipedia/commons/4/48/OKCupid_Logo.svg" width="243"></h2>
+<ul>
+<li class="fragment"><p>If that data is scraped from the site by a third party and made available is that ethical?</p></li>
+<li class="fragment"><p>OkCupid, including usernames, age, gender, location, what kind of relationship (or sex) they’re interested in, personality traits</p></li>
+<li class="fragment"><p>“The data is already public.” -Emil Kirkegaard</p></li>
+</ul>
+</section>
+<section id="protection" class="slide level2">
+<h2>Protection</h2>
+<p>How is the data being protected?</p>
+<p>Who is responsible for destroying it?</p>
+</section>
+<section id="college-students" class="slide level2">
+<h2>College Students</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="30_map_review_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+<p><img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm_RWI9VTHbnc4TXZTOpWZxf-nX3KdhlyATA&amp;s.png"></p>
+<figcaption>Smith College</figcaption>
 </figure>
 </div>
+</div><div class="column" style="width:50%;">
+<div class="columns">
+<p>There is data that Smith collected from you.</p><p>The repos in this class are data that you are creating.</p>
 </div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="30_map_review_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="get-into-trouble" class="slide level2">
-<h2>Get into trouble</h2>
-<p>R gets confused when we have two packages loaded with the same name.</p>
-<p>Note that in the case below the maps maps wins out. We even get a message.</p>
-
-<img data-src="30_map_review_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="now-try-the-map-from-purr" class="slide level2">
-<h2>Now try the map from purr</h2>
-<p>This is a silly example. Just to show we sometimes have to be explicit with R when choosing our functions</p>
-<div class="cell">
-
-<div class="cell-output cell-output-stdout">
-<pre><code>$name
-   [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE
-  [13] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE
-  [25]  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE
-  [37]  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE
-  [49]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-  [61]  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
-  [73] FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE
-  [85]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE
-  [97] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE
- [109] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE
- [121] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE
- [133]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [145]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [157] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [169] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE
- [181] FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
- [193] FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
- [205]  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE
- [217] FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
- [229]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE
- [241]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE
- [253] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE
- [265]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
- [277]  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE
- [289]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE
- [301]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
- [313] FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE
- [325] FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE
- [337] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
- [349]  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE
- [361]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
- [373]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [385]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE
- [397]  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE
- [409] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE  TRUE
- [421] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE
- [433]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE
- [445]  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
- [457]  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [469]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [481]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [493]  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
- [505]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE
- [517]  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
- [529] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [541]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
- [553]  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE
- [565] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE
- [577] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE
- [589] FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE
- [601]  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE
- [613]  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE
- [625] FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE
- [637]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
- [649]  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE
- [661]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [673]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
- [685] FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE
- [697] FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
- [709] FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE
- [721]  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
- [733]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE
- [745] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE
- [757]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
- [769]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE
- [781]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [793]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [805]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [817]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [829]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE
- [841]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE
- [853]  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE
- [865] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE
- [877]  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
- [889]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE
- [901]  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE
- [913] FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE
- [925]  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [937]  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE
- [949]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [961] FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
- [973]  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE
- [985]  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE
- [997] FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE</code></pre>
-</div>
-</div>
-<img data-src="30_map_review_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="more-geospacial-map-review" class="slide level2">
-<h2>More geospacial map review</h2>
-<p>We also made fancier maps</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-dff5c1111d3930f7f384" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-dff5c1111d3930f7f384">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addAwesomeMarkers","args":[37.7258,-122.1569,{"icon":"home","markerColor":"blue","iconColor":"white","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"glyphicon"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"I lived here once",null,null,null,"SAN LEANDRO",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addAwesomeMarkers","args":[42.3163,-72.6403,{"icon":"education","markerColor":"blue","iconColor":"white","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"glyphicon"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Home of the Pioneers",null,null,null,"Smith College",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[37.7258,42.3163],"lng":[-122.1569,-72.6403]}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-
-
+<section id="preparation" class="slide level2">
+<h2>Preparation</h2>
+<p>How is the data cleaned?</p>
+<p>Are data sets being combined to preserve anonymity?</p>
+<p>Is the accuracy of the data verified?</p>
 </section>
+<section id="lab-5ish" class="slide level2">
+<h2>Lab 5ish</h2>
+<p><a href="https://aratrace.com/7-sisters-trail-race-4/"><img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAGMOJ6BcHCxFFTln4-ZM9AQ9jaul5yUThUg&amp;s.png"></a></p>
+</section>
+<section id="privacy" class="slide level2">
+<h2>Privacy</h2>
+<p>Who will have access to data that can be used to ID a person?</p>
+<p>How will individuals be anonymized?</p>
+<p>Who has access to that anonymized data.</p>
+</section>
+<section id="scenario" class="slide level2">
+<h2>Scenario</h2>
+<p>A citizen of a country files taxes with their government. Paying taxes is rarely optional. In filing there are data related to residence, wages, age, gender, taxes and government ID numbers pertaining to this citizen and their family.</p>
+<p>Discuss:</p>
+<ul>
+<li><p>Provenance</p></li>
+<li><p>Purpose</p></li>
+<li><p>Protection</p></li>
+<li><p>Preparation</p></li>
+<li><p>Privacy</p></li>
+</ul>
+</section>
+<section id="governments-responsibility" class="slide level2">
+<h2>Government’s responsibility</h2>
+<p>Who should access to this data?</p>
+<p>How should is be secured?</p>
+<p>What rights to privacy does this citizen have?</p>
+<p>How long should the data be held?</p>
+</section>
+<section id="current-events" class="slide level2">
+<h2>Current Events</h2>
+<p>DOGE requesting access to tax payer returns to root out fraud.<sup>1</sup></p>
+<p>Wanted a person without the proper clearance to be able to access tax payer returns. (Gavin Kliger)</p>
+<p>Will be given access if needed in anonymized form. <sup>2</sup></p>
+<aside><ol class="aside-footnotes"><li id="fn1"><p><a href="https://www.economist.com/united-states/2025/02/18/is-elon-musks-war-on-fraud-just-cover-for-a-power-grab" class="uri">https://www.economist.com/united-states/2025/02/18/is-elon-musks-war-on-fraud-just-cover-for-a-power-grab</a></p></li><li id="fn2"><p><a href="https://www.nytimes.com/2025/02/21/us/politics/irs-doge-gavin-kliger.html" class="uri">https://www.nytimes.com/2025/02/21/us/politics/irs-doge-gavin-kliger.html</a></p></li></ol></aside></section>
+<section id="books" class="slide level2">
+<h2>Books</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><img data-src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1427665814i/51291.jpg"></p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1456091964i/28186015.jpg"></p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="https://timharford.com/wp-content/uploads/2020/11/data-detective.png"></p>
+</div></div>
+</section>
+<section id="credits" class="slide level2">
+<h2>Credits</h2>
+<ul>
+<li><p>The five ps seem to come from the Harvard Business Review <a href="https://hbr.org/2023/07/the-ethics-of-managing-peoples-data" class="uri">https://hbr.org/2023/07/the-ethics-of-managing-peoples-data</a> 9/30/2024</p></li>
+<li><p>Suing Chat GPT https://www.theverge.com/2024/2/13/24072131/sarah-silverman-paul-tremblay-openai-chatgpt-copyright-lawsuit</p></li>
+</ul>
+
+
+</section></section>
+
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -505,44 +494,6 @@ Schwab
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

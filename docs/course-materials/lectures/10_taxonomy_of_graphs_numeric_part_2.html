@@ -206,124 +206,167 @@ Schwab
 </div>
 
 </section>
-<section id="prereqs" class="slide level2">
-<h2>PreReqs</h2>
-<p>I assume you’ve read chapter 2.2, if you haven’t, go back and read it before this lecture. Also I assume you saw the previous lecture on taxonomy.</p>
+<section id="libraries" class="slide level2">
+<h2>Libraries</h2>
+<p>You may not have <code>palmerpenguins</code> installed. You’ll know if you get the following message:</p>
+<p><strong>Error in `library()`:</strong></p>
+<p>! there is no package called ‘palmerpenguins’</p>
+<p>If so paste the install line into the console and type return/enter. (Remove the #).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co">#install.packages("palmerpenguins")</span></span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="the-data" class="slide level2">
 <h2>The Data</h2>
-<p>Here’s the starwars data again.</p>
+<p>In this lecture I’ll use one set of data called <code>palmerpenguins</code> to illustrate some of the ideas you should consider when building a graph.</p>
+<p>We’ll focus mostly on the numeric variables in this lecture, although many of the ideas are similar for both numeric and categorical variables.</p>
+</section>
+<section id="example-mass" class="slide level2">
+<h2>Example mass</h2>
+<p>Recall how we can use summarize from lab 2 to calculate descriptive statistics.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(mdsr)</span>
-<span id="cb1-3"><a></a><span class="fu">head</span>(starwars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># Putting inside of summarize is helpful</span></span>
+<span id="cb2-2"><a></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb2-4"><a></a>    <span class="at">body_mass =</span> <span class="fu">mean</span>( body_mass_g, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb2-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 14
-  name      height  mass hair_color skin_color eye_color birth_year sex   gender
-  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Luke Sky…    172    77 blond      fair       blue            19   male  mascu…
-2 C-3PO        167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…
-3 R2-D2         96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…
-4 Darth Va…    202   136 none       white      yellow          41.9 male  mascu…
-5 Leia Org…    150    49 brown      light      brown           19   fema… femin…
-6 Owen Lars    178   120 brown, gr… light      blue            52   male  mascu…
-# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
-#   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<pre><code># A tibble: 1 × 1
+  body_mass
+      &lt;dbl&gt;
+1     4202.</code></pre>
+</div>
+</div>
+<p>Below we can calculate the mean() with base R (i.e.&nbsp;without summarize()).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># But not necessary</span></span>
+<span id="cb4-2"><a></a></span>
+<span id="cb4-3"><a></a><span class="fu">mean</span>(penguins<span class="sc">$</span>body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4201.754</code></pre>
 </div>
 </div>
 </section>
-<section id="section" class="slide level2" data-background-image="https://s-media-cache-ak0.pinimg.com/originals/c2/46/92/c24692fd95dbfb89f772613a316a5405.png" data-background-size="contain">
-<h2></h2>
+<section>
+<section id="try-one" class="title-slide slide level1 center">
+<h1>Try one:</h1>
+<p>Find the median flipper length using <code>summarize()</code>.</p>
 </section>
-<section id="visual-cues-position" class="slide level2">
-<h2>Visual Cues Position</h2>
-<p>Show position with a point plot. You will need to map two asthetics.</p>
+<section id="answer" class="slide level2">
+<h2>Answer:</h2>
+<p>To find the median flipper length using <code>summarize()</code> you would use this code in a chunk:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>starwars <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a></a>    <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb3-3"><a></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> mass))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># Putting inside of summarize is helpful</span></span>
+<span id="cb6-2"><a></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb6-4"><a></a>    <span class="at">body_mass =</span> <span class="fu">median</span>( flipper_length_mm, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb6-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  body_mass
+      &lt;dbl&gt;
+1       197</code></pre>
 </div>
-<img data-src="11_taxonomy_of_graphics_part_3_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="visual-cues-position-again" class="slide level2">
-<h2>Visual Cues position again</h2>
-<p>I’m going to remove the really heavy character with a filter.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>starwars <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a></a>    <span class="fu">filter</span>(mass <span class="sc">&lt;</span> <span class="dv">250</span>)<span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a></a>    <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb4-4"><a></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> mass))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="11_taxonomy_of_graphics_part_3_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="visual-cues-shape" class="slide level2">
-<h2>Visual Cues Shape</h2>
-<p>We can map the categorical variable shape.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>starwars <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a></a>    <span class="fu">filter</span>(mass <span class="sc">&lt;</span> <span class="dv">250</span>)<span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a></a>    <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb5-4"><a></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>height, </span>
-<span id="cb5-5"><a></a>            <span class="at">y =</span> mass,</span>
-<span id="cb5-6"><a></a>            <span class="at">shape =</span> gender</span>
-<span id="cb5-7"><a></a>            ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="11_taxonomy_of_graphics_part_3_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="visual-cues-shape-clean" class="slide level2">
-<h2>Visual Cues Shape Clean</h2>
-<p>We can map the categorical variable shape.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>starwars <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a></a>    <span class="fu">filter</span>(mass <span class="sc">&lt;</span> <span class="dv">250</span>)<span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a></a>    <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb6-4"><a></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>height, </span>
-<span id="cb6-5"><a></a>            <span class="at">y =</span> mass,</span>
-<span id="cb6-6"><a></a>            <span class="at">shape =</span> gender</span>
-<span id="cb6-7"><a></a>            ))<span class="sc">+</span></span>
-<span id="cb6-8"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="11_taxonomy_of_graphics_part_3_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-<section id="you-try" class="slide level2">
-<h2>You try:</h2>
-<p>Take a moment and copy the code below into r. Change the x-axis to be birth_year, and the y-axis to be height. Are older characters taller? Color by sex, what do you notice?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>starwars <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a></a>    <span class="fu">filter</span>(mass <span class="sc">&lt;</span> <span class="dv">250</span>)<span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a></a>    <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb7-4"><a></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span> , </span>
-<span id="cb7-5"><a></a>            <span class="at">y =</span>  ,</span>
-<span id="cb7-6"><a></a>            <span class="at">color =</span> </span>
-<span id="cb7-7"><a></a>            ))<span class="sc">+</span></span>
-<span id="cb7-8"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="section-1" class="slide level2" data-background-image="https://i.pinimg.com/736x/62/c6/ee/62c6ee636c47dccad00e7e56c268c3bf--data-visualization-points.jpg" data-background-size="contain">
-<h2></h2>
-</section>
-<section id="visual-cues-context" class="slide level2">
-<h2>Visual Cues Context</h2>
-<p>Here I add a title, x and y axes and a source of the data.</p>
+<section id="boxplots" class="slide level2 smaller">
+<h2>Boxplots</h2>
+<p>Boxplots are helpful for finding outliers.</p>
+<p>Try to make a boxplot of the penguins <code>bill_depth_mm</code> color it by <code>island</code>.</p>
+
+<img data-src="10_taxonomy_of_graphs_numeric_part_2_files/figure-revealjs/boxplot-1.png" width="960" class="r-stretch"></section>
+<section id="code-for-graph" class="slide level2">
+<h2>Code for graph</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>starwars <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a></a>    <span class="fu">filter</span>(mass <span class="sc">&lt;</span> <span class="dv">250</span>)<span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a></a>    <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb8-4"><a></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> birth_year, </span>
-<span id="cb8-5"><a></a>            <span class="at">y =</span> height,</span>
-<span id="cb8-6"><a></a>            <span class="at">color =</span> sex</span>
-<span id="cb8-7"><a></a>            ))<span class="sc">+</span></span>
-<span id="cb8-8"><a></a>    <span class="fu">labs</span>( <span class="at">x =</span> <span class="st">"year character was born"</span>,</span>
-<span id="cb8-9"><a></a>        <span class="at">y =</span> <span class="st">"height (cm)"</span> ,</span>
-<span id="cb8-10"><a></a>        <span class="at">title =</span> <span class="st">"Starwars Characters"</span>,</span>
-<span id="cb8-11"><a></a>        <span class="at">caption =</span> <span class="st">"source: https://swapi.py4e.com/"</span></span>
-<span id="cb8-12"><a></a>        )<span class="sc">+</span></span>
-<span id="cb8-13"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="do">## boxplot for bill depth, separated by island.</span></span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_depth_mm, <span class="at">color =</span> island))<span class="sc">+</span></span>
+<span id="cb8-5"><a></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="10_taxonomy_of_graphs_numeric_part_2_files/figure-revealjs/boxplot-code-1.png" width="960" class="r-stretch"></section>
+<section id="geom_vline" class="slide level2 smaller">
+<h2>geom_vline()</h2>
+<p>If you want to mark part of the graph, sometimes a vertical line is helpful. You simply add on a geom_vline() layer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Adding a brown line to show the mean billdepth. </span></span>
+<span id="cb9-2"><a></a></span>
+<span id="cb9-3"><a></a>mean_bill_depth <span class="ot">=</span> <span class="fu">mean</span>(penguins<span class="sc">$</span>bill_depth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-4"><a></a></span>
+<span id="cb9-5"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb9-6"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_depth_mm, <span class="at">color =</span> island))<span class="sc">+</span></span>
+<span id="cb9-7"><a></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb9-8"><a></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb9-9"><a></a>    <span class="at">xintercept =</span> mean_bill_depth,</span>
+<span id="cb9-10"><a></a>    <span class="at">color=</span><span class="st">"brown"</span>,</span>
+<span id="cb9-11"><a></a>    <span class="at">linetype=</span><span class="st">"dashed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="10_taxonomy_of_graphs_numeric_part_2_files/figure-revealjs/means-on-boxes-1.png" width="960" class="r-stretch"></section>
+<section id="faceted" class="slide level2">
+<h2>faceted</h2>
+<p>We can break code into smaller piece called facets.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># In the code below I am faceting by species</span></span>
+<span id="cb10-2"><a></a></span>
+<span id="cb10-3"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb10-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_depth_mm, <span class="at">color =</span> island))<span class="sc">+</span></span>
+<span id="cb10-5"><a></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb10-6"><a></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb10-7"><a></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(</span>
+<span id="cb10-8"><a></a>      penguins<span class="sc">$</span>bill_depth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-9"><a></a>    <span class="at">color=</span><span class="st">"brown"</span>,</span>
+<span id="cb10-10"><a></a>    <span class="at">linetype=</span><span class="st">"dashed"</span>)<span class="sc">+</span></span>
+<span id="cb10-11"><a></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="10_taxonomy_of_graphs_numeric_part_2_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section id="create-histograms" class="slide level2">
+<h2>Create Histograms</h2>
+<p>To see the spread, center and shape of a numeric variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>starwars <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> height )) <span class="sc">+</span></span>
+<span id="cb11-3"><a></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="10_taxonomy_of_graphs_numeric_part_2_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="histograms" class="slide level2">
+<h2>Histograms</h2>
+<ol type="1">
+<li>Make bins for the numbers</li>
+<li>Counts the occurrence of a value within bins</li>
+<li>The height is the number of counts.</li>
+</ol>
+<p>We can adjust the bin or bin size.</p>
+</section>
+<section id="try-one-1" class="slide level2">
+<h2>Try one:</h2>
+<p>Copy some code above as a template and try to make a histogram of <code>bill_length_mm</code>.</p>
+<p>Add a vertical line at the mean() value, fill by sex and facet by island.</p>
+</section>
+<section id="answer-1" class="slide level2">
+<h2>Answer:</h2>
+<p>Here is my solution to the problem on the previous slide.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>mean_bill_len <span class="ot">=</span> <span class="fu">mean</span>(penguins<span class="sc">$</span>bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-2"><a></a></span>
+<span id="cb12-3"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> sex))<span class="sc">+</span></span>
+<span id="cb12-5"><a></a>  <span class="fu">geom_histogram</span>()<span class="sc">+</span></span>
+<span id="cb12-6"><a></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb12-7"><a></a>    <span class="at">xintercept =</span> mean_bill_len,</span>
+<span id="cb12-8"><a></a>    <span class="at">color=</span><span class="st">"brown"</span>,</span>
+<span id="cb12-9"><a></a>    <span class="at">linetype=</span><span class="st">"dashed"</span>)<span class="sc">+</span></span>
+<span id="cb12-10"><a></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 
 
-<img data-src="11_taxonomy_of_graphics_part_3_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<img data-src="10_taxonomy_of_graphs_numeric_part_2_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

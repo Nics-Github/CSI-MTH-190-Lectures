@@ -49,6 +49,7 @@ Part 1: Visualizations
 
 -   [3. Basic Statistics](./course-materials/lectures/3_Basic_Statistics.qmd)
 
+
 # Week 2
 
 -   [4. Where does Data Comes From](./course-materials/lectures/4_where_does_data_come_from.qmd)
@@ -57,25 +58,27 @@ Part 1: Visualizations
 
 -   [6 Data Frames Variable Types Tidy Data](./course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.qmd)
 
+-   [7 Data Ethics part 1](./course-materials/lectures/7_ethics_part_1.qmd)]
+
 # Week 3 
 
--   [7 Taxonomy of Graphs (categorical)](course-materials/lectures/7_taxonomy_of_graphs_categorical.qmd)
+-   [8 Taxonomy of Graphs (categorical)](course-materials/lectures/8_taxonomy_of_graphs_categorical.qmd)
 
--   [8 The ggplot cheatsheet](https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-visualization.pdf)
+-   [9 The ggplot cheatsheet](https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-visualization.pdf)
 
--   [9 Taxonomy of Graphs (numeric)](./course-materials/lectures/9_taxonomy_of_graphs_numeric_part_2.qmd)
+-   [10 Taxonomy of Graphs (numeric)](./course-materials/lectures/10_taxonomy_of_graphs_numeric_part_2.qmd)
 
--   [10 Color talk](./course-materials/lectures/10_color_theory.qmd)
+-   [11 Color talk](./course-materials/lectures/11_color_theory.qmd)
 
 # Week 4
 
--   [11 Taxonomy of Graphs (numeric)](./course-materials/lectures/11_taxonomy_of_graphics_part_3.qmd)
+-   [12 Taxonomy of Graphs (numeric)](./course-materials/lectures/12_taxonomy_of_graphics_part_3.qmd)
 
 -   [Discussion: Taxonomy of Graphics](./course-materials/in-class-activies/3Activity_Taxonomy_of_Graphics.qmd)
 
--   [12 Building a graph](./course-materials/lectures/12_Building_a_graph.qmd)
+-   [13 Building a graph](./course-materials/lectures/13_Building_a_graph.qmd)
 
--   [13 Data Ethics part 1]()
+-   [14 Data Ethics part 2]()
 
 # Week 5
 

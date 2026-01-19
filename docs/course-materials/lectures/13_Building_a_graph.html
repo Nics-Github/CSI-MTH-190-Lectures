@@ -270,7 +270,7 @@ Schwab
 <span id="cb3-3"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop ) )  <span class="co"># &lt;- This is our asthetic</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="12_Building_a_graph_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
 <section id="we-can-change-aes" class="slide level2">
 <h2>We can change aes()</h2>
 <p>Using the code above we can easily change aesthetics.</p>
@@ -280,53 +280,53 @@ Schwab
 <span id="cb4-3"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> payroll ) )  <span class="co"># &lt;- This is our asthetic{r}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="12_Building_a_graph_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
 <section id="sidenote-scientific-notation" class="slide level2">
 <h2>Sidenote: scientific notation</h2>
 <p>We can drop the scientific notation with <code>scale_x_continuous()</code> function.</p>
 
-<img data-src="12_Building_a_graph_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section id="faceting" class="slide level2">
 <h2>Faceting</h2>
 <p>We can also facet our data to make separate plots of features. We have to tell R which variable we want to facet by, I’ll do lgID for league.</p>
 <p>Now our x-axis numbers are jumbled. We’ll fix that on the next slide.</p>
 
-<img data-src="12_Building_a_graph_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 <section id="sidenote-2-fixing-axes-numbers" class="slide level2">
 <h2>Sidenote 2: fixing axes numbers</h2>
 <p>We can abbreviate the axis numbers in a variety of ways. I had to look this one up, because I don’t use it often.</p>
 
-<img data-src="12_Building_a_graph_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="adjusting-alpha" class="slide level2">
 <h2>Adjusting alpha</h2>
 <p>Instead of faceting we can leave the graphs on the same axes but adjust the transparency. alpha is not an aesthetic, but a parameter like mapping. Note: as our lines get longer we break them up.</p>
 
-<img data-src="12_Building_a_graph_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
 <section id="stacked" class="slide level2">
 <h2>Stacked</h2>
 <p>By default R stacks our plots ( and pick gross colors) This make the American League look taller than the National League. We should dodge them instead by setting the position parameter.</p>
 
-<img data-src="12_Building_a_graph_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
 <section id="bin-width-and-bins" class="slide level2">
 <h2>bin width and bins</h2>
 <p>Each geom has its own parameters. we can adjust the <code>bin width</code> parameter of <code>geom_histogram()</code> so our bars are not so skinny. We can also specify the exact bins with the bins parameter.</p>
 
-<img data-src="12_Building_a_graph_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
 <section id="changing-geom" class="slide level2">
 <h2>Changing geom</h2>
 <p>Once you have your graph, you may want to change the geom to try other visual representations of your data. You can easily do this. Let’s change geom_histogram to geom_density(). We get a warning about bins and position, because those are not parameters of geom_density.</p>
 
-<img data-src="12_Building_a_graph_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
 <section id="geom_density" class="slide level2">
 <h2>geom_density()</h2>
 <p>geom_density() shows the proportion of your data out of 100.You can change the y-scale to get a better image of what I mean.</p>
 
-<img data-src="12_Building_a_graph_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="legend" class="slide level2">
 <h2>legend</h2>
 <p>You can adjust the legend name too.</p>
 
-<img data-src="12_Building_a_graph_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="conclusion" class="slide level2">
 <h2>Conclusion</h2>
 <p>There was a lot done during this lecture. I only want you to know what you are able to do. You will not need to do all of this all the time.</p>

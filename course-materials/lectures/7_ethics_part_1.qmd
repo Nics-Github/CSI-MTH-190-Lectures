@@ -1,0 +1,192 @@
+---
+title: "Intro to Data Ethics"
+author: "Schwab"
+format: 
+  revealjs:
+    theme: beige
+editor: visual
+---
+
+# Data Ethics
+
+This is a squishy area.
+
+"Use Common Sense" - The authors of our textbook.
+
+## Ethics of Your Field
+
+Handling Personal Data
+
+Be cautious when feeding information to AI - Personal Data can be reused by models
+
+Consider the information you collect - Only collect the infromation you need
+
+## The Five Ps of Ethical Data Handling.
+
+The five Ps terminology comes from here the Harvard Business Review.
+
+[Here's the link.](https://hbr.org/2023/07/the-ethics-of-managing-peoples-data)
+
+## Copyright and Chat GPT
+
+::::: columns
+::: {.column width="50%"}
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1920px-ChatGPT_logo.svg.png)
+:::
+
+::: {.column width="50%"}
+-   Sarah Silverman, Mona Awad and Paul Tremplay sue Open AI for direct infringement.
+
+-   Using copyrighted materials to train their models.
+
+-   [List of suits is getting longer.](https://originality.ai/blog/openai-chatgpt-lawsuit-list)
+:::
+:::::
+
+## Provenance
+
+Where does the data originate?
+
+Was it acquired legally?
+
+## Github
+
+:::::: columns
+::: {.column width="50%"}
+![](https://upload.wikimedia.org/wikipedia/commons/a/ae/Github-desktop-logo-symbol.svg){width="354"}
+:::
+
+:::: {.column width="50%"}
+::: columns
+Microsoft (owner of github) uses code in repos to train copilot.
+
+-   Ethical on public repositories?
+
+-   Private repositories?
+
+-   Copilot costs \$20 a month or is free.
+:::
+::::
+::::::
+
+## Purpose
+
+Would the source of the data agree with how it is being used?
+
+What if the data is re-purposed?
+
+## ![](https://upload.wikimedia.org/wikipedia/commons/4/48/OKCupid_Logo.svg){width="243"}
+
+[Users information scraped from OK Cupid](https://privacyinternational.org/examples/1857/researchers-release-dataset-70000-users-okcupid-profiles-and-call-data-public)
+
+::: incremental
+-   If that data is scraped from the site by a third party and made available is that ethical?
+
+-   OkCupid, including usernames, age, gender, location, what kind of relationship (or sex) they’re interested in, personality traits
+
+-   "The data is already public. " -Emil Kirkegaard
+:::
+
+## Protection
+
+How is the data being protected?
+
+Who is responsible for destroying it?
+
+## College Students
+
+:::::: columns
+::: {.column width="50%"}
+![](https://www.hcc.edu/images/Redesign%20Images/HCC-LOGO.png)
+:::
+
+:::: {.column width="50%"}
+::: columns
+There is data that HCC collected about you.
+
+Everything you do or make in this class exists on canvas.
+:::
+::::
+::::::
+
+## Preparation
+
+How is the data cleaned?
+
+Are data sets being combined to preserve anonymity?
+
+Is the accuracy of the data verified?
+
+## Lab 7ish
+
+[![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAGMOJ6BcHCxFFTln4-ZM9AQ9jaul5yUThUg&s)](https://aratrace.com/7-sisters-trail-race-4/)
+
+## Privacy
+
+Who will have access to data that can be used to ID a person?
+
+How will individuals be anonymized?
+
+Who has access to that anonymized data.
+
+## Scenario
+
+A citizen of a country files taxes with their government. Paying taxes is rarely optional. In filing there are data related to residence, wages, age, gender, taxes and government ID numbers pertaining to this citizen and their family.
+
+Discuss:
+
+-   Provenance
+
+-   Purpose
+
+-   Protection
+
+-   Preparation
+
+-   Privacy
+
+## Government's responsibility
+
+Who should access to this data?
+
+How should is be secured?
+
+What rights to privacy does this citizen have?
+
+How long should the data be held?
+
+## Current Events
+
+At the beginning of last year DOGE requested access to tax payer returns to root out fraud.[^1]
+
+[^1]: <https://www.economist.com/united-states/2025/02/18/is-elon-musks-war-on-fraud-just-cover-for-a-power-grab>
+
+Wanted a person without the proper clearance to be able to access tax payer returns. (Gavin Kliger)
+
+Will be given access if needed in anonymized form. [^2]
+
+[^2]: <https://www.nytimes.com/2025/02/21/us/politics/irs-doge-gavin-kliger.html>
+
+## Books
+
+:::::: columns
+::: {.column width="33%"}
+![](https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1427665814i/51291.jpg)
+:::
+
+::: {.column width="33%"}
+![](https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1456091964i/28186015.jpg)
+:::
+
+::: {.column width="33%"}
+![](https://timharford.com/wp-content/uploads/2020/11/data-detective.png)
+:::
+::::::
+
+## Credits
+
+Unless otherwise cited or linked here are the credits:
+
+-   The five ps seem to come from the Harvard Business Review <https://hbr.org/2023/07/the-ethics-of-managing-peoples-data> 9/30/2024
+
+-   Suing Chat GPT https://www.theverge.com/2024/2/13/24072131/sarah-silverman-paul-tremblay-openai-chatgpt-copyright-lawsuit
