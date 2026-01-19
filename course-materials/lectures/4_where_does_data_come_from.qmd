@@ -126,7 +126,7 @@ To read in the data:
 
 ```{r}
 library(googlesheets4)
-class_data = read_sheet("https://docs.google.com/spreadsheets/d/1e9RC6pd5oiBKHxbNc0HrnsW4To_vL7qomnGS43rTsto/edit?usp=sharing")
+class_data = read_sheet("https://docs.google.com/spreadsheets/d/1aNrNX5xWkrtuJHc-bsCC7e07KbnRbVIxaWdbblOCyxA/edit?usp=sharing")
 ```
 
 3.  You will be prompted in the console to cache OAuth Tokens. Select 1 for Yes.

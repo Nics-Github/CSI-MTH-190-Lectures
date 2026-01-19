@@ -46,7 +46,7 @@
     "href": "course-materials/lectures/3_Basic_Statistics.html#population-size",
     "title": "Basic Statistics",
     "section": "Population size",
-    "text": "Population size\nThe population is the total size of the thing you are studying. So the population of the salary data may be everyone that lives in Holyoke, MA."
+    "text": "Population size\nThe population is the total size of the thing you are studying. So the population of the salary data may be everyone that lives and earns a salary in Holyoke, MA."
   },
   {
     "objectID": "course-materials/lectures/3_Basic_Statistics.html#measures-of-spread",
@@ -130,7 +130,7 @@
     "href": "course-materials/lectures/2_Brief-R-history.html#why-r",
     "title": "A Short History of R",
     "section": "Why R?",
-    "text": "Why R?\nThe top three languages in Data Science right now are:\n\nPython (pandas, numpy, pytorch)\nR (tidyverse)\nSQL\nProbably in that order."
+    "text": "Why R?\nThe top three languages in Data Science right now are:\n\nPython (pandas, numpy, pytorch)\nR (tidyverse)\nSQL\nProbably in that order.\n\nHere’s the TIOBE rank of Computer languages, as of Jan 2026 R jumped from the 18th to 10th. Probably reflecting the drive toward AI."
   },
   {
     "objectID": "course-materials/lectures/2_Brief-R-history.html#interchangeable",
@@ -200,7 +200,7 @@
     "href": "course-materials/lectures/2_Brief-R-history.html#who-makes-rstudio",
     "title": "A Short History of R",
     "section": "Who makes RStudio?",
-    "text": "Who makes RStudio?\n\nStarted in 2009 as RStudio\nThe tidyverse comes out in 2016\nRenamed Posit last year.\nOffers Python, SQL, and other DS language Support"
+    "text": "Who makes RStudio?\n\nStarted in 2009 as RStudio\nThe tidyverse comes out in 2016\nRenamed Posit in 2022.\nOffers Python, SQL, and other DS language Support"
   },
   {
     "objectID": "course-materials/lectures/2_Brief-R-history.html#deep-learning-and-ai",
@@ -1482,5 +1482,103 @@
     "title": "In-class Exercises: Mapping",
     "section": "Challenge!!",
     "text": "Challenge!!\n\nUse the above data to create an interactive map\nConvert the numerical variable estimate to a categorical variable with 3 levels such as Low, Medium, High\nUse the factor() function to order 3 levels as Low, Medium, High, otherwise the legend order will be in alphabetical order\nCreate your own color palette to match the color order (e.g., from light green to dark green) with your legend order\n\n\n# Write your code below"
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#data-is-collected-by",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#data-is-collected-by",
+    "title": "Where Does Data Come From",
+    "section": "Data is collected by",
+    "text": "Data is collected by\nPolling Organizations\nexample: Yougov and The Economist Collect Data on the most important issues facing the US\nThis data, or a summary of it is often made public\nPublic Researchers\nexample: Nihart et al find plastics n brain tissue\nThis data, or a summary of it is often made public\nCompanies\nexample: Meta Collects Data On Its Users\nThis data, or a summary of is not usually made public.\nGovernments\nexample: The Bureau of Labor Statistics Collects and Publishes Employment figures\nThis data, or a summary of it is often made public"
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#we-will-not-be-collecting-data",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#we-will-not-be-collecting-data",
+    "title": "Where Does Data Come From",
+    "section": "We will not be collecting Data",
+    "text": "We will not be collecting Data\nThat task is for a methods course (Psycology has such a course). When you collect data you need to do it in a thoughtful way, which requires a fair amount of training."
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#we-will-be-using-data",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#we-will-be-using-data",
+    "title": "Where Does Data Come From",
+    "section": "We will be using Data",
+    "text": "We will be using Data\nWe want to use data to gleen information."
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#import-data",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#import-data",
+    "title": "Where Does Data Come From",
+    "section": "Import Data",
+    "text": "Import Data\nWe first have to import data into whatever software we are using to analyze it.\nWe’ll import using three methods in this lecture and We’ll see more as the semester progresses.\n\nread_csv()\nread_sheets()\npackages\nAPIs\nScraping from websites"
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-.csv-file.",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-.csv-file.",
+    "title": "Where Does Data Come From",
+    "section": "Importing a .csv file.",
+    "text": "Importing a .csv file.\nA .csv file is a special type of text document. csv is short for “comma separated values.” Essentially its a text file with commas separating the data within the file.\nThere are other ways of separating data (such as with tabs).\nThe tidyverse has a function called read_csv() which will take a .csv file and read it into memory so you can use it."
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-google-sheets-file",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-google-sheets-file",
+    "title": "Where Does Data Come From",
+    "section": "Importing a google sheets file",
+    "text": "Importing a google sheets file\nGooglesheets are also very common ways of storing data. There is a package called googlesheets4 that has the function read_sheets() for reading in data from a google sheet."
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#importing-from-a-package",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#importing-from-a-package",
+    "title": "Where Does Data Come From",
+    "section": "Importing from a package",
+    "text": "Importing from a package\nPackages like the tidyverse already have data built in. Often times these data are for educational purposes and are sometimes very out of date.\nWe’ll import from a package first, as it is the easiest."
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#example-1.",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#example-1.",
+    "title": "Where Does Data Come From",
+    "section": "Example 1.",
+    "text": "Example 1.\nLet’s import txhousing with the tidyverse. This data is loaded automatically when we load the tidyverse.\n\n# first load the tidyverse\nlibrary(tidyverse)\n# next call the data with txhousing to view it.\ntxhousing\n\n# A tibble: 8,602 × 9\n   city     year month sales   volume median listings inventory  date\n   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;\n 1 Abilene  2000     1    72  5380000  71400      701       6.3 2000 \n 2 Abilene  2000     2    98  6505000  58700      746       6.6 2000.\n 3 Abilene  2000     3   130  9285000  58100      784       6.8 2000.\n 4 Abilene  2000     4    98  9730000  68600      785       6.9 2000.\n 5 Abilene  2000     5   141 10590000  67300      794       6.8 2000.\n 6 Abilene  2000     6   156 13910000  66900      780       6.6 2000.\n 7 Abilene  2000     7   152 12635000  73500      742       6.2 2000.\n 8 Abilene  2000     8   131 10710000  75000      765       6.4 2001.\n 9 Abilene  2000     9   104  7615000  64500      771       6.5 2001.\n10 Abilene  2000    10   101  7040000  59300      764       6.6 2001.\n# ℹ 8,592 more rows\n\n\nBenefiets: Data is easy to import. Documentation is often provided with package. Trust the data is good.\nCons: The data is often outdated. Mostly just for educational purposes."
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#example-2",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#example-2",
+    "title": "Where Does Data Come From",
+    "section": "Example 2",
+    "text": "Example 2\nLet’s read in the data from the plastics in brains study.\nFirst we have to download the data from here.\nNext we have to move it to our current working directory. In most cases this is folder this .qmd file is in, if not we can set it manually in rstudio, which I’ll do in the video of this lecture.\nFinally we have to load the tidyverse and read in the data and save it to memory.\n\nplastic_in_brains = read_csv(\"path/to/name_of_csv.csv\")"
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons",
+    "title": "Where Does Data Come From",
+    "section": "Pros and Cons",
+    "text": "Pros and Cons\nBenefiets: The data is current and exactly what we are interested in.\nCons: The documentation is elsewhere. We have to be sure we trust the supplier of data."
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#read-from-a-google-sheet.",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#read-from-a-google-sheet.",
+    "title": "Where Does Data Come From",
+    "section": "Read from a google sheet.",
+    "text": "Read from a google sheet.\nFinally I’ll show how we can read in data from a google sheet.\nWe collected class data in a google form. That data is now accessible to us as a sheet.\nTo read in the data:\n1. load the googlesheets4\n2. run read_sheet() with the url from our sheet.\n\nlibrary(googlesheets4)\nclass_data = read_sheet(\"https://docs.google.com/spreadsheets/d/1aNrNX5xWkrtuJHc-bsCC7e07KbnRbVIxaWdbblOCyxA/edit?usp=sharing\")\n\n\nYou will be prompted in the console to cache OAuth Tokens. Select 1 for Yes.\nYou might be asked to install httpuv, you should do that. Finally you may be taken to a webpage to authorize the tidyverse access, do that too.\nYou should only have to do the steps above once."
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons-1",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons-1",
+    "title": "Where Does Data Come From",
+    "section": "Pros and Cons",
+    "text": "Pros and Cons\nSame as those from importing .csv files."
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#apis-and-scraping",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#apis-and-scraping",
+    "title": "Where Does Data Come From",
+    "section": "APIs and Scraping",
+    "text": "APIs and Scraping\nWe’ll discuss API calls and scraping when they come up in the labs."
+  },
+  {
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#you-are-ready-to-go-on-to-the-next-lecture.",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#you-are-ready-to-go-on-to-the-next-lecture.",
+    "title": "Where Does Data Come From",
+    "section": "You are ready to go on to the next lecture.",
+    "text": "You are ready to go on to the next lecture.\nYou will need to read in our class data using google sheets to go on to the next lecture and homework assignment."
   }
 ]

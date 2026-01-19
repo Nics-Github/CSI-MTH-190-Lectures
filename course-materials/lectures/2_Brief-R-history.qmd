@@ -19,7 +19,9 @@ The top three languages in Data Science right now are:
 
 -   SQL
 
-    Probably in that order.
+-   Probably in that order.
+
+[Here's the TIOBE rank](https://www.tiobe.com/tiobe-index/) of Computer languages, as of Jan 2026 R jumped from the 18th to 10th. Probably reflecting the drive toward AI.
 
 ## Interchangeable
 
@@ -67,7 +69,7 @@ Ross Ihaka and Robert Gentleman of the university of Auckland Developed it.
 
 The versions of R are named after Peanuts comics or cartoons.
 
-[Pile of Leaves](https://www.gocomics.com/peanuts/1957/11/15)
+[Pile of Leaves](https://charlesscottgallery.com/cdn/shop/products/chargeduo.jpg?v=1667280563&width=1646)
 
 Why? [4.4.2 release](https://stat.ethz.ch/pipermail/r-announce/2024/000706.html)
 
@@ -98,7 +100,7 @@ Hadley Wickham and others made it.
 
 -   The tidyverse comes out in 2016
 
--   Renamed Posit last year.
+-   Renamed Posit in 2022.
 
 -   Offers Python, SQL, and other DS language Support
 :::

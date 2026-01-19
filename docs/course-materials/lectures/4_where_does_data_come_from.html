@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Schwab">
-  <title>CSI-MTH-190 – Basic Statistics</title>
+  <title>CSI-MTH-190 – Where Does Data Come From</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -194,7 +194,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Basic Statistics</h1>
+  <h1 class="title">Where Does Data Come From</h1>
   <p class="subtitle">CSI-MTH-190</p>
 
 <div class="quarto-title-authors">
@@ -206,120 +206,130 @@ Schwab
 </div>
 
 </section>
-<section>
-<section id="statistics" class="title-slide slide level1 center">
-<h1>Statistics</h1>
-<p>If you’ve taken statistics before this will be a bit of review:</p>
-<p>I’ll briefly discuss these topics and how to compute them in R.</p>
-<ul>
-<li><p>Measures of Center</p></li>
-<li><p>Sample Size</p></li>
-<li><p>Population Size</p></li>
-<li><p>Measures of Spread</p></li>
-</ul>
+<section id="data-is-collected-by" class="slide level2">
+<h2>Data is collected by</h2>
+<h4 id="polling-organizations">Polling Organizations</h4>
+<p>example: <a href="https://today.yougov.com/topics/politics/trackers/most-important-issues-facing-the-us">Yougov and The Economist Collect Data on the most important issues facing the US</a></p>
+<p>This data, or a summary of it is often made public</p>
+<h4 id="public-researchers">Public Researchers</h4>
+<p>example: <a href="https://www.nature.com/articles/s41591-024-03453-1">Nihart et al find plastics n brain tissue</a></p>
+<p>This data, or a summary of it is often made public</p>
+<h4 id="companies">Companies</h4>
+<p>example: <a href="https://www.facebook.com/privacy/policy/">Meta Collects Data On Its Users</a></p>
+<p>This data, or a summary of is not usually made public.</p>
+<h4 id="governments">Governments</h4>
+<p>example: <a href="https://www.bls.gov/data/#employment">The Bureau of Labor Statistics Collects and Publishes Employment figures</a></p>
+<p>This data, or a summary of it is often made public</p>
 </section>
-<section id="measures-of-center" class="slide level2">
-<h2>Measures of center</h2>
-<p>Often we want to know the average of some data.</p>
-<p>There are three common ways of doing this.</p>
-<p>mean - sum of all values divided by the number of values.</p>
-<p>median - the number in the middle of the values.</p>
-<p>mode - the most common number.</p>
+<section id="we-will-not-be-collecting-data" class="slide level2">
+<h2>We will not be collecting Data</h2>
+<p>That task is for a methods course (Psycology has such a course). When you collect data you need to do it in a thoughtful way, which requires a fair amount of training.</p>
 </section>
-<section id="the-data" class="slide level2">
-<h2>The data</h2>
-<p>Let’s make some data. Pretend I went out and asked 4 people who live in Holyoke, MA their salary. Below is a summary of the answers:</p>
-<table class="caption-top">
-<caption>fictional annual salaries from 4 people</caption>
-<thead>
-<tr class="header">
-<th>person</th>
-<th>salary</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>40000</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>50000</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>60000</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>1000000</td>
-</tr>
-</tbody>
-</table>
-<p>To bring these salaries into R we can create a vector with the c() function, and save it to a variable called salaries</p>
+<section id="we-will-be-using-data" class="slide level2">
+<h2>We will be using Data</h2>
+<p>We want to use data to gleen information.</p>
+</section>
+<section id="import-data" class="slide level2">
+<h2>Import Data</h2>
+<p>We first have to import data into whatever software we are using to analyze it.</p>
+<p>We’ll import using three methods in this lecture and We’ll see more as the semester progresses.</p>
+<ol type="1">
+<li>read_csv()</li>
+<li>read_sheets()</li>
+<li>packages</li>
+<li>APIs</li>
+<li>Scraping from websites</li>
+</ol>
+</section>
+<section id="importing-a-.csv-file." class="slide level2">
+<h2>Importing a .csv file.</h2>
+<p>A .csv file is a special type of text document. csv is short for “comma separated values.” Essentially its a text file with commas separating the data within the file.</p>
+<p>There are other ways of separating data (such as with tabs).</p>
+<p>The tidyverse has a function called <code>read_csv()</code> which will take a .csv file and read it into memory so you can use it.</p>
+</section>
+<section id="importing-a-google-sheets-file" class="slide level2">
+<h2>Importing a google sheets file</h2>
+<p>Googlesheets are also very common ways of storing data. There is a package called <code>googlesheets4</code> that has the function <code>read_sheets()</code> for reading in data from a google sheet.</p>
+</section>
+<section id="importing-from-a-package" class="slide level2">
+<h2>Importing from a package</h2>
+<p>Packages like the tidyverse already have data built in. Often times these data are for educational purposes and are sometimes very out of date.</p>
+<p>We’ll import from a package first, as it is the easiest.</p>
+</section>
+<section id="example-1." class="slide level2">
+<h2>Example 1.</h2>
+<p>Let’s import <code>txhousing</code> with the tidyverse. This data is loaded automatically when we load the tidyverse.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>salaries <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">40000</span>,<span class="dv">50000</span>,<span class="dv">60000</span>,<span class="dv">1000000</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="section" class="slide level2">
-<h2></h2>
-</section>
-<section id="mean-of-the-data" class="slide level2">
-<h2>Mean of the Data</h2>
-<p>We can find the mean of the data with the <code>mean()</code> function.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">mean</span>(salaries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># first load the tidyverse</span></span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a></a><span class="co"># next call the data with txhousing to view it.</span></span>
+<span id="cb1-4"><a></a>txhousing</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 287500</code></pre>
+<pre><code># A tibble: 8,602 × 9
+   city     year month sales   volume median listings inventory  date
+   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+ 1 Abilene  2000     1    72  5380000  71400      701       6.3 2000 
+ 2 Abilene  2000     2    98  6505000  58700      746       6.6 2000.
+ 3 Abilene  2000     3   130  9285000  58100      784       6.8 2000.
+ 4 Abilene  2000     4    98  9730000  68600      785       6.9 2000.
+ 5 Abilene  2000     5   141 10590000  67300      794       6.8 2000.
+ 6 Abilene  2000     6   156 13910000  66900      780       6.6 2000.
+ 7 Abilene  2000     7   152 12635000  73500      742       6.2 2000.
+ 8 Abilene  2000     8   131 10710000  75000      765       6.4 2001.
+ 9 Abilene  2000     9   104  7615000  64500      771       6.5 2001.
+10 Abilene  2000    10   101  7040000  59300      764       6.6 2001.
+# ℹ 8,592 more rows</code></pre>
 </div>
 </div>
-<p>In this case r adds up the values and divides by 4.</p>
-<p>The mean of the data, in this case, is not a good representation of the people surveyed.</p>
-<p>The mean is sensitive to outliers.</p>
+<p>Benefiets: Data is easy to import. Documentation is often provided with package. Trust the data is good.</p>
+<p>Cons: The data is often outdated. Mostly just for educational purposes.</p>
 </section>
-<section id="median-of-the-data" class="slide level2">
-<h2>Median of the Data</h2>
-<p>To find the median we use the <code>median()</code> function.</p>
+<section id="example-2" class="slide level2">
+<h2>Example 2</h2>
+<p>Let’s read in the data from the plastics in brains study.</p>
+<p>First we have to download the data from <a href="https://datadryad.org/dataset/doi:10.5061/dryad.b8gtht7p8">here</a>.</p>
+<p>Next we have to move it to our current working directory. In most cases this is folder this .qmd file is in, if not we can set it manually in rstudio, which I’ll do in the video of this lecture.</p>
+<p>Finally we have to load the tidyverse and read in the data and save it to memory.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">median</span>(salaries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 55000</code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>plastic_in_brains <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"path/to/name_of_csv.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>In this case R finds the number in the middle of the 4. Note there is no number exactly in the middle so R finds the mean of the two closest to the middle (50,000 and 60,000).</p>
-<p>In this case the median is a better representation of most of the people we surveyed.</p>
-<p>The Median is not sensitive to outliers.</p>
 </section>
-<section id="the-mode" class="slide level2">
-<h2>The Mode</h2>
-<p>There is no mode function in R, and usually we find the mode just by inspection of the data. We can use the <code>table()</code> function for this.</p>
+<section id="pros-and-cons" class="slide level2">
+<h2>Pros and Cons</h2>
+<p>Benefiets: The data is current and exactly what we are interested in.</p>
+<p>Cons: The documentation is elsewhere. We have to be sure we trust the supplier of data.</p>
+</section>
+<section id="read-from-a-google-sheet." class="slide level2">
+<h2>Read from a google sheet.</h2>
+<p>Finally I’ll show how we can read in data from a google sheet.</p>
+<p>We collected class data in a google form. That data is now accessible to us as a sheet.</p>
+<p>To read in the data:</p>
+<p>1. load the googlesheets4</p>
+<p>2. run <code>read_sheet()</code> with the url from our sheet.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">table</span>(salaries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>salaries
-40000 50000 60000 1e+06 
-    1     1     1     1 </code></pre>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(googlesheets4)</span>
+<span id="cb4-2"><a></a>class_data <span class="ot">=</span> <span class="fu">read_sheet</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1aNrNX5xWkrtuJHc-bsCC7e07KbnRbVIxaWdbblOCyxA/edit?usp=sharing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>We can see this data has no mode.</p>
+<ol start="3" type="1">
+<li>You will be prompted in the console to cache OAuth Tokens. Select 1 for Yes.</li>
+<li>You might be asked to install <code>httpuv</code>, you should do that. Finally you may be taken to a webpage to authorize the tidyverse access, do that too.</li>
+<li>You should only have to do the steps above once.</li>
+</ol>
 </section>
-<section id="sample-size" class="slide level2">
-<h2>Sample size</h2>
-<p>The sample size of our data is the number of observations made. An observation in this case is a person’s salary. For our data above the sample size is 4.</p>
+<section id="pros-and-cons-1" class="slide level2">
+<h2>Pros and Cons</h2>
+<p>Same as those from importing .csv files.</p>
 </section>
-<section id="population-size" class="slide level2">
-<h2>Population size</h2>
-<p>The population is the total size of the thing you are studying. So the population of the salary data may be everyone that lives and earns a salary in Holyoke, MA.</p>
+<section id="apis-and-scraping" class="slide level2">
+<h2>APIs and Scraping</h2>
+<p>We’ll discuss API calls and scraping when they come up in the labs.</p>
 </section>
-<section id="measures-of-spread" class="slide level2">
-<h2>Measures of Spread</h2>
-<p>There are two measures of spread that I’ll mention from time to time in this course.</p>
-<p>Inner Quartile Range. This is the width between 25% and 75% of the data. We can find it with the <code>IQR()</code> function</p>
-<p>Standard Deviation. This is the average distance from the mean of the data. We calculate it with the <code>sd()</code> function.</p>
-<p>We’ll discuss these two more as they come up in the course.</p>
+<section id="you-are-ready-to-go-on-to-the-next-lecture." class="slide level2">
+<h2>You are ready to go on to the next lecture.</h2>
+<p>You will need to read in our class data using google sheets to go on to the next lecture and homework assignment.</p>
 
 
-</section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

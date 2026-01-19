@@ -1,6 +1,6 @@
 ---
 title: "CSI-MTH 190: Intro to Data Science"
-subtitle: "Lab 1: Intro to RStudio"
+subtitle: "Lab 1: Solutions"
 author: "Nicholas Schwab"
 date: "today"
 format:
@@ -104,7 +104,7 @@ This graphic isn't great, and we can adjust it by changing the arguments within 
 ```{r}
 # This is code for a histogram
 ggplot(data = faithfuld)+
-  geom_histogram(mapping = aes(x= waiting), binwidth = 10)
+  geom_histogram(mapping = aes(x= waiting), binwidth = 40)
 
 ```
 
@@ -135,37 +135,37 @@ old_faithful_bins_10
 
 The following problems will be graded by your peers. You will be looking at a new dataset called mpg. All problems are similar to those discussed above. If you need help check out the examples above first and you are in class ask for help from me our your peer. If you are stuck for a few minutes post a screenshot to the discussion forum or come to office hours. I usually reply to posts within 24 hours, unless its the weekend. Whatever happens don't get stuck for hours, that's no fun. 
 
-
 1. Make a chunk below and use it to view mpg. 
 
-**Answer by typing into a new chunk below**
+**Answer by typing into the chunk below**
 
+```{r}
+mpg
 
+```
 
 
 
 2. In the chunk below use the ? operator to take a look at the documentation for mpg.  Type the code in the chunk, but type your answers to the questions outside of a chunk in the whitespace. 
 
 ```{r, eval=FALSE}
-
+?mpg
 
 ```
 
 2a. How many observations are in this data frame? Note: this question should be different than part c.
 
-**Answer:**
-
+**Answer:** There are 234 observations in this data frame. 
 
 2b. How many variables are in this data frame?
 
-**Answer:**
+**Answer:** There are 11 variables in the data
 
+2c.  How many cars are in this data frame? Hint: Make a new chunk and type: `count(mpg,model,year)` this will count the model of var for every year. 
 
-2c.  How many cars are in this data frame? Hint: Make a new chunk and type: `count(mpg,model,year)` this will count the model of car for every year. 
+**Answer:** There are 76 cars in this dataframe. 
 
-**Answer:**
-
-
+ 
 3. Use head() to take a look at the first 6 rows of data.
 
 **Answer by making and typing into the chunk below**
@@ -177,18 +177,23 @@ The following problems will be graded by your peers. You will be looking at a ne
 **Answer by making and typing into the chunk below**
 
 ```{r}
-
+ggplot(data = mpg)+
+  geom_histogram(aes(cty), bins = 10)
 ```
 
 4b. What is one interesting thing this hisogram shows you about the data? 
 
 **Answer:**
 
-
 Nice work on the 4 parts above. 
 
 5. Take your plot from part 4 and save it as the variable `mpg_cty_bins_10` in a new chunk below. 
 
+```{r}
+mpg_cty_bins_10 = ggplot(data = mpg)+
+  geom_histogram(aes(cty), bins = 10)
+
+```
 
 
 6. Knit your work and upload it to canvas. 

@@ -101,7 +101,7 @@ The sample size of our data is the number of observations made. An observation i
 
 ## Population size
 
-The population is the total size of the thing you are studying. So the population of the salary data may be everyone that lives in Holyoke, MA.
+The population is the total size of the thing you are studying. So the population of the salary data may be everyone that lives and earns a salary in Holyoke, MA.
 
 ## Measures of Spread
 
