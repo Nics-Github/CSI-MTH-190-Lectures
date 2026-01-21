@@ -24,6 +24,8 @@ example: [Nihart et al find plastics n brain tissue](https://www.nature.com/arti
 
 This data, or a summary of it is often made public
 
+## And collected by
+
 #### Companies
 
 example: [Meta Collects Data On Its Users](https://www.facebook.com/privacy/policy/)
@@ -38,7 +40,7 @@ This data, or a summary of it is often made public
 
 ## We will not be collecting Data
 
-That task is for a methods course (Psycology has such a course). When you collect data you need to do it in a thoughtful way, which requires a fair amount of training.
+That task is for a methods course (Psychology has such a course). When you collect data you need to do it in a thoughtful way, which requires a fair amount of training.
 
 ## We will be using Data
 
@@ -101,7 +103,6 @@ Finally we have to load the tidyverse and read in the data and save it to memory
 
 ```{r}
 #| eval: False
-
 
 plastic_in_brains = read_csv("path/to/name_of_csv.csv")
 ```
