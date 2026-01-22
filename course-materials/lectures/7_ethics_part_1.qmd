@@ -25,7 +25,17 @@ Consider the information you collect - Only collect the infromation you need
 
 The five Ps terminology comes from here the Harvard Business Review.
 
-[Here's the link.](https://hbr.org/2023/07/the-ethics-of-managing-peoples-data)
+[Here's the link.](https://www.ew360.mx/clientes/Ado/especiales/310823/HBR2.pdf)
+
+1.  Provenance
+
+2.  Purpose
+
+3.  Protection
+
+4.  Privacy
+
+5.  Preparation
 
 ## Copyright and Chat GPT
 
