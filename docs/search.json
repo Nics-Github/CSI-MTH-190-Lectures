@@ -1811,5 +1811,82 @@
     "title": "A Short History of R",
     "section": "Some Credits",
     "text": "Some Credits\n\nPhoto of John Chambers taken from Stanford’s website.\nPhoto of Ross Ihaka - https://www.auckland.ac.nz/content/auckland/en/science/about-the-faculty/department-of-statistics/ihaka-lecture-series/jcr:content/leftpar/imagecomponent/image.img.1024.medium.jpg/1561079330278.jpg\nPhoto by Robert Gentalman - https://calendar.gatech.edu/sites/default/files/styles/large/public/hg_media/2024-25/Robert_Gentleman.jpg.webp?itok=0aDlOIOK\nPhoto by Hadley Wickham - Private correspondence, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=46810731\nMost of the details of this short history came from chapter 2 of Roger Peng’s R Programming for Data Science.\nhttps://bookdown.org/rdpeng/rprogdatascience/history-and-overview-of-r.html"
+  },
+  {
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#data-ethics-examples",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#data-ethics-examples",
+    "title": "Data Ethics Examples",
+    "section": "Data Ethics Examples",
+    "text": "Data Ethics Examples\nA reminder of the 5 ps\nHere’s the link.\nProvenance\nPurpose\nProtection\nPrivacy\nPreparation"
+  },
+  {
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#lets-discuss-the-5-ps",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#lets-discuss-the-5-ps",
+    "title": "Data Ethics Examples",
+    "section": "Let’s discuss the 5 ps",
+    "text": "Let’s discuss the 5 ps\nTwo examples involving competitions.\n\nWorld Cube Association\nBoston Marathon"
+  },
+  {
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#world-cube-association",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#world-cube-association",
+    "title": "Data Ethics Examples",
+    "section": "World Cube Association",
+    "text": "World Cube Association\n3x3 solver Olaf Kuźmiński\nOlaf’s Page\nWhat are the five p s?\nScenerio: We write an article on Olaf’s Rubic’s cube career.\nWhat should we do to be as ethical as possible?\nWhen does it become unethical?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#boston-marthon",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#boston-marthon",
+    "title": "Data Ethics Examples",
+    "section": "Boston Marthon",
+    "text": "Boston Marthon\nResults for the Boston Marathon\nWhat are the five p s?\nScenerio: We write an article on Whit Blair winner of 2025 non-binary category.\nWhat should we do to be as ethical as possible?\nWhen does it become unethical?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#reminder-tidy-data",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#reminder-tidy-data",
+    "title": "Data Ethics Examples",
+    "section": "Reminder: Tidy data",
+    "text": "Reminder: Tidy data\n\nColumns are variables.\nRows are observations.\nIndividual entries are called values.\nThe data we will deal with in this course is rectangular."
+  },
+  {
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars",
+    "title": "Data Ethics Examples",
+    "section": "starwars",
+    "text": "starwars\nIs the data tidy?\nAre the variables clear?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#construction",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#construction",
+    "title": "Data Ethics Examples",
+    "section": "construction",
+    "text": "construction\nIs the data tidy?\nAre the variables clear?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#population",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#population",
+    "title": "Data Ethics Examples",
+    "section": "population",
+    "text": "population\nIs the data tidy?\nAre the variables clear?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#relig_income",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#relig_income",
+    "title": "Data Ethics Examples",
+    "section": "relig_income",
+    "text": "relig_income\nIs the data tidy?\nAre the variables clear?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#billboard",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#billboard",
+    "title": "Data Ethics Examples",
+    "section": "billboard",
+    "text": "billboard\nIs the data tidy?\nAre the variables clear?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars-1",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars-1",
+    "title": "Data Ethics Examples",
+    "section": "Starwars",
+    "text": "Starwars\nChoose a variable in starwars and make a graph.\nUse geom_histogram().\nShare your graph with those around you."
   }
 ]

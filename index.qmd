@@ -60,6 +60,8 @@ Part 1: Visualizations
 
 -   [7 Data Ethics part 1](./course-materials/lectures/7_ethics_part_1.qmd)]
 
+-   [7.5 Data Ethics and Tidy Data Examples](./course-materials/lectures/7_5_in_class_ethic_examples.qmd)
+
 # Week 3 
 
 -   [8 Taxonomy of Graphs (categorical)](course-materials/lectures/8_taxonomy_of_graphs_categorical.qmd)

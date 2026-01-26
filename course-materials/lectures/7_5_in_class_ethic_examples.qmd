@@ -1,0 +1,132 @@
+---
+title: "Data Ethics Examples"
+subtitle: "And Tidy Data"
+author: "Schwab"
+format: 
+  revealjs:
+    theme: beige
+editor: visual
+---
+
+## Data Ethics Examples
+
+A reminder of the 5 ps
+
+[Here's the link.](https://www.ew360.mx/clientes/Ado/especiales/310823/HBR2.pdf)
+
+Provenance
+
+Purpose
+
+Protection
+
+Privacy
+
+Preparation
+
+## Let's discuss the 5 ps
+
+Two examples involving competitions.
+
+1.  [World Cube Association](https://www.worldcubeassociation.org/results/rankings/333/single?)
+
+2.  [Boston Marathon](https://www.baa.org/races/boston-marathon/results/)
+
+## World Cube Association
+
+3x3 solver [Olaf Kuźmiński](https://youtu.be/xpmcqOZp5PQ?si=RxQNsfcM_yJhOuv1&t=721)
+
+[Olaf's Page](https://www.worldcubeassociation.org/persons/2018KUZM02)
+
+What are the five p s?
+
+Scenerio: We write an article on Olaf's Rubic's cube career.
+
+What should we do to be as ethical as possible?
+
+When does it become unethical?
+
+## Boston Marthon
+
+Results for the [Boston Marathon](https://www.baa.org/races/boston-marathon/results/)
+
+What are the five p s?
+
+Scenerio: We write an article on [Whit Blair](https://www.baa.org/races/boston-marathon/results/?runner=119) winner of 2025 non-binary category.
+
+What should we do to be as ethical as possible?
+
+When does it become unethical?
+
+```{=html}
+<!-- 
+## ICE Data
+
+I'd like to use some data involving ICE later in the semester. 
+
+However Deportation and Imigration is an incredibly charged topic.
+
+It feels unethical to bring it up in class.  -->
+```
+
+# Data Exploration
+
+## Reminder: Tidy data
+
+![](https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png)
+
+Columns are variables.
+
+Rows are observations.
+
+Individual entries are called values.
+
+The data we will deal with in this course is rectangular.
+
+## starwars
+
+```{r}
+library(tidyverse)
+```
+
+Is the data tidy?
+
+Are the variables clear?
+
+## construction
+
+Is the data tidy?
+
+Are the variables clear?
+
+## population
+
+```{r}
+library(tidyverse)
+```
+
+Is the data tidy?
+
+Are the variables clear?
+
+## relig_income
+
+Is the data tidy?
+
+Are the variables clear?
+
+## billboard
+
+Is the data tidy?
+
+Are the variables clear?
+
+# If time: Graph practice
+
+## Starwars
+
+Choose a variable in `starwars` and make a graph.
+
+Use geom_histogram().
+
+Share your graph with those around you.
