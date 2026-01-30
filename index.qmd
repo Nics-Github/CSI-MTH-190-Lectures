@@ -64,11 +64,11 @@ Part 1: Visualizations
 
 # Week 3 
 
--   [8 Taxonomy of Graphs (categorical)](course-materials/lectures/8_taxonomy_of_graphs_categorical.qmd)
+-   [8 The ggplot cheatsheet](https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-visualization.pdf)
 
--   [9 The ggplot cheatsheet](https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-visualization.pdf)
+-   [9 Taxonomy of Data Graphics (categorical)](./course-materials/lectures/9_taxonomy_of_graphs_categorical.qmd)
 
--   [10 Taxonomy of Graphs (numeric)](./course-materials/lectures/10_taxonomy_of_graphs_numeric_part_2.qmd)
+-   [10 Taxonomy of Data Graphics (numeric)](./course-materials/lectures/10_taxonomy_of_graphs_numeric_part_2.qmd)
 
 -   [11 Color talk](./course-materials/lectures/11_color_theory.qmd)
 
