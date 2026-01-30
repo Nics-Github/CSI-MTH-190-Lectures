@@ -81,35 +81,35 @@
     "href": "course-materials/lectures/11_color_theory.html#the-two-functions",
     "title": "Color Theory",
     "section": "The two functions",
-    "text": "The two functions\nThe two functions we’ll use for colors are\nscale_*_brewer() scale_*_distiller()\nThe * matches the aestheic we are trying to color."
+    "text": "The two functions\nThe two functions we’ll use for colors are\nscale_*_brewer() scale_*_distiller()\nThe * matches the aestheic we are trying to color.\n\nscale_fill_brewer()     #&lt;- filling discrete\n\nscale_fill_distiller()  #&lt;- filling continuous\n\nscale_color_brewer()\n\nscale_color_distiller()"
   },
   {
     "objectID": "course-materials/lectures/11_color_theory.html#base-graph",
     "href": "course-materials/lectures/11_color_theory.html#base-graph",
     "title": "Color Theory",
     "section": "Base Graph",
-    "text": "Base Graph\nBelow is a scatter plot of body_mass_g vs bill_depth_mm."
+    "text": "Base Graph\nBelow is a scatter plot of body_mass_g vs bill_depth_mm.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(x=body_mass_g,bill_depth_mm))"
   },
   {
     "objectID": "course-materials/lectures/11_color_theory.html#sequential-1",
     "href": "course-materials/lectures/11_color_theory.html#sequential-1",
     "title": "Color Theory",
     "section": "Sequential 1",
-    "text": "Sequential 1\nI’d like to show the flipper length as a third variable. flipper_length_mm is a continuous and numeric variable. We can color by it."
+    "text": "Sequential 1\nI’d like to show the flipper length as a third variable. flipper_length_mm is a continuous and numeric variable. We can color by it.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))"
   },
   {
     "objectID": "course-materials/lectures/11_color_theory.html#sequential-2",
     "href": "course-materials/lectures/11_color_theory.html#sequential-2",
     "title": "Color Theory",
     "section": "Sequential 2",
-    "text": "Sequential 2\nThe lighter color should indicate less.\nTo reverse it I’ll add scale_color_distiller(direction = 1) because we’re working with a continuous variable and we’re coloring."
+    "text": "Sequential 2\nThe lighter color should indicate less.\nTo reverse it I’ll add scale_color_distiller(direction = 1) because we’re working with a continuous variable and we’re coloring.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))+\n  scale_color_distiller(direction = 1)"
   },
   {
     "objectID": "course-materials/lectures/11_color_theory.html#sequential-3",
     "href": "course-materials/lectures/11_color_theory.html#sequential-3",
     "title": "Color Theory",
     "section": "Sequential 3",
-    "text": "Sequential 3\nUsing the default color isn’t great. Let’s choose a premade brewer palette.\nTo reverse it I’ll add scale_color_distiller(direction = 1) because we’re working with a continuous variable and we’re coloring."
+    "text": "Sequential 3\nUsing the default color isn’t great. Let’s choose a premade brewer palette.\nTo reverse it I’ll add scale_color_distiller(direction = 1) because we’re working with a continuous variable and we’re coloring.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))+\n  scale_color_distiller(palette = \"Greys\",  direction = 1)"
   },
   {
     "objectID": "course-materials/lectures/11_color_theory.html#sequential",
@@ -123,35 +123,35 @@
     "href": "course-materials/lectures/11_color_theory.html#diverging-palettes",
     "title": "Color Theory",
     "section": "Diverging Palettes",
-    "text": "Diverging Palettes\nIf we want to use two base colors, one to show high values and the other to show low. We can use a diverging palette.\nHere the brown is long flipper and dark blue is short flipper."
+    "text": "Diverging Palettes\nIf we want to use two base colors, one to show high values and the other to show low. We can use a diverging palette.\nHere the brown is long flipper and dark blue is short flipper.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))+\n  scale_color_distiller(palette = \"BrBG\")"
   },
   {
     "objectID": "course-materials/lectures/11_color_theory.html#diverging-palettes-2",
     "href": "course-materials/lectures/11_color_theory.html#diverging-palettes-2",
     "title": "Color Theory",
     "section": "Diverging Palettes 2",
-    "text": "Diverging Palettes 2\nIt often makes more sense to use a diverging palette with the middle being zero.\nHere I do a bit of wrangling to add a new column, which captures the difference from the average height."
+    "text": "Diverging Palettes 2\nIt often makes more sense to use a diverging palette with the middle being zero.\nHere I do a bit of wrangling to add a new column, which captures the difference from the average height.\n\n\nCode\nave_mass = mean(penguins$body_mass_g,na.rm = TRUE)\n\npenguins |&gt;\n  mutate(diff_mass_from_avg =body_mass_g - ave_mass)|&gt;\n  ggplot()+\n  geom_point(aes(\n    x = flipper_length_mm, \n    y = bill_depth_mm,\n    color = diff_mass_from_avg))+\n  scale_color_distiller(palette = \"BrBG\")"
   },
   {
     "objectID": "course-materials/lectures/11_color_theory.html#diverging-palettes-3",
     "href": "course-materials/lectures/11_color_theory.html#diverging-palettes-3",
     "title": "Color Theory",
     "section": "Diverging Palettes 3",
-    "text": "Diverging Palettes 3\nI’m adding a circle around each point so they are easier to see."
+    "text": "Diverging Palettes 3\nI’m adding a circle around each point so they are easier to see.\n\n\nCode\nave_mass = mean(penguins$body_mass_g,na.rm = TRUE)\n\npenguins |&gt;\n  mutate(diff_mass_from_avg =body_mass_g - ave_mass)|&gt;\n  ggplot()+\n  geom_point(aes(\n    x = flipper_length_mm, \n    y = bill_depth_mm,\n    fill = diff_mass_from_avg,\n    ),\n    shape = 21,   # &lt;- this is a circle that allows outlining\n    color = \"black\",  # &lt;- outline color\n    stroke = 0.3,    # &lt;- outline thickness\n    size = 3)+\n  scale_fill_distiller(palette = \"BrBG\")"
   },
   {
     "objectID": "course-materials/lectures/11_color_theory.html#diverging-palettes-4",
     "href": "course-materials/lectures/11_color_theory.html#diverging-palettes-4",
     "title": "Color Theory",
     "section": "Diverging Palettes 4",
-    "text": "Diverging Palettes 4\nMissing Data should be clearly represented with grey or a like color."
+    "text": "Diverging Palettes 4\nMissing Data should be clearly represented with grey or a like color.\n\n\nCode\nlibrary(tidycensus)\n\n#Make Mass Median Income\nmass_med_income &lt;- \n  get_acs(\n    geography = \"county\", \n    variables = c(med_household_income = \"B19013_001\"),\n    state = \"MA\",\n    # We'll need to pivot wider, but that doesn't work with simple features. \n    geometry = TRUE\n  )|&gt;\n  # Add centroids to each region using purrr package\n tidyr::separate(NAME, c(\"County\", \"State\"), sep = \", \") |&gt; \n tidyr::separate(County, c(\"County\", \"Fluff\"), sep = \" \") |&gt;\n  mutate(med_household_income = estimate) |&gt;\n  mutate(med_income_discrete = cut_interval(\n    med_household_income, \n    length = 15000, \n    labels = c(\"60-75\", \"75-90\",\"90-105\", \"105-120\",\"120-135\")\n    ))\n\n\n\n\nCode\nmass_med_income$med_income_discrete[8] = NA\n\nggplot() +\n  geom_sf(data = mass_med_income, aes(fill = med_income_discrete)) +\n # geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +\n  labs(fill = \"Median Income\\n thousands dollars\",\n       title = \"Massachusetts Med Income 2020 \",\n       #subtitle = \"Median income in 2020 was $91,842\",\n       subtitle = \"Hampshire county data is missing\",\n       caption = \"deptofnumbers.com\")+\n  scale_fill_brewer(palette = \"PuOr\",na.value =\"grey\" )+\n  theme_classic()+\n  theme_void()"
   },
   {
     "objectID": "course-materials/lectures/11_color_theory.html#qualitative-data",
     "href": "course-materials/lectures/11_color_theory.html#qualitative-data",
     "title": "Color Theory",
     "section": "Qualitative Data",
-    "text": "Qualitative Data\nIf the variable is categorical use a qualitative palette.\nLimit yourself to six categories."
+    "text": "Qualitative Data\nIf the variable is categorical use a qualitative palette.\nLimit yourself to six categories.\n\n\nCode\nfun_facts &lt;- tribble(\n  ~fun_facts,\n  \"County of Mass Bay Colony\",\n  \"County of Plymouth Colony\",\n  \"Newest\",\n  \"Island\",\n  \"County of Mass Bay Colony\",\n  \"County of Plymouth Colony\",\n  \"Newest\",\n  \"I live here\",\n  \"County of Mass Bay Colony\",\n  \"Newest\",\n  \"County of Plymouth Colony\",\n  \"Boarders Three States\",\n  \"Boarders Three States\",\n  \"Island\"\n)\n\nggplot() +\n  geom_sf(data = bind_cols(mass_med_income, fun_facts), aes(fill = fun_facts)) +\n  labs(fill = \"\",\n       title = \"Massachusetts Med Income 2020 \",\n       subtitle = \"Fun Facts about MA Counties\",\n       caption = \"source: https://en.wikipedia.org/wiki/\\nList_of_counties_in_Massachusetts\")+\n  scale_fill_brewer(palette = \"Set2\",na.value =\"grey\" )+\n  theme_classic()+\n  theme_void()"
   },
   {
     "objectID": "course-materials/lectures/11_color_theory.html#how-do-we-do-this",
@@ -165,14 +165,14 @@
     "href": "course-materials/lectures/11_color_theory.html#too-many-categories-and-rainbows",
     "title": "Color Theory",
     "section": "Too many categories and Rainbows!",
-    "text": "Too many categories and Rainbows!\nThis is the default option in R"
+    "text": "Too many categories and Rainbows!\nThis is the default option in R\n\n\nCode\nggplot() +\n  geom_sf(data = bind_cols(mass_med_income, fun_facts), aes(fill = County )) +\n # geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +\n  labs(fill = \"County Names\",\n       title = \"Counties in MA\")+\n  theme_classic()+\n  theme(axis.title.x=element_blank(),\n        axis.text.x=element_blank(),\n        axis.ticks.x=element_blank(),\n        axis.title.y=element_blank(),\n        axis.text.y=element_blank(),\n        axis.ticks.y=element_blank(),\n        axis.line = element_blank()\n        )"
   },
   {
     "objectID": "course-materials/lectures/11_color_theory.html#confusing-fill-and-color",
     "href": "course-materials/lectures/11_color_theory.html#confusing-fill-and-color",
     "title": "Color Theory",
     "section": "Confusing fill and color",
-    "text": "Confusing fill and color\nDon’t confuse fill and color. If aes(fill) then you must use scale_fill_brewer() not scale_color_brewer(), and vice versa."
+    "text": "Confusing fill and color\nDon’t confuse fill and color. If aes(fill) then you must use scale_fill_brewer() not scale_color_brewer(), and vice versa.\n\nggplot() +\n  geom_sf(data = mass_med_income, aes(fill = med_income_discrete)) +\n  labs(fill = \"Median Income\\n thousands dollars\",\n       title = \"Tried to color the fill aes()\",\n       subtitle = \"Got the default colors\",\n       caption = \"deptofnumbers.com\")+\n  scale_color_brewer(palette = \"PuOr\",na.value =\"grey\" )+\n  theme_classic()+\n  theme_void()"
   },
   {
     "objectID": "course-materials/lectures/2_Brief-R-history.html#why-r",

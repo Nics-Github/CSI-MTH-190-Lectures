@@ -58,7 +58,7 @@ Part 1: Visualizations
 
 -   [6 Data Frames Variable Types Tidy Data](./course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.qmd)
 
--   [7 Data Ethics part 1](./course-materials/lectures/7_ethics_part_1.qmd)]
+-   [7 Data Ethics part 1](./course-materials/lectures/7_ethics_part_1.qmd)
 
 -   [7.5 Data Ethics and Tidy Data Examples](./course-materials/lectures/7_5_in_class_ethic_examples.qmd)
 
