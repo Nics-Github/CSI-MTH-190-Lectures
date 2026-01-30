@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Schwab">
-  <title>CSI-MTH-190 – Taxonomy of Graphs part 2</title>
+  <title>CSI-MTH-190 – Taxonomy of Graphs part 2: Numeric Data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -194,7 +194,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Taxonomy of Graphs part 2</h1>
+  <h1 class="title">Taxonomy of Graphs part 2: Numeric Data</h1>
   <p class="subtitle">CSI-MTH-190</p>
 
 <div class="quarto-title-authors">
@@ -213,9 +213,9 @@ Schwab
 <p>! there is no package called ‘palmerpenguins’</p>
 <p>If so paste the install line into the console and type return/enter. (Remove the #).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co">#install.packages("palmerpenguins")</span></span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(palmerpenguins)</span>
-<span id="cb1-3"><a></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a></a><span class="co">#install.packages("palmerpenguins")</span></span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(palmerpenguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="the-data" class="slide level2">
@@ -328,9 +328,9 @@ Schwab
 <h2>Create Histograms</h2>
 <p>To see the spread, center and shape of a numeric variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>starwars <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> height )) <span class="sc">+</span></span>
-<span id="cb11-3"><a></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>body_mass_g))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="10_taxonomy_of_graphs_numeric_part_2_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
@@ -345,7 +345,7 @@ Schwab
 </section>
 <section id="try-one-1" class="slide level2">
 <h2>Try one:</h2>
-<p>Copy some code above as a template and try to make a histogram of <code>bill_length_mm</code>.</p>
+<p>Copy some code above as a template and try to make a histogram of <code>body_mass_g</code>.</p>
 <p>Add a vertical line at the mean() value, fill by sex and facet by island.</p>
 </section>
 <section id="answer-1" class="slide level2">
@@ -355,7 +355,7 @@ Schwab
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>mean_bill_len <span class="ot">=</span> <span class="fu">mean</span>(penguins<span class="sc">$</span>bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb12-2"><a></a></span>
 <span id="cb12-3"><a></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> sex))<span class="sc">+</span></span>
+<span id="cb12-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">fill =</span> sex))<span class="sc">+</span></span>
 <span id="cb12-5"><a></a>  <span class="fu">geom_histogram</span>()<span class="sc">+</span></span>
 <span id="cb12-6"><a></a>  <span class="fu">geom_vline</span>(</span>
 <span id="cb12-7"><a></a>    <span class="at">xintercept =</span> mean_bill_len,</span>

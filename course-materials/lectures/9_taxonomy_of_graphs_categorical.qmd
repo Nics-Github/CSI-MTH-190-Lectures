@@ -1,5 +1,5 @@
 ---
-title: "Taxonomy of Graphs part 1"
+title: "Taxonomy of Graphs part 1: Categorical"
 subtitle: "CSI-MTH-190"
 author: "Schwab"
 editor: visual
@@ -51,7 +51,7 @@ starwars |>
 
 ## Visual Cues Color
 
-Too many colors is not helpful. Below I fill each rectangle by `hair_color`.
+Too many colors are not helpful. Below I fill each rectangle by `hair_color`.
 
 And we now have a redundant mapping.
 
@@ -118,7 +118,7 @@ starwars |>
 
 ## Touch ups
 
-You can add a theme to the graph to easily make things look more professional. Pick your favorit theme and go with it.
+You can add a theme to the graph to easily make things look more professional. Pick your favorite theme and go with it.
 
 Also I eliminated the x-axis label as it was redundant with the title.
 

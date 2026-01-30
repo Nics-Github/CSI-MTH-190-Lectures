@@ -6,12 +6,14 @@ format:
   revealjs:
     theme: beige
 execute: 
-  echo: false
   warning: false
   message: false
+  
 
   
 ---
+
+# Libraries 
 
 ```{r}
 library(tidyverse)
@@ -24,7 +26,7 @@ Remember the goal of making data graphics to to communicate some idea.
 
 In this lecture we'll talk about different color palettes and when to use them. 
 
-We'll use the `starwars` data. 
+We'll use the `penguins` data again. 
 
 ## Colors
 
@@ -46,21 +48,32 @@ General Color Palettes:
 
 The two functions we'll use for colors are
 
-sclae_*_discrete()
-scale_*_continuous()
+scale_\*\_brewer()
+scale_\*\_distiller()
 
 The * matches the aestheic we are trying to color. 
 
-scale_fill_brewer()     <- filling discrete
-scale_fill_distiller()  <- filling continuous
+
+```{r}
+#| eval: false
+
+scale_fill_brewer()     #<- filling discrete
+
+scale_fill_distiller()  #<- filling continuous
+
 scale_color_brewer()
+
 scale_color_distiller()
+```
+
 
 ## Base Graph
 
 Below is a scatter plot of `body_mass_g` vs `bill_depth_mm`.
 
 ```{r}
+#| code-fold: true
+
 penguins |>
   ggplot()+
   geom_point(aes(x=body_mass_g,bill_depth_mm))
@@ -74,7 +87,8 @@ I'd like to show the flipper length as a third variable.
 We can color by it. 
 
 ```{r}
-# Plot!
+#| code-fold: true
+
 penguins |>
   ggplot()+
   geom_point(aes(
@@ -91,7 +105,9 @@ The lighter color should indicate less.
 To reverse it I'll add scale_color_distiller(direction = 1) because we're working with a continuous variable and we're coloring. 
 
 ```{r}
-# Plot!
+#| code-fold: true
+
+
 penguins |>
   ggplot()+
   geom_point(aes(
@@ -109,7 +125,9 @@ Using the default color isn't great. Let's choose a premade brewer palette.
 To reverse it I'll add scale_color_distiller(direction = 1) because we're working with a continuous variable and we're coloring. 
 
 ```{r}
-# Plot!
+#| code-fold: true
+
+
 penguins |>
   ggplot()+
   geom_point(aes(
@@ -135,7 +153,9 @@ If we want to use two base colors, one to show high values and the other to show
 Here the brown is long flipper and dark blue is short flipper. 
 
 ```{r}
-# Plot!
+#| code-fold: true
+
+
 penguins |>
   ggplot()+
   geom_point(aes(
@@ -153,6 +173,9 @@ It often makes more sense to use a diverging palette with the middle being zero.
 Here I do a bit of wrangling to add a new column, which captures the difference from the average height. 
 
 ```{r}
+#| code-fold: true
+
+
 ave_mass = mean(penguins$body_mass_g,na.rm = TRUE)
 
 penguins |>
@@ -170,6 +193,9 @@ penguins |>
 I'm adding a circle around each point so they are easier to see. 
 
 ```{r}
+#| code-fold: true
+
+
 ave_mass = mean(penguins$body_mass_g,na.rm = TRUE)
 
 penguins |>
@@ -179,17 +205,48 @@ penguins |>
     x = flipper_length_mm, 
     y = bill_depth_mm,
     fill = diff_mass_from_avg,
-    color = "black",
-    stroke = 0.01))+
+    ),
+    shape = 21,   # <- this is a circle that allows outlining
+    color = "black",  # <- outline color
+    stroke = 0.3,    # <- outline thickness
+    size = 3)+
   scale_fill_distiller(palette = "BrBG")
 ```
 
-## Diverging Palettes
+## Diverging Palettes 4
 
 Missing Data should be clearly represented with grey or a like color. 
 
 ```{r}
-# Plot!
+#| code-fold: true
+#| results: hide
+library(tidycensus)
+
+#Make Mass Median Income
+mass_med_income <- 
+  get_acs(
+    geography = "county", 
+    variables = c(med_household_income = "B19013_001"),
+    state = "MA",
+    # We'll need to pivot wider, but that doesn't work with simple features. 
+    geometry = TRUE
+  )|>
+  # Add centroids to each region using purrr package
+ tidyr::separate(NAME, c("County", "State"), sep = ", ") |> 
+ tidyr::separate(County, c("County", "Fluff"), sep = " ") |>
+  mutate(med_household_income = estimate) |>
+  mutate(med_income_discrete = cut_interval(
+    med_household_income, 
+    length = 15000, 
+    labels = c("60-75", "75-90","90-105", "105-120","120-135")
+    ))
+```
+
+
+
+```{r}
+#| code-fold: true
+
 mass_med_income$med_income_discrete[8] = NA
 
 ggplot() +
@@ -202,14 +259,7 @@ ggplot() +
        caption = "deptofnumbers.com")+
   scale_fill_brewer(palette = "PuOr",na.value ="grey" )+
   theme_classic()+
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank(),
-        axis.line = element_blank()
-        )
+  theme_void()
 ```
 
 
@@ -220,6 +270,8 @@ If the variable is categorical use a qualitative palette.
 Limit yourself to six categories. 
 
 ```{r}
+#| code-fold: true
+
 
 fun_facts <- tribble(
   ~fun_facts,
@@ -230,7 +282,7 @@ fun_facts <- tribble(
   "County of Mass Bay Colony",
   "County of Plymouth Colony",
   "Newest",
-  "Smith College",
+  "I live here",
   "County of Mass Bay Colony",
   "Newest",
   "County of Plymouth Colony",
@@ -241,22 +293,13 @@ fun_facts <- tribble(
 
 ggplot() +
   geom_sf(data = bind_cols(mass_med_income, fun_facts), aes(fill = fun_facts)) +
- # geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +
   labs(fill = "",
        title = "Massachusetts Med Income 2020 ",
-       #subtitle = "Median income in 2020 was $91,842",
        subtitle = "Fun Facts about MA Counties",
-       caption = "source: https://en.wikipedia.org/wiki/List_of_counties_in_Massachusetts")+
+       caption = "source: https://en.wikipedia.org/wiki/\nList_of_counties_in_Massachusetts")+
   scale_fill_brewer(palette = "Set2",na.value ="grey" )+
   theme_classic()+
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        axis.title.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.ticks.y=element_blank(),
-        axis.line = element_blank()
-        )
+  theme_void()
 ```
 
 ## How do we do this? 
@@ -276,6 +319,8 @@ add `scale_*_distiller()` to your plot
 This is the default option in R
 
 ```{r}
+#| code-fold: true
+
 ggplot() +
   geom_sf(data = bind_cols(mass_med_income, fun_facts), aes(fill = County )) +
  # geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +
@@ -293,9 +338,20 @@ ggplot() +
 
 ```
 
+## Confusing fill and color
 
-## Themes
+Don't confuse fill and color. If aes(fill) then you must use scale_fill_brewer() **not** scale_color_brewer(), and vice versa.
 
-
+```{r}
+ggplot() +
+  geom_sf(data = mass_med_income, aes(fill = med_income_discrete)) +
+  labs(fill = "Median Income\n thousands dollars",
+       title = "Tried to color the fill aes()",
+       subtitle = "Got the default colors",
+       caption = "deptofnumbers.com")+
+  scale_color_brewer(palette = "PuOr",na.value ="grey" )+
+  theme_classic()+
+  theme_void()
+```
 
 

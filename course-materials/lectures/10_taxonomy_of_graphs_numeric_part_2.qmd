@@ -1,5 +1,5 @@
 ---
-title: "Taxonomy of Graphs part 2"
+title: "Taxonomy of Graphs part 2: Numeric Data"
 subtitle: "CSI-MTH-190"
 author: "Schwab"
 editor: visual
@@ -21,10 +21,10 @@ You may not have `palmerpenguins` installed. You'll know if you get the followin
 If so paste the install line into the console and type return/enter. (Remove the #).
 
 ```{r libraries}
-
+library(tidyverse)
 #install.packages("palmerpenguins")
 library(palmerpenguins)
-library(tidyverse)
+
 ```
 
 ## The Data
@@ -137,9 +137,9 @@ penguins |>
 To see the spread, center and shape of a numeric variable.
 
 ```{r}
-starwars |>
-  ggplot(aes(x= height )) +
-  geom_histogram()
+penguins |>
+  ggplot() +
+  geom_histogram(aes(x=body_mass_g))
 ```
 
 ## Histograms
@@ -152,7 +152,7 @@ We can adjust the bin or bin size.
 
 ## Try one:
 
-Copy some code above as a template and try to make a histogram of `bill_length_mm`.
+Copy some code above as a template and try to make a histogram of `body_mass_g`.
 
 Add a vertical line at the mean() value, fill by sex and facet by island.
 
@@ -164,7 +164,7 @@ Here is my solution to the problem on the previous slide.
 mean_bill_len = mean(penguins$bill_length_mm, na.rm = TRUE)
 
 penguins |>
-  ggplot(aes(x = bill_length_mm, fill = sex))+
+  ggplot(aes(x = body_mass_g, fill = sex))+
   geom_histogram()+
   geom_vline(
     xintercept = mean_bill_len,

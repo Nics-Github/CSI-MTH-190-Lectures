@@ -32,6 +32,7 @@ By the end of this assignment you will be able to tell me:
 - how many observations and variables there are in the data.
 - the average (or center) of one of the variables.
 - the shape of a graph of one of the variables. 
+ 
 
 
 ## What is due: 
@@ -46,33 +47,54 @@ This and all labs will be peer graded, I will double check your peers' grading.
 
 Make a chunk below and use the ? operator to pull up the help menu for the MLB_teams data then answer the questions below in full sentences to introduce your data. The documentation is not great, you many find just viewing the data helpful, so try that too. 
 
-
+```{r}
+?MLB_teams
+MLB_teams
+```
 
 Data Questions
 
 1. How many variables are in the data?
 
-**Answer:** 
+**Answer:** 11
 
 2. What is the `lgID` for the Boston Red Sox. What does `lgID` mean? (You may have to search the internet, or ask a peer).
 
-**Answer:**  
+**Answer:**  AL is the value for the Red Sox. lgID is the league the team is in. American or National. 
 
 3. Considering the help menu. What are the sources of this data?
 
-**Answer:** 
+**Answer:** The Lahman package and Wikipedia
 
 4. For this problem, use the `count()` function from the dplyr package. How many teams are present in this data? (Hint: You may want to google examples of count() or see the documentation with `?count()`). 
 
 ```{r}
-
+?count()
+view(MLB_teams |>
+    count(teamID))
 ```
 
-**Answer:** 
+**Answer:** I get 31 teams each having about 7 occurances. 
 
 5. There are 30 MLB teams in the US. Is this number different than your answer above? Why? (Hint: view(MLBTeams) and check the team names).
 
-**Answer:** 
+**Answer:** The Marlin's changed their name and thus their MLB team ID. Check the teamID: MIA, FLO. in the code chunk below I put those two together and get 30 teams. 
+
+```{r}
+MLB_teams = MLB_teams |>
+    mutate(
+        teamID = case_match(
+            teamID,
+            "FLO" ~ "MIA",
+            .default = teamID
+            )
+    ) 
+    
+view(MLB_teams |>
+    count(teamID)
+    )
+```
+
 
 ## Calculate the Summary Statistics
 
@@ -90,16 +112,17 @@ Take the code above and add another variable called `mean_loss` inside of the su
 
 **Answer in a chunk below.**
 
-```{r summary}
+```{r }
 # The code for the summary data goes here
-
+MLB_teams |>
+    summarize(mean_win = mean(W), mean_loss = mean(L))
 ```
 
 
 
 It would be nice to group the data by years or teams. This way we could see which team did best in the data. I'll summarize the mean by yearID below. Notice, its a little boring, of course the average for each year is the same. 
 
-```{r summary}
+```{r }
 # The code for the summary data goes here
 MLB_teams |>
     group_by(yearID) |>
@@ -107,18 +130,20 @@ MLB_teams |>
 ```
 
 
-6. We can summarize by statistics other than the mean(). Copy and paste the code above in the chunk below and find the median() of the wins for the year. What year had the most median wins?
+6. We can summarize by statistics other than the mean(). Edit the code above and find the median() of the wins for the year. In what year had the most median wins?
 
-```{r summary}
+```{r }
 # The code for the summary data goes here
-
+MLB_teams |>
+    group_by(yearID) |>
+    summarize(mean_win = mean(W), median_win = median(W))
 ```
 
-**Answer:** 
+**Answer:** 2009, there were more median wins. 
 
 You can save your summarized data by putting setting it equal to a variable, like this: 
 
-```{r summary}
+```{r }
 # The code for the summary data goes here
 my_summary = MLB_teams |>
     group_by(yearID) |>
@@ -137,8 +162,11 @@ my_summary
 
 **Answer in a chunk below:** 
 
-```{r summary}
-
+```{r }
+# The code for the summary data goes here
+mlb_attendance = MLB_teams |>
+    group_by(lgID,yearID) |>
+    summarize(total_attendance = sum(attendance))
 ```
 
 8. Pipe mlb_attendance into ggplot() and use geom_col() to make a bar graph showing the summary you calculated in number 7. (Hint: geom_col() takes two variables x and y in the aes()). Your graph will be pretty boring, but we'll spice it up in problem 11. 
@@ -146,7 +174,9 @@ my_summary
 **Answer in the chunk below:** 
 
 ```{r}
-
+mlb_attendance |>
+    ggplot()+
+    geom_col(aes(x=yearID,y=total_attendance))
 ```
 
 We can add lables by adding labs() after our geom. See my code for an example of this:
@@ -171,16 +201,28 @@ my_summary |>
 **Answer in a chunk below:**
 
 ```{r}
-
+MLB_teams |>
+    group_by(lgID)|>
+    summarise(avg_pop = mean(metroPop))|>
+    ggplot()+
+    geom_col(aes(x = lgID, y= avg_pop))
 
 ```
 
-**Summarize your graphic with a sentence or two:** 
+**Summarize your graphic with a sentence or two:** Answers will vary. But on average the national league has a slightly higher average population. 
 
 ## Revisit mlb_attendance
 
-11. In chapter 2.1 from the reading this week. You saw examples of color coding graphs. We'll do this below. I'm interested in comparing the attendance between the two leagues by year. Grab your code from your column graph in problem 9 above and fill = lgID into the aes() function. We will do a lot more of this in the next lab.
+11. In chapter 2.1 from the reading this week. You saw examples of color coding graphs. We'll do this below. I'm interested in comparing the attendance between the two leagues by year. Grab your code from your column graph in problem 9 above and fill = lgID into the aes() function. 
 
 ```{r}
-
+mlb_attendance |>
+    ggplot()+
+    geom_col(aes(x=yearID,y=total_attendance, fill = lgID))+
+    labs(
+        x = "year",
+        y = "total attendance",
+        title = "Attendance for the\nAmerican and National Leagues",
+        caption = "MDSR r package, Lahman, v. 0.2.8"
+    )
 ```
