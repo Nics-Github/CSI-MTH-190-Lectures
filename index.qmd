@@ -74,11 +74,11 @@ Part 1: Visualizations
 
 # Week 4
 
--   [Discussion: Taxonomy of Graphics](./course-materials/in-class-activies/3Activity_Taxonomy_of_Graphics.qmd)
+-   [12 Data Ethics part 2](./course-materials/lectures/12_ethics_part_2.qmd)
 
 -   [13 Building a graph](./course-materials/lectures/13_Building_a_graph.qmd)
 
--   [14 Data Ethics part 2]()
+-   [14 Set up for Lab 4]()
 
 # Week 5
 

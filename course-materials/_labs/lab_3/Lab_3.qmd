@@ -1,13 +1,13 @@
 ---
 title: "CSI-MTH 190: Intro to Data Science"
 subtitle: "Lab 3: Intro to Graphics"
-author: "Nicholas Schwab"
+author: "name"
 date: "today"
 format:
   html:
     embed-resources: true
 execute:
-    eval: false
+    eval: true
     message: false
 ---
 
@@ -39,7 +39,7 @@ Run the code below to load the dataset we will be working with today.
 
 ```{r}
 # If you cannot read in the file set the current working directory to the same folder your lab is in. Use the gear icon and choose setwd().
-# Ignore the rest of this code for now. All
+# Ignore the rest of this code for now.
 library(tidyverse)
 
 read_file = readLines("data/county_health_2021.csv")
@@ -125,10 +125,10 @@ However, in this case, to be sure that every county is represented on the plot, 
 
 ## Exercise 2: Add Jitter to the Plot
 
-Copy the code that I created above into the chunk below. Refer to the [ggplot2 cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf) to find the geom function you need to create this plot. Set the *width* and the *height* of the *jitter* to your choice. Make sure the range of the data is not drastically changed. Make sure the points stay above their state. Notice the adjustments to the plot as you update these attributes.
+Copy the code that I created above into the chunk below. Refer to the [ggplot2 cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf) to find the geom function you need to create this plot. Set the *width* and the *height* of the *jitter* to your choice (but keep them smallish). Make sure the range of the data is not drastically changed. Make sure the points stay above their state. Notice the adjustments to the plot as you update these attributes.
 
 ```{r}
-# Adjust this code so that is jitters
+# Adjust this code so that it jitters
 ggplot(data = ne_county_health_2021, 
        aes(x = State_Abbreviation, 
            y = Flu_vaccinations_raw_value)) +
@@ -168,7 +168,7 @@ Your subtitle should be the data's source: County Health Rankings, University of
 
 ## Exercise 5: Divide This Plot by State
 
-Sometimes, the narrative a plot conveys can be misleading until we starting layering in additional variables. For instance, in the above plot we look at the correlation between life expectancy and reported physically unhealthy days in New England counties, but different states in New England might have different relationships between the two variables, so it may make more sense to divide this plot out by state. We can do this by creating small multiples using the `facet_wrap()` function. 
+Sometimes, the narrative a plot conveys can be misleading until we starting layering in additional variables. For instance, in the above plot we look at the correlation between life expectancy and reported physically unhealthy days in New England counties, but different states in New England might have different relationships between the two variables, so it may make more sense to divide this plot out by state. We can do this by creating small multiples using the `facet_wrap()` function. See Lecture 10 for an example of faceting. 
 
 ```{r}
 # Paste the code you wrote in Exercise 4 below and adjust it
@@ -310,4 +310,4 @@ This is just an exploratory data analysis. I was wondering if there is a relatio
 
 ```
 
-Remember to Render this lab before you push it to github.  
+Remember to Render this lab before you put it on canvas.  

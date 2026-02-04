@@ -1,10 +1,14 @@
 ---
-title: "How to build a graph"
+title: "Options when building a graph"
+subtitle: "A wrap up of Visualization"
 author: "Schwab"
 format: 
   revealjs:
     theme: beige
 editor: visual
+execute:
+    echo: true
+    code-fold: true
 ---
 
 ## Reference Lecture 8 taxonomy of graphics
@@ -94,6 +98,7 @@ MLB_teams |>   # <- this is the data
 We can drop the scientific notation with `scale_x_continuous()` function.
 
 ```{r}
+#| code-fold: TRUE
 MLB_teams |>   # <- this is the data
     ggplot() +  # <- this is what we are doing
     geom_histogram( mapping = aes( x = metroPop ) ) + # <- This is our asthetic
@@ -107,6 +112,7 @@ We can also facet our data to make separate plots of features. We have to tell R
 Now our x-axis numbers are jumbled. We'll fix that on the next slide.
 
 ```{r}
+#| code-fold: TRUE
 MLB_teams |>   
     ggplot() + 
     geom_histogram( mapping = aes( x = metroPop ) ) + 
@@ -119,6 +125,7 @@ MLB_teams |>
 We can abbreviate the axis numbers in a variety of ways. I had to look this one up, because I don't use it often.
 
 ```{r}
+#| code-fold: TRUE
 library(scales) # need this to use cut_short_scale()
 MLB_teams |>  
     ggplot() +  
@@ -134,6 +141,7 @@ MLB_teams |>
 Instead of faceting we can leave the graphs on the same axes but adjust the transparency. alpha is not an aesthetic, but a parameter like mapping. Note: as our lines get longer we break them up.
 
 ```{r}
+#| code-fold: TRUE
 library(scales) # need this to use cut_short_scale()
 MLB_teams |>  
     ggplot() +  
@@ -153,6 +161,7 @@ MLB_teams |>
 By default R stacks our plots ( and pick gross colors) This make the American League look taller than the National League. We should dodge them instead by setting the position parameter.
 
 ```{r}
+#| code-fold: TRUE
 MLB_teams |>  
     ggplot() +  
     geom_histogram( mapping = aes( x = metroPop,
@@ -172,6 +181,7 @@ MLB_teams |>
 Each geom has its own parameters. we can adjust the `bin width` parameter of `geom_histogram()` so our bars are not so skinny. We can also specify the exact bins with the bins parameter.
 
 ```{r}
+#| code-fold: TRUE
 MLB_teams |>  
     ggplot() +  
     geom_histogram( mapping = aes( x = metroPop,
@@ -195,6 +205,7 @@ MLB_teams |>
 Once you have your graph, you may want to change the geom to try other visual representations of your data. You can easily do this. Let's change geom_histogram to geom_density(). We get a warning about bins and position, because those are not parameters of geom_density.
 
 ```{r}
+#| code-fold: TRUE
 MLB_teams |>  
     ggplot() +  
     geom_density( mapping = aes( x = metroPop,
@@ -217,6 +228,7 @@ MLB_teams |>
 geom_density() shows the proportion of your data out of 100.You can change the y-scale to get a better image of what I mean.
 
 ```{r}
+#| code-fold: TRUE
 MLB_teams |>  
     ggplot() +  
     geom_density( mapping = aes( x = metroPop,
@@ -243,6 +255,7 @@ MLB_teams |>
 You can adjust the legend name too.
 
 ```{r}
+#| code-fold: TRUE
 MLB_teams |>  
     ggplot() +  
     geom_density( mapping = aes( x = metroPop,
@@ -262,6 +275,10 @@ MLB_teams |>
                      values = c("blue","red"))
 
 ```
+
+## Ethics
+
+Make good graphing choices. Don't mislead your viewer (especially unintentionally).
 
 ## Conclusion
 
