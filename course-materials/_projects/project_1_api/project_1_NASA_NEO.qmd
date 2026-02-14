@@ -1,0 +1,51 @@
+---
+title: "Project 1: Near Earth Objects"
+format: html
+---
+
+https://api.nasa.gov/
+
+```{r}
+library(tidyverse)
+
+start_date = '2015-09-07'
+end_date = '2015-09-10'
+
+get_astroids = function(start_date = start_date, end_date = NA){
+    # Can only choose a week at a time, more dates return 400 error
+    # Defaults to a week after start date
+
+    if (is.na(end_date)){
+        raw_astroids = jsonlite::fromJSON(
+            paste('https://api.nasa.gov/neo/rest/v1/feed?start_date=',start_date,'&api_key=htE96YPBdLtRS28HdTATYNMvoOYr248pRfGIAGTs',sep = '')
+            )
+    }
+
+    else{
+        raw_astroids = jsonlite::fromJSON(
+            paste('https://api.nasa.gov/neo/rest/v1/feed?start_date=',start_date,'&end_date=',end_date,'&api_key=htE96YPBdLtRS28HdTATYNMvoOYr248pRfGIAGTs',sep = '')
+            )
+    }
+    
+    # cleaning and flattening
+    astroids = raw_astroids$near_earth_objects |>
+        reduce(.f = bind_rows)|>      # learned from gemini
+        #flatten(recursive = TRUE)|>   #  I could not get function to work well so unnesting...
+        unnest(c(links,estimated_diameter), names_sep = "_")|>
+        unnest(c(estimated_diameter_kilometers,estimated_diameter_meters,estimated_diameter_miles,estimated_diameter_feet,close_approach_data), names_sep = "_")|>
+        unnest(c(close_approach_data_relative_velocity,close_approach_data_miss_distance),names_sep = "_" )|>
+        mutate(across(matches("meters|lunar|miles"), as.numeric))|>
+        janitor::clean_names()|>
+        as_tibble()
+    
+    return(astroids)
+}
+
+```
+
+```{r}
+rocks = get_astroids(start_date = '2026-02-02')
+count(rocks, name,sort = TRUE)
+count(rocks, is_potentially_hazardous_asteroid) 
+
+```

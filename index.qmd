@@ -88,11 +88,11 @@ Part 1: Visualizations
 
 Part 2: Wrangling
 
--   [14 Ethics Part 2](./course-materials/lectures/14_ethics_part_2.qmd)
-
--   [15 Lecture on the five verbs](course-materials/lectures/mdsr-the-verbs.qmd)
+-   [15 Lecture on the five verbs](./course-materials/lectures/15_Lecture_on_five_verbs.qmd)
 
 -   [16 Dplyr Cheat sheet](https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-transformation.pdf)
+
+-   [17 Ethics Part 3](./course-materials/lectures/17_ethic_part_3.qmd.qmd)
 
 # Week 7
 

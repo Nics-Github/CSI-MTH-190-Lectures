@@ -4,41 +4,30 @@ author: "Nic Schwab"
 format: 
   revealjs:
     theme: beige
+execute: 
+  echo: true
 editor: visual
 ---
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(fig.path = 'figures/', fig.height = 5)
+library(tidyverse)
 ```
 
 ## dplyr lives in the tidyverse
 
 ![](https://raw.githubusercontent.com/tidyverse/dplyr/master/man/figures/logo.png){fig-align="center"}
 
-## SDS 100 Lab 4
+## The Verbs
 
 ::::: columns
 ::: {.column width="50%"}
 You've learned about these verbs:
 
--   `select()`
-
-    -   subsets columns
-
 -   `filter()`
 
     -   subsets rows
-
--   `mutate()`
-
-    -   creates new variables (or columns)
-
--   `arrange()` / `arrange(desc())`
-:::
-
-::: {.column width="50%"}
-We will also use:
 
 -   `group_by()`
 
@@ -48,13 +37,33 @@ We will also use:
 
     -   to summarize data
 
+-   `mutate()`
+
+    -   creates new variables (or columns)
+:::
+
+::: {.column width="50%"}
+We will also use:
+
+-   `select()`
+
+    -   subsets columns
+
 -   `rename()`
 
     -   to rename columns
+
+-   `arrange()` / `arrange(desc())/ slice_*`
+
+-   `case_when()`
+
+    -   change variable levels
 :::
 :::::
 
-## Recall SQL Queries
+## Preview SQL Queries
+
+CSI 264
 
 | SQL      | dplyr                           |
 |----------|---------------------------------|
@@ -83,27 +92,106 @@ When we wrangle we are not altering the original data.
 
 ## What is a tibble?
 
-::::: columns
+:::: columns
 ::: {.column width="50%"}
-![](http://hexb.in/hexagons/tibble.png){width="90%"}
+![](https://tibble.tidyverse.org/logo.svg){fig-align="center" width="50%"}
 :::
-
 ::: {.column width="50%"}
 -   Object of class `tbl`
 
--   [Its different from a data frame.](https://jtr13.github.io/cc21fall1/tibble-vs.-dataframe.html)
+-   [Its kind of different from a data frame.](https://jtr13.github.io/cc21fall1/tibble-vs.-dataframe.html)
 :::
-:::::
+::::
 
-## Group by example
+## New verbs by example
 
 Live code with the `mpg` data frame.
 
-Open R or Smith's [RStudio Server](https://rstudio.smith.edu/auth-sign-in?appUri=%2F)
+Try these with me.
+
+Open R or HCC's [RStudio Server](https://rstudio.hcc.edu).
+
+## Side Note: Vectors
+
+c() makes a vector in R. 
+
+We use them to hold information. All information must be the same type (int, bool, etc.)
+
+
+If you are familiar with lists or arrays, a vector is very similar to those. 
+
+```{r}
+books = c("The Martian", "The Hail Mary Project", "Artemis")
+```
+
+## filter()
+
+%in% vs ==
+
+```{r}
+mpg |> # 18 audis
+    filter ( manufacturer == "audi")|>
+    nrow()
+
+mpg |> # 25 fords
+    filter(manufacturer == "ford")|>
+    nrow()
+
+mpg |> # doesn't work correctly
+    filter(manufacturer == c("ford", "audi"))|>
+    nrow()
+
+mpg |> # doesn't work correctly
+    filter(manufacturer %in% c("ford", "audi"))|>
+    nrow()
+```
+
+## group_by and summarize
+
+group_by() works with summarize()
+```{r}
+mpg|>
+    group_by(manufacturer)|>
+    # n() is a counting function
+    summarise(count = n())
+
+```
+
+## mutate()
+
+Changes values of colums. You can save the data frame.
+
+```{r}
+mpg = mpg |>
+    mutate(new_year = 2000 - year )
+mpg$year
+```
+
+## select()
+
+`select()` subsets the columms. Maybe you don't need the whole df. 
+
+`names()` is useful for finding column names
+
+```{r}
+names(mpg)
+new_mpg = mpg |> select(manufacturer, year)
+new_mpg
+```
+
+## arrange() / slice_*()
+
+arrange() ordered your df by a variable, while slice_max() will take the top so many rows. 
+
+```{r}
+mpg |> arrange (desc(displ))
+
+mpg |> slice_max(displ, n = 5)
+```
 
 ## Practice wrangling
 
-[In class MDSR Problems 1 and 2](https://mdsr-book.github.io/mdsr2e/ch-dataI.html#dataI-exercises)
+[MDSR Problems 1 and 2](https://mdsr-book.github.io/mdsr3e/04-dataI.html#dataI-exercises)
 
 ```{r, Random_subset }
 #| code-summary: "Make the Random_subset data frame."

@@ -1,0 +1,6 @@
+---
+title: "Dplyr Cheatsheet"
+---
+
+This is only a placeholder for the [cheatsheet](https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-transformation.pdf). 
+

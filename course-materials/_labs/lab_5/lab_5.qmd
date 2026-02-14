@@ -1,6 +1,6 @@
 ---
 title: "CSI-MTH 190: Intro to Data Science"
-subtitle: "Lab 4: Intro to Wrangling and Cleaning"
+subtitle: "Lab 5: Intro to Wrangling and Cleaning"
 author: "Nicholas Schwab"
 date: "today"
 format:

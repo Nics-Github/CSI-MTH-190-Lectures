@@ -56,375 +56,312 @@
     "text": "Measures of Spread\nThere are two measures of spread that I’ll mention from time to time in this course.\nInner Quartile Range. This is the width between 25% and 75% of the data. We can find it with the IQR() function\nStandard Deviation. This is the average distance from the mean of the data. We calculate it with the sd() function.\nWe’ll discuss these two more as they come up in the course."
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#goal-communication",
-    "href": "course-materials/lectures/11_color_theory.html#goal-communication",
-    "title": "Color Theory",
-    "section": "Goal: Communication",
-    "text": "Goal: Communication\nRemember the goal of making data graphics to to communicate some idea.\nIn this lecture we’ll talk about different color palettes and when to use them.\nWe’ll use the penguins data again."
+    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html",
+    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html",
+    "title": "In-class Exercises: Mapping",
+    "section": "",
+    "text": "# Get MA county sf object, that includes population estimate column in data\nmass_pop_orig &lt;- \n  tidycensus::get_acs(\n    geography = \"county\", \n    variables = \"B01003_001\", \n    state = \"MA\",\n    geometry = TRUE\n  ) |&gt; \n  # Add centroids to each region using purrr package\n  mutate(\n    lng = purrr::map_dbl(geometry, ~st_centroid(.x)[[1]]),\n    lat = purrr::map_dbl(geometry, ~st_centroid(.x)[[2]])\n  )  \n\n\n  |                                                                            \n  |                                                                      |   0%\n  |                                                                            \n  |                                                                      |   1%\n  |                                                                            \n  |=                                                                     |   1%\n  |                                                                            \n  |=                                                                     |   2%\n  |                                                                            \n  |==                                                                    |   2%\n  |                                                                            \n  |==                                                                    |   3%\n  |                                                                            \n  |==                                                                    |   4%\n  |                                                                            \n  |===                                                                   |   4%\n  |                                                                            \n  |===                                                                   |   5%\n  |                                                                            \n  |====                                                                  |   5%\n  |                                                                            \n  |====                                                                  |   6%\n  |                                                                            \n  |=====                                                                 |   6%\n  |                                                                            \n  |=====                                                                 |   7%\n  |                                                                            \n  |=====                                                                 |   8%\n  |                                                                            \n  |======                                                                |   8%\n  |                                                                            \n  |======                                                                |   9%\n  |                                                                            \n  |=======                                                               |   9%\n  |                                                                            \n  |=======                                                               |  10%\n  |                                                                            \n  |=======                                                               |  11%\n  |                                                                            \n  |========                                                              |  11%\n  |                                                                            \n  |========                                                              |  12%\n  |                                                                            \n  |=========                                                             |  12%\n  |                                                                            \n  |=========                                                             |  13%\n  |                                                                            \n  |=========                                                             |  14%\n  |                                                                            \n  |==========                                                            |  14%\n  |                                                                            \n  |==========                                                            |  15%\n  |                                                                            \n  |===========                                                           |  15%\n  |                                                                            \n  |===========                                                           |  16%\n  |                                                                            \n  |============                                                          |  16%\n  |                                                                            \n  |============                                                          |  17%\n  |                                                                            \n  |============                                                          |  18%\n  |                                                                            \n  |=============                                                         |  18%\n  |                                                                            \n  |=============                                                         |  19%\n  |                                                                            \n  |==============                                                        |  19%\n  |                                                                            \n  |==============                                                        |  20%\n  |                                                                            \n  |==============                                                        |  21%\n  |                                                                            \n  |===============                                                       |  21%\n  |                                                                            \n  |===============                                                       |  22%\n  |                                                                            \n  |================                                                      |  22%\n  |                                                                            \n  |================                                                      |  23%\n  |                                                                            \n  |================                                                      |  24%\n  |                                                                            \n  |=================                                                     |  24%\n  |                                                                            \n  |=================                                                     |  25%\n  |                                                                            \n  |==================                                                    |  25%\n  |                                                                            \n  |==================                                                    |  26%\n  |                                                                            \n  |===================                                                   |  26%\n  |                                                                            \n  |===================                                                   |  27%\n  |                                                                            \n  |===================                                                   |  28%\n  |                                                                            \n  |====================                                                  |  28%\n  |                                                                            \n  |====================                                                  |  29%\n  |                                                                            \n  |=====================                                                 |  29%\n  |                                                                            \n  |=====================                                                 |  30%\n  |                                                                            \n  |=====================                                                 |  31%\n  |                                                                            \n  |======================                                                |  31%\n  |                                                                            \n  |======================                                                |  32%\n  |                                                                            \n  |=======================                                               |  32%\n  |                                                                            \n  |=======================                                               |  33%\n  |                                                                            \n  |=======================                                               |  34%\n  |                                                                            \n  |========================                                              |  34%\n  |                                                                            \n  |========================                                              |  35%\n  |                                                                            \n  |=========================                                             |  35%\n  |                                                                            \n  |=========================                                             |  36%\n  |                                                                            \n  |==========================                                            |  36%\n  |                                                                            \n  |==========================                                            |  37%\n  |                                                                            \n  |==========================                                            |  38%\n  |                                                                            \n  |===========================                                           |  38%\n  |                                                                            \n  |===========================                                           |  39%\n  |                                                                            \n  |============================                                          |  39%\n  |                                                                            \n  |============================                                          |  40%\n  |                                                                            \n  |============================                                          |  41%\n  |                                                                            \n  |=============================                                         |  41%\n  |                                                                            \n  |=============================                                         |  42%\n  |                                                                            \n  |==============================                                        |  42%\n  |                                                                            \n  |==============================                                        |  43%\n  |                                                                            \n  |==============================                                        |  44%\n  |                                                                            \n  |===============================                                       |  44%\n  |                                                                            \n  |===============================                                       |  45%\n  |                                                                            \n  |================================                                      |  45%\n  |                                                                            \n  |================================                                      |  46%\n  |                                                                            \n  |=================================                                     |  46%\n  |                                                                            \n  |=================================                                     |  47%\n  |                                                                            \n  |=================================                                     |  48%\n  |                                                                            \n  |==================================                                    |  48%\n  |                                                                            \n  |==================================                                    |  49%\n  |                                                                            \n  |===================================                                   |  49%\n  |                                                                            \n  |===================================                                   |  50%\n  |                                                                            \n  |===================================                                   |  51%\n  |                                                                            \n  |====================================                                  |  51%\n  |                                                                            \n  |====================================                                  |  52%\n  |                                                                            \n  |=====================================                                 |  52%\n  |                                                                            \n  |=====================================                                 |  53%\n  |                                                                            \n  |=====================================                                 |  54%\n  |                                                                            \n  |======================================                                |  54%\n  |                                                                            \n  |======================================                                |  55%\n  |                                                                            \n  |=======================================                               |  55%\n  |                                                                            \n  |=======================================                               |  56%\n  |                                                                            \n  |========================================                              |  56%\n  |                                                                            \n  |========================================                              |  57%\n  |                                                                            \n  |========================================                              |  58%\n  |                                                                            \n  |=========================================                             |  58%\n  |                                                                            \n  |=========================================                             |  59%\n  |                                                                            \n  |==========================================                            |  59%\n  |                                                                            \n  |==========================================                            |  60%\n  |                                                                            \n  |==========================================                            |  61%\n  |                                                                            \n  |===========================================                           |  61%\n  |                                                                            \n  |===========================================                           |  62%\n  |                                                                            \n  |============================================                          |  62%\n  |                                                                            \n  |============================================                          |  63%\n  |                                                                            \n  |============================================                          |  64%\n  |                                                                            \n  |=============================================                         |  64%\n  |                                                                            \n  |=============================================                         |  65%\n  |                                                                            \n  |==============================================                        |  65%\n  |                                                                            \n  |==============================================                        |  66%\n  |                                                                            \n  |===============================================                       |  66%\n  |                                                                            \n  |===============================================                       |  67%\n  |                                                                            \n  |===============================================                       |  68%\n  |                                                                            \n  |================================================                      |  68%\n  |                                                                            \n  |================================================                      |  69%\n  |                                                                            \n  |=================================================                     |  69%\n  |                                                                            \n  |=================================================                     |  70%\n  |                                                                            \n  |=================================================                     |  71%\n  |                                                                            \n  |==================================================                    |  71%\n  |                                                                            \n  |==================================================                    |  72%\n  |                                                                            \n  |===================================================                   |  72%\n  |                                                                            \n  |===================================================                   |  73%\n  |                                                                            \n  |===================================================                   |  74%\n  |                                                                            \n  |====================================================                  |  74%\n  |                                                                            \n  |====================================================                  |  75%\n  |                                                                            \n  |=====================================================                 |  75%\n  |                                                                            \n  |=====================================================                 |  76%\n  |                                                                            \n  |======================================================                |  76%\n  |                                                                            \n  |======================================================                |  77%\n  |                                                                            \n  |======================================================                |  78%\n  |                                                                            \n  |=======================================================               |  78%\n  |                                                                            \n  |=======================================================               |  79%\n  |                                                                            \n  |========================================================              |  79%\n  |                                                                            \n  |========================================================              |  80%\n  |                                                                            \n  |========================================================              |  81%\n  |                                                                            \n  |=========================================================             |  81%\n  |                                                                            \n  |=========================================================             |  82%\n  |                                                                            \n  |==========================================================            |  82%\n  |                                                                            \n  |==========================================================            |  83%\n  |                                                                            \n  |==========================================================            |  84%\n  |                                                                            \n  |===========================================================           |  84%\n  |                                                                            \n  |===========================================================           |  85%\n  |                                                                            \n  |============================================================          |  85%\n  |                                                                            \n  |============================================================          |  86%\n  |                                                                            \n  |=============================================================         |  86%\n  |                                                                            \n  |=============================================================         |  87%\n  |                                                                            \n  |=============================================================         |  88%\n  |                                                                            \n  |==============================================================        |  88%\n  |                                                                            \n  |==============================================================        |  89%\n  |                                                                            \n  |===============================================================       |  89%\n  |                                                                            \n  |===============================================================       |  90%\n  |                                                                            \n  |===============================================================       |  91%\n  |                                                                            \n  |================================================================      |  91%\n  |                                                                            \n  |================================================================      |  92%\n  |                                                                            \n  |=================================================================     |  92%\n  |                                                                            \n  |=================================================================     |  93%\n  |                                                                            \n  |=================================================================     |  94%\n  |                                                                            \n  |==================================================================    |  94%\n  |                                                                            \n  |==================================================================    |  95%\n  |                                                                            \n  |===================================================================   |  95%\n  |                                                                            \n  |===================================================================   |  96%\n  |                                                                            \n  |====================================================================  |  96%\n  |                                                                            \n  |====================================================================  |  97%\n  |                                                                            \n  |====================================================================  |  98%\n  |                                                                            \n  |===================================================================== |  98%\n  |                                                                            \n  |===================================================================== |  99%\n  |                                                                            \n  |======================================================================|  99%\n  |                                                                            \n  |======================================================================| 100%\n\nmass_pop_orig\n\nSimple feature collection with 14 features and 7 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -73.50814 ymin: 41.23796 xmax: -69.92839 ymax: 42.88659\nGeodetic CRS:  NAD83\nFirst 10 features:\n   GEOID                            NAME   variable estimate moe\n1  25009     Essex County, Massachusetts B01003_001   807258  NA\n2  25005   Bristol County, Massachusetts B01003_001   578436  NA\n3  25021   Norfolk County, Massachusetts B01003_001   724540  NA\n4  25007     Dukes County, Massachusetts B01003_001    20751  NA\n5  25017 Middlesex County, Massachusetts B01003_001  1622896  NA\n6  25023  Plymouth County, Massachusetts B01003_001   531889  NA\n7  25011  Franklin County, Massachusetts B01003_001    70922  NA\n8  25015 Hampshire County, Massachusetts B01003_001   156595  NA\n9  25025   Suffolk County, Massachusetts B01003_001   782172  NA\n10 25013   Hampden County, Massachusetts B01003_001   462853  NA\n                         geometry       lng      lat\n1  MULTIPOLYGON (((-70.58029 4... -70.95243 42.67323\n2  MULTIPOLYGON (((-70.83573 4... -71.11445 41.79724\n3  MULTIPOLYGON (((-70.84466 4... -71.21179 42.16033\n4  MULTIPOLYGON (((-70.8071 41... -70.64999 41.39608\n5  MULTIPOLYGON (((-71.89877 4... -71.39180 42.48557\n6  MULTIPOLYGON (((-70.88335 4... -70.81147 41.95109\n7  MULTIPOLYGON (((-73.02301 4... -72.59183 42.58309\n8  MULTIPOLYGON (((-73.06577 4... -72.66377 42.34016\n9  MULTIPOLYGON (((-70.93091 4... -71.07348 42.33286\n10 MULTIPOLYGON (((-73.07484 4... -72.63158 42.13509\n\n# Unfortunately the original NAME variable above is very long and redundant.\n# Create a new data frame with the just the county name using the separate()\n# function from the tidyr package. \nmass_pop &lt;- mass_pop_orig |&gt; \n  tidyr::separate(NAME, c(\"County\", \"State\"), sep = \", \") |&gt; \n  tidyr::separate(County, c(\"County\", \"Fluff\"), sep = \" \") \n\n# Plot gradient choropleth map based on numerical variable estimate\nggplot() +\n  geom_sf(data = mass_pop, aes(fill = estimate)) +\n  geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +\n  labs(fill = \"Population\\nEstimate\")\n\n\n\n\n\n\n\n# What if instead we want a bin based choropleth map. Use the cut_number()\n# function to convert the numerical variable estimate \n# to a categorical variable with 3 levels!\nmass_pop &lt;- mass_pop |&gt;\n  mutate(estimate_discrete = cut_number(estimate, 3))\nmass_pop\n\nSimple feature collection with 14 features and 10 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -73.50814 ymin: 41.23796 xmax: -69.92839 ymax: 42.88659\nGeodetic CRS:  NAD83\nFirst 10 features:\n   GEOID    County  Fluff         State   variable estimate moe       lng\n1  25009     Essex County Massachusetts B01003_001   807258  NA -70.95243\n2  25005   Bristol County Massachusetts B01003_001   578436  NA -71.11445\n3  25021   Norfolk County Massachusetts B01003_001   724540  NA -71.21179\n4  25007     Dukes County Massachusetts B01003_001    20751  NA -70.64999\n5  25017 Middlesex County Massachusetts B01003_001  1622896  NA -71.39180\n6  25023  Plymouth County Massachusetts B01003_001   531889  NA -70.81147\n7  25011  Franklin County Massachusetts B01003_001    70922  NA -72.59183\n8  25015 Hampshire County Massachusetts B01003_001   156595  NA -72.66377\n9  25025   Suffolk County Massachusetts B01003_001   782172  NA -71.07348\n10 25013   Hampden County Massachusetts B01003_001   462853  NA -72.63158\n        lat                       geometry   estimate_discrete\n1  42.67323 MULTIPOLYGON (((-70.58029 4... (6.76e+05,1.62e+06]\n2  41.79724 MULTIPOLYGON (((-70.83573 4... (1.81e+05,6.76e+05]\n3  42.16033 MULTIPOLYGON (((-70.84466 4... (6.76e+05,1.62e+06]\n4  41.39608 MULTIPOLYGON (((-70.8071 41... [1.43e+04,1.81e+05]\n5  42.48557 MULTIPOLYGON (((-71.89877 4... (6.76e+05,1.62e+06]\n6  41.95109 MULTIPOLYGON (((-70.88335 4... (1.81e+05,6.76e+05]\n7  42.58309 MULTIPOLYGON (((-73.02301 4... [1.43e+04,1.81e+05]\n8  42.34016 MULTIPOLYGON (((-73.06577 4... [1.43e+04,1.81e+05]\n9  42.33286 MULTIPOLYGON (((-70.93091 4... (6.76e+05,1.62e+06]\n10 42.13509 MULTIPOLYGON (((-73.07484 4... (1.81e+05,6.76e+05]\n\n# Plot!\nggplot() +\n  geom_sf(data = mass_pop, aes(fill = estimate_discrete)) +\n  geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +\n  labs(fill = \"Population\\nEstimate\")\n\n\n\n\n\n\n\n\nCheck out this site for more on tidycensus\nSpecifically the load_variables function.\n\nv20 &lt;- load_variables(2020, \"acs5\", cache = TRUE)"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#colors",
-    "href": "course-materials/lectures/11_color_theory.html#colors",
-    "title": "Color Theory",
-    "section": "Colors",
-    "text": "Colors\nBig Idea: Color Choices Matter\nGeneral Color Palettes:\n\nSequential Palettes\nDiverging Palettes\nQualitative Palettes"
+    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise",
+    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise",
+    "title": "In-class Exercises: Mapping",
+    "section": "Exercise",
+    "text": "Exercise\nUse the tidycensus package to conduct a spatial analysis of the American Community Survey data it contains for Massachusetts. Answer the question: Which counties in Massachusetts have the highest proportion of retirees (Use age &gt; 65 as a proxyt for retirement)?\nInstructions for using the tidycensus package\n\nlibrary(tidyverse)\nlibrary(tidycensus)\n\n# Write your code below\nmass_prop_retirees &lt;- \n  tidycensus::get_acs(\n    geography = \"county\", \n    variables = c(population = \"B01003_001\",age_1=\"B01001_044\", age_2='B01001_045', age_3='B01001_046',age_4='B01001_047', age_5 = 'B01001_048', age_6 = 'B01001_044'),\n    state = \"MA\",\n    geometry = FALSE\n  ) |&gt;\n  # Add centroids to each region using purrr package\n tidyr::separate(NAME, c(\"County\", \"State\"), sep = \", \") |&gt; \n tidyr::separate(County, c(\"County\", \"Fluff\"), sep = \" \") \n\nmass_prop_retirees &lt;- mass_prop_retirees |&gt; \n  select(County,variable,estimate)|&gt;\n  pivot_wider(names_from = variable, values_from = estimate) |&gt;\n  mutate(proportion = (age_1+age_2+age_3+age_4+age_5)/population)\n\n# Do a left join, a right join will lose the multipolygon-ness\nmass_prop &lt;- mass_pop |&gt;\n  left_join(mass_prop_retirees, by = \"County\")\n\nggplot() +\n  geom_sf(data = mass_prop, aes(fill = proportion)) +\n  scale_fill_distiller(direction = 1)\n\n\n\n\n\n\n\nmass_pop_orig\n\nSimple feature collection with 14 features and 7 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -73.50814 ymin: 41.23796 xmax: -69.92839 ymax: 42.88659\nGeodetic CRS:  NAD83\nFirst 10 features:\n   GEOID                            NAME   variable estimate moe\n1  25009     Essex County, Massachusetts B01003_001   807258  NA\n2  25005   Bristol County, Massachusetts B01003_001   578436  NA\n3  25021   Norfolk County, Massachusetts B01003_001   724540  NA\n4  25007     Dukes County, Massachusetts B01003_001    20751  NA\n5  25017 Middlesex County, Massachusetts B01003_001  1622896  NA\n6  25023  Plymouth County, Massachusetts B01003_001   531889  NA\n7  25011  Franklin County, Massachusetts B01003_001    70922  NA\n8  25015 Hampshire County, Massachusetts B01003_001   156595  NA\n9  25025   Suffolk County, Massachusetts B01003_001   782172  NA\n10 25013   Hampden County, Massachusetts B01003_001   462853  NA\n                         geometry       lng      lat\n1  MULTIPOLYGON (((-70.58029 4... -70.95243 42.67323\n2  MULTIPOLYGON (((-70.83573 4... -71.11445 41.79724\n3  MULTIPOLYGON (((-70.84466 4... -71.21179 42.16033\n4  MULTIPOLYGON (((-70.8071 41... -70.64999 41.39608\n5  MULTIPOLYGON (((-71.89877 4... -71.39180 42.48557\n6  MULTIPOLYGON (((-70.88335 4... -70.81147 41.95109\n7  MULTIPOLYGON (((-73.02301 4... -72.59183 42.58309\n8  MULTIPOLYGON (((-73.06577 4... -72.66377 42.34016\n9  MULTIPOLYGON (((-70.93091 4... -71.07348 42.33286\n10 MULTIPOLYGON (((-73.07484 4... -72.63158 42.13509"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#r-color-brewer-palletts",
-    "href": "course-materials/lectures/11_color_theory.html#r-color-brewer-palletts",
-    "title": "Color Theory",
-    "section": "R Color Brewer palletts",
-    "text": "R Color Brewer palletts"
+    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise-1",
+    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise-1",
+    "title": "In-class Exercises: Mapping",
+    "section": "Exercise",
+    "text": "Exercise\nDraw an interactive map of a previous school or place you went.\n\n# Write your code below"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#the-two-functions",
-    "href": "course-materials/lectures/11_color_theory.html#the-two-functions",
-    "title": "Color Theory",
-    "section": "The two functions",
-    "text": "The two functions\nThe two functions we’ll use for colors are\nscale_*_brewer() scale_*_distiller()\nThe * matches the aestheic we are trying to color.\n\nscale_fill_brewer()     #&lt;- filling discrete\n\nscale_fill_distiller()  #&lt;- filling continuous\n\nscale_color_brewer()\n\nscale_color_distiller()"
+    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#color-in-leaflet",
+    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#color-in-leaflet",
+    "title": "In-class Exercises: Mapping",
+    "section": "Color in leaflet",
+    "text": "Color in leaflet\n\nwetlands &lt;- macleish_layers |&gt;\n  pluck(\"wetlands\")\n\nleaflet() |&gt;\n  addTiles()|&gt;\n  addPolygons(data = wetlands, \n              color = ~SHAPE_LEN, \n              popup = ~IT_VALDESC)\n\n\n\n\nwetland_pal &lt;- colorNumeric(\n  palette = \"viridis\", \n  domain = wetlands |&gt;\n    pull(SHAPE_LEN)\n)\n\nleaflet() |&gt;\n  addTiles() |&gt;\n  addPolygons(data = wetlands, \n              color = ~wetland_pal(SHAPE_LEN), \n              fillOpacity = 0.8, weight = 0.1, \n              popup = ~IT_VALDESC) |&gt;\n  addLegend(position = \"bottomleft\", \n            pal = wetland_pal, \n            values = wetlands$SHAPE_LEN,\n            title = \"Wetland Area\")"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#base-graph",
-    "href": "course-materials/lectures/11_color_theory.html#base-graph",
-    "title": "Color Theory",
-    "section": "Base Graph",
-    "text": "Base Graph\nBelow is a scatter plot of body_mass_g vs bill_depth_mm.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(x=body_mass_g,bill_depth_mm))"
+    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise-2",
+    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise-2",
+    "title": "In-class Exercises: Mapping",
+    "section": "Exercise",
+    "text": "Exercise\nDraw an interactive map adding circles.\n\n# Write your code below"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#sequential-1",
-    "href": "course-materials/lectures/11_color_theory.html#sequential-1",
-    "title": "Color Theory",
-    "section": "Sequential 1",
-    "text": "Sequential 1\nI’d like to show the flipper length as a third variable. flipper_length_mm is a continuous and numeric variable. We can color by it.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))"
+    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#challenge",
+    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#challenge",
+    "title": "In-class Exercises: Mapping",
+    "section": "Challenge!!",
+    "text": "Challenge!!\n\nUse the above data to create an interactive map\nConvert the numerical variable estimate to a categorical variable with 3 levels such as Low, Medium, High\nUse the factor() function to order 3 levels as Low, Medium, High, otherwise the legend order will be in alphabetical order\nCreate your own color palette to match the color order (e.g., from light green to dark green) with your legend order\n\n\n# Write your code below"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#sequential-2",
-    "href": "course-materials/lectures/11_color_theory.html#sequential-2",
-    "title": "Color Theory",
-    "section": "Sequential 2",
-    "text": "Sequential 2\nThe lighter color should indicate less.\nTo reverse it I’ll add scale_color_distiller(direction = 1) because we’re working with a continuous variable and we’re coloring.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))+\n  scale_color_distiller(direction = 1)"
+    "objectID": "course-materials/lectures/21_pivots.html#tidydata",
+    "href": "course-materials/lectures/21_pivots.html#tidydata",
+    "title": "Tidy data and pivots",
+    "section": "Tidydata",
+    "text": "Tidydata"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#sequential-3",
-    "href": "course-materials/lectures/11_color_theory.html#sequential-3",
-    "title": "Color Theory",
-    "section": "Sequential 3",
-    "text": "Sequential 3\nUsing the default color isn’t great. Let’s choose a premade brewer palette.\nTo reverse it I’ll add scale_color_distiller(direction = 1) because we’re working with a continuous variable and we’re coloring.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))+\n  scale_color_distiller(palette = \"Greys\",  direction = 1)"
+    "objectID": "course-materials/lectures/21_pivots.html#first-job",
+    "href": "course-materials/lectures/21_pivots.html#first-job",
+    "title": "Tidy data and pivots",
+    "section": "First Job",
+    "text": "First Job\nYou need to get data into machine readable format. What do you do?\npivot_longer()\npivot_wider()\nWhat do these functions do?"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#sequential",
-    "href": "course-materials/lectures/11_color_theory.html#sequential",
-    "title": "Color Theory",
-    "section": "Sequential",
-    "text": "Sequential\nNotes:\n\nUsed for continuous numeric variables\nDarker should be used to show more"
+    "objectID": "course-materials/lectures/21_pivots.html#some-built-in-tables",
+    "href": "course-materials/lectures/21_pivots.html#some-built-in-tables",
+    "title": "Tidy data and pivots",
+    "section": "Some built in tables",
+    "text": "Some built in tables"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#diverging-palettes",
-    "href": "course-materials/lectures/11_color_theory.html#diverging-palettes",
-    "title": "Color Theory",
-    "section": "Diverging Palettes",
-    "text": "Diverging Palettes\nIf we want to use two base colors, one to show high values and the other to show low. We can use a diverging palette.\nHere the brown is long flipper and dark blue is short flipper.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))+\n  scale_color_distiller(palette = \"BrBG\")"
+    "objectID": "course-materials/lectures/21_pivots.html#pivot_longer",
+    "href": "course-materials/lectures/21_pivots.html#pivot_longer",
+    "title": "Tidy data and pivots",
+    "section": "pivot_longer()",
+    "text": "pivot_longer()\nThis data is not tidy how can we make it longer for computers?\n\n\n# A tibble: 3 × 5\n  Country        `1979` `1989` `1999` `2009`\n  &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 France        NA          NA    0.3    0.4\n2 South Africa  NA          NA   14.8   17.2\n3 United States  0.0318     NA    0.5    0.6\n\n\nWrite down how you think we could do that with pivot_longer()"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#diverging-palettes-2",
-    "href": "course-materials/lectures/11_color_theory.html#diverging-palettes-2",
-    "title": "Color Theory",
-    "section": "Diverging Palettes 2",
-    "text": "Diverging Palettes 2\nIt often makes more sense to use a diverging palette with the middle being zero.\nHere I do a bit of wrangling to add a new column, which captures the difference from the average height.\n\n\nCode\nave_mass = mean(penguins$body_mass_g,na.rm = TRUE)\n\npenguins |&gt;\n  mutate(diff_mass_from_avg =body_mass_g - ave_mass)|&gt;\n  ggplot()+\n  geom_point(aes(\n    x = flipper_length_mm, \n    y = bill_depth_mm,\n    color = diff_mass_from_avg))+\n  scale_color_distiller(palette = \"BrBG\")"
+    "objectID": "course-materials/lectures/21_pivots.html#pivot_wider",
+    "href": "course-materials/lectures/21_pivots.html#pivot_wider",
+    "title": "Tidy data and pivots",
+    "section": "pivot_wider()",
+    "text": "pivot_wider()\nThis data is tidy how could we make it wider for humans?\n\n\n# A tibble: 6 × 3\n# Groups:   name [3]\n  name   sex    total\n  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt;\n1 Leslie F     266474\n2 Leslie M     112689\n3 Robin  F     289395\n4 Robin  M      44616\n5 Sue    F     144465\n6 Sue    M        519\n\n\nWrite down how you think we could do that with pivot_wider()"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#diverging-palettes-3",
-    "href": "course-materials/lectures/11_color_theory.html#diverging-palettes-3",
-    "title": "Color Theory",
-    "section": "Diverging Palettes 3",
-    "text": "Diverging Palettes 3\nI’m adding a circle around each point so they are easier to see.\n\n\nCode\nave_mass = mean(penguins$body_mass_g,na.rm = TRUE)\n\npenguins |&gt;\n  mutate(diff_mass_from_avg =body_mass_g - ave_mass)|&gt;\n  ggplot()+\n  geom_point(aes(\n    x = flipper_length_mm, \n    y = bill_depth_mm,\n    fill = diff_mass_from_avg,\n    ),\n    shape = 21,   # &lt;- this is a circle that allows outlining\n    color = \"black\",  # &lt;- outline color\n    stroke = 0.3,    # &lt;- outline thickness\n    size = 3)+\n  scale_fill_distiller(palette = \"BrBG\")"
+    "objectID": "course-materials/lectures/21_pivots.html#pivot_longer-1",
+    "href": "course-materials/lectures/21_pivots.html#pivot_longer-1",
+    "title": "Tidy data and pivots",
+    "section": "pivot_longer()",
+    "text": "pivot_longer()\nLet’s try our code on the examples above. Pivot this longer.\n\nlibrary(tidyverse)\nlibrary(mdsr)\nlibrary(googlesheets4)\ngs4_deauth()\nhiv_key &lt;- \"1kWH_xdJDM4SMfT_Kzpkk-1yuxWChfurZuWYjfmv51EA\"\nhiv &lt;- read_sheet(hiv_key) |&gt;\n  rename(Country = 1) |&gt;\n  filter(\n    Country %in% c(\"United States\", \"France\", \"South Africa\")\n  ) |&gt;\n  select(Country, `1979`, `1989`, `1999`, `2009`) |&gt;\n  unnest(cols = c(`2009`)) |&gt;\n  mutate(across(matches(\"[0-9]\"), as.double))\nhiv\n\n# A tibble: 3 × 5\n  Country        `1979` `1989` `1999` `2009`\n  &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 France        NA          NA    0.3    0.4\n2 South Africa  NA          NA   14.8   17.2\n3 United States  0.0318     NA    0.5    0.6"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#diverging-palettes-4",
-    "href": "course-materials/lectures/11_color_theory.html#diverging-palettes-4",
-    "title": "Color Theory",
-    "section": "Diverging Palettes 4",
-    "text": "Diverging Palettes 4\nMissing Data should be clearly represented with grey or a like color.\n\n\nCode\nlibrary(tidycensus)\n\n#Make Mass Median Income\nmass_med_income &lt;- \n  get_acs(\n    geography = \"county\", \n    variables = c(med_household_income = \"B19013_001\"),\n    state = \"MA\",\n    # We'll need to pivot wider, but that doesn't work with simple features. \n    geometry = TRUE\n  )|&gt;\n  # Add centroids to each region using purrr package\n tidyr::separate(NAME, c(\"County\", \"State\"), sep = \", \") |&gt; \n tidyr::separate(County, c(\"County\", \"Fluff\"), sep = \" \") |&gt;\n  mutate(med_household_income = estimate) |&gt;\n  mutate(med_income_discrete = cut_interval(\n    med_household_income, \n    length = 15000, \n    labels = c(\"60-75\", \"75-90\",\"90-105\", \"105-120\",\"120-135\")\n    ))\n\n\n\n\nCode\nmass_med_income$med_income_discrete[8] = NA\n\nggplot() +\n  geom_sf(data = mass_med_income, aes(fill = med_income_discrete)) +\n # geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +\n  labs(fill = \"Median Income\\n thousands dollars\",\n       title = \"Massachusetts Med Income 2020 \",\n       #subtitle = \"Median income in 2020 was $91,842\",\n       subtitle = \"Hampshire county data is missing\",\n       caption = \"deptofnumbers.com\")+\n  scale_fill_brewer(palette = \"PuOr\",na.value =\"grey\" )+\n  theme_classic()+\n  theme_void()"
+    "objectID": "course-materials/lectures/21_pivots.html#pivot_wider-1",
+    "href": "course-materials/lectures/21_pivots.html#pivot_wider-1",
+    "title": "Tidy data and pivots",
+    "section": "pivot_wider()",
+    "text": "pivot_wider()\n\nlibrary(babynames)\nbabynames |&gt;\n     filter(name %in% c(\"Sue\", \"Robin\", \"Leslie\")) |&gt;\n     group_by(name, sex) |&gt;\n     summarize(total = sum(n))\n\n# A tibble: 6 × 3\n# Groups:   name [3]\n  name   sex    total\n  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt;\n1 Leslie F     266474\n2 Leslie M     112689\n3 Robin  F     289395\n4 Robin  M      44616\n5 Sue    F     144465\n6 Sue    M        519"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#qualitative-data",
-    "href": "course-materials/lectures/11_color_theory.html#qualitative-data",
-    "title": "Color Theory",
-    "section": "Qualitative Data",
-    "text": "Qualitative Data\nIf the variable is categorical use a qualitative palette.\nLimit yourself to six categories.\n\n\nCode\nfun_facts &lt;- tribble(\n  ~fun_facts,\n  \"County of Mass Bay Colony\",\n  \"County of Plymouth Colony\",\n  \"Newest\",\n  \"Island\",\n  \"County of Mass Bay Colony\",\n  \"County of Plymouth Colony\",\n  \"Newest\",\n  \"I live here\",\n  \"County of Mass Bay Colony\",\n  \"Newest\",\n  \"County of Plymouth Colony\",\n  \"Boarders Three States\",\n  \"Boarders Three States\",\n  \"Island\"\n)\n\nggplot() +\n  geom_sf(data = bind_cols(mass_med_income, fun_facts), aes(fill = fun_facts)) +\n  labs(fill = \"\",\n       title = \"Massachusetts Med Income 2020 \",\n       subtitle = \"Fun Facts about MA Counties\",\n       caption = \"source: https://en.wikipedia.org/wiki/\\nList_of_counties_in_Massachusetts\")+\n  scale_fill_brewer(palette = \"Set2\",na.value =\"grey\" )+\n  theme_classic()+\n  theme_void()"
+    "objectID": "course-materials/lectures/21_pivots.html#not-tidy---tidy",
+    "href": "course-materials/lectures/21_pivots.html#not-tidy---tidy",
+    "title": "Tidy data and pivots",
+    "section": "Not Tidy -> Tidy",
+    "text": "Not Tidy -&gt; Tidy\nThis table is not tidy can you make it so?\n\n\n# A tibble: 3 × 3\n  country         `1999`     `2000`\n  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;\n1 Afghanistan   19987071   20595360\n2 Brazil       172006362  174504898\n3 China       1272915272 1280428583"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#how-do-we-do-this",
-    "href": "course-materials/lectures/11_color_theory.html#how-do-we-do-this",
-    "title": "Color Theory",
-    "section": "How do we do this?",
-    "text": "How do we do this?\nCategorical/discrete variable\nadd scale_*_brewer() to your plot\nNumeric/continuous Variable\nadd scale_*_distiller() to your plot"
+    "objectID": "course-materials/lectures/21_pivots.html#more-practice",
+    "href": "course-materials/lectures/21_pivots.html#more-practice",
+    "title": "Tidy data and pivots",
+    "section": "More practice",
+    "text": "More practice\nThis dataframe is tidy but can you make it easier for a human to read?\n\n\n# A tibble: 19 × 12\n   fish  Release I80_1 Lisbon  Rstr Base_TD   BCE   BCW  BCE2  BCW2   MAE   MAW\n   &lt;fct&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;\n 1 4842        1     1      1     1       1     1     1     1     1     1     1\n 2 4843        1     1      1     1       1     1     1     1     1     1     1\n 3 4844        1     1      1     1       1     1     1     1     1     1     1\n 4 4845        1     1      1     1       1    NA    NA    NA    NA    NA    NA\n 5 4847        1     1      1    NA      NA    NA    NA    NA    NA    NA    NA\n 6 4848        1     1      1     1      NA    NA    NA    NA    NA    NA    NA\n 7 4849        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA\n 8 4850        1     1     NA     1       1     1     1    NA    NA    NA    NA\n 9 4851        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA\n10 4854        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA\n11 4855        1     1      1     1       1    NA    NA    NA    NA    NA    NA\n12 4857        1     1      1     1       1     1     1     1     1    NA    NA\n13 4858        1     1      1     1       1     1     1     1     1     1     1\n14 4859        1     1      1     1       1    NA    NA    NA    NA    NA    NA\n15 4861        1     1      1     1       1     1     1     1     1     1     1\n16 4862        1     1      1     1       1     1     1     1     1    NA    NA\n17 4863        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA\n18 4864        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA\n19 4865        1     1      1    NA      NA    NA    NA    NA    NA    NA    NA"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#too-many-categories-and-rainbows",
-    "href": "course-materials/lectures/11_color_theory.html#too-many-categories-and-rainbows",
-    "title": "Color Theory",
-    "section": "Too many categories and Rainbows!",
-    "text": "Too many categories and Rainbows!\nThis is the default option in R\n\n\nCode\nggplot() +\n  geom_sf(data = bind_cols(mass_med_income, fun_facts), aes(fill = County )) +\n # geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +\n  labs(fill = \"County Names\",\n       title = \"Counties in MA\")+\n  theme_classic()+\n  theme(axis.title.x=element_blank(),\n        axis.text.x=element_blank(),\n        axis.ticks.x=element_blank(),\n        axis.title.y=element_blank(),\n        axis.text.y=element_blank(),\n        axis.ticks.y=element_blank(),\n        axis.line = element_blank()\n        )"
+    "objectID": "course-materials/lectures/21_pivots.html#consider-some-tables",
+    "href": "course-materials/lectures/21_pivots.html#consider-some-tables",
+    "title": "Tidy data and pivots",
+    "section": "consider some tables",
+    "text": "consider some tables\nAre these tables tidy, do we need to pivot wider or longer?\n\ntable1,\ntable2,\ntable3,\ntable4a,\ntable4b,\ntable5\nProblem 5 from chapter 6"
   },
   {
-    "objectID": "course-materials/lectures/11_color_theory.html#confusing-fill-and-color",
-    "href": "course-materials/lectures/11_color_theory.html#confusing-fill-and-color",
-    "title": "Color Theory",
-    "section": "Confusing fill and color",
-    "text": "Confusing fill and color\nDon’t confuse fill and color. If aes(fill) then you must use scale_fill_brewer() not scale_color_brewer(), and vice versa.\n\nggplot() +\n  geom_sf(data = mass_med_income, aes(fill = med_income_discrete)) +\n  labs(fill = \"Median Income\\n thousands dollars\",\n       title = \"Tried to color the fill aes()\",\n       subtitle = \"Got the default colors\",\n       caption = \"deptofnumbers.com\")+\n  scale_color_brewer(palette = \"PuOr\",na.value =\"grey\" )+\n  theme_classic()+\n  theme_void()"
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#introduction-to-programming-language-for-data-science-r-and-computing-environment-rstudio",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#introduction-to-programming-language-for-data-science-r-and-computing-environment-rstudio",
+    "title": "Course Overview",
+    "section": "Introduction to Programming Language for Data Science (R) and Computing Environment (RStudio)",
+    "text": "Introduction to Programming Language for Data Science (R) and Computing Environment (RStudio)\n\nTake a look at R Studio together\nShort History of R"
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#why-r",
-    "href": "course-materials/lectures/2_Brief-R-history.html#why-r",
-    "title": "A Short History of R",
-    "section": "Why R?",
-    "text": "Why R?\nThe top three languages in Data Science right now are:\n\nPython (pandas, numpy, pytorch)\nR (tidyverse)\nSQL\nProbably in that order.\n\nHere’s the TIOBE rank of Computer languages, as of Jan 2026 R jumped from the 18th to 10th. Probably reflecting the drive toward AI."
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-science-life-cycle",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-science-life-cycle",
+    "title": "Course Overview",
+    "section": "Data Science Life Cycle",
+    "text": "Data Science Life Cycle\nDS life cycle"
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#interchangeable",
-    "href": "course-materials/lectures/2_Brief-R-history.html#interchangeable",
-    "title": "A Short History of R",
-    "section": "Interchangeable",
-    "text": "Interchangeable\nLearning how to work with data is similar from on language to another.\nR, I think, is the most convenient way to get students working with Data.\nFor vizualization: the ggplot ecosystem is nicer than pandas.\nThe RStudio and R work very well together."
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#grammar-of-graphics",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#grammar-of-graphics",
+    "title": "Course Overview",
+    "section": "Grammar of Graphics",
+    "text": "Grammar of Graphics\nHadley Wickham"
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#before-r-there-was-s",
-    "href": "course-materials/lectures/2_Brief-R-history.html#before-r-there-was-s",
-    "title": "A Short History of R",
-    "section": "Before R there was S",
-    "text": "Before R there was S\n“S is a language that was developed [in 1976] by John Chambers and others at the old Bell Telephone Laboratories”"
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-collection",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-collection",
+    "title": "Course Overview",
+    "section": "Data Collection",
+    "text": "Data Collection\nCollect student data here\nhttps://forms.gle/uRxF8UTkgp45ofY46\nYou must be signed into your HCC email account to fill out form."
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#s-got-bought-and-sold",
-    "href": "course-materials/lectures/2_Brief-R-history.html#s-got-bought-and-sold",
-    "title": "A Short History of R",
-    "section": "S got bought and sold",
-    "text": "S got bought and sold\nTIBCO is the owner of S\nHere’s a book on S"
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#web-scraping-and-importing-data-and-a-tiny-bit-of-cleaning",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#web-scraping-and-importing-data-and-a-tiny-bit-of-cleaning",
+    "title": "Course Overview",
+    "section": "Web Scraping and Importing Data ( and a tiny bit of cleaning)",
+    "text": "Web Scraping and Importing Data ( and a tiny bit of cleaning)\n\nlibrary(googlesheets4)\nlibrary(janitor)\n\nstudent_data &lt;- read_sheet('https://docs.google.com/spreadsheets/d/1aNrNX5xWkrtuJHc-bsCC7e07KbnRbVIxaWdbblOCyxA/edit?usp=sharing')\n\nstudent_data &lt;- clean_names(student_data)"
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#r-is-released-for-free",
-    "href": "course-materials/lectures/2_Brief-R-history.html#r-is-released-for-free",
-    "title": "A Short History of R",
-    "section": "1996-2000 R is released for free",
-    "text": "1996-2000 R is released for free\nRoss Ihaka and Robert Gentleman of the university of Auckland Developed it."
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-visualization",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-visualization",
+    "title": "Course Overview",
+    "section": "Data Visualization",
+    "text": "Data Visualization\n\n# make simple plot of student data. \nlibrary(tidyverse)\n\nstudent_data |&gt;\n  ggplot(mapping = aes(x = what_is_your_height_in_inches) )+\n  geom_histogram()+\n  labs(\n    title = \"Students' height in inches\"\n  )"
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#ross-ihaka",
-    "href": "course-materials/lectures/2_Brief-R-history.html#ross-ihaka",
-    "title": "A Short History of R",
-    "section": "Ross Ihaka",
-    "text": "Ross Ihaka"
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-wrangling",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-wrangling",
+    "title": "Course Overview",
+    "section": "Data Wrangling",
+    "text": "Data Wrangling\n\n# wrangle student data. edit plot\nstudent_data |&gt;\n  \n  select(do_you_have_experience_with_the_statistical_computer_language_r) |&gt;\n  \n  rename(r_experiance = do_you_have_experience_with_the_statistical_computer_language_r )|&gt;\n  \n  group_by(r_experiance)|&gt;\n  \n  summarize(\n    \n    sum()/n()\n    \n  )\n\n# A tibble: 3 × 2\n  r_experiance                                           `sum()/n()`\n  &lt;chr&gt;                                                        &lt;dbl&gt;\n1 No                                                               0\n2 No but I have experience with other computer software.           0\n3 Yes                                                              0"
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#robert-gentleman",
-    "href": "course-materials/lectures/2_Brief-R-history.html#robert-gentleman",
-    "title": "A Short History of R",
-    "section": "Robert Gentleman",
-    "text": "Robert Gentleman"
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-management",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-management",
+    "title": "Course Overview",
+    "section": "Data Management",
+    "text": "Data Management\n-   Security\n-   Keeping yourself organized!\n-   How Data is housed"
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#version-names",
-    "href": "course-materials/lectures/2_Brief-R-history.html#version-names",
-    "title": "A Short History of R",
-    "section": "version names",
-    "text": "version names\nThe versions of R are named after Peanuts comics or cartoons.\nPile of Leaves\nWhy? 4.4.2 release\nOther versions"
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-ethics",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-ethics",
+    "title": "Course Overview",
+    "section": "Data Ethics",
+    "text": "Data Ethics\nHow we collect and use data without doing harm."
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#cran",
-    "href": "course-materials/lectures/2_Brief-R-history.html#cran",
-    "title": "A Short History of R",
-    "section": "CRAN",
-    "text": "CRAN\nComprehensive R Archive Network\nThey manage all R updates and R packages. There are currently 19897 packages.\nThey put on the UseR! conference\nThere’s an R magazine\nThis is the CRAN team"
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#introduction-to-database-querying-with-sql",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#introduction-to-database-querying-with-sql",
+    "title": "Course Overview",
+    "section": "Introduction to Database Querying with SQL",
+    "text": "Introduction to Database Querying with SQL\nWrangle some data with the classic SQL.\nSimple Query?"
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#the-tidyverse",
-    "href": "course-materials/lectures/2_Brief-R-history.html#the-tidyverse",
-    "title": "A Short History of R",
-    "section": "The tidyverse",
-    "text": "The tidyverse\nHadley Wickham and others made it."
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#further-topics-based-on-time-and-student-interest-may-include",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#further-topics-based-on-time-and-student-interest-may-include",
+    "title": "Course Overview",
+    "section": "Further Topics based on time and student interest may include:",
+    "text": "Further Topics based on time and student interest may include:\n-   Dynamic and Customized Data Graphics\n\n-   Geospatial Data and Maps\n\n-   Learning with AI"
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#who-makes-rstudio",
-    "href": "course-materials/lectures/2_Brief-R-history.html#who-makes-rstudio",
-    "title": "A Short History of R",
-    "section": "Who makes RStudio?",
-    "text": "Who makes RStudio?\n\nStarted in 2009 as RStudio\nThe tidyverse comes out in 2016\nRenamed Posit in 2022.\nOffers Python, SQL, and other DS language Support"
+    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#optional-and-advnaced-topics",
+    "href": "course-materials/lectures/1_Overview_of_the_course.html#optional-and-advnaced-topics",
+    "title": "Course Overview",
+    "section": "Optional and Advnaced Topics:",
+    "text": "Optional and Advnaced Topics:\n-   Function writing and data masking in R\n\n-   Iteration"
   },
   {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#deep-learning-and-ai",
-    "href": "course-materials/lectures/2_Brief-R-history.html#deep-learning-and-ai",
-    "title": "A Short History of R",
-    "section": "Deep Learning and AI",
-    "text": "Deep Learning and AI\npytorch is becoming increasingly an increasingly popular method for deep learning in python.\nR has torch, which is an implementation of pytorch in R."
-  },
-  {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#the-future",
-    "href": "course-materials/lectures/2_Brief-R-history.html#the-future",
-    "title": "A Short History of R",
-    "section": "The future",
-    "text": "The future\nPosit has made a pivot toward integrating Python and Jupyter into their ecosystem with Quarto.\nQuarto is a document that works with Python, R, and other languges.\nPositron is an IDE independent of language forked from VS code."
-  },
-  {
-    "objectID": "course-materials/lectures/2_Brief-R-history.html#some-credits",
-    "href": "course-materials/lectures/2_Brief-R-history.html#some-credits",
-    "title": "A Short History of R",
-    "section": "Some Credits",
-    "text": "Some Credits\n\nPhoto of John Chambers taken from Stanford’s website.\nPhoto of Ross Ihaka - https://www.auckland.ac.nz/content/auckland/en/science/about-the-faculty/department-of-statistics/ihaka-lecture-series/jcr:content/leftpar/imagecomponent/image.img.1024.medium.jpg/1561079330278.jpg\nPhoto by Robert Gentalman - https://calendar.gatech.edu/sites/default/files/styles/large/public/hg_media/2024-25/Robert_Gentleman.jpg.webp?itok=0aDlOIOK\nPhoto by Hadley Wickham - Private correspondence, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=46810731\nMost of the details of this short history came from chapter 2 of Roger Peng’s R Programming for Data Science.\nhttps://bookdown.org/rdpeng/rprogdatascience/history-and-overview-of-r.html"
-  },
-  {
-    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#dplyr-lives-in-the-tidyverse",
-    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#dplyr-lives-in-the-tidyverse",
-    "title": "The Verbs",
-    "section": "dplyr lives in the tidyverse",
-    "text": "dplyr lives in the tidyverse"
-  },
-  {
-    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#sds-100-lab-4",
-    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#sds-100-lab-4",
-    "title": "The Verbs",
-    "section": "SDS 100 Lab 4",
-    "text": "SDS 100 Lab 4\n\n\nYou’ve learned about these verbs:\n\nselect()\n\nsubsets columns\n\nfilter()\n\nsubsets rows\n\nmutate()\n\ncreates new variables (or columns)\n\narrange() / arrange(desc())\n\n\nWe will also use:\n\ngroup_by()\n\nto group the data before summarizing\n\nsummarize()\n\nto summarize data\n\nrename()\n\nto rename columns"
-  },
-  {
-    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#recall-sql-queries",
-    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#recall-sql-queries",
-    "title": "The Verbs",
-    "section": "Recall SQL Queries",
-    "text": "Recall SQL Queries\n\n\n\nSQL\ndplyr\n\n\n\n\nSELECT\nselect(), mutate(), summarise()\n\n\nFROM\nthe data frame. data=\n\n\nWHERE\nfilter()\n\n\nORDER BY\narrange()\n\n\nLIMIT\nslice_head()\n\n\nGROUP BY\ngroup_by"
-  },
-  {
-    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#the-idea",
-    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#the-idea",
-    "title": "The Verbs",
-    "section": "The idea",
-    "text": "The idea\nYou can get good at a few functions and do a lot.\nThe first argument is a data frame.\n\nits a special kind called a tibble.\n\nThe output of the wrangling functions is a data frame.\nWhen we wrangle we are not altering the original data.\n\nIt still exists.\nYou can start over."
-  },
-  {
-    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#what-is-a-tibble",
-    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#what-is-a-tibble",
-    "title": "The Verbs",
-    "section": "What is a tibble?",
-    "text": "What is a tibble?\n\n\n\n\n\nObject of class tbl\nIts different from a data frame."
-  },
-  {
-    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#group-by-example",
-    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#group-by-example",
-    "title": "The Verbs",
-    "section": "Group by example",
-    "text": "Group by example\nLive code with the mpg data frame.\nOpen R or Smith’s RStudio Server"
-  },
-  {
-    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#practice-wrangling",
-    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#practice-wrangling",
-    "title": "The Verbs",
-    "section": "Practice wrangling",
-    "text": "Practice wrangling\nIn class MDSR Problems 1 and 2\n\n # Copy this code into a chunk in R to make the Random_subset data frame from problem 1 and 2.\n # Use the verbs we've discussed to make the subsets from the text.\n Random_subset &lt;-  tibble::tribble(\n     ~year,~sex,   ~name,         ~n, ~prop,\n      2003, \"M\",     \"Bilal\",        146, 0.0000695,\n      1999, \"F\",     \"Terria\",        23, 0.0000118,\n      2010, \"F\",     \"Naziyah\",       45, 0.0000230,\n      1989, \"F\",     \"Shawana\",       41, 0.0000206,\n      1989, \"F\",     \"Jessi\",        210, 0.000105,\n      1928, \"M\",     \"Tillman\",       43, 0.0000377,\n      1981, \"F\",     \"Leslee\",        83, 0.0000464,\n      1981, \"F\",     \"Sherise\",       27, 0.0000151,\n      1920, \"F\",     \"Marquerite\",    26, 0.0000209,\n      1941, \"M\",     \"Lorraine\",      24, 0.0000191\n   )"
-  },
-  {
-    "objectID": "course-materials/lectures/18_ethic_part_3.html",
-    "href": "course-materials/lectures/18_ethic_part_3.html",
+    "objectID": "course-materials/lectures/17_ethic_part_3.html",
+    "href": "course-materials/lectures/17_ethic_part_3.html",
     "title": "CSI-MTH-190",
     "section": "",
     "text": "8.6"
   },
   {
-    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#data-ethics-examples",
-    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#data-ethics-examples",
-    "title": "Data Ethics Examples",
-    "section": "Data Ethics Examples",
-    "text": "Data Ethics Examples\nA reminder of the 5 ps\nHere’s the link.\nProvenance\nPurpose\nProtection\nPrivacy\nPreparation"
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#names-and-surveys",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#names-and-surveys",
+    "title": "No Computers Data Viz",
+    "section": "Names and Surveys",
+    "text": "Names and Surveys\nSurvey Questions"
   },
   {
-    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#lets-discuss-the-5-ps",
-    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#lets-discuss-the-5-ps",
-    "title": "Data Ethics Examples",
-    "section": "Let’s discuss the 5 ps",
-    "text": "Let’s discuss the 5 ps\nTwo examples involving competitions.\n\nWorld Cube Association\nBoston Marathon"
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#data-viz-no-computers",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#data-viz-no-computers",
+    "title": "No Computers Data Viz",
+    "section": "Data Viz no computers",
+    "text": "Data Viz no computers\nSheets data\n\nData Frame\nObservations\nTidy Data\nVariables\nVariable Types"
   },
   {
-    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#world-cube-association",
-    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#world-cube-association",
-    "title": "Data Ethics Examples",
-    "section": "World Cube Association",
-    "text": "World Cube Association\n3x3 solver Olaf Kuźmiński\nOlaf’s Page\nWhat are the five p s?\nScenerio: We write an article on Olaf’s Rubic’s cube career.\nWhat should we do to be as ethical as possible?\nWhen does it become unethical?"
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#part-1-hand-drawn-graphs-of-survey-questions.",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#part-1-hand-drawn-graphs-of-survey-questions.",
+    "title": "No Computers Data Viz",
+    "section": "Part 1: Hand drawn graphs of survey questions.",
+    "text": "Part 1: Hand drawn graphs of survey questions.\nDraw a graph of a variable. Do not write your name.\n\nIt does not need to be perfect.\nTry to make it correct.\n\nIt is fine if its not correct."
   },
   {
-    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#boston-marthon",
-    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#boston-marthon",
-    "title": "Data Ethics Examples",
-    "section": "Boston Marthon",
-    "text": "Boston Marthon\nResults for the Boston Marathon\nWhat are the five p s?\nScenerio: We write an article on Whit Blair winner of 2025 non-binary category.\nWhat should we do to be as ethical as possible?\nWhen does it become unethical?"
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#talk-to-someone-close-to-you.",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#talk-to-someone-close-to-you.",
+    "title": "No Computers Data Viz",
+    "section": "Talk to someone close to you.",
+    "text": "Talk to someone close to you.\nAnswer these questions:\n\nIs the graph’s message or story clear?\nWhat is missing from each graph?\nWhat is distracting from the graph?\nWhat does the graph do well?"
   },
   {
-    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#reminder-tidy-data",
-    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#reminder-tidy-data",
-    "title": "Data Ethics Examples",
-    "section": "Reminder: Tidy data",
-    "text": "Reminder: Tidy data\n\nColumns are variables.\nRows are observations.\nIndividual entries are called values.\nThe data we will deal with in this course is rectangular."
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#what-makes-a-clear-graph",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#what-makes-a-clear-graph",
+    "title": "No Computers Data Viz",
+    "section": "What makes a clear graph?",
+    "text": "What makes a clear graph?\nClass discussion."
   },
   {
-    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars",
-    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars",
-    "title": "Data Ethics Examples",
-    "section": "starwars",
-    "text": "starwars\nIs the data tidy?\nAre the variables clear?"
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#graph-context.",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#graph-context.",
+    "title": "No Computers Data Viz",
+    "section": "Graph Context.",
+    "text": "Graph Context.\n\nTitle\nWell labeled Axes\nAuthor’s Name\nData Source\nCaptions"
   },
   {
-    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#construction",
-    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#construction",
-    "title": "Data Ethics Examples",
-    "section": "construction",
-    "text": "construction\nIs the data tidy?\nAre the variables clear?"
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#baumers-thoughts",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#baumers-thoughts",
+    "title": "No Computers Data Viz",
+    "section": "Baumer’s Thoughts",
+    "text": "Baumer’s Thoughts\nSome of the following slides were borrowed by the text’s author."
   },
   {
-    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#population",
-    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#population",
-    "title": "Data Ethics Examples",
-    "section": "population",
-    "text": "population\nIs the data tidy?\nAre the variables clear?"
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#a-misleading-chart-from-apple",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#a-misleading-chart-from-apple",
+    "title": "No Computers Data Viz",
+    "section": "A misleading chart from Apple",
+    "text": "A misleading chart from Apple"
   },
   {
-    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#relig_income",
-    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#relig_income",
-    "title": "Data Ethics Examples",
-    "section": "relig_income",
-    "text": "relig_income\nIs the data tidy?\nAre the variables clear?"
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#pie-charts",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#pie-charts",
+    "title": "No Computers Data Viz",
+    "section": "Pie charts",
+    "text": "Pie charts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAre 6-cylinder engines more common among manuals or automatics?"
   },
   {
-    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#billboard",
-    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#billboard",
-    "title": "Data Ethics Examples",
-    "section": "billboard",
-    "text": "billboard\nIs the data tidy?\nAre the variables clear?"
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#unclear-scales",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#unclear-scales",
+    "title": "No Computers Data Viz",
+    "section": "Unclear Scales",
+    "text": "Unclear Scales\n\n\nOften not very clearly defined\nEasy to lie by manipulating scales\nWhy perspective?\nWidth of lines?"
   },
   {
-    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars-1",
-    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars-1",
-    "title": "Data Ethics Examples",
-    "section": "Starwars",
-    "text": "Starwars\nChoose a variable in starwars and make a graph.\nUse geom_histogram().\nShare your graph with those around you."
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#clearer-scales",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#clearer-scales",
+    "title": "No Computers Data Viz",
+    "section": "Clearer Scales",
+    "text": "Clearer Scales\n\n\nGood graphics have clear scales\n\nRemember iPhone sales graphic"
   },
   {
-    "objectID": "course-materials/lectures/1first-day-survey/Make-graphs.html",
-    "href": "course-materials/lectures/1first-day-survey/Make-graphs.html",
-    "title": "No Computer Visualizations",
-    "section": "",
-    "text": "Hopefully I have summarized our survey data into a table."
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#tufte",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#tufte",
+    "title": "No Computers Data Viz",
+    "section": "Tufte",
+    "text": "Tufte\nThe follow slides are taken from Tufte.\nRecommended: The Visual Display of Quantitative Information."
   },
   {
-    "objectID": "course-materials/lectures/1first-day-survey/Make-graphs.html#q-what-is-the-purpose-of-a-visualization",
-    "href": "course-materials/lectures/1first-day-survey/Make-graphs.html#q-what-is-the-purpose-of-a-visualization",
-    "title": "No Computer Visualizations",
-    "section": "Q: What is the purpose of a visualization?",
-    "text": "Q: What is the purpose of a visualization?"
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#balance-of-art-vs.-science",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#balance-of-art-vs.-science",
+    "title": "No Computers Data Viz",
+    "section": "Balance of art vs. science",
+    "text": "Balance of art vs. science\n\n\nData graphics:\n\npurpose is to convey meaning\nscientific, rigorous\npeer-reviewed\nclear\ncreative!\n\n\nInfographics:\n\npurpose might be to draw eyeballs\nentertaining?\nsales or marketing?\npublic sphere\ncreative\n\n\nWe’re only interested in the former"
   },
   {
-    "objectID": "course-materials/lectures/1first-day-survey/Make-graphs.html#q-what-makes-a-successful-graph",
-    "href": "course-materials/lectures/1first-day-survey/Make-graphs.html#q-what-makes-a-successful-graph",
-    "title": "No Computer Visualizations",
-    "section": "Q: What makes a successful graph?",
-    "text": "Q: What makes a successful graph?"
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#other-people-have-thought-about-this",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#other-people-have-thought-about-this",
+    "title": "No Computers Data Viz",
+    "section": "Other people have thought about this",
+    "text": "Other people have thought about this\nDo’s and Don’t\nTufte’s Data to Ink Ratio\nFlowing Data"
+  },
+  {
+    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#some-graphs-to-discuss-in-groups",
+    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#some-graphs-to-discuss-in-groups",
+    "title": "No Computers Data Viz",
+    "section": "Some Graphs to discuss in groups",
+    "text": "Some Graphs to discuss in groups\nThe Economist’s Graph detail\nGraphs from the NYTimes"
   },
   {
     "objectID": "course-materials/lectures/4_where_does_data_come_from.html#data-is-collected-by",
@@ -1281,207 +1218,102 @@
     "text": "Credits\nUnless otherwise cited or linked here are the credits:\n\nThe five ps seem to come from the Harvard Business Review https://hbr.org/2023/07/the-ethics-of-managing-peoples-data 9/30/2024\nSuing Chat GPT https://www.theverge.com/2024/2/13/24072131/sarah-silverman-paul-tremblay-openai-chatgpt-copyright-lawsuit"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#stop-question-frisk",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#stop-question-frisk",
-    "title": "Stop Question Frisk",
-    "section": "Stop, Question, Frisk",
-    "text": "Stop, Question, Frisk\n\nStarted in the 1990s\nNew York City Police Practice\n\nPolice need “reasonable suspicion.”\n\nLeads to mistrust in the police by these groups."
+    "objectID": "course-materials/lectures/1first-day-survey/Make-graphs.html",
+    "href": "course-materials/lectures/1first-day-survey/Make-graphs.html",
+    "title": "No Computer Visualizations",
+    "section": "",
+    "text": "Hopefully I have summarized our survey data into a table."
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#more-about-about-me",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#more-about-about-me",
-    "title": "Stop Question Frisk",
-    "section": "More about about me",
-    "text": "More about about me\nI’m not Black.\nI am Hispanic.\nI look White.\nI am not from New York City.\nIn this data analysis I will have limited perspective."
+    "objectID": "course-materials/lectures/1first-day-survey/Make-graphs.html#q-what-is-the-purpose-of-a-visualization",
+    "href": "course-materials/lectures/1first-day-survey/Make-graphs.html#q-what-is-the-purpose-of-a-visualization",
+    "title": "No Computer Visualizations",
+    "section": "Q: What is the purpose of a visualization?",
+    "text": "Q: What is the purpose of a visualization?"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#race-exists",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#race-exists",
-    "title": "Stop Question Frisk",
-    "section": "Race Exists",
-    "text": "Race Exists\nThis is an acknowledgement that the construct of race exists and plays a part in the way human being interact with each other."
+    "objectID": "course-materials/lectures/1first-day-survey/Make-graphs.html#q-what-makes-a-successful-graph",
+    "href": "course-materials/lectures/1first-day-survey/Make-graphs.html#q-what-makes-a-successful-graph",
+    "title": "No Computer Visualizations",
+    "section": "Q: What makes a successful graph?",
+    "text": "Q: What makes a successful graph?"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#schedule",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#schedule",
-    "title": "Stop Question Frisk",
-    "section": "Schedule",
-    "text": "Schedule\n\nIntroduce you to the data.\nPose a question.\nGive you data frames with data to answer the question one way.\n\nYou’ll order them with a partner.\nYou’ll make up pseudocode to explain data transformations.\nI’ll give you the real code.\n\nWe’ll repeat the process of for 2021 data in R."
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#data-ethics-examples",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#data-ethics-examples",
+    "title": "Data Ethics Examples",
+    "section": "Data Ethics Examples",
+    "text": "Data Ethics Examples\nA reminder of the 5 ps\nHere’s the link.\nProvenance\nPurpose\nProtection\nPrivacy\nPreparation"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#the-data",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#the-data",
-    "title": "Stop Question Frisk",
-    "section": "The Data",
-    "text": "The Data\nHere is NYC’s stop and frisk data.\nLet’s consider 2011 data\n\nEach column is a variable\nand each row is a stop\n\nThe variable names are inconsistent across years."
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#lets-discuss-the-5-ps",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#lets-discuss-the-5-ps",
+    "title": "Data Ethics Examples",
+    "section": "Let’s discuss the 5 ps",
+    "text": "Let’s discuss the 5 ps\nTwo examples involving competitions.\n\nWorld Cube Association\nBoston Marathon"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#sqf-history",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#sqf-history",
-    "title": "Stop Question Frisk",
-    "section": "SQF History",
-    "text": "SQF History"
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#world-cube-association",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#world-cube-association",
+    "title": "Data Ethics Examples",
+    "section": "World Cube Association",
+    "text": "World Cube Association\n3x3 solver Olaf Kuźmiński\nOlaf’s Page\nWhat are the five p s?\nScenerio: We write an article on Olaf’s Rubic’s cube career.\nWhat should we do to be as ethical as possible?\nWhen does it become unethical?"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#questions",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#questions",
-    "title": "Stop Question Frisk",
-    "section": "Questions",
-    "text": "Questions\n\nWhich racial groups were most likely to be stopped by police officers in 2011?\nWhat percent of the stops resulted in an arrest by race in 2011?\nHow do the answers to these questions change in 2021?\nYou will likely have more questions as we analyze the data."
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#boston-marthon",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#boston-marthon",
+    "title": "Data Ethics Examples",
+    "section": "Boston Marthon",
+    "text": "Boston Marthon\nResults for the Boston Marathon\nWhat are the five p s?\nScenerio: We write an article on Whit Blair winner of 2025 non-binary category.\nWhat should we do to be as ethical as possible?\nWhen does it become unethical?"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#your-data-frames",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#your-data-frames",
-    "title": "Stop Question Frisk",
-    "section": "Your data frames",
-    "text": "Your data frames\n\nData envelopes for 2011 Data\n\n\nPut the data frames in order.\nBe sure you can explain the process from one df to another. “psuedocode”\nQuestions about the data?\n\n\nArrow envelopes functions\n\n\nAfter the frames are in order put the code arrows between each frame.\nQuestions about the code?"
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#reminder-tidy-data",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#reminder-tidy-data",
+    "title": "Data Ethics Examples",
+    "section": "Reminder: Tidy data",
+    "text": "Reminder: Tidy data\n\nColumns are variables.\nRows are observations.\nIndividual entries are called values.\nThe data we will deal with in this course is rectangular."
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#conclusions-from-2021-data",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#conclusions-from-2021-data",
-    "title": "Stop Question Frisk",
-    "section": "Conclusions from 2021 data",
-    "text": "Conclusions from 2021 data\nHere are our questions again\n\nWhich racial groups were most likely to be stopped by police officers in 2011?\nWhat percent of the stops resulted in an arrest by race in 2011?\nHow do the answers to these questions change in 2021?\nYou will likely have more questions as we analyze the data."
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars",
+    "title": "Data Ethics Examples",
+    "section": "starwars",
+    "text": "starwars\nIs the data tidy?\nAre the variables clear?"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#for-comparison",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#for-comparison",
-    "title": "Stop Question Frisk",
-    "section": "For comparison:",
-    "text": "For comparison:\nHere’s the demographics of NYC1:\n\nBlack: 23.4 %\nLatino: 28.9%\nWhite: 39.8%\n\nhttps://www.census.gov/quickfacts/fact/table/newyorkcitynewyork/PST045222"
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#construction",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#construction",
+    "title": "Data Ethics Examples",
+    "section": "construction",
+    "text": "construction\nIs the data tidy?\nAre the variables clear?"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#summarize-functions",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#summarize-functions",
-    "title": "Stop Question Frisk",
-    "section": "Summarize functions:",
-    "text": "Summarize functions:\nNew functions:\n\nselect(), mutate(), arrange(), rename()\n\nOld functions:\n\nnames(), recode(), count()"
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#population",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#population",
+    "title": "Data Ethics Examples",
+    "section": "population",
+    "text": "population\nIs the data tidy?\nAre the variables clear?"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#lets-compare-to-2011.",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#lets-compare-to-2011.",
-    "title": "Stop Question Frisk",
-    "section": "Let’s compare to 2011.",
-    "text": "Let’s compare to 2011.\nMake a new r project.\nDownload 2011 csv from this site.\nMake a new document and put this in a chunk.\n\n\nCode\n# This code will read in the 2011 SQF data from the internet\n\n# makes a temp file\ntemp &lt;- tempfile()\n\n# downloads the file from the url and puts it in the temp location\ndownload.file(\"https://www.nyc.gov/assets/nypd/downloads/zip/analysis_and_planning/stop-question-frisk/sqf-2011-csv.zip\",temp)\n\n# This makes a connection to the temp filea and reads the csv in the temp location \ndata &lt;- read.csv(unz(temp, \"2011.csv\"))\n\n# This breaks the connection to the temp file (important if you are reading other files later. )\nunlink(temp)"
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#relig_income",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#relig_income",
+    "title": "Data Ethics Examples",
+    "section": "relig_income",
+    "text": "relig_income\nIs the data tidy?\nAre the variables clear?"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#answer-the-questions.",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#answer-the-questions.",
-    "title": "Stop Question Frisk",
-    "section": "Answer the questions.",
-    "text": "Answer the questions.\nFigure out the variable names and do a similar analysis.\n\nAre Black, and Hispanic groups more likely to be stopped by police officers than other groups in 2011?\n\n\nDoes this change as the total counts of stops decreases to 2021 levels?"
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#billboard",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#billboard",
+    "title": "Data Ethics Examples",
+    "section": "billboard",
+    "text": "billboard\nIs the data tidy?\nAre the variables clear?"
   },
   {
-    "objectID": "course-materials/lectures/15_Wrangling_1_SQF.html#two-more-verbs",
-    "href": "course-materials/lectures/15_Wrangling_1_SQF.html#two-more-verbs",
-    "title": "Stop Question Frisk",
-    "section": "Two more verbs",
-    "text": "Two more verbs\n\nfilter() - subsets the data based on requirements.\nmutate() - adds a new column."
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#names-and-surveys",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#names-and-surveys",
-    "title": "No Computers Data Viz",
-    "section": "Names and Surveys",
-    "text": "Names and Surveys\nSurvey Questions"
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#data-viz-no-computers",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#data-viz-no-computers",
-    "title": "No Computers Data Viz",
-    "section": "Data Viz no computers",
-    "text": "Data Viz no computers\nSheets data\n\nData Frame\nObservations\nTidy Data\nVariables\nVariable Types"
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#part-1-hand-drawn-graphs-of-survey-questions.",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#part-1-hand-drawn-graphs-of-survey-questions.",
-    "title": "No Computers Data Viz",
-    "section": "Part 1: Hand drawn graphs of survey questions.",
-    "text": "Part 1: Hand drawn graphs of survey questions.\nDraw a graph of a variable. Do not write your name.\n\nIt does not need to be perfect.\nTry to make it correct.\n\nIt is fine if its not correct."
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#talk-to-someone-close-to-you.",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#talk-to-someone-close-to-you.",
-    "title": "No Computers Data Viz",
-    "section": "Talk to someone close to you.",
-    "text": "Talk to someone close to you.\nAnswer these questions:\n\nIs the graph’s message or story clear?\nWhat is missing from each graph?\nWhat is distracting from the graph?\nWhat does the graph do well?"
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#what-makes-a-clear-graph",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#what-makes-a-clear-graph",
-    "title": "No Computers Data Viz",
-    "section": "What makes a clear graph?",
-    "text": "What makes a clear graph?\nClass discussion."
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#graph-context.",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#graph-context.",
-    "title": "No Computers Data Viz",
-    "section": "Graph Context.",
-    "text": "Graph Context.\n\nTitle\nWell labeled Axes\nAuthor’s Name\nData Source\nCaptions"
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#baumers-thoughts",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#baumers-thoughts",
-    "title": "No Computers Data Viz",
-    "section": "Baumer’s Thoughts",
-    "text": "Baumer’s Thoughts\nSome of the following slides were borrowed by the text’s author."
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#a-misleading-chart-from-apple",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#a-misleading-chart-from-apple",
-    "title": "No Computers Data Viz",
-    "section": "A misleading chart from Apple",
-    "text": "A misleading chart from Apple"
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#pie-charts",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#pie-charts",
-    "title": "No Computers Data Viz",
-    "section": "Pie charts",
-    "text": "Pie charts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAre 6-cylinder engines more common among manuals or automatics?"
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#unclear-scales",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#unclear-scales",
-    "title": "No Computers Data Viz",
-    "section": "Unclear Scales",
-    "text": "Unclear Scales\n\n\nOften not very clearly defined\nEasy to lie by manipulating scales\nWhy perspective?\nWidth of lines?"
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#clearer-scales",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#clearer-scales",
-    "title": "No Computers Data Viz",
-    "section": "Clearer Scales",
-    "text": "Clearer Scales\n\n\nGood graphics have clear scales\n\nRemember iPhone sales graphic"
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#tufte",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#tufte",
-    "title": "No Computers Data Viz",
-    "section": "Tufte",
-    "text": "Tufte\nThe follow slides are taken from Tufte.\nRecommended: The Visual Display of Quantitative Information."
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#balance-of-art-vs.-science",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#balance-of-art-vs.-science",
-    "title": "No Computers Data Viz",
-    "section": "Balance of art vs. science",
-    "text": "Balance of art vs. science\n\n\nData graphics:\n\npurpose is to convey meaning\nscientific, rigorous\npeer-reviewed\nclear\ncreative!\n\n\nInfographics:\n\npurpose might be to draw eyeballs\nentertaining?\nsales or marketing?\npublic sphere\ncreative\n\n\nWe’re only interested in the former"
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#other-people-have-thought-about-this",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#other-people-have-thought-about-this",
-    "title": "No Computers Data Viz",
-    "section": "Other people have thought about this",
-    "text": "Other people have thought about this\nDo’s and Don’t\nTufte’s Data to Ink Ratio\nFlowing Data"
-  },
-  {
-    "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#some-graphs-to-discuss-in-groups",
-    "href": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#some-graphs-to-discuss-in-groups",
-    "title": "No Computers Data Viz",
-    "section": "Some Graphs to discuss in groups",
-    "text": "Some Graphs to discuss in groups\nThe Economist’s Graph detail\nGraphs from the NYTimes"
+    "objectID": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars-1",
+    "href": "course-materials/lectures/7_5_in_class_ethic_examples.html#starwars-1",
+    "title": "Data Ethics Examples",
+    "section": "Starwars",
+    "text": "Starwars\nChoose a variable in starwars and make a graph.\nUse geom_histogram().\nShare your graph with those around you."
   },
   {
     "objectID": "course-materials/lectures/10_taxonomy_of_graphs_numeric_part_2.html#libraries",
@@ -1624,199 +1456,318 @@
     "text": "Remove Info Instead\n\n\nCode\nmed_income_county |&gt;\n    separate(col = NAME, into = \"NAME\", sep = \" \",extra = \"drop\")|&gt;\n    filter(NAME %in% c(\"Hampden\",\"Nantucket\"))|&gt;\n    ggplot()+\n    geom_point(\n        aes(year, estimate,fill = NAME),\n        shape = 21,\n        size = 2,\n        stroke = 0.1,\n        color = \"black\")+\n    geom_point(data = med_income_state, aes(year,estimate))+\n    scale_y_continuous(\n        labels = scales::label_comma(),\n    )+\n    labs(\n        title = \"Massachusetts Median Income \",\n        subtitle = \"Nantucket, Hampden and the State Average\",\n        y = \"dollars\",\n        caption = \"Showing the counties with highest and lowest median income as well as the average.\\n source: American Community Survey\"\n    )+\n    theme_minimal()  +\n    scale_fill_brewer(palette = 'Set3',na.value =\"grey\", direction = -1 )"
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#introduction-to-programming-language-for-data-science-r-and-computing-environment-rstudio",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#introduction-to-programming-language-for-data-science-r-and-computing-environment-rstudio",
-    "title": "Course Overview",
-    "section": "Introduction to Programming Language for Data Science (R) and Computing Environment (RStudio)",
-    "text": "Introduction to Programming Language for Data Science (R) and Computing Environment (RStudio)\n\nTake a look at R Studio together\nShort History of R"
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#dplyr-lives-in-the-tidyverse",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#dplyr-lives-in-the-tidyverse",
+    "title": "The Verbs",
+    "section": "dplyr lives in the tidyverse",
+    "text": "dplyr lives in the tidyverse"
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-science-life-cycle",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-science-life-cycle",
-    "title": "Course Overview",
-    "section": "Data Science Life Cycle",
-    "text": "Data Science Life Cycle\nDS life cycle"
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#the-verbs",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#the-verbs",
+    "title": "The Verbs",
+    "section": "The Verbs",
+    "text": "The Verbs\n\n\nYou’ve learned about these verbs:\n\nfilter()\n\nsubsets rows\n\ngroup_by()\n\nto group the data before summarizing\n\nsummarize()\n\nto summarize data\n\nmutate()\n\ncreates new variables (or columns)\n\n\n\nWe will also use:\n\nselect()\n\nsubsets columns\n\nrename()\n\nto rename columns\n\narrange() / arrange(desc())/ slice_*\ncase_when()\n\nchange variable levels"
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#grammar-of-graphics",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#grammar-of-graphics",
-    "title": "Course Overview",
-    "section": "Grammar of Graphics",
-    "text": "Grammar of Graphics\nHadley Wickham"
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#preview-sql-queries",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#preview-sql-queries",
+    "title": "The Verbs",
+    "section": "Preview SQL Queries",
+    "text": "Preview SQL Queries\nCSI 264\n\n\n\nSQL\ndplyr\n\n\n\n\nSELECT\nselect(), mutate(), summarise()\n\n\nFROM\nthe data frame. data=\n\n\nWHERE\nfilter()\n\n\nORDER BY\narrange()\n\n\nLIMIT\nslice_head()\n\n\nGROUP BY\ngroup_by"
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-collection",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-collection",
-    "title": "Course Overview",
-    "section": "Data Collection",
-    "text": "Data Collection\nCollect student data here\nhttps://forms.gle/uRxF8UTkgp45ofY46\nYou must be signed into your HCC email account to fill out form."
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#the-idea",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#the-idea",
+    "title": "The Verbs",
+    "section": "The idea",
+    "text": "The idea\nYou can get good at a few functions and do a lot.\nThe first argument is a data frame.\n\nits a special kind called a tibble.\n\nThe output of the wrangling functions is a data frame.\nWhen we wrangle we are not altering the original data.\n\nIt still exists.\nYou can start over."
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#web-scraping-and-importing-data-and-a-tiny-bit-of-cleaning",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#web-scraping-and-importing-data-and-a-tiny-bit-of-cleaning",
-    "title": "Course Overview",
-    "section": "Web Scraping and Importing Data ( and a tiny bit of cleaning)",
-    "text": "Web Scraping and Importing Data ( and a tiny bit of cleaning)\n\nlibrary(googlesheets4)\nlibrary(janitor)\n\nstudent_data &lt;- read_sheet('https://docs.google.com/spreadsheets/d/1aNrNX5xWkrtuJHc-bsCC7e07KbnRbVIxaWdbblOCyxA/edit?usp=sharing')\n\nstudent_data &lt;- clean_names(student_data)"
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#what-is-a-tibble",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#what-is-a-tibble",
+    "title": "The Verbs",
+    "section": "What is a tibble?",
+    "text": "What is a tibble?\n\n\n\n\n\n\n\n\n\nObject of class tbl\nIts kind of different from a data frame."
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-visualization",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-visualization",
-    "title": "Course Overview",
-    "section": "Data Visualization",
-    "text": "Data Visualization\n\n# make simple plot of student data. \nlibrary(tidyverse)\n\nstudent_data |&gt;\n  ggplot(mapping = aes(x = what_is_your_height_in_inches) )+\n  geom_histogram()+\n  labs(\n    title = \"Students' height in inches\"\n  )"
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#new-verbs-by-example",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#new-verbs-by-example",
+    "title": "The Verbs",
+    "section": "New verbs by example",
+    "text": "New verbs by example\nLive code with the mpg data frame.\nTry these with me.\nOpen R or HCC’s RStudio Server."
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-wrangling",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-wrangling",
-    "title": "Course Overview",
-    "section": "Data Wrangling",
-    "text": "Data Wrangling\n\n# wrangle student data. edit plot\nstudent_data |&gt;\n  \n  select(do_you_have_experience_with_the_statistical_computer_language_r) |&gt;\n  \n  rename(r_experiance = do_you_have_experience_with_the_statistical_computer_language_r )|&gt;\n  \n  group_by(r_experiance)|&gt;\n  \n  summarize(\n    \n    sum()/n()\n    \n  )\n\n# A tibble: 3 × 2\n  r_experiance                                           `sum()/n()`\n  &lt;chr&gt;                                                        &lt;dbl&gt;\n1 No                                                               0\n2 No but I have experience with other computer software.           0\n3 Yes                                                              0"
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#side-note-vectors",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#side-note-vectors",
+    "title": "The Verbs",
+    "section": "Side Note: Vectors",
+    "text": "Side Note: Vectors\nc() makes a vector in R.\nWe use them to hold information. All information must be the same type (int, bool, etc.)\nIf you are familiar with lists or arrays, a vector is very similar to those.\n\nbooks = c(\"The Martian\", \"The Hail Mary Project\", \"Artemis\")"
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-management",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-management",
-    "title": "Course Overview",
-    "section": "Data Management",
-    "text": "Data Management\n-   Security\n-   Keeping yourself organized!\n-   How Data is housed"
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#filter",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#filter",
+    "title": "The Verbs",
+    "section": "filter()",
+    "text": "filter()\n%in% vs ==\n\nmpg |&gt; # 18 audis\n    filter ( manufacturer == \"audi\")|&gt;\n    nrow()\n\n[1] 18\n\nmpg |&gt; # 25 fords\n    filter(manufacturer == \"ford\")|&gt;\n    nrow()\n\n[1] 25\n\nmpg |&gt; # doesn't work correctly\n    filter(manufacturer == c(\"ford\", \"audi\"))|&gt;\n    nrow()\n\n[1] 22\n\nmpg |&gt; # doesn't work correctly\n    filter(manufacturer %in% c(\"ford\", \"audi\"))|&gt;\n    nrow()\n\n[1] 43"
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#data-ethics",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#data-ethics",
-    "title": "Course Overview",
-    "section": "Data Ethics",
-    "text": "Data Ethics\nHow we collect and use data without doing harm."
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#group_by-and-summarize",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#group_by-and-summarize",
+    "title": "The Verbs",
+    "section": "group_by and summarize",
+    "text": "group_by and summarize\ngroup_by() works with summarize()\n\nmpg|&gt;\n    group_by(manufacturer)|&gt;\n    # n() is a counting function\n    summarise(count = n())\n\n# A tibble: 15 × 2\n   manufacturer count\n   &lt;chr&gt;        &lt;int&gt;\n 1 audi            18\n 2 chevrolet       19\n 3 dodge           37\n 4 ford            25\n 5 honda            9\n 6 hyundai         14\n 7 jeep             8\n 8 land rover       4\n 9 lincoln          3\n10 mercury          4\n11 nissan          13\n12 pontiac          5\n13 subaru          14\n14 toyota          34\n15 volkswagen      27"
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#introduction-to-database-querying-with-sql",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#introduction-to-database-querying-with-sql",
-    "title": "Course Overview",
-    "section": "Introduction to Database Querying with SQL",
-    "text": "Introduction to Database Querying with SQL\nWrangle some data with the classic SQL.\nSimple Query?"
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#mutate",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#mutate",
+    "title": "The Verbs",
+    "section": "mutate()",
+    "text": "mutate()\nChanges values of colums. You can save the data frame.\n\nmpg = mpg |&gt;\n    mutate(new_year = 2000 - year )\nmpg$year\n\n  [1] 1999 1999 2008 2008 1999 1999 2008 1999 1999 2008 2008 1999 1999 2008 2008\n [16] 1999 2008 2008 2008 2008 2008 1999 2008 1999 1999 2008 2008 2008 2008 2008\n [31] 1999 1999 1999 2008 1999 2008 2008 1999 1999 1999 1999 2008 2008 2008 1999\n [46] 1999 2008 2008 2008 2008 1999 1999 2008 2008 2008 1999 1999 1999 2008 2008\n [61] 2008 1999 2008 1999 2008 2008 2008 2008 2008 2008 1999 1999 2008 1999 1999\n [76] 1999 2008 1999 1999 1999 2008 2008 1999 1999 1999 1999 1999 2008 1999 2008\n [91] 1999 1999 2008 2008 1999 1999 2008 2008 2008 1999 1999 1999 1999 1999 2008\n[106] 2008 2008 2008 1999 1999 2008 2008 1999 1999 2008 1999 1999 2008 2008 2008\n[121] 2008 2008 2008 2008 1999 1999 2008 2008 2008 2008 1999 2008 2008 1999 1999\n[136] 1999 2008 1999 2008 2008 1999 1999 1999 2008 2008 2008 2008 1999 1999 2008\n[151] 1999 1999 2008 2008 1999 1999 1999 2008 2008 1999 1999 2008 2008 2008 2008\n[166] 1999 1999 1999 1999 2008 2008 2008 2008 1999 1999 1999 1999 2008 2008 1999\n[181] 1999 2008 2008 1999 1999 2008 1999 1999 2008 2008 1999 1999 2008 1999 1999\n[196] 1999 2008 2008 1999 2008 1999 1999 2008 1999 1999 2008 2008 1999 1999 2008\n[211] 2008 1999 1999 1999 1999 2008 2008 2008 2008 1999 1999 1999 1999 1999 1999\n[226] 2008 2008 1999 1999 2008 2008 1999 1999 2008"
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#further-topics-based-on-time-and-student-interest-may-include",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#further-topics-based-on-time-and-student-interest-may-include",
-    "title": "Course Overview",
-    "section": "Further Topics based on time and student interest may include:",
-    "text": "Further Topics based on time and student interest may include:\n-   Dynamic and Customized Data Graphics\n\n-   Geospatial Data and Maps\n\n-   Learning with AI"
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#select",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#select",
+    "title": "The Verbs",
+    "section": "select()",
+    "text": "select()\nselect() subsets the columms. Maybe you don’t need the whole df.\nnames() is useful for finding column names\n\nnames(mpg)\n\n [1] \"manufacturer\" \"model\"        \"displ\"        \"year\"         \"cyl\"         \n [6] \"trans\"        \"drv\"          \"cty\"          \"hwy\"          \"fl\"          \n[11] \"class\"        \"new_year\"    \n\nnew_mpg = mpg |&gt; select(manufacturer, year)\nnew_mpg\n\n# A tibble: 234 × 2\n   manufacturer  year\n   &lt;chr&gt;        &lt;int&gt;\n 1 audi          1999\n 2 audi          1999\n 3 audi          2008\n 4 audi          2008\n 5 audi          1999\n 6 audi          1999\n 7 audi          2008\n 8 audi          1999\n 9 audi          1999\n10 audi          2008\n# ℹ 224 more rows"
   },
   {
-    "objectID": "course-materials/lectures/1_Overview_of_the_course.html#optional-and-advnaced-topics",
-    "href": "course-materials/lectures/1_Overview_of_the_course.html#optional-and-advnaced-topics",
-    "title": "Course Overview",
-    "section": "Optional and Advnaced Topics:",
-    "text": "Optional and Advnaced Topics:\n-   Function writing and data masking in R\n\n-   Iteration"
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#arrange-slice_",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#arrange-slice_",
+    "title": "The Verbs",
+    "section": "arrange() / slice_*()",
+    "text": "arrange() / slice_*()\narrange() ordered your df by a variable, while slice_max() will take the top so many rows.\n\nmpg |&gt; arrange (desc(displ))\n\n# A tibble: 234 × 12\n   manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class\n   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;\n 1 chevrolet    corvette     7    2008     8 manu… r        15    24 p     2sea…\n 2 chevrolet    k1500 tah…   6.5  1999     8 auto… 4        14    17 d     suv  \n 3 chevrolet    corvette     6.2  2008     8 manu… r        16    26 p     2sea…\n 4 chevrolet    corvette     6.2  2008     8 auto… r        15    25 p     2sea…\n 5 jeep         grand che…   6.1  2008     8 auto… 4        11    14 p     suv  \n 6 chevrolet    c1500 sub…   6    2008     8 auto… r        12    17 r     suv  \n 7 dodge        durango 4…   5.9  1999     8 auto… 4        11    15 r     suv  \n 8 dodge        ram 1500 …   5.9  1999     8 auto… 4        11    15 r     pick…\n 9 chevrolet    c1500 sub…   5.7  1999     8 auto… r        13    17 r     suv  \n10 chevrolet    corvette     5.7  1999     8 manu… r        16    26 p     2sea…\n# ℹ 224 more rows\n# ℹ 1 more variable: new_year &lt;dbl&gt;\n\nmpg |&gt; slice_max(displ, n = 5)\n\n# A tibble: 5 × 12\n  manufacturer model       displ  year   cyl trans drv     cty   hwy fl    class\n  &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;\n1 chevrolet    corvette      7    2008     8 manu… r        15    24 p     2sea…\n2 chevrolet    k1500 taho…   6.5  1999     8 auto… 4        14    17 d     suv  \n3 chevrolet    corvette      6.2  2008     8 manu… r        16    26 p     2sea…\n4 chevrolet    corvette      6.2  2008     8 auto… r        15    25 p     2sea…\n5 jeep         grand cher…   6.1  2008     8 auto… 4        11    14 p     suv  \n# ℹ 1 more variable: new_year &lt;dbl&gt;"
   },
   {
-    "objectID": "course-materials/lectures/21_pivots.html#tidydata",
-    "href": "course-materials/lectures/21_pivots.html#tidydata",
-    "title": "Tidy data and pivots",
-    "section": "Tidydata",
-    "text": "Tidydata"
+    "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#practice-wrangling",
+    "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#practice-wrangling",
+    "title": "The Verbs",
+    "section": "Practice wrangling",
+    "text": "Practice wrangling\nMDSR Problems 1 and 2\n\n # Copy this code into a chunk in R to make the Random_subset data frame from problem 1 and 2.\n # Use the verbs we've discussed to make the subsets from the text.\n Random_subset &lt;-  tibble::tribble(\n     ~year,~sex,   ~name,         ~n, ~prop,\n      2003, \"M\",     \"Bilal\",        146, 0.0000695,\n      1999, \"F\",     \"Terria\",        23, 0.0000118,\n      2010, \"F\",     \"Naziyah\",       45, 0.0000230,\n      1989, \"F\",     \"Shawana\",       41, 0.0000206,\n      1989, \"F\",     \"Jessi\",        210, 0.000105,\n      1928, \"M\",     \"Tillman\",       43, 0.0000377,\n      1981, \"F\",     \"Leslee\",        83, 0.0000464,\n      1981, \"F\",     \"Sherise\",       27, 0.0000151,\n      1920, \"F\",     \"Marquerite\",    26, 0.0000209,\n      1941, \"M\",     \"Lorraine\",      24, 0.0000191\n   )"
   },
   {
-    "objectID": "course-materials/lectures/21_pivots.html#first-job",
-    "href": "course-materials/lectures/21_pivots.html#first-job",
-    "title": "Tidy data and pivots",
-    "section": "First Job",
-    "text": "First Job\nYou need to get data into machine readable format. What do you do?\npivot_longer()\npivot_wider()\nWhat do these functions do?"
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#why-r",
+    "href": "course-materials/lectures/2_Brief-R-history.html#why-r",
+    "title": "A Short History of R",
+    "section": "Why R?",
+    "text": "Why R?\nThe top three languages in Data Science right now are:\n\nPython (pandas, numpy, pytorch)\nR (tidyverse)\nSQL\nProbably in that order.\n\nHere’s the TIOBE rank of Computer languages, as of Jan 2026 R jumped from the 18th to 10th. Probably reflecting the drive toward AI."
   },
   {
-    "objectID": "course-materials/lectures/21_pivots.html#some-built-in-tables",
-    "href": "course-materials/lectures/21_pivots.html#some-built-in-tables",
-    "title": "Tidy data and pivots",
-    "section": "Some built in tables",
-    "text": "Some built in tables"
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#interchangeable",
+    "href": "course-materials/lectures/2_Brief-R-history.html#interchangeable",
+    "title": "A Short History of R",
+    "section": "Interchangeable",
+    "text": "Interchangeable\nLearning how to work with data is similar from on language to another.\nR, I think, is the most convenient way to get students working with Data.\nFor vizualization: the ggplot ecosystem is nicer than pandas.\nThe RStudio and R work very well together."
   },
   {
-    "objectID": "course-materials/lectures/21_pivots.html#pivot_longer",
-    "href": "course-materials/lectures/21_pivots.html#pivot_longer",
-    "title": "Tidy data and pivots",
-    "section": "pivot_longer()",
-    "text": "pivot_longer()\nThis data is not tidy how can we make it longer for computers?\n\n\n# A tibble: 3 × 5\n  Country        `1979` `1989` `1999` `2009`\n  &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 France        NA          NA    0.3    0.4\n2 South Africa  NA          NA   14.8   17.2\n3 United States  0.0318     NA    0.5    0.6\n\n\nWrite down how you think we could do that with pivot_longer()"
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#before-r-there-was-s",
+    "href": "course-materials/lectures/2_Brief-R-history.html#before-r-there-was-s",
+    "title": "A Short History of R",
+    "section": "Before R there was S",
+    "text": "Before R there was S\n“S is a language that was developed [in 1976] by John Chambers and others at the old Bell Telephone Laboratories”"
   },
   {
-    "objectID": "course-materials/lectures/21_pivots.html#pivot_wider",
-    "href": "course-materials/lectures/21_pivots.html#pivot_wider",
-    "title": "Tidy data and pivots",
-    "section": "pivot_wider()",
-    "text": "pivot_wider()\nThis data is tidy how could we make it wider for humans?\n\n\n# A tibble: 6 × 3\n# Groups:   name [3]\n  name   sex    total\n  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt;\n1 Leslie F     266474\n2 Leslie M     112689\n3 Robin  F     289395\n4 Robin  M      44616\n5 Sue    F     144465\n6 Sue    M        519\n\n\nWrite down how you think we could do that with pivot_wider()"
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#s-got-bought-and-sold",
+    "href": "course-materials/lectures/2_Brief-R-history.html#s-got-bought-and-sold",
+    "title": "A Short History of R",
+    "section": "S got bought and sold",
+    "text": "S got bought and sold\nTIBCO is the owner of S\nHere’s a book on S"
   },
   {
-    "objectID": "course-materials/lectures/21_pivots.html#pivot_longer-1",
-    "href": "course-materials/lectures/21_pivots.html#pivot_longer-1",
-    "title": "Tidy data and pivots",
-    "section": "pivot_longer()",
-    "text": "pivot_longer()\nLet’s try our code on the examples above. Pivot this longer.\n\nlibrary(tidyverse)\nlibrary(mdsr)\nlibrary(googlesheets4)\ngs4_deauth()\nhiv_key &lt;- \"1kWH_xdJDM4SMfT_Kzpkk-1yuxWChfurZuWYjfmv51EA\"\nhiv &lt;- read_sheet(hiv_key) |&gt;\n  rename(Country = 1) |&gt;\n  filter(\n    Country %in% c(\"United States\", \"France\", \"South Africa\")\n  ) |&gt;\n  select(Country, `1979`, `1989`, `1999`, `2009`) |&gt;\n  unnest(cols = c(`2009`)) |&gt;\n  mutate(across(matches(\"[0-9]\"), as.double))\nhiv\n\n# A tibble: 3 × 5\n  Country        `1979` `1989` `1999` `2009`\n  &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 France        NA          NA    0.3    0.4\n2 South Africa  NA          NA   14.8   17.2\n3 United States  0.0318     NA    0.5    0.6"
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#r-is-released-for-free",
+    "href": "course-materials/lectures/2_Brief-R-history.html#r-is-released-for-free",
+    "title": "A Short History of R",
+    "section": "1996-2000 R is released for free",
+    "text": "1996-2000 R is released for free\nRoss Ihaka and Robert Gentleman of the university of Auckland Developed it."
   },
   {
-    "objectID": "course-materials/lectures/21_pivots.html#pivot_wider-1",
-    "href": "course-materials/lectures/21_pivots.html#pivot_wider-1",
-    "title": "Tidy data and pivots",
-    "section": "pivot_wider()",
-    "text": "pivot_wider()\n\nlibrary(babynames)\nbabynames |&gt;\n     filter(name %in% c(\"Sue\", \"Robin\", \"Leslie\")) |&gt;\n     group_by(name, sex) |&gt;\n     summarize(total = sum(n))\n\n# A tibble: 6 × 3\n# Groups:   name [3]\n  name   sex    total\n  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt;\n1 Leslie F     266474\n2 Leslie M     112689\n3 Robin  F     289395\n4 Robin  M      44616\n5 Sue    F     144465\n6 Sue    M        519"
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#ross-ihaka",
+    "href": "course-materials/lectures/2_Brief-R-history.html#ross-ihaka",
+    "title": "A Short History of R",
+    "section": "Ross Ihaka",
+    "text": "Ross Ihaka"
   },
   {
-    "objectID": "course-materials/lectures/21_pivots.html#not-tidy---tidy",
-    "href": "course-materials/lectures/21_pivots.html#not-tidy---tidy",
-    "title": "Tidy data and pivots",
-    "section": "Not Tidy -> Tidy",
-    "text": "Not Tidy -&gt; Tidy\nThis table is not tidy can you make it so?\n\n\n# A tibble: 3 × 3\n  country         `1999`     `2000`\n  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;\n1 Afghanistan   19987071   20595360\n2 Brazil       172006362  174504898\n3 China       1272915272 1280428583"
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#robert-gentleman",
+    "href": "course-materials/lectures/2_Brief-R-history.html#robert-gentleman",
+    "title": "A Short History of R",
+    "section": "Robert Gentleman",
+    "text": "Robert Gentleman"
   },
   {
-    "objectID": "course-materials/lectures/21_pivots.html#more-practice",
-    "href": "course-materials/lectures/21_pivots.html#more-practice",
-    "title": "Tidy data and pivots",
-    "section": "More practice",
-    "text": "More practice\nThis dataframe is tidy but can you make it easier for a human to read?\n\n\n# A tibble: 19 × 12\n   fish  Release I80_1 Lisbon  Rstr Base_TD   BCE   BCW  BCE2  BCW2   MAE   MAW\n   &lt;fct&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;\n 1 4842        1     1      1     1       1     1     1     1     1     1     1\n 2 4843        1     1      1     1       1     1     1     1     1     1     1\n 3 4844        1     1      1     1       1     1     1     1     1     1     1\n 4 4845        1     1      1     1       1    NA    NA    NA    NA    NA    NA\n 5 4847        1     1      1    NA      NA    NA    NA    NA    NA    NA    NA\n 6 4848        1     1      1     1      NA    NA    NA    NA    NA    NA    NA\n 7 4849        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA\n 8 4850        1     1     NA     1       1     1     1    NA    NA    NA    NA\n 9 4851        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA\n10 4854        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA\n11 4855        1     1      1     1       1    NA    NA    NA    NA    NA    NA\n12 4857        1     1      1     1       1     1     1     1     1    NA    NA\n13 4858        1     1      1     1       1     1     1     1     1     1     1\n14 4859        1     1      1     1       1    NA    NA    NA    NA    NA    NA\n15 4861        1     1      1     1       1     1     1     1     1     1     1\n16 4862        1     1      1     1       1     1     1     1     1    NA    NA\n17 4863        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA\n18 4864        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA\n19 4865        1     1      1    NA      NA    NA    NA    NA    NA    NA    NA"
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#version-names",
+    "href": "course-materials/lectures/2_Brief-R-history.html#version-names",
+    "title": "A Short History of R",
+    "section": "version names",
+    "text": "version names\nThe versions of R are named after Peanuts comics or cartoons.\nPile of Leaves\nWhy? 4.4.2 release\nOther versions"
   },
   {
-    "objectID": "course-materials/lectures/21_pivots.html#consider-some-tables",
-    "href": "course-materials/lectures/21_pivots.html#consider-some-tables",
-    "title": "Tidy data and pivots",
-    "section": "consider some tables",
-    "text": "consider some tables\nAre these tables tidy, do we need to pivot wider or longer?\n\ntable1,\ntable2,\ntable3,\ntable4a,\ntable4b,\ntable5\nProblem 5 from chapter 6"
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#cran",
+    "href": "course-materials/lectures/2_Brief-R-history.html#cran",
+    "title": "A Short History of R",
+    "section": "CRAN",
+    "text": "CRAN\nComprehensive R Archive Network\nThey manage all R updates and R packages. There are currently 19897 packages.\nThey put on the UseR! conference\nThere’s an R magazine\nThis is the CRAN team"
   },
   {
-    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html",
-    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html",
-    "title": "In-class Exercises: Mapping",
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#the-tidyverse",
+    "href": "course-materials/lectures/2_Brief-R-history.html#the-tidyverse",
+    "title": "A Short History of R",
+    "section": "The tidyverse",
+    "text": "The tidyverse\nHadley Wickham and others made it."
+  },
+  {
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#who-makes-rstudio",
+    "href": "course-materials/lectures/2_Brief-R-history.html#who-makes-rstudio",
+    "title": "A Short History of R",
+    "section": "Who makes RStudio?",
+    "text": "Who makes RStudio?\n\nStarted in 2009 as RStudio\nThe tidyverse comes out in 2016\nRenamed Posit in 2022.\nOffers Python, SQL, and other DS language Support"
+  },
+  {
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#deep-learning-and-ai",
+    "href": "course-materials/lectures/2_Brief-R-history.html#deep-learning-and-ai",
+    "title": "A Short History of R",
+    "section": "Deep Learning and AI",
+    "text": "Deep Learning and AI\npytorch is becoming increasingly an increasingly popular method for deep learning in python.\nR has torch, which is an implementation of pytorch in R."
+  },
+  {
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#the-future",
+    "href": "course-materials/lectures/2_Brief-R-history.html#the-future",
+    "title": "A Short History of R",
+    "section": "The future",
+    "text": "The future\nPosit has made a pivot toward integrating Python and Jupyter into their ecosystem with Quarto.\nQuarto is a document that works with Python, R, and other languges.\nPositron is an IDE independent of language forked from VS code."
+  },
+  {
+    "objectID": "course-materials/lectures/2_Brief-R-history.html#some-credits",
+    "href": "course-materials/lectures/2_Brief-R-history.html#some-credits",
+    "title": "A Short History of R",
+    "section": "Some Credits",
+    "text": "Some Credits\n\nPhoto of John Chambers taken from Stanford’s website.\nPhoto of Ross Ihaka - https://www.auckland.ac.nz/content/auckland/en/science/about-the-faculty/department-of-statistics/ihaka-lecture-series/jcr:content/leftpar/imagecomponent/image.img.1024.medium.jpg/1561079330278.jpg\nPhoto by Robert Gentalman - https://calendar.gatech.edu/sites/default/files/styles/large/public/hg_media/2024-25/Robert_Gentleman.jpg.webp?itok=0aDlOIOK\nPhoto by Hadley Wickham - Private correspondence, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=46810731\nMost of the details of this short history came from chapter 2 of Roger Peng’s R Programming for Data Science.\nhttps://bookdown.org/rdpeng/rprogdatascience/history-and-overview-of-r.html"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#goal-communication",
+    "href": "course-materials/lectures/11_color_theory.html#goal-communication",
+    "title": "Color Theory",
+    "section": "Goal: Communication",
+    "text": "Goal: Communication\nRemember the goal of making data graphics to to communicate some idea.\nIn this lecture we’ll talk about different color palettes and when to use them.\nWe’ll use the penguins data again."
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#colors",
+    "href": "course-materials/lectures/11_color_theory.html#colors",
+    "title": "Color Theory",
+    "section": "Colors",
+    "text": "Colors\nBig Idea: Color Choices Matter\nGeneral Color Palettes:\n\nSequential Palettes\nDiverging Palettes\nQualitative Palettes"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#r-color-brewer-palletts",
+    "href": "course-materials/lectures/11_color_theory.html#r-color-brewer-palletts",
+    "title": "Color Theory",
+    "section": "R Color Brewer palletts",
+    "text": "R Color Brewer palletts"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#the-two-functions",
+    "href": "course-materials/lectures/11_color_theory.html#the-two-functions",
+    "title": "Color Theory",
+    "section": "The two functions",
+    "text": "The two functions\nThe two functions we’ll use for colors are\nscale_*_brewer() scale_*_distiller()\nThe * matches the aestheic we are trying to color.\n\nscale_fill_brewer()     #&lt;- filling discrete\n\nscale_fill_distiller()  #&lt;- filling continuous\n\nscale_color_brewer()\n\nscale_color_distiller()"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#base-graph",
+    "href": "course-materials/lectures/11_color_theory.html#base-graph",
+    "title": "Color Theory",
+    "section": "Base Graph",
+    "text": "Base Graph\nBelow is a scatter plot of body_mass_g vs bill_depth_mm.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(x=body_mass_g,bill_depth_mm))"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#sequential-1",
+    "href": "course-materials/lectures/11_color_theory.html#sequential-1",
+    "title": "Color Theory",
+    "section": "Sequential 1",
+    "text": "Sequential 1\nI’d like to show the flipper length as a third variable. flipper_length_mm is a continuous and numeric variable. We can color by it.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#sequential-2",
+    "href": "course-materials/lectures/11_color_theory.html#sequential-2",
+    "title": "Color Theory",
+    "section": "Sequential 2",
+    "text": "Sequential 2\nThe lighter color should indicate less.\nTo reverse it I’ll add scale_color_distiller(direction = 1) because we’re working with a continuous variable and we’re coloring.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))+\n  scale_color_distiller(direction = 1)"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#sequential-3",
+    "href": "course-materials/lectures/11_color_theory.html#sequential-3",
+    "title": "Color Theory",
+    "section": "Sequential 3",
+    "text": "Sequential 3\nUsing the default color isn’t great. Let’s choose a premade brewer palette.\nTo reverse it I’ll add scale_color_distiller(direction = 1) because we’re working with a continuous variable and we’re coloring.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))+\n  scale_color_distiller(palette = \"Greys\",  direction = 1)"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#sequential",
+    "href": "course-materials/lectures/11_color_theory.html#sequential",
+    "title": "Color Theory",
+    "section": "Sequential",
+    "text": "Sequential\nNotes:\n\nUsed for continuous numeric variables\nDarker should be used to show more"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#diverging-palettes",
+    "href": "course-materials/lectures/11_color_theory.html#diverging-palettes",
+    "title": "Color Theory",
+    "section": "Diverging Palettes",
+    "text": "Diverging Palettes\nIf we want to use two base colors, one to show high values and the other to show low. We can use a diverging palette.\nHere the brown is long flipper and dark blue is short flipper.\n\n\nCode\npenguins |&gt;\n  ggplot()+\n  geom_point(aes(\n    x = body_mass_g, \n    y = bill_depth_mm,\n    color = flipper_length_mm))+\n  scale_color_distiller(palette = \"BrBG\")"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#diverging-palettes-2",
+    "href": "course-materials/lectures/11_color_theory.html#diverging-palettes-2",
+    "title": "Color Theory",
+    "section": "Diverging Palettes 2",
+    "text": "Diverging Palettes 2\nIt often makes more sense to use a diverging palette with the middle being zero.\nHere I do a bit of wrangling to add a new column, which captures the difference from the average height.\n\n\nCode\nave_mass = mean(penguins$body_mass_g,na.rm = TRUE)\n\npenguins |&gt;\n  mutate(diff_mass_from_avg =body_mass_g - ave_mass)|&gt;\n  ggplot()+\n  geom_point(aes(\n    x = flipper_length_mm, \n    y = bill_depth_mm,\n    color = diff_mass_from_avg))+\n  scale_color_distiller(palette = \"BrBG\")"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#diverging-palettes-3",
+    "href": "course-materials/lectures/11_color_theory.html#diverging-palettes-3",
+    "title": "Color Theory",
+    "section": "Diverging Palettes 3",
+    "text": "Diverging Palettes 3\nI’m adding a circle around each point so they are easier to see.\n\n\nCode\nave_mass = mean(penguins$body_mass_g,na.rm = TRUE)\n\npenguins |&gt;\n  mutate(diff_mass_from_avg =body_mass_g - ave_mass)|&gt;\n  ggplot()+\n  geom_point(aes(\n    x = flipper_length_mm, \n    y = bill_depth_mm,\n    fill = diff_mass_from_avg,\n    ),\n    shape = 21,   # &lt;- this is a circle that allows outlining\n    color = \"black\",  # &lt;- outline color\n    stroke = 0.3,    # &lt;- outline thickness\n    size = 3)+\n  scale_fill_distiller(palette = \"BrBG\")"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#diverging-palettes-4",
+    "href": "course-materials/lectures/11_color_theory.html#diverging-palettes-4",
+    "title": "Color Theory",
+    "section": "Diverging Palettes 4",
+    "text": "Diverging Palettes 4\nMissing Data should be clearly represented with grey or a like color.\n\n\nCode\nlibrary(tidycensus)\n\n#Make Mass Median Income\nmass_med_income &lt;- \n  get_acs(\n    geography = \"county\", \n    variables = c(med_household_income = \"B19013_001\"),\n    state = \"MA\",\n    # We'll need to pivot wider, but that doesn't work with simple features. \n    geometry = TRUE\n  )|&gt;\n  # Add centroids to each region using purrr package\n tidyr::separate(NAME, c(\"County\", \"State\"), sep = \", \") |&gt; \n tidyr::separate(County, c(\"County\", \"Fluff\"), sep = \" \") |&gt;\n  mutate(med_household_income = estimate) |&gt;\n  mutate(med_income_discrete = cut_interval(\n    med_household_income, \n    length = 15000, \n    labels = c(\"60-75\", \"75-90\",\"90-105\", \"105-120\",\"120-135\")\n    ))\n\n\n\n\nCode\nmass_med_income$med_income_discrete[8] = NA\n\nggplot() +\n  geom_sf(data = mass_med_income, aes(fill = med_income_discrete)) +\n # geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +\n  labs(fill = \"Median Income\\n thousands dollars\",\n       title = \"Massachusetts Med Income 2020 \",\n       #subtitle = \"Median income in 2020 was $91,842\",\n       subtitle = \"Hampshire county data is missing\",\n       caption = \"deptofnumbers.com\")+\n  scale_fill_brewer(palette = \"PuOr\",na.value =\"grey\" )+\n  theme_classic()+\n  theme_void()"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#qualitative-data",
+    "href": "course-materials/lectures/11_color_theory.html#qualitative-data",
+    "title": "Color Theory",
+    "section": "Qualitative Data",
+    "text": "Qualitative Data\nIf the variable is categorical use a qualitative palette.\nLimit yourself to six categories.\n\n\nCode\nfun_facts &lt;- tribble(\n  ~fun_facts,\n  \"County of Mass Bay Colony\",\n  \"County of Plymouth Colony\",\n  \"Newest\",\n  \"Island\",\n  \"County of Mass Bay Colony\",\n  \"County of Plymouth Colony\",\n  \"Newest\",\n  \"I live here\",\n  \"County of Mass Bay Colony\",\n  \"Newest\",\n  \"County of Plymouth Colony\",\n  \"Boarders Three States\",\n  \"Boarders Three States\",\n  \"Island\"\n)\n\nggplot() +\n  geom_sf(data = bind_cols(mass_med_income, fun_facts), aes(fill = fun_facts)) +\n  labs(fill = \"\",\n       title = \"Massachusetts Med Income 2020 \",\n       subtitle = \"Fun Facts about MA Counties\",\n       caption = \"source: https://en.wikipedia.org/wiki/\\nList_of_counties_in_Massachusetts\")+\n  scale_fill_brewer(palette = \"Set2\",na.value =\"grey\" )+\n  theme_classic()+\n  theme_void()"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#how-do-we-do-this",
+    "href": "course-materials/lectures/11_color_theory.html#how-do-we-do-this",
+    "title": "Color Theory",
+    "section": "How do we do this?",
+    "text": "How do we do this?\nCategorical/discrete variable\nadd scale_*_brewer() to your plot\nNumeric/continuous Variable\nadd scale_*_distiller() to your plot"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#too-many-categories-and-rainbows",
+    "href": "course-materials/lectures/11_color_theory.html#too-many-categories-and-rainbows",
+    "title": "Color Theory",
+    "section": "Too many categories and Rainbows!",
+    "text": "Too many categories and Rainbows!\nThis is the default option in R\n\n\nCode\nggplot() +\n  geom_sf(data = bind_cols(mass_med_income, fun_facts), aes(fill = County )) +\n # geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +\n  labs(fill = \"County Names\",\n       title = \"Counties in MA\")+\n  theme_classic()+\n  theme(axis.title.x=element_blank(),\n        axis.text.x=element_blank(),\n        axis.ticks.x=element_blank(),\n        axis.title.y=element_blank(),\n        axis.text.y=element_blank(),\n        axis.ticks.y=element_blank(),\n        axis.line = element_blank()\n        )"
+  },
+  {
+    "objectID": "course-materials/lectures/11_color_theory.html#confusing-fill-and-color",
+    "href": "course-materials/lectures/11_color_theory.html#confusing-fill-and-color",
+    "title": "Color Theory",
+    "section": "Confusing fill and color",
+    "text": "Confusing fill and color\nDon’t confuse fill and color. If aes(fill) then you must use scale_fill_brewer() not scale_color_brewer(), and vice versa.\n\nggplot() +\n  geom_sf(data = mass_med_income, aes(fill = med_income_discrete)) +\n  labs(fill = \"Median Income\\n thousands dollars\",\n       title = \"Tried to color the fill aes()\",\n       subtitle = \"Got the default colors\",\n       caption = \"deptofnumbers.com\")+\n  scale_color_brewer(palette = \"PuOr\",na.value =\"grey\" )+\n  theme_classic()+\n  theme_void()"
+  },
+  {
+    "objectID": "course-materials/lectures/16_dplyr.html",
+    "href": "course-materials/lectures/16_dplyr.html",
+    "title": "Dplyr Cheatsheet",
     "section": "",
-    "text": "# Get MA county sf object, that includes population estimate column in data\nmass_pop_orig &lt;- \n  tidycensus::get_acs(\n    geography = \"county\", \n    variables = \"B01003_001\", \n    state = \"MA\",\n    geometry = TRUE\n  ) |&gt; \n  # Add centroids to each region using purrr package\n  mutate(\n    lng = purrr::map_dbl(geometry, ~st_centroid(.x)[[1]]),\n    lat = purrr::map_dbl(geometry, ~st_centroid(.x)[[2]])\n  )  \n\n\n  |                                                                            \n  |                                                                      |   0%\n  |                                                                            \n  |                                                                      |   1%\n  |                                                                            \n  |=                                                                     |   1%\n  |                                                                            \n  |=                                                                     |   2%\n  |                                                                            \n  |==                                                                    |   2%\n  |                                                                            \n  |==                                                                    |   3%\n  |                                                                            \n  |==                                                                    |   4%\n  |                                                                            \n  |===                                                                   |   4%\n  |                                                                            \n  |===                                                                   |   5%\n  |                                                                            \n  |====                                                                  |   5%\n  |                                                                            \n  |====                                                                  |   6%\n  |                                                                            \n  |=====                                                                 |   6%\n  |                                                                            \n  |=====                                                                 |   7%\n  |                                                                            \n  |=====                                                                 |   8%\n  |                                                                            \n  |======                                                                |   8%\n  |                                                                            \n  |======                                                                |   9%\n  |                                                                            \n  |=======                                                               |   9%\n  |                                                                            \n  |=======                                                               |  10%\n  |                                                                            \n  |=======                                                               |  11%\n  |                                                                            \n  |========                                                              |  11%\n  |                                                                            \n  |========                                                              |  12%\n  |                                                                            \n  |=========                                                             |  12%\n  |                                                                            \n  |=========                                                             |  13%\n  |                                                                            \n  |=========                                                             |  14%\n  |                                                                            \n  |==========                                                            |  14%\n  |                                                                            \n  |==========                                                            |  15%\n  |                                                                            \n  |===========                                                           |  15%\n  |                                                                            \n  |===========                                                           |  16%\n  |                                                                            \n  |============                                                          |  16%\n  |                                                                            \n  |============                                                          |  17%\n  |                                                                            \n  |============                                                          |  18%\n  |                                                                            \n  |=============                                                         |  18%\n  |                                                                            \n  |=============                                                         |  19%\n  |                                                                            \n  |==============                                                        |  19%\n  |                                                                            \n  |==============                                                        |  20%\n  |                                                                            \n  |==============                                                        |  21%\n  |                                                                            \n  |===============                                                       |  21%\n  |                                                                            \n  |===============                                                       |  22%\n  |                                                                            \n  |================                                                      |  22%\n  |                                                                            \n  |================                                                      |  23%\n  |                                                                            \n  |================                                                      |  24%\n  |                                                                            \n  |=================                                                     |  24%\n  |                                                                            \n  |=================                                                     |  25%\n  |                                                                            \n  |==================                                                    |  25%\n  |                                                                            \n  |==================                                                    |  26%\n  |                                                                            \n  |===================                                                   |  26%\n  |                                                                            \n  |===================                                                   |  27%\n  |                                                                            \n  |===================                                                   |  28%\n  |                                                                            \n  |====================                                                  |  28%\n  |                                                                            \n  |====================                                                  |  29%\n  |                                                                            \n  |=====================                                                 |  29%\n  |                                                                            \n  |=====================                                                 |  30%\n  |                                                                            \n  |=====================                                                 |  31%\n  |                                                                            \n  |======================                                                |  31%\n  |                                                                            \n  |======================                                                |  32%\n  |                                                                            \n  |=======================                                               |  32%\n  |                                                                            \n  |=======================                                               |  33%\n  |                                                                            \n  |=======================                                               |  34%\n  |                                                                            \n  |========================                                              |  34%\n  |                                                                            \n  |========================                                              |  35%\n  |                                                                            \n  |=========================                                             |  35%\n  |                                                                            \n  |=========================                                             |  36%\n  |                                                                            \n  |==========================                                            |  36%\n  |                                                                            \n  |==========================                                            |  37%\n  |                                                                            \n  |==========================                                            |  38%\n  |                                                                            \n  |===========================                                           |  38%\n  |                                                                            \n  |===========================                                           |  39%\n  |                                                                            \n  |============================                                          |  39%\n  |                                                                            \n  |============================                                          |  40%\n  |                                                                            \n  |============================                                          |  41%\n  |                                                                            \n  |=============================                                         |  41%\n  |                                                                            \n  |=============================                                         |  42%\n  |                                                                            \n  |==============================                                        |  42%\n  |                                                                            \n  |==============================                                        |  43%\n  |                                                                            \n  |==============================                                        |  44%\n  |                                                                            \n  |===============================                                       |  44%\n  |                                                                            \n  |===============================                                       |  45%\n  |                                                                            \n  |================================                                      |  45%\n  |                                                                            \n  |================================                                      |  46%\n  |                                                                            \n  |=================================                                     |  46%\n  |                                                                            \n  |=================================                                     |  47%\n  |                                                                            \n  |=================================                                     |  48%\n  |                                                                            \n  |==================================                                    |  48%\n  |                                                                            \n  |==================================                                    |  49%\n  |                                                                            \n  |===================================                                   |  49%\n  |                                                                            \n  |===================================                                   |  50%\n  |                                                                            \n  |===================================                                   |  51%\n  |                                                                            \n  |====================================                                  |  51%\n  |                                                                            \n  |====================================                                  |  52%\n  |                                                                            \n  |=====================================                                 |  52%\n  |                                                                            \n  |=====================================                                 |  53%\n  |                                                                            \n  |=====================================                                 |  54%\n  |                                                                            \n  |======================================                                |  54%\n  |                                                                            \n  |======================================                                |  55%\n  |                                                                            \n  |=======================================                               |  55%\n  |                                                                            \n  |=======================================                               |  56%\n  |                                                                            \n  |========================================                              |  56%\n  |                                                                            \n  |========================================                              |  57%\n  |                                                                            \n  |========================================                              |  58%\n  |                                                                            \n  |=========================================                             |  58%\n  |                                                                            \n  |=========================================                             |  59%\n  |                                                                            \n  |==========================================                            |  59%\n  |                                                                            \n  |==========================================                            |  60%\n  |                                                                            \n  |==========================================                            |  61%\n  |                                                                            \n  |===========================================                           |  61%\n  |                                                                            \n  |===========================================                           |  62%\n  |                                                                            \n  |============================================                          |  62%\n  |                                                                            \n  |============================================                          |  63%\n  |                                                                            \n  |============================================                          |  64%\n  |                                                                            \n  |=============================================                         |  64%\n  |                                                                            \n  |=============================================                         |  65%\n  |                                                                            \n  |==============================================                        |  65%\n  |                                                                            \n  |==============================================                        |  66%\n  |                                                                            \n  |===============================================                       |  66%\n  |                                                                            \n  |===============================================                       |  67%\n  |                                                                            \n  |===============================================                       |  68%\n  |                                                                            \n  |================================================                      |  68%\n  |                                                                            \n  |================================================                      |  69%\n  |                                                                            \n  |=================================================                     |  69%\n  |                                                                            \n  |=================================================                     |  70%\n  |                                                                            \n  |=================================================                     |  71%\n  |                                                                            \n  |==================================================                    |  71%\n  |                                                                            \n  |==================================================                    |  72%\n  |                                                                            \n  |===================================================                   |  72%\n  |                                                                            \n  |===================================================                   |  73%\n  |                                                                            \n  |===================================================                   |  74%\n  |                                                                            \n  |====================================================                  |  74%\n  |                                                                            \n  |====================================================                  |  75%\n  |                                                                            \n  |=====================================================                 |  75%\n  |                                                                            \n  |=====================================================                 |  76%\n  |                                                                            \n  |======================================================                |  76%\n  |                                                                            \n  |======================================================                |  77%\n  |                                                                            \n  |======================================================                |  78%\n  |                                                                            \n  |=======================================================               |  78%\n  |                                                                            \n  |=======================================================               |  79%\n  |                                                                            \n  |========================================================              |  79%\n  |                                                                            \n  |========================================================              |  80%\n  |                                                                            \n  |========================================================              |  81%\n  |                                                                            \n  |=========================================================             |  81%\n  |                                                                            \n  |=========================================================             |  82%\n  |                                                                            \n  |==========================================================            |  82%\n  |                                                                            \n  |==========================================================            |  83%\n  |                                                                            \n  |==========================================================            |  84%\n  |                                                                            \n  |===========================================================           |  84%\n  |                                                                            \n  |===========================================================           |  85%\n  |                                                                            \n  |============================================================          |  85%\n  |                                                                            \n  |============================================================          |  86%\n  |                                                                            \n  |=============================================================         |  86%\n  |                                                                            \n  |=============================================================         |  87%\n  |                                                                            \n  |=============================================================         |  88%\n  |                                                                            \n  |==============================================================        |  88%\n  |                                                                            \n  |==============================================================        |  89%\n  |                                                                            \n  |===============================================================       |  89%\n  |                                                                            \n  |===============================================================       |  90%\n  |                                                                            \n  |===============================================================       |  91%\n  |                                                                            \n  |================================================================      |  91%\n  |                                                                            \n  |================================================================      |  92%\n  |                                                                            \n  |=================================================================     |  92%\n  |                                                                            \n  |=================================================================     |  93%\n  |                                                                            \n  |=================================================================     |  94%\n  |                                                                            \n  |==================================================================    |  94%\n  |                                                                            \n  |==================================================================    |  95%\n  |                                                                            \n  |===================================================================   |  95%\n  |                                                                            \n  |===================================================================   |  96%\n  |                                                                            \n  |====================================================================  |  96%\n  |                                                                            \n  |====================================================================  |  97%\n  |                                                                            \n  |====================================================================  |  98%\n  |                                                                            \n  |===================================================================== |  98%\n  |                                                                            \n  |===================================================================== |  99%\n  |                                                                            \n  |======================================================================|  99%\n  |                                                                            \n  |======================================================================| 100%\n\nmass_pop_orig\n\nSimple feature collection with 14 features and 7 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -73.50814 ymin: 41.23796 xmax: -69.92839 ymax: 42.88659\nGeodetic CRS:  NAD83\nFirst 10 features:\n   GEOID                            NAME   variable estimate moe\n1  25009     Essex County, Massachusetts B01003_001   807258  NA\n2  25005   Bristol County, Massachusetts B01003_001   578436  NA\n3  25021   Norfolk County, Massachusetts B01003_001   724540  NA\n4  25007     Dukes County, Massachusetts B01003_001    20751  NA\n5  25017 Middlesex County, Massachusetts B01003_001  1622896  NA\n6  25023  Plymouth County, Massachusetts B01003_001   531889  NA\n7  25011  Franklin County, Massachusetts B01003_001    70922  NA\n8  25015 Hampshire County, Massachusetts B01003_001   156595  NA\n9  25025   Suffolk County, Massachusetts B01003_001   782172  NA\n10 25013   Hampden County, Massachusetts B01003_001   462853  NA\n                         geometry       lng      lat\n1  MULTIPOLYGON (((-70.58029 4... -70.95243 42.67323\n2  MULTIPOLYGON (((-70.83573 4... -71.11445 41.79724\n3  MULTIPOLYGON (((-70.84466 4... -71.21179 42.16033\n4  MULTIPOLYGON (((-70.8071 41... -70.64999 41.39608\n5  MULTIPOLYGON (((-71.89877 4... -71.39180 42.48557\n6  MULTIPOLYGON (((-70.88335 4... -70.81147 41.95109\n7  MULTIPOLYGON (((-73.02301 4... -72.59183 42.58309\n8  MULTIPOLYGON (((-73.06577 4... -72.66377 42.34016\n9  MULTIPOLYGON (((-70.93091 4... -71.07348 42.33286\n10 MULTIPOLYGON (((-73.07484 4... -72.63158 42.13509\n\n# Unfortunately the original NAME variable above is very long and redundant.\n# Create a new data frame with the just the county name using the separate()\n# function from the tidyr package. \nmass_pop &lt;- mass_pop_orig |&gt; \n  tidyr::separate(NAME, c(\"County\", \"State\"), sep = \", \") |&gt; \n  tidyr::separate(County, c(\"County\", \"Fluff\"), sep = \" \") \n\n# Plot gradient choropleth map based on numerical variable estimate\nggplot() +\n  geom_sf(data = mass_pop, aes(fill = estimate)) +\n  geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +\n  labs(fill = \"Population\\nEstimate\")\n\n\n\n\n\n\n\n# What if instead we want a bin based choropleth map. Use the cut_number()\n# function to convert the numerical variable estimate \n# to a categorical variable with 3 levels!\nmass_pop &lt;- mass_pop |&gt;\n  mutate(estimate_discrete = cut_number(estimate, 3))\nmass_pop\n\nSimple feature collection with 14 features and 10 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -73.50814 ymin: 41.23796 xmax: -69.92839 ymax: 42.88659\nGeodetic CRS:  NAD83\nFirst 10 features:\n   GEOID    County  Fluff         State   variable estimate moe       lng\n1  25009     Essex County Massachusetts B01003_001   807258  NA -70.95243\n2  25005   Bristol County Massachusetts B01003_001   578436  NA -71.11445\n3  25021   Norfolk County Massachusetts B01003_001   724540  NA -71.21179\n4  25007     Dukes County Massachusetts B01003_001    20751  NA -70.64999\n5  25017 Middlesex County Massachusetts B01003_001  1622896  NA -71.39180\n6  25023  Plymouth County Massachusetts B01003_001   531889  NA -70.81147\n7  25011  Franklin County Massachusetts B01003_001    70922  NA -72.59183\n8  25015 Hampshire County Massachusetts B01003_001   156595  NA -72.66377\n9  25025   Suffolk County Massachusetts B01003_001   782172  NA -71.07348\n10 25013   Hampden County Massachusetts B01003_001   462853  NA -72.63158\n        lat                       geometry   estimate_discrete\n1  42.67323 MULTIPOLYGON (((-70.58029 4... (6.76e+05,1.62e+06]\n2  41.79724 MULTIPOLYGON (((-70.83573 4... (1.81e+05,6.76e+05]\n3  42.16033 MULTIPOLYGON (((-70.84466 4... (6.76e+05,1.62e+06]\n4  41.39608 MULTIPOLYGON (((-70.8071 41... [1.43e+04,1.81e+05]\n5  42.48557 MULTIPOLYGON (((-71.89877 4... (6.76e+05,1.62e+06]\n6  41.95109 MULTIPOLYGON (((-70.88335 4... (1.81e+05,6.76e+05]\n7  42.58309 MULTIPOLYGON (((-73.02301 4... [1.43e+04,1.81e+05]\n8  42.34016 MULTIPOLYGON (((-73.06577 4... [1.43e+04,1.81e+05]\n9  42.33286 MULTIPOLYGON (((-70.93091 4... (6.76e+05,1.62e+06]\n10 42.13509 MULTIPOLYGON (((-73.07484 4... (1.81e+05,6.76e+05]\n\n# Plot!\nggplot() +\n  geom_sf(data = mass_pop, aes(fill = estimate_discrete)) +\n  geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +\n  labs(fill = \"Population\\nEstimate\")\n\n\n\n\n\n\n\n\nCheck out this site for more on tidycensus\nSpecifically the load_variables function.\n\nv20 &lt;- load_variables(2020, \"acs5\", cache = TRUE)"
-  },
-  {
-    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise",
-    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise",
-    "title": "In-class Exercises: Mapping",
-    "section": "Exercise",
-    "text": "Exercise\nUse the tidycensus package to conduct a spatial analysis of the American Community Survey data it contains for Massachusetts. Answer the question: Which counties in Massachusetts have the highest proportion of retirees (Use age &gt; 65 as a proxyt for retirement)?\nInstructions for using the tidycensus package\n\nlibrary(tidyverse)\nlibrary(tidycensus)\n\n# Write your code below\nmass_prop_retirees &lt;- \n  tidycensus::get_acs(\n    geography = \"county\", \n    variables = c(population = \"B01003_001\",age_1=\"B01001_044\", age_2='B01001_045', age_3='B01001_046',age_4='B01001_047', age_5 = 'B01001_048', age_6 = 'B01001_044'),\n    state = \"MA\",\n    geometry = FALSE\n  ) |&gt;\n  # Add centroids to each region using purrr package\n tidyr::separate(NAME, c(\"County\", \"State\"), sep = \", \") |&gt; \n tidyr::separate(County, c(\"County\", \"Fluff\"), sep = \" \") \n\nmass_prop_retirees &lt;- mass_prop_retirees |&gt; \n  select(County,variable,estimate)|&gt;\n  pivot_wider(names_from = variable, values_from = estimate) |&gt;\n  mutate(proportion = (age_1+age_2+age_3+age_4+age_5)/population)\n\n# Do a left join, a right join will lose the multipolygon-ness\nmass_prop &lt;- mass_pop |&gt;\n  left_join(mass_prop_retirees, by = \"County\")\n\nggplot() +\n  geom_sf(data = mass_prop, aes(fill = proportion)) +\n  scale_fill_distiller(direction = 1)\n\n\n\n\n\n\n\nmass_pop_orig\n\nSimple feature collection with 14 features and 7 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -73.50814 ymin: 41.23796 xmax: -69.92839 ymax: 42.88659\nGeodetic CRS:  NAD83\nFirst 10 features:\n   GEOID                            NAME   variable estimate moe\n1  25009     Essex County, Massachusetts B01003_001   807258  NA\n2  25005   Bristol County, Massachusetts B01003_001   578436  NA\n3  25021   Norfolk County, Massachusetts B01003_001   724540  NA\n4  25007     Dukes County, Massachusetts B01003_001    20751  NA\n5  25017 Middlesex County, Massachusetts B01003_001  1622896  NA\n6  25023  Plymouth County, Massachusetts B01003_001   531889  NA\n7  25011  Franklin County, Massachusetts B01003_001    70922  NA\n8  25015 Hampshire County, Massachusetts B01003_001   156595  NA\n9  25025   Suffolk County, Massachusetts B01003_001   782172  NA\n10 25013   Hampden County, Massachusetts B01003_001   462853  NA\n                         geometry       lng      lat\n1  MULTIPOLYGON (((-70.58029 4... -70.95243 42.67323\n2  MULTIPOLYGON (((-70.83573 4... -71.11445 41.79724\n3  MULTIPOLYGON (((-70.84466 4... -71.21179 42.16033\n4  MULTIPOLYGON (((-70.8071 41... -70.64999 41.39608\n5  MULTIPOLYGON (((-71.89877 4... -71.39180 42.48557\n6  MULTIPOLYGON (((-70.88335 4... -70.81147 41.95109\n7  MULTIPOLYGON (((-73.02301 4... -72.59183 42.58309\n8  MULTIPOLYGON (((-73.06577 4... -72.66377 42.34016\n9  MULTIPOLYGON (((-70.93091 4... -71.07348 42.33286\n10 MULTIPOLYGON (((-73.07484 4... -72.63158 42.13509"
-  },
-  {
-    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise-1",
-    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise-1",
-    "title": "In-class Exercises: Mapping",
-    "section": "Exercise",
-    "text": "Exercise\nDraw an interactive map of a previous school or place you went.\n\n# Write your code below"
-  },
-  {
-    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#color-in-leaflet",
-    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#color-in-leaflet",
-    "title": "In-class Exercises: Mapping",
-    "section": "Color in leaflet",
-    "text": "Color in leaflet\n\nwetlands &lt;- macleish_layers |&gt;\n  pluck(\"wetlands\")\n\nleaflet() |&gt;\n  addTiles()|&gt;\n  addPolygons(data = wetlands, \n              color = ~SHAPE_LEN, \n              popup = ~IT_VALDESC)\n\n\n\n\nwetland_pal &lt;- colorNumeric(\n  palette = \"viridis\", \n  domain = wetlands |&gt;\n    pull(SHAPE_LEN)\n)\n\nleaflet() |&gt;\n  addTiles() |&gt;\n  addPolygons(data = wetlands, \n              color = ~wetland_pal(SHAPE_LEN), \n              fillOpacity = 0.8, weight = 0.1, \n              popup = ~IT_VALDESC) |&gt;\n  addLegend(position = \"bottomleft\", \n            pal = wetland_pal, \n            values = wetlands$SHAPE_LEN,\n            title = \"Wetland Area\")"
-  },
-  {
-    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise-2",
-    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#exercise-2",
-    "title": "In-class Exercises: Mapping",
-    "section": "Exercise",
-    "text": "Exercise\nDraw an interactive map adding circles.\n\n# Write your code below"
-  },
-  {
-    "objectID": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#challenge",
-    "href": "course-materials/lectures/29_Choropleth_and_Leaflet_Solutions.html#challenge",
-    "title": "In-class Exercises: Mapping",
-    "section": "Challenge!!",
-    "text": "Challenge!!\n\nUse the above data to create an interactive map\nConvert the numerical variable estimate to a categorical variable with 3 levels such as Low, Medium, High\nUse the factor() function to order 3 levels as Low, Medium, High, otherwise the legend order will be in alphabetical order\nCreate your own color palette to match the color order (e.g., from light green to dark green) with your legend order\n\n\n# Write your code below"
+    "text": "This is only a placeholder for the cheatsheet."
   }
 ]
