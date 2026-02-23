@@ -1,1 +1,101 @@
-8.6
+---
+title: "Ethics part 3: Bias in Data"
+subtitle: "CSI-MTH-190"
+author: "Schwab"
+format: 
+  revealjs:
+    theme: beige
+execute: 
+  warning: false
+  message: false
+  echo: true
+--- 
+
+## Practice thinking about Bias 
+
+Start thinking about how data may be biased.
+
+I'll give an example then we'll consider three additonal examples.  
+
+## Modern Pulse Oximeters Intoduction
+
+[Video](https://youtu.be/r0RISnX-cnc?si=uMQIlau1sHtbKW1c)
+
+[Article](https://www.npr.org/2023/02/10/1156166554/covid-19-pulse-oximeters-racial-bias)
+
+## HP Calibrated for all skin tones
+
+HP worked with NASA to develoop medical devices.
+
+Hewlett Packard made an ear pulse oximeter [for all in the 1970s.](https://www.wired.com/story/pulse-oximeters-equity/)
+
+[HP Journal Article](https://hparchive.com/Journals/HPJ-1976-10.pdf)
+
+## Minolta
+
+At the same time as HP, Minolta was developing a pulse oximeter.
+
+Takuo Aoyagi help develop the first pulse oxymeter for the finger.
+
+But there was no discussion of different skin tones.
+
+## Newer Models Prioritize Convenience
+
+Small device that is battery powered for the finger tip. 
+
+People can keep it in their pocket.
+
+Today there is still bias in these devices.
+
+Brought to light during COVID what many people with darker skin were sent home from ER despite having breathing difficulties.
+
+## Why tell you this story? 
+
+The bias in these devices is imparted by the people who design them. 
+
+HP collected data to consider skin tones.
+
+If Minolta collected data on skin tone, it was ignored. 
+
+Those choices matter. 
+
+#  Examples 
+
+Let's practice considering bias in the data. 
+
+
+## Ex 1.  Skin Cancer
+
+Machine Learning (AI) example:
+
+- Start with a [dataset](https://www.kaggle.com/datasets/kmader/skin-cancer-mnist-ham10000) of lots of pictures of potential cancers.
+
+- Cancer Specialists (Humans) label pictures as cancerous or not.
+
+- Data (Images of skin) is fed into a nueral network repeatedly until AI can tell appar cancer images. This makes a model.
+
+- Model is then used to take a new image and guess if it is cancerous or not. 
+
+Any Bias Here? When would it matter?
+
+## Ex. 2 Stop Question Frisk
+
+Stop Question Fisk is a policing strategy used in New York City as well as other major cities.
+
+All the data is collected and reported [here](https://www.nyc.gov/site/nypd/stats/reports-analysis/stopfrisk.page)
+
+Data is reported on a [form](https://ccrjustice.org/sites/default/files/attach/2016/03/Floyd%20Monitor%20Status%20Report%20-%20New%20UF250%203-23-16.pdf) the police officers submit.
+
+Any Bias Here? When would it matter?
+
+## Ex 3. babynames
+
+We will be considering the [`babynames` dataset](https://cran.r-project.org/web/packages/babynames/babynames.pdf) in the next lab. 
+
+This dataset includes all names given to US citizens as collected from the social security administration between 1880 and 2017.
+
+Any Bias Here? When would it matter?
+
+## Reading
+
+For more examples of algorithmic bias read chapter [8.6 from MDSR](https://mdsr-book.github.io/mdsr3e/08-ethics.html#algorithmic-bias)

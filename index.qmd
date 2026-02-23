@@ -92,19 +92,13 @@ Part 2: Wrangling
 
 -   [16 Dplyr Cheat sheet](https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-transformation.pdf)
 
--   [17 Ethics Part 3](./course-materials/lectures/17_ethic_part_3.qmd.qmd)
+-   [17 Ethics Part 3](./course-materials/lectures/17_ethic_part_3.qmd)
 
 # Week 7
-
--   [17 What you can do in sumarize]()
-
--   [18 Ethics part 3]()
 
 -   [19 Joins part 1 an exploration]()
 
 # Week 8
-
--   [20 Joins part 2 an exploration]()
 
 -   [21 Pivots](./course-materials/lectures/21_pivots.qmd)
 

@@ -8,7 +8,7 @@ format:
     embed-resources: true
 ---
 
-Introduction: In this lab you will practice with some data manipulation functions. They come from the `dplyr` package. Their cheatsheet can be found [here](https://rstudio.github.io/cheatsheets/html/data-transformation.html).
+Introduction: In this lab you will practice with some data manipulation functions. They come from the `dplyr` package. The cheatsheet can be found [here](https://rstudio.github.io/cheatsheets/html/data-transformation.html).
 
 Specifically we'll practice with:
 
@@ -19,7 +19,7 @@ Specifically we'll practice with:
 - group_by() and 
 - sumarize()
 
-We'll practice on the dataset `babynames`, which lists a summary of every name of every child born in the US and given a social security number since 1880. I'll start with an example then give you some practice problems at the end.
+We'll practice these functions with the dataset `babynames`, which lists a summary of every name of every child born in the US and given a social security number since 1880. I'll start with an example then give you some practice problems at the end.
 
 ## Install a package
 
@@ -31,7 +31,7 @@ Together let's navigate to the [github](https://github.com/hadley/babynames) rep
 #install.packages("babynames")
 ```
 
-After you install babynames once, be sure to comment that line of code out, or add #| eval: False. 
+After you install babynames once, be sure to comment that line of code, or add #| eval: False. 
 
 ## Understand the data
 
@@ -41,12 +41,12 @@ library(tidyverse)
 library(babynames)
 ```
 
-You should always understand what your data look like. Call up the help menu or view the data with `head()` or `view` in a chunk below. The data, like the package is called `babynames`.
+You should always understand what your data look like. Do not use view(), babynames is big and you'll slow the server down. Call up the help menu or view the data with `head()`. in a chunk below. The data, like the package is called `babynames`.
 
 ```{r}
 ?babynames
-# warning sometimes data is so big it is challenging to view it this way, and head() is better.
-view(babynames)
+# warning sometimes data is so big it is challenging to view() it, and head() is better.
+
 ```
 
 ## mutate()
@@ -61,7 +61,7 @@ Then you'll pipe babynames into mutate(total = ...)
 
 ```{r}
 babynames = babynames|>
-    mutate(total_births = #### put code here)
+    mutate(total_births = n/prop)
 view(babynames)
 ```
 
@@ -115,7 +115,6 @@ babynames |>
 
 Note that all of these years coincide with the boomer generation.
 
-
 ## filter()
 
 If you wanted to see what year had the highest total births for a given name you could filter by that name first. For example I might filter for Nic or Nicholas as those are two names I go by often. Then I would repeat the analysis above to find which year had the most children named Nicholas born.
@@ -144,13 +143,34 @@ In the following set of exercises I will guide you through the process of making
 
 **Solution:** Make a chunk for the filtering below.
 
+```{r}
+babynames_nic = babynames |>
+    filter(name %in% c("Nic", "Nick", "Nicholas"))
+```
+
 **Problem 2:** Now that we've filtered we should make a line graph of the number of babies born `n` by the `year` they were born.
 
 **Solution:** Make a chunk and use `ggplot()` and `geom_line()` complete problem 2.
 
+```{r}
+babynames_nic |>
+    ggplot()+
+    geom_line(aes(x= year, y = n))
+
+```
+
 **Problem 3:** You'll notice there is a problem, depending on your name, your graph probably oscillates to make a jagged appearance. Your task is to figure out why its happening and fix it with `group_by()` and `summarize()`, then pipe it into a new line graph without it oscillating. Then tidy up your line graph with a title, better axes labels and a better looking theme.
 
-**Solution:**
+**Solution:** 
+
+```{r}
+babynames_nic |>
+    group_by(year)|>
+    summarise(n=sum(n))|>
+    ggplot()+
+    geom_line(aes(x= year, y = n))
+
+```
 
 ## Excercises Part 2
 
@@ -174,29 +194,95 @@ To do this we'll have to agree on dates for common generation names in the US. H
 
 **Solution:**
 
-**Problem 5:** Using the `generations` dataframe, group_by() and summarize() find the total number of births by generation, then use `geom_col()` to make a nice bar graph showing the generation_name on the y-axis and the total births on the x-axis. (Hint: it might be nice to use the provided theme: 
 ```{r}
+generations = babynames|>
+    mutate(generation = case_when(
+        year < 1883    ~ "No name",
+        year < 1901    ~ "Lost Generation",
+        year < 1928    ~ "Greatest Generation",
+        year < 1946    ~ "Silent Generation",
+        year < 1965    ~ "Baby Boomers",
+        year < 1981    ~ "Generation X",       
+        year < 1997    ~ "Millennials",        
+        year < 2013    ~ "Zoomers",             
+        year >= 2013   ~ "Generation Alpha ",
+        TRUE ~ "No name"
+    ))
 
-
-theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)))
 ```
 
-**Solution:**
+**Problem 5:** Using the `generations` dataframe, group_by() and summarize() find the total number of births by generation, then use `geom_col()` to make a nice bar graph showing the generation_name on the y-axis and the total births on the x-axis.
+
+**Solution:** 
+```{r}
+generations |> 
+    group_by(generation) |>
+    summarise(total_births = sum(n))|>
+    ggplot()+
+    geom_col(aes(generation,total_births))+
+    theme(
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+  )
+```
 
 **Problem 6:** Edit the code above to group by biological sex as well as generations. Then remake the graph to color by sex. What do you notice?  
 
-**Solution:**
+**Solution:** 
+```{r}
+generations |> 
+    group_by(generation,sex) |>
+    summarise(total_births = sum(n))|>
+    ggplot()+
+    geom_col(aes(
+        generation,
+        total_births, 
+        fill = sex),
+        position= "dodge")+
+    theme(
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+  )
+```
 
 ## Exercises part #3
 
-**Problem 7:** Subset the `generations` data to only both the Millennial and Zoomer generations and find the three most popular names from both generations. You will need the `%in%` operator and a vector `c()`.  I found `ungroup()` or a second `group_by()` helpful.  Your answer should have six rows.
+**Problem 7:** Subset the `generations` data to only both the Millennial and Zoomer generations and find the three most popular names from both generations. You will need the `%in%` operator and a vector `c()`. I found `ungroup()` or a second `group_by()` helpful. Your answer should have six rows.
 
 **Solution:**
+
+```{r}
+generations |>
+    filter(generation %in% c("Millennials","Zoomers"))|>
+    group_by(name, generation)|>
+    summarise(n = sum(n))|>
+    ungroup()|>
+    slice_max(order_by = n, n = 3, by=generation)
+
+```
 
 **Problem 8:** Use `filter()` and `str_detect()` to find the top three names from the Millennial and Zoomer generation that start with "E". You should only have to add **max** one line to your answer to number 7. Save your answer as `gen_top6` for problem 9, make sure the six names and their totals still show in the rendered document.
 
 **Solution:**
+```{r}
+gen_top6 = generations |>
+    filter(generation %in% c("Millennials","Zoomers"))|>
+    group_by(name, generation)|>
+    summarise(n = sum(n))|>
+    ungroup()|>
+    filter(  str_detect(name, "^E"))|>
+    slice_max(order_by = n, n = 3, by=generation)
+```
 
-**Problem 9:** For each generation in the `generations` dataset find the average number of the top 6 names you found in problem 8. Your answer should have 45 rows.   
+**Problem 9:** For each generation in the `generations` dataset find the average number of the top 6 names you found in problem 8. Your answer should have 45 rows.  
 
 **Solution:**
+
+```{r}
+# If you save your answer to number 8 as gen_top6. This code will pull the top six names, so you don't have to retype them.
+
+top_6_names = gen_top6 |> pull(name)
+
+generations |>
+    filter(name %in% top_6_names)|>
+    group_by(name, generation)|>
+    summarise(avg = mean(n))
+```

@@ -1,9 +1,17 @@
 ---
-title: "page not found"
-format: html
+title: "MTH 190 Intro To Data Science"
+author:
+  - name: "Nicholas Schwab"
+    roles: "Professor" # Free text roles
 ---
 
-# Oh no the page is not found 
+# Oh no the page is not found
 
-[Go back to SDS 192](index.qmd)
+:(
+
+:(
+
+:(
+
+[Go back to CSI/MTH 190](index.qmd)
 

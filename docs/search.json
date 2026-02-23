@@ -252,11 +252,74 @@
     "text": "Optional and Advnaced Topics:\n-   Function writing and data masking in R\n\n-   Iteration"
   },
   {
-    "objectID": "course-materials/lectures/17_ethic_part_3.html",
-    "href": "course-materials/lectures/17_ethic_part_3.html",
-    "title": "CSI-MTH-190",
-    "section": "",
-    "text": "8.6"
+    "objectID": "course-materials/lectures/17_ethic_part_3.html#practice-thinking-about-bias",
+    "href": "course-materials/lectures/17_ethic_part_3.html#practice-thinking-about-bias",
+    "title": "Ethics part 3: Bias in Data",
+    "section": "Practice thinking about Bias",
+    "text": "Practice thinking about Bias\nStart thinking about how data may be biased.\nI’ll give an example then we’ll consider three additonal examples."
+  },
+  {
+    "objectID": "course-materials/lectures/17_ethic_part_3.html#modern-pulse-oximeters-intoduction",
+    "href": "course-materials/lectures/17_ethic_part_3.html#modern-pulse-oximeters-intoduction",
+    "title": "Ethics part 3: Bias in Data",
+    "section": "Modern Pulse Oximeters Intoduction",
+    "text": "Modern Pulse Oximeters Intoduction\nVideo\nArticle"
+  },
+  {
+    "objectID": "course-materials/lectures/17_ethic_part_3.html#hp-calibrated-for-all-skin-tones",
+    "href": "course-materials/lectures/17_ethic_part_3.html#hp-calibrated-for-all-skin-tones",
+    "title": "Ethics part 3: Bias in Data",
+    "section": "HP Calibrated for all skin tones",
+    "text": "HP Calibrated for all skin tones\nHP worked with NASA to develoop medical devices.\nHewlett Packard made an ear pulse oximeter for all in the 1970s.\nHP Journal Article"
+  },
+  {
+    "objectID": "course-materials/lectures/17_ethic_part_3.html#minolta",
+    "href": "course-materials/lectures/17_ethic_part_3.html#minolta",
+    "title": "Ethics part 3: Bias in Data",
+    "section": "Minolta",
+    "text": "Minolta\nAt the same time as HP, Minolta was developing a pulse oximeter.\nTakuo Aoyagi help develop the first pulse oxymeter for the finger.\nBut there was no discussion of different skin tones."
+  },
+  {
+    "objectID": "course-materials/lectures/17_ethic_part_3.html#newer-models-prioritize-convenience",
+    "href": "course-materials/lectures/17_ethic_part_3.html#newer-models-prioritize-convenience",
+    "title": "Ethics part 3: Bias in Data",
+    "section": "Newer Models Prioritize Convenience",
+    "text": "Newer Models Prioritize Convenience\nSmall device that is battery powered for the finger tip.\nPeople can keep it in their pocket.\nToday there is still bias in these devices.\nBrought to light during COVID what many people with darker skin were sent home from ER despite having breathing difficulties."
+  },
+  {
+    "objectID": "course-materials/lectures/17_ethic_part_3.html#why-tell-you-this-story",
+    "href": "course-materials/lectures/17_ethic_part_3.html#why-tell-you-this-story",
+    "title": "Ethics part 3: Bias in Data",
+    "section": "Why tell you this story?",
+    "text": "Why tell you this story?\nThe bias in these devices is imparted by the people who design them.\nHP collected data to consider skin tones.\nIf Minolta collected data on skin tone, it was ignored.\nThose choices matter."
+  },
+  {
+    "objectID": "course-materials/lectures/17_ethic_part_3.html#ex-1.-skin-cancer",
+    "href": "course-materials/lectures/17_ethic_part_3.html#ex-1.-skin-cancer",
+    "title": "Ethics part 3: Bias in Data",
+    "section": "Ex 1. Skin Cancer",
+    "text": "Ex 1. Skin Cancer\nMachine Learning (AI) example:\n\nStart with a dataset of lots of pictures of potential cancers.\nCancer Specialists (Humans) label pictures as cancerous or not.\nData (Images of skin) is fed into a nueral network repeatedly until AI can tell appar cancer images. This makes a model.\nModel is then used to take a new image and guess if it is cancerous or not.\n\nAny Bias Here? When would it matter?"
+  },
+  {
+    "objectID": "course-materials/lectures/17_ethic_part_3.html#ex.-2-stop-question-frisk",
+    "href": "course-materials/lectures/17_ethic_part_3.html#ex.-2-stop-question-frisk",
+    "title": "Ethics part 3: Bias in Data",
+    "section": "Ex. 2 Stop Question Frisk",
+    "text": "Ex. 2 Stop Question Frisk\nStop Question Fisk is a policing strategy used in New York City as well as other major cities.\nAll the data is collected and reported here\nData is reported on a form the police officers submit.\nAny Bias Here? When would it matter?"
+  },
+  {
+    "objectID": "course-materials/lectures/17_ethic_part_3.html#ex-3.-babynames",
+    "href": "course-materials/lectures/17_ethic_part_3.html#ex-3.-babynames",
+    "title": "Ethics part 3: Bias in Data",
+    "section": "Ex 3. babynames",
+    "text": "Ex 3. babynames\nWe will be considering the babynames dataset in the next lab.\nThis dataset includes all names given to US citizens as collected from the social security administration between 1880 and 2017.\nAny Bias Here? When would it matter?"
+  },
+  {
+    "objectID": "course-materials/lectures/17_ethic_part_3.html#reading",
+    "href": "course-materials/lectures/17_ethic_part_3.html#reading",
+    "title": "Ethics part 3: Bias in Data",
+    "section": "Reading",
+    "text": "Reading\nFor more examples of algorithmic bias read chapter 8.6 from MDSR"
   },
   {
     "objectID": "course-materials/lectures/1first-day-survey/Data-Viz-No-Computers.html#names-and-surveys",
@@ -1474,7 +1537,7 @@
     "href": "course-materials/lectures/15_Lecture_on_five_verbs.html#preview-sql-queries",
     "title": "The Verbs",
     "section": "Preview SQL Queries",
-    "text": "Preview SQL Queries\nCSI 264\n\n\n\nSQL\ndplyr\n\n\n\n\nSELECT\nselect(), mutate(), summarise()\n\n\nFROM\nthe data frame. data=\n\n\nWHERE\nfilter()\n\n\nORDER BY\narrange()\n\n\nLIMIT\nslice_head()\n\n\nGROUP BY\ngroup_by"
+    "text": "Preview SQL Queries\nCSI 242 Applied Database Management\n\n\n\nSQL\ndplyr\n\n\n\n\nSELECT\nselect(), mutate(), summarise()\n\n\nFROM\nthe data frame. data=\n\n\nWHERE\nfilter()\n\n\nORDER BY\narrange()\n\n\nLIMIT\nslice_head()\n\n\nGROUP BY\ngroup_by"
   },
   {
     "objectID": "course-materials/lectures/15_Lecture_on_five_verbs.html#the-idea",

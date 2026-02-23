@@ -63,7 +63,7 @@ We will also use:
 
 ## Preview SQL Queries
 
-CSI 264
+CSI 242 Applied Database Management
 
 | SQL      | dplyr                           |
 |----------|---------------------------------|
