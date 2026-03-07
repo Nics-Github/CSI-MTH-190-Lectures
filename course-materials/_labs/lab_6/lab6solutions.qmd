@@ -23,8 +23,9 @@ library(tidyverse)
 
 # Read your csv file in here. hint: you can use the import feature if you forget the code. 
 # save your data as the variable: "sqf_2011"
+sqf_2011 = read_csv("2011.csv")
 
-
+sqf_2011_race_cat = read.csv("https://raw.githubusercontent.com/lindsaypoirier/STS-101/master/Data/SQF/sqf_race_categories.csv", stringsAsFactors = FALSE) 
 ```
 
 ```{r}
@@ -32,8 +33,7 @@ library(tidyverse)
 #| messages: false
 #| document: show
 
-# Do not edit this code chunk. Feel free to read it.
-sqf_2011_race_cat = read.csv("https://raw.githubusercontent.com/lindsaypoirier/STS-101/master/Data/SQF/sqf_race_categories.csv", stringsAsFactors = FALSE)  
+# Do not edit this code chunk. Feel free to read it. 
 sqf_2011 = 
   sqf_2011 |> 
   select(pct, race, age, frisked, pistol, riflshot, asltweap, knifcuti, machgun, othrweap, sumissue, arstmade) |>
@@ -57,7 +57,7 @@ Add two new columns. The first should indicate whether a weapon was found, and t
 sqf_2011 = 
   sqf_2011 |>
   #Add a variable for weapon found a lot has been filled in for you here.
-  _____(wpnfound = case_when(pistol == 1 |       # notice the vertical bars are called pipes and
+  mutate(wpnfound = case_when(pistol == 1 |       
                                riflshot == 1 |   #represent "or"
                                asltweap == 1 |
                                knifcuti == 1 | 
@@ -69,7 +69,11 @@ sqf_2011 =
 sqf_2011 = 
   sqf_2011 |>
   #Add a variable for arrest made or summons issued, you'll have to find the two variable names and set up your case_when.
-  _____(arrestsumm = case_when())
+  mutate(arrestsumm = case_when(
+        arstmade==1|
+        sumissue==1 ~ 1,
+    TRUE ~ 0 
+  ))
 ```
 
 ###### Question
@@ -85,8 +89,11 @@ You've made new columns. Subset the dataset by removing eight redundant variable
 # You can select() or select(-c())
 sqf_2011 =
   sqf_2011 |>
-  _____()
+  select(-c(pistol,riflshot,asltweap,knifcuti,machgun,othrweap,sumissue,arstmade
+  ))
 ```
+
+
 
 ###### Question
 
@@ -99,7 +106,7 @@ Calculate the number of stops in 2011. If you are not sure which function to use
 
 total_stops =
   sqf_2011 |>
-  summarize(Count = _____) |>
+  summarize(Count = n()) |>
   pull() # <- This makes a value/vector of the total number of stops that we'll use later
 
 total_stops
@@ -116,10 +123,10 @@ How many stops did not result in an arrest or summons in 2011? What percentage o
 
 sqf_2011 |>
   #Subset to rows where suspect innocent
-  _____(arrestsumm _____ 0) |> 
+  filter(arrestsumm == 0) |> 
   #Calculate number of observations
-  _____(total_innocent = n(), 
-            percent_innocent = _____ / total_stops * 100)
+  summarise(total_innocent = n(), 
+            percent_innocent = total_innocent / total_stops * 100)
 ```
 
 ###### Question
@@ -134,9 +141,9 @@ In how many stops were the individuals aged 14-24? In what percentage of stops w
 
 sqf_2011 |>
   #Subset to rows where suspect age 14-24
-  _____(age _____ 14 & age _____ 24) |> 
+  filter(age >= 14 & age <= 24) |> 
   #Calculate number of observations and percentage of observations
-  _____(total_14_24 = _____, 
+  summarise(total_14_24 = n(), 
             percent_14_24 = n() / total_stops * 100)
 ```
 
@@ -154,7 +161,7 @@ Fix the code below to calculate the correct number of stops for individuals 14-2
 total_stops_age_recorded =
   sqf_2011 |>
   #Subset to rows where age is not 999
-  _____(age _____ 999) |> 
+  filter(age != 999) |> 
   summarize(Count = n()) |>
   pull()
 
@@ -180,20 +187,20 @@ How many stops were there per race in 2011? What percentage of stops per race in
 total_stops_race_recorded =
   sqf_2011 |>
   #Subset to rows where race_cat is not NA or "OTHER"
-  filter(_____(race_cat) & race_cat _____ "OTHER") |> 
+  filter(!is.na(race_cat) & race_cat != "OTHER") |> 
   summarize(Count = n()) |>
   pull()
 
 sqf_2011 |>
   #Subset to rows where race_cat is not NA or "OTHER"
-  _____(_____(race_cat) & race_cat _____ "OTHER") |> 
+  filter(!is.na(race_cat) & race_cat != "OTHER") |> 
   #Group by race
-  _____(race_cat) |> 
+  group_by(race_cat) |> 
   #Calculate number of observations
-  _____(stops = n(), 
+  summarise(stops = n(), 
             percent_stops = n() / total_stops_race_recorded * 100) |>
   #arrange() by stops in descending (desc()) order
-  _____(_____(stops)) 
+  arrange(desc(stops)) 
 ```
 
 ###### Question
@@ -208,9 +215,9 @@ In how many stops were the individuals identified as Latinx (i.e. "WHITE-HISPANI
 
 sqf_2011 |>
   #Subset to rows where race_cat is "WHITE-HISPANIC" or "BLACK-HISPANIC"
-  _____(race_cat _____ c("WHITE-HISPANIC", "BLACK-HISPANIC")) |> 
+  filter(race_cat %in% c("WHITE-HISPANIC", "BLACK-HISPANIC")) |> 
   #Calculate number of observations
-  _____(stops_Latinx = _____, 
+  summarise(stops_Latinx = n(), 
             percent_Latinx = n() / total_stops_race_recorded * 100)
 ```
 
@@ -224,7 +231,15 @@ What percentage of stops in 2011 resulted in a frisk per race? What percentage o
 
 ```{r}
 # Write code here. 
-
+sqf_2011 |>
+    group_by(race_cat)|>
+    summarise(
+        stops = n(),
+        percent_stops = n()/total_stops*100,
+        percent_frisked = sum(frisked)/stops*100,
+        percent_wpnfound = sum(wpnfound)/stops*100,
+        percent_arrestsum = sum(arrestsumm)/stops*100
+        )
 ```
 
 ###### Question

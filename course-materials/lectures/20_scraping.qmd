@@ -1,0 +1,217 @@
+---
+title: "Web Scrapping"
+subtitle: "and cleaning"
+author: "Schwab"
+format: 
+  revealjs:
+    theme: beige
+editor: visual
+execute: 
+  echo: true
+  code-fold: true
+---
+
+## Ways to get data
+
+We have looked at several places to find data:
+
+packages
+
+csv files
+
+APIs
+
+In this lecture we will consider scraping.
+
+## How does it work?
+
+Every web page is an html file.
+
+html stands for HyperText Markup Language.
+
+html has markers to tell the web browser how to display the page.
+
+There are several markers that could be used for scraping.
+
+We will focus primarily on the \<table\> marker
+
+## How to see markers
+
+You can right click on a website an select "inspect" to view a page's html file.
+
+We'll consider the Wikipedia page for the 2026 Winter Olympics.
+
+There are a lot of tables on this site.
+
+<https://en.wikipedia.org/wiki/2026_Winter_Olympics>
+
+## rvest
+
+We will scrape with a package called Rvest.
+
+rvest (meant to sound like "Harvest") is a package that is part of the tidyverse, but is not loaded by default.
+
+This means you download when you download the tidyverse.
+
+But you must still load it after you have loaded the tidyverse.
+
+```{r}
+library(tidyverse)
+library(rvest)
+```
+
+## The read in the html
+
+There are two helpful examples [here](https://rvest.tidyverse.org/).
+
+Generally we will first read in the html data with `read_html()`
+
+`read_html()` takes a url as a string and you have to be connected to the internet for it to work properly. 
+
+```{r}
+winter_olympics = read_html("https://en.wikipedia.org/wiki/2026_Winter_Olympics")
+
+winter_olympics
+```
+
+## Find the right table
+
+We want to find the "selector" for our table.
+
+```{r}
+winter_olympics |>
+html_element("#mw-content-text > div.mw-content-ltr.mw-parser-output > table:nth-child(85)")
+```
+
+## Convert into a table
+
+We use html_table() to create a data frame. 
+
+```{r}
+winter_olympics |>
+html_element("#mw-content-text > div.mw-content-ltr.mw-parser-output > table:nth-child(85)")|>
+html_table()
+```
+
+## Cleaning
+
+Note: We'd have to clean this table a fair bit. Its not tidy and there are strange symbols.
+
+Also everything is a character vector.
+
+We will not clean this table but we'll clean the next one.
+
+## Medal count
+
+Attempt to scrape the 2026 Winter Olympics medal table. We'll clean this one up a bit.
+
+
+## Medal Count Solution
+
+```{r}
+
+winter_olympics = read_html("https://en.wikipedia.org/wiki/2026_Winter_Olympics")
+
+olympic_medals = winter_olympics |>
+  html_element("#mw-content-text > div.mw-content-ltr.mw-parser-output > table.wikitable.sortable.sticky-header-multi.plainrowheaders.jquery-tablesorter")|>
+  html_table()
+```
+
+## Cleaning with Janitor
+
+We can clean this table with the `dplyr` and `janitor` packages. `janitor` is not part of the `tidyverse`, but it works with tidy data.
+
+See [this page for more information.](https://cloud.r-project.org/web/packages/janitor/vignettes/janitor.html)
+
+## Items to clean
+
+Try some of these yourself first, see the hint functions for each line: 
+
+- Rank should be an integer, not a character  (mutate())
+
+- .mw-paser... should say "name_of_country"  (rename())
+
+- all column names should be lowercase to match style (clean_names())
+
+- lose the last "total row" (head())
+
+- should probably change "remaining" to "other" (case_when(), or manually)
+
+- drop the "total" column (select())
+
+- table is not tidy (pivot_longer())
+
+## Rank should be an integer, not a character
+
+Use mutate to make a new column of the correct type.
+
+```{r}
+olympic_medals = olympic_medals |>
+  mutate(Rank = as.integer(Rank))
+  olympic_medals
+```
+
+## .mw-paser... should say "name_of_country"
+
+We'll use rename()
+
+```{r}
+olympic_medals = olympic_medals|>
+  rename( name_of_country = `.mw-parser-output .tooltip-dotted{border-bottom:1px dotted;cursor:help}NOC`)
+```
+
+## all column names should be lowercase to match style (clean_names())
+
+The clean_names() function will lower case all column names and use underscores as spaces. This conforms to the tidyverse style guide. It also makes data easier to work with. 
+
+```{r}
+library(janitor)
+
+olympic_medals = olympic_medals |> 
+  clean_names()
+```
+
+## lose the last "total row" (head())
+
+```{r}
+olympic_medals = olympic_medals |>
+head(16)
+
+```
+
+## change "remaining" to "other" (case_when(), or manually)
+
+```{r}
+olympic_medals|>
+mutate(name_of_country = case_when(
+  name_of_country=="Remaining" ~ "Other Countries",
+  TRUE ~ name_of_country))
+
+# alternative method
+#olympic_medals[16, "name_of_country"]<-"hello" # Notice the <- here. 16th row of the name_of_country column.
+
+```
+
+## drop the "total" column
+
+```{r}
+olympic_medals = 
+  olympic_medals |>
+  select(-total)
+```
+
+## tidy up the table
+
+```{r}
+olympic_medals = olympic_medals |>
+pivot_longer(
+  cols = c(gold,silver,bronze),
+  names_to = "medal", 
+  values_to = "number_of_medals")
+```
+
+## admire the clean data frame
+
+```{r}
+head(olympic_medals)
+```

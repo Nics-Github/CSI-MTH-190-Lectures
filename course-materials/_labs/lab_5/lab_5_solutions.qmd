@@ -234,8 +234,8 @@ generations |>
     summarise(total_births = sum(n))|>
     ggplot()+
     geom_col(aes(
-        generation,
-        total_births, 
+        x = fct_reorder(generation,total_births, .desc = TRUE),
+        y = total_births, 
         fill = sex),
         position= "dodge")+
     theme(
@@ -251,12 +251,10 @@ generations |>
 
 ```{r}
 generations |>
-    filter(generation %in% c("Millennials","Zoomers"))|>
-    group_by(name, generation)|>
-    summarise(n = sum(n))|>
-    ungroup()|>
-    slice_max(order_by = n, n = 3, by=generation)
-
+    filter(generation %in% c("Millennials", "Zoomers")) |>
+    group_by(generation, name) |>
+    summarise(n = sum(n),) |> # This kills the hierarchy 
+    slice_max(order_by = n, n = 3)
 ```
 
 **Problem 8:** Use `filter()` and `str_detect()` to find the top three names from the Millennial and Zoomer generation that start with "E". You should only have to add **max** one line to your answer to number 7. Save your answer as `gen_top6` for problem 9, make sure the six names and their totals still show in the rendered document.
@@ -270,9 +268,11 @@ gen_top6 = generations |>
     ungroup()|>
     filter(  str_detect(name, "^E"))|>
     slice_max(order_by = n, n = 3, by=generation)
+gen_top6
+
 ```
 
-**Problem 9:** For each generation in the `generations` dataset find the average number of the top 6 names you found in problem 8. Your answer should have 45 rows.  
+**Problem 9:** For each generation in the `generations` dataset find the average number of the top 6 names you found in problem 8. Your answer should have 45 rows. Average per year.
 
 **Solution:**
 
@@ -281,8 +281,11 @@ gen_top6 = generations |>
 
 top_6_names = gen_top6 |> pull(name)
 
+# This is clearer
 generations |>
+    group_by(name,generation,year)|>  # The year grouping is removed with sumarize
+    summarise(total = sum(n))|>
     filter(name %in% top_6_names)|>
-    group_by(name, generation)|>
-    summarise(avg = mean(n))
+    summarise(avg = mean(total))    
+
 ```

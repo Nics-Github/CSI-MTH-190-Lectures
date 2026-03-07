@@ -96,13 +96,15 @@ Part 2: Wrangling
 
 # Week 7
 
--   [19 Joins part 1 an exploration]()
+-   [18 Joins ](./course-materials/lectures/18_joins.qmd)
+
 
 # Week 8
 
--   [21 Pivots](./course-materials/lectures/21_pivots.qmd)
 
--   [22 Placeholder]()
+-   [19 Pivots](./course-materials/lectures/19_pivots.qmd)
+
+-   [20 Scraping and cleaning](./course-materials/lectures/20_scraping.qmd)
 
 # Week 9 
 

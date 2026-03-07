@@ -1,0 +1,16 @@
+# Introduction
+
+In 1968, the Supreme Court case Terry v. Ohio ruled that a police officer could stop an individual without “probable cause” but with “reasonable suspicion” the suspect had committed a crime. Further, an officer could frisk an individual without “probable cause” but with “reasonable suspicion” the suspect was carrying a weapon. In the early 1990s, stop, question, and frisk became a widely prevalent tactic in policing in NYC. However, as the practice expanded in the 2000s, civil rights organizations began calling attention to the ways in which it was fueling the over-policing of NYC neighborhoods, along with racial profiling.
+
+In 2011, David Floyd and David Ourlicht filed a class action lawsuit (on behalf of themselves and other minority civilians in NYC) against the City of New York, Police Commissioner Raymond Kelly, Mayor Michael Bloomberg, and a number of NYPD officers. Their argument was that the NYPD had stopped them without “reasonable suspicion” and that the defendants had sanctioned policies for stopping civilians on the basis of race or national origin. Honorable Shira A. Scheindlin, who oversaw the US District Court Case, ultimately ruled that stop and frisk was being carried out in an unconstitutional way. The officer-reported data that we will examine in this lab was leveraged as key evidence throughout this case.
+
+In this lab, you will apply the 6 data wrangling verbs we learned this week in order to analyze data regarding NYPD stop, question, and frisk. Specifically, we will [replicate data analysis performed](https://www.nyclu.org/data/stop-and-frisk-data) by the NYCLU in 2011 to demonstrate how the practice was being carried out unconstitutionally in New York. We are specifically going to look at three issues:
+
+How many times did the NYPD stop an individual in 2011?
+
+In how many 2011 stops was the stopped individual found to be guilty of a crime?
+
+In how many 2011 stops that involved a frisk was the individual found to be carrying a weapon?
+
+We are also going to examine the racial breakdown for each of these three questions to assess the extent to which stop and frisk was being carried out in a discriminatory way in 2011.
+

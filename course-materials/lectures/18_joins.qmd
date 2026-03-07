@@ -1,0 +1,82 @@
+---
+title: "Joins"
+subtitle: "CSI-MTH-190"
+author: "Schwab"
+format: 
+  revealjs:
+    theme: beige
+execute: 
+  warning: false
+  message: false
+  echo: true
+--- 
+
+```{r}
+library(tidyverse)
+```
+
+## Combine two data frames 
+
+- bind_cols()
+- inner_join()
+- left_join()
+- full_join()
+
+## Our toy data frames
+
+```{r}
+band_members
+#band_members2
+band_instruments
+```
+
+## bind_cols() 
+
+This function just smashes two dataframes together. 
+
+Only use if you are sure that the rows match up together. 
+
+```{r}
+bind_cols( band_instruments, band_members)
+```
+
+## full_join()
+
+Keeps all the data and by default matches by a column name. 
+
+```{r}
+full_join(band_instruments, band_members)
+```
+
+## left_join()
+
+Keeps all data in the left dataframe, adding rows from the right dataframe if there is a key match. 
+
+```{r}
+left_join(band_instruments, band_members)
+```
+
+## inner_join()
+
+Keeps only the data when keys match in both data frames. This is helpful when you want to know what values the dataframes have in common. 
+
+```{r}
+inner_join(band_instruments, band_members)
+```
+
+## Different Key names
+
+If the keys in both data frames after different we must specify how to join the data. 
+
+```{r}
+left_join(
+    band_instruments2, 
+    band_members, 
+    by = c("artist" = "name")
+    )
+```
+
+## other joins
+
+There are many other joins, some of which are on [dplyr's cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf)
+

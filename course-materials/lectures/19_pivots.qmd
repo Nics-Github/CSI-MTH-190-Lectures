@@ -5,6 +5,9 @@ format:
   revealjs:
     theme: beige
 editor: visual
+execute: 
+  echo: true
+  code-fold: true
 ---
 
 ```{r libraries}
@@ -21,17 +24,29 @@ library(googlesheets4)
 
 ![](https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png)
 
-## First Job
+## Tidy data problems
 
-You need to get data into machine readable format. What do you do?
+Tidy data is not always in a human readable format.
+
+It is easy for computers to read but tricky for people.
+
+or
+
+Data is in a format that is easy for people for tricky for computers.
+
+## pivot\_\*()
+
+When you want to make data readable for machines you'll often pivot_longer().
 
 `pivot_longer()`
 
+When you want to make it more human readable you'll pivot wider.
+
 `pivot_wider()`
 
-What do these functions do?
+These are new functions we should check the docs.
 
-## Some built in tables
+
 
 ## `pivot_longer()`
 
@@ -39,6 +54,7 @@ This data is not tidy how can we make it longer for computers?
 
 ```{r}
 #| echo: FALSE
+#| code-fold: true
 
 gs4_deauth()
 hiv_key <- "1kWH_xdJDM4SMfT_Kzpkk-1yuxWChfurZuWYjfmv51EA"
@@ -53,7 +69,20 @@ hiv <- read_sheet(hiv_key) |>
 hiv
 ```
 
-Write down how you think we could do that with `pivot_longer()`
+How you think we could do that with `pivot_longer()`
+
+## `pivot_longer()`
+
+Solution to previous slide
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+hiv |>
+  pivot_longer(cols = `1979`:`2009`, names_to = "year", values_to = "hiv_rate")
+
+```
 
 ## `pivot_wider()`
 
@@ -68,63 +97,51 @@ babynames |>
      summarize(total = sum(n))
 ```
 
-Write down how you think we could do that with `pivot_wider()`
+How you think we could do that with `pivot_wider()`
 
-## `pivot_longer()`
-
-Let's try our code on the examples above. Pivot this longer.
-
-```{r}
-#| echo: true
-
-library(tidyverse)
-library(mdsr)
-library(googlesheets4)
-gs4_deauth()
-hiv_key <- "1kWH_xdJDM4SMfT_Kzpkk-1yuxWChfurZuWYjfmv51EA"
-hiv <- read_sheet(hiv_key) |>
-  rename(Country = 1) |>
-  filter(
-    Country %in% c("United States", "France", "South Africa")
-  ) |>
-  select(Country, `1979`, `1989`, `1999`, `2009`) |>
-  unnest(cols = c(`2009`)) |>
-  mutate(across(matches("[0-9]"), as.double))
-hiv
-
-```
 
 ## `pivot_wider()`
 
+Solution to the previous slide.
+
 ```{r}
 #| echo: true
+#| code-fold: true
+
 library(babynames)
 babynames |>
      filter(name %in% c("Sue", "Robin", "Leslie")) |>
      group_by(name, sex) |>
-     summarize(total = sum(n))
+     summarize(total = sum(n))|>
+     pivot_wider(names_from = sex,values_from = total)
 ```
 
-## Not Tidy -\> Tidy
+## fish_encounters
 
-This table is not tidy can you make it so?
+This data is tidy try to make it wider.
 
 ```{r}
-#|echo: true
-#|
-table4b 
+fish_encounters
 ```
 
-## More practice
+## fish_encounters 2
 
-This dataframe is tidy but can you make it easier for a human to read?
+The solution to the previous slide.
 
 ```{r}
+
+
 fish_encounters |>
   pivot_wider(names_from = station,values_from = "seen")
 ```
 
-## consider some tables
+## Bonus: the separate() function
+
+If your values have a common symbol and they should be put into different column that can be done with separate().
+
+We'll see some examples in the next several problems. 
+
+## Not Tidy -\> Tidy
 
 Are these tables tidy, do we need to pivot wider or longer?
 
@@ -140,7 +157,7 @@ Are these tables tidy, do we need to pivot wider or longer?
 
 -   table5
 
--   [Problem 5 from chapter 6](https://mdsr-book.github.io/mdsr3e/06-dataII.html#dataII-exercises)
+## solutions posted in video
 
 # Reading
 
