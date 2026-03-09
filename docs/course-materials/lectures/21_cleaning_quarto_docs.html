@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Schwab">
-  <title>CSI-MTH-190 – Tidy data and pivots</title>
+  <title>CSI-MTH-190 – Quarto Documents</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -194,7 +194,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Tidy data and pivots</h1>
+  <h1 class="title">Quarto Documents</h1>
+  <p class="subtitle">and the working directory</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -205,212 +206,164 @@ Schwab
 </div>
 
 </section>
-<section id="tidydata" class="slide level2">
-<h2>Tidydata</h2>
-
-<img data-src="https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png" class="r-stretch"></section>
-<section id="tidy-data-problems" class="slide level2">
-<h2>Tidy data problems</h2>
-<p>Tidy data is not always in a human readable format.</p>
-<p>It is easy for computers to read but tricky for people.</p>
-<p>or</p>
-<p>Data is in a format that is easy for people for tricky for computers.</p>
+<section id="cheat-sheet" class="slide level2">
+<h2>Cheat Sheet</h2>
+<p>See the cheatsheet for all the options.</p>
+<p><a href="https://rstudio.github.io/cheatsheets/html/quarto.html">Quarto Cheatsheet</a></p>
 </section>
-<section id="pivot_" class="slide level2">
-<h2>pivot_*()</h2>
-<p>When you want to make data readable for machines you’ll often pivot_longer().</p>
-<p><code>pivot_longer()</code></p>
-<p>When you want to make it more human readable you’ll pivot wider.</p>
-<p><code>pivot_wider()</code></p>
-<p>These are new functions we should check the docs.</p>
+<section id="pre-quarto" class="slide level2">
+<h2>Pre-Quarto</h2>
+<ol start="2004" type="1">
+<li><p>Markdown is a general document format that my documents use and support. It is still a common standard.</p></li>
+<li><p>Jupyter notebooks were made for doing data analysis in Python.</p></li>
+<li><p>RMarkdown was made specifically for document types involving built in R script.</p></li>
+<li><p>Posit introduced quarto that supports working with Python, R, Julia and other languages.</p></li>
+</ol>
 </section>
-<section id="pivot_longer" class="slide level2">
-<h2><code>pivot_longer()</code></h2>
-<p>This data is not tidy how can we make it longer for computers?</p>
+<section id="global-options" class="slide level2">
+<h2>Global Options</h2>
+<p>You can change options globally by editing the YAML.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">gs4_deauth</span>()</span>
-<span id="cb1-2"><a></a>hiv_key <span class="ot">&lt;-</span> <span class="st">"1kWH_xdJDM4SMfT_Kzpkk-1yuxWChfurZuWYjfmv51EA"</span></span>
-<span id="cb1-3"><a></a>hiv <span class="ot">&lt;-</span> <span class="fu">read_sheet</span>(hiv_key) <span class="sc">|&gt;</span></span>
-<span id="cb1-4"><a></a>  <span class="fu">rename</span>(<span class="at">Country =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-5"><a></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-6"><a></a>    Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United States"</span>, <span class="st">"France"</span>, <span class="st">"South Africa"</span>)</span>
-<span id="cb1-7"><a></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-8"><a></a>  <span class="fu">select</span>(Country, <span class="st">`</span><span class="at">1979</span><span class="st">`</span>, <span class="st">`</span><span class="at">1989</span><span class="st">`</span>, <span class="st">`</span><span class="at">1999</span><span class="st">`</span>, <span class="st">`</span><span class="at">2009</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-9"><a></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2009</span><span class="st">`</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb1-10"><a></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"[0-9]"</span>), as.double))</span>
-<span id="cb1-11"><a></a>hiv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 5
-  Country        `1979` `1989` `1999` `2009`
-  &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 France        NA          NA    0.3    0.4
-2 South Africa  NA          NA   14.8   17.2
-3 United States  0.0318     NA    0.5    0.6</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="sc">---</span></span>
+<span id="cb1-2"><a></a>...</span>
+<span id="cb1-3"><a></a>execute<span class="sc">:</span> </span>
+<span id="cb1-4"><a></a>  echo<span class="sc">:</span> true</span>
+<span id="cb1-5"><a></a>  code<span class="sc">-</span>fold<span class="sc">:</span> true</span>
+<span id="cb1-6"><a></a>...</span>
+<span id="cb1-7"><a></a><span class="sc">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>How you think we could do that with <code>pivot_longer()</code></p>
+<p>You can change options locally by adding #| in code chunks.</p>
 </section>
-<section id="pivot_longer-1" class="slide level2">
-<h2><code>pivot_longer()</code></h2>
-<p>Solution to previous slide</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>hiv <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1979</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2009</span><span class="st">`</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"hiv_rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 3
-   Country       year  hiv_rate
-   &lt;chr&gt;         &lt;chr&gt;    &lt;dbl&gt;
- 1 France        1979   NA     
- 2 France        1989   NA     
- 3 France        1999    0.3   
- 4 France        2009    0.4   
- 5 South Africa  1979   NA     
- 6 South Africa  1989   NA     
- 7 South Africa  1999   14.8   
- 8 South Africa  2009   17.2   
- 9 United States 1979    0.0318
-10 United States 1989   NA     
-11 United States 1999    0.5   
-12 United States 2009    0.6   </code></pre>
-</div>
-</div>
+<section id="showing-code" class="slide level2">
+<h2>Showing code</h2>
+<p><code>#| echo: True</code> option</p>
+<p><code>#| code-fold: True</code> option</p>
 </section>
-<section id="pivot_wider" class="slide level2">
-<h2><code>pivot_wider()</code></h2>
-<p>This data is tidy how could we make it wider for humans?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">library</span>(babynames)</span>
-<span id="cb5-2"><a></a>babynames <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a></a>     <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Sue"</span>, <span class="st">"Robin"</span>, <span class="st">"Leslie"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb5-4"><a></a>     <span class="fu">group_by</span>(name, sex) <span class="sc">|&gt;</span></span>
-<span id="cb5-5"><a></a>     <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
-# Groups:   name [3]
-  name   sex    total
-  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt;
-1 Leslie F     266474
-2 Leslie M     112689
-3 Robin  F     289395
-4 Robin  M      44616
-5 Sue    F     144465
-6 Sue    M        519</code></pre>
-</div>
-</div>
-<p>How you think we could do that with <code>pivot_wider()</code></p>
+<section id="running-code" class="slide level2">
+<h2>Running code</h2>
+<p><code>#| eval: True</code> option (default)</p>
+<p>Runs the code in the chunk.</p>
+<p><code>#| include: True</code> option (default)</p>
+<p>Runs the code and shows the results.</p>
 </section>
-<section id="pivot_wider-1" class="slide level2">
-<h2><code>pivot_wider()</code></h2>
-<p>Solution to the previous slide.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(babynames)</span>
-<span id="cb7-2"><a></a>babynames <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a></a>     <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Sue"</span>, <span class="st">"Robin"</span>, <span class="st">"Leslie"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb7-4"><a></a>     <span class="fu">group_by</span>(name, sex) <span class="sc">|&gt;</span></span>
-<span id="cb7-5"><a></a>     <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n))<span class="sc">|&gt;</span></span>
-<span id="cb7-6"><a></a>     <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sex,<span class="at">values_from =</span> total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-# Groups:   name [3]
-  name        F      M
-  &lt;chr&gt;   &lt;int&gt;  &lt;int&gt;
-1 Leslie 266474 112689
-2 Robin  289395  44616
-3 Sue    144465    519</code></pre>
-</div>
-</div>
+<section id="open-lab-5-to-experiment." class="slide level2">
+<h2>Open Lab 5 to experiment.</h2>
 </section>
-<section id="fish_encounters" class="slide level2">
-<h2>fish_encounters</h2>
-<p>This data is tidy try to make it wider.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>fish_encounters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 114 × 3
-   fish  station  seen
-   &lt;fct&gt; &lt;fct&gt;   &lt;int&gt;
- 1 4842  Release     1
- 2 4842  I80_1       1
- 3 4842  Lisbon      1
- 4 4842  Rstr        1
- 5 4842  Base_TD     1
- 6 4842  BCE         1
- 7 4842  BCW         1
- 8 4842  BCE2        1
- 9 4842  BCW2        1
-10 4842  MAE         1
-# ℹ 104 more rows</code></pre>
-</div>
-</div>
+<section id="creating-other-documents" class="slide level2">
+<h2>Creating other documents</h2>
+<p><a href="https://quarto.org/docs/presentations/">Presentations</a></p>
+<p><a href="https://quarto.org/docs/websites/">Websites</a></p>
+<p><a href="https://quarto.org/docs/books/">Books</a></p>
+<p><a href="https://quarto.org/docs/output-formats/pdf-basics.html">Pdfs</a></p>
 </section>
-<section id="fish_encounters-2" class="slide level2">
-<h2>fish_encounters 2</h2>
-<p>The solution to the previous slide.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>fish_encounters <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> station,<span class="at">values_from =</span> <span class="st">"seen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 19 × 12
-   fish  Release I80_1 Lisbon  Rstr Base_TD   BCE   BCW  BCE2  BCW2   MAE   MAW
-   &lt;fct&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
- 1 4842        1     1      1     1       1     1     1     1     1     1     1
- 2 4843        1     1      1     1       1     1     1     1     1     1     1
- 3 4844        1     1      1     1       1     1     1     1     1     1     1
- 4 4845        1     1      1     1       1    NA    NA    NA    NA    NA    NA
- 5 4847        1     1      1    NA      NA    NA    NA    NA    NA    NA    NA
- 6 4848        1     1      1     1      NA    NA    NA    NA    NA    NA    NA
- 7 4849        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA
- 8 4850        1     1     NA     1       1     1     1    NA    NA    NA    NA
- 9 4851        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA
-10 4854        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA
-11 4855        1     1      1     1       1    NA    NA    NA    NA    NA    NA
-12 4857        1     1      1     1       1     1     1     1     1    NA    NA
-13 4858        1     1      1     1       1     1     1     1     1     1     1
-14 4859        1     1      1     1       1    NA    NA    NA    NA    NA    NA
-15 4861        1     1      1     1       1     1     1     1     1     1     1
-16 4862        1     1      1     1       1     1     1     1     1    NA    NA
-17 4863        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA
-18 4864        1     1     NA    NA      NA    NA    NA    NA    NA    NA    NA
-19 4865        1     1      1    NA      NA    NA    NA    NA    NA    NA    NA</code></pre>
-</div>
-</div>
-</section>
-<section id="bonus-the-separate-function" class="slide level2">
-<h2>Bonus: the separate() function</h2>
-<p>If your values have a common symbol and they should be put into different column that can be done with separate().</p>
-<p>We’ll see some examples in the next several problems.</p>
-</section>
-<section id="not-tidy---tidy" class="slide level2">
-<h2>Not Tidy -&gt; Tidy</h2>
-<p>Are these tables tidy, do we need to pivot wider or longer?</p>
-<ul>
-<li><p>table1,</p></li>
-<li><p>table2,</p></li>
-<li><p>table3,</p></li>
-<li><p>table4a,</p></li>
-<li><p>table4b,</p></li>
-<li><p>table5</p></li>
-</ul>
-</section>
-<section id="solutions-posted-in-video" class="slide level2">
-<h2>solutions posted in video</h2>
-</section>
-<section id="reading" class="title-slide slide level1 center">
-<h1>Reading</h1>
-<p><a href="https://mdsr-book.github.io/mdsr3e/06-dataII.html">Read Chapter 6.</a></p>
-<p><a href="https://r4ds.had.co.nz/tidy-data.html">Futher reading on tidy data</a></p>
-
+<section>
+<section id="working-directory" class="title-slide slide level1 center">
+<h1>Working Directory</h1>
 
 </section>
+<section id="what-is-a-directory" class="slide level2">
+<h2>What is a directory</h2>
+<p>A directory is the current folder R considers when working with your file.</p>
+<p>Most computer languages need the directory to be specified so the computer know where to find files.</p>
+</section>
+<section id="working-directory-1" class="slide level2">
+<h2>Working directory</h2>
+<p>We have been creating R projects to specify a working directory.</p>
+<p>This is the easiest method for maintaining a working directory.</p>
+</section>
+<section id="what-is-my-working-directory" class="slide level2">
+<h2>What is my working directory?</h2>
+<p>RStudio tells you the working directory in the console.</p>
+<p>Here R is looking for files in my /MTH190/Lab 6 folder</p>
+<p><img data-src="./images/wd_lab_6.png"></p>
+<p>If I close the project R will look in the home folder.</p>
+<p>File &gt; Close Project</p>
+<p><img data-src="./images/wd_home.png"></p>
+</section>
+<section id="another-working-directory" class="slide level2">
+<h2>Another working directory</h2>
+<p>When rendering a quarto document the working directory is automatically set to the folder the quarto document resides in.</p>
+<p>This can be confusing. Let’s work through an example.</p>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<p>This will be easiest to follow if you are on the server.</p>
+<ol type="1">
+<li>Close any project you are currently working in so your working directory is the home directory.</li>
+</ol>
+<p>Your console should look like this:</p>
+
+<img data-src="./images/wd_home.png" class="r-stretch"></section>
+<section id="the-server-is-a-linux-system" class="slide level2">
+<h2>The server is a Linux System</h2>
+<p>This is a side note:</p>
+<p>You can also type <code>getwd()</code> into the console to verify your directory. This shows my home directory is:</p>
+<pre><code>"/u00/rstudio_homes/administration.hcc/nschwab"</code></pre>
+<p>This is the same as ~</p>
+</section>
+<section id="make-a-folder" class="slide level2">
+<h2>Make a folder</h2>
+<ol start="2" type="1">
+<li><p>Let’s make a folder and call it practice_wd.</p></li>
+<li><p>In that folder make a new quarto document.</p></li>
+</ol>
+<p>Notice: Our working directory and the directory our quarto document are in are different.</p>
+<p>We’ll leave it that way.</p>
+<p>(The easiest way to make them match to to start a new R project in the practice_wd folder)</p>
+</section>
+<section id="check-the-documents-working-directory" class="slide level2">
+<h2>Check the document’s working directory</h2>
+<p>Make a new chunk and type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then render the document.</p>
+<p>You should notice that the working directory is in the practice_wd folder.</p>
+<pre><code>"/u00/rstudio_homes/administration.hcc/nschwab/practice_wd"</code></pre>
+</section>
+<section id="wd-confusion" class="slide level2">
+<h2>WD Confusion</h2>
+<p>This is confusing for students because while not rendered R is looking for files in the current working directory (home ~) but when rendered R will look in the folder the quarto document is in (~_wd)</p>
+<p>This will be a big deal when we read data into the document.</p>
+</section>
+<section id="a-csv-file" class="slide level2">
+<h2>A csv file</h2>
+<p>The code below will make a dummy data csv file for practice put it into a code chunk in your practice.qmd file.</p>
+<p>Note: It should save to your quarto document’s working directory (~_wd)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co">#Make some dummy data</span></span>
+<span id="cb5-2"><a></a>df <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb5-3"><a></a>    <span class="sc">~</span>my_teacher_supports_me, <span class="sc">~</span><span class="st">`</span><span class="at">my_parents_support_me</span><span class="st">`</span>,</span>
+<span id="cb5-4"><a></a>    <span class="st">"Strongly Agree"</span>,<span class="st">"Strongly Agree"</span>,</span>
+<span id="cb5-5"><a></a>    <span class="st">"Strongly Agree"</span>,<span class="st">" Agree"</span>,</span>
+<span id="cb5-6"><a></a>    <span class="st">"Neutral"</span>,<span class="st">"Agree"</span>,</span>
+<span id="cb5-7"><a></a>    <span class="st">"Agree"</span>,<span class="st">" Neutral"</span>,</span>
+<span id="cb5-8"><a></a>    <span class="cn">NA</span>, <span class="st">"Agree"</span>,</span>
+<span id="cb5-9"><a></a>    <span class="st">"Disagree"</span>,<span class="st">"Disagree"</span></span>
+<span id="cb5-10"><a></a>)</span>
+<span id="cb5-11"><a></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(df,<span class="st">"dummy_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="read-the-data" class="slide level2">
+<h2>Read the data</h2>
+<p>Make a new chunk and read in the data.</p>
+<p>If you run this chunk you will get an error:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"dummy_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Error: 'dummy_data' does not exist in current working directory ('/u00/rstudio_homes/administration.hcc/nschwab/practice_wd').</code></pre>
+</section>
+<section id="rendering-everything-works" class="slide level2">
+<h2>Rendering everything works</h2>
+<p>When rendering everything works fine.</p>
+<p>If the current working directory and the directory for the quarto file match this is not a problem.</p>
+<p>This is why we make R Projects before each lab and project.</p>
+</section>
+<section id="questions" class="slide level2">
+<h2>Questions</h2>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

@@ -108,6 +108,8 @@ Part 2: Wrangling
 
 # Week 9 
 
+-   [21 Cleaning Quarto Documents](./course-materials/lectures/21_quarto_docs_and_working_dir.qmd)
+
 -   [Project 2 Intro]()
 
 # Week 10

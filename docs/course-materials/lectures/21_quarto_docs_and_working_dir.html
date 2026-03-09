@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Nicholas Schwab">
-<meta name="dcterms.date" content="2026-03-09">
+<meta name="author" content="Schwab">
 
-<title>CSI-MTH 190: Intro to Data Science – CSI-MTH-190</title>
+<title>Quarto Documents – CSI-MTH-190</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,31 +21,66 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./course-materials/website/images/US_190.jpg" rel="icon" type="image/jpeg">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d64559d910ec87c4ee681e1e2f97436f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-ccd81253fefb92e9cd3f9eb5b5d87b54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-d64559d910ec87c4ee681e1e2f97436f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../course-materials/website/images/US_190.jpg" rel="icon" type="image/jpeg">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d64559d910ec87c4ee681e1e2f97436f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-ccd81253fefb92e9cd3f9eb5b5d87b54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-d64559d910ec87c4ee681e1e2f97436f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,12 +108,11 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<style>html{ scroll-behavior: smooth; }</style>
 
 
 </head>
 
-<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -248,7 +281,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">CSI-MTH-190</span>
     </a>
   </div>
@@ -259,7 +292,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./course-materials/website/Resources.html"> 
+    <a class="nav-link" href="../../course-materials/website/Resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item compact">
@@ -282,7 +315,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./course-materials/website/schwab.html"> 
+    <a class="nav-link" href="../../course-materials/website/schwab.html"> 
 <span class="menu-text">Schwab</span></a>
   </li>  
 </ul>
@@ -296,42 +329,18 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#lectures" id="toc-lectures" class="nav-link active" data-scroll-target="#lectures">Lectures</a></li>
-  <li><a href="#week-1" id="toc-week-1" class="nav-link" data-scroll-target="#week-1">Week 1</a></li>
-  <li><a href="#week-2" id="toc-week-2" class="nav-link" data-scroll-target="#week-2">Week 2</a></li>
-  <li><a href="#week-3" id="toc-week-3" class="nav-link" data-scroll-target="#week-3">Week 3</a></li>
-  <li><a href="#week-4" id="toc-week-4" class="nav-link" data-scroll-target="#week-4">Week 4</a></li>
-  <li><a href="#week-5" id="toc-week-5" class="nav-link" data-scroll-target="#week-5">Week 5</a></li>
-  <li><a href="#week-6" id="toc-week-6" class="nav-link" data-scroll-target="#week-6">Week 6</a></li>
-  <li><a href="#week-7" id="toc-week-7" class="nav-link" data-scroll-target="#week-7">Week 7</a></li>
-  <li><a href="#week-8" id="toc-week-8" class="nav-link" data-scroll-target="#week-8">Week 8</a></li>
-  <li><a href="#week-9" id="toc-week-9" class="nav-link" data-scroll-target="#week-9">Week 9</a></li>
-  <li><a href="#week-10" id="toc-week-10" class="nav-link" data-scroll-target="#week-10">Week 10</a></li>
-  <li><a href="#week-11" id="toc-week-11" class="nav-link" data-scroll-target="#week-11">Week 11</a></li>
-  <li><a href="#week-12" id="toc-week-12" class="nav-link" data-scroll-target="#week-12">Week 12</a></li>
-  <li><a href="#week-13" id="toc-week-13" class="nav-link" data-scroll-target="#week-13">Week 13</a></li>
-  <li><a href="#week-14" id="toc-week-14" class="nav-link" data-scroll-target="#week-14">Week 14</a></li>
-  <li><a href="#week-15" id="toc-week-15" class="nav-link" data-scroll-target="#week-15">Week 15</a></li>
-  <li><a href="#day-28-final-project-website" id="toc-day-28-final-project-website" class="nav-link" data-scroll-target="#day-28-final-project-website">Day 28: Final Project: Website</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="21_quarto_docs_and_working_dir.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">CSI-MTH 190: Intro to Data Science</h1>
+<h1 class="title">Quarto Documents</h1>
+<p class="subtitle lead">and the working directory</p>
 </div>
 
 
@@ -341,16 +350,10 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Nicholas Schwab </p>
+             <p>Schwab </p>
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 9, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -360,307 +363,158 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<style>
-h1{font-weight: 400;}
-</style>
-<section id="lectures" class="level1">
-<h1>Lectures</h1>
-<p>Part 1: Visualizations</p>
+<section id="cheat-sheet" class="level2">
+<h2 class="anchored" data-anchor-id="cheat-sheet">Cheat Sheet</h2>
+<p>See the cheatsheet for all the options.</p>
+<p><a href="https://rstudio.github.io/cheatsheets/html/quarto.html">Quarto Cheatsheet</a></p>
 </section>
-<section id="week-1" class="level1">
-<h1>Week 1</h1>
-<ul>
-<li><p><a href="./course-materials/lectures/1_Overview_of_the_course.html">1. Overview of Intro to Data Science</a></p></li>
-<li><p><a href="https://rstudio.hcc.edu/auth-sign-in?appUri=%2F">Live Coding: Introduction to R and RStudio</a></p></li>
-<li><p><a href="./course-materials/lectures/2_Brief-R-history.html">2. Brief History of R</a></p></li>
-<li><p><a href="./course-materials/lectures/3_Basic_Statistics.html">3. Basic Statistics</a></p></li>
-</ul>
+<section id="pre-quarto" class="level2">
+<h2 class="anchored" data-anchor-id="pre-quarto">Pre-Quarto</h2>
+<ol start="2004" type="1">
+<li><p>Markdown is a general document format that my documents use and support. It is still a common standard.</p></li>
+<li><p>Jupyter notebooks were made for doing data analysis in Python.</p></li>
+<li><p>RMarkdown was made specifically for document types involving built in R script.</p></li>
+<li><p>Posit introduced quarto that supports working with Python, R, Julia and other languages.</p></li>
+</ol>
 </section>
-<section id="week-2" class="level1">
-<h1>Week 2</h1>
-<ul>
-<li><p><a href="./course-materials/lectures/4_where_does_data_come_from.html">4. Where does Data Comes From</a></p></li>
-<li><p><a href="./course-materials/lectures/5_notes_on_style.html">5. Notes on Style</a></p></li>
-<li><p><a href="./course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html">6 Data Frames Variable Types Tidy Data</a></p></li>
-<li><p><a href="./course-materials/lectures/7_ethics_part_1.html">7 Data Ethics part 1</a></p></li>
-<li><p><a href="./course-materials/lectures/7_5_in_class_ethic_examples.html">7.5 Data Ethics and Tidy Data Examples</a></p></li>
-</ul>
-</section>
-<section id="week-3" class="level1">
-<h1>Week 3</h1>
-<ul>
-<li><p><a href="https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-visualization.pdf">8 The ggplot cheatsheet</a></p></li>
-<li><p><a href="./course-materials/lectures/9_taxonomy_of_graphs_categorical.html">9 Taxonomy of Data Graphics (categorical)</a></p></li>
-<li><p><a href="./course-materials/lectures/10_taxonomy_of_graphs_numeric_part_2.html">10 Taxonomy of Data Graphics (numeric)</a></p></li>
-<li><p><a href="./course-materials/lectures/11_color_theory.html">11 Color talk</a></p></li>
-</ul>
-</section>
-<section id="week-4" class="level1">
-<h1>Week 4</h1>
-<ul>
-<li><p><a href="./course-materials/lectures/12_ethics_part_2.html">12 Data Ethics part 2</a></p></li>
-<li><p><a href="./course-materials/lectures/13_Building_a_graph.html">13 Building a graph</a></p></li>
-<li><p><a href="">14 Set up for Lab 4</a></p></li>
-</ul>
-</section>
-<section id="week-5" class="level1">
-<h1>Week 5</h1>
-<ul>
-<li><a href="./course-materials/lectures/14_2_introduce_project_1.html">Project 1 Intro</a></li>
-</ul>
-</section>
-<section id="week-6" class="level1">
-<h1>Week 6</h1>
-<p>Part 2: Wrangling</p>
-<ul>
-<li><p><a href="./course-materials/lectures/15_Lecture_on_five_verbs.html">15 Lecture on the five verbs</a></p></li>
-<li><p><a href="https://github.com/rstudio/cheatsheets/blob/553af35d9bda98715ed5fedfd8709ade4ba12b76/data-transformation.pdf">16 Dplyr Cheat sheet</a></p></li>
-<li><p><a href="./course-materials/lectures/17_ethic_part_3.html">17 Ethics Part 3</a></p></li>
-</ul>
-</section>
-<section id="week-7" class="level1">
-<h1>Week 7</h1>
-<ul>
-<li><a href="./course-materials/lectures/18_joins.html">18 Joins</a></li>
-</ul>
-</section>
-<section id="week-8" class="level1">
-<h1>Week 8</h1>
-<ul>
-<li><p><a href="./course-materials/lectures/19_pivots.html">19 Pivots</a></p></li>
-<li><p><a href="./course-materials/lectures/20_scraping.html">20 Scraping and cleaning</a></p></li>
-</ul>
-</section>
-<section id="week-9" class="level1">
-<h1>Week 9</h1>
-<ul>
-<li><p><a href="./course-materials/lectures/21_quarto_docs_and_working_dir.html">21 Cleaning Quarto Documents</a></p></li>
-<li><p><a href="">Project 2 Intro</a></p></li>
-</ul>
-</section>
-<section id="week-10" class="level1">
-<h1>Week 10</h1>
-<p>Part 3: Application - Maps</p>
-<ul>
-<li><p><a href="./course-materials/lectures/23_maps-ggplot.html">23 Maps part 1</a></p></li>
-<li><p><a href="./course-materials/lectures/23_maps-ggplot.html">24 Maps part 2</a></p></li>
-<li><p>[25 Maps part 3]</p></li>
-</ul>
-</section>
-<section id="week-11" class="level1">
-<h1>Week 11</h1>
-<ul>
-<li>[26 Maps part 4]</li>
-</ul>
-</section>
-<section id="week-12" class="level1">
-<h1>Week 12</h1>
-<ul>
-<li><a href="">Project 3 Intro</a></li>
-</ul>
-</section>
-<section id="week-13" class="level1">
-<h1>Week 13</h1>
-<p>Part 4: Parallel to SQL</p>
-<ul>
-<li>[27 SQL]</li>
-</ul>
-</section>
-<section id="week-14" class="level1">
-<h1>Week 14</h1>
-<ul>
-<li><p><a href="">28 SQL 1</a></p></li>
-<li><p><a href="">29 SQL 2</a></p></li>
-</ul>
-</section>
-<section id="week-15" class="level1">
-<h1>Week 15</h1>
-<ul>
-<li><a href="">30 SQL 3</a></li>
-</ul>
-<!-- Discuss the difference between `%in%` and `==`
-
--   [Lecture on Joins](Make this lecture)
-
--   [Pivots](course-materials/lectures/18_pivots.qmd)
-  
--   Short `kable()` [demo](https://www.geeksforgeeks.org/kable-method-in-r/)
-
--   Functions and the tidyverse (Advanced)
--   Iteration (Advanced)
-
-
-
-
-# Project 3 info
-
-Some places to find data: 
-
-[Kaggle](https://www.kaggle.com/)
-
-[US forest service](https://data.fs.usda.gov)
-
-[Mass data website](https://data.mass.gov/)
-
-[google data search](https://datasetsearch.research.google.com/)
-
-Or just google "keyword" + gis or data
-
-Be mindful of the source and validity of your data. 
-
-# Day 33 Lab 7 Mapping Monarchs.
-
-[Alumani Panel](www/Alum_Panel.pdf)
-
-[Here is the lab for today.](https://classroom.github.com/a/QxAl2Zx9)
-
-It is due next Wednesday
-
-
-
-# Day 31 Choropleth Mapping and Leaflet
-
-[Data Jounralism at the Globe Wed from 4-5:15](https://umass-amherst.zoom.us/meeting/register/3R83LNn7ROWw6lAbmltMAw)
-
-[Scott Lacombe today 12:15-1:30](www/Tech_SL.png)
-
-Pushing back office hours 1:40-3:00 pm.
-
-![Cora's map](www/coras_map.jpg)
-
-[Choropleth Mapping](./course-materials/in-class-activies/29_Choropleth_and_Leaflet.qmd)
-
-::: {.callout-note collapse="true"}
-
-# Project 3 info
-
-[Project 3](https://classroom.github.com/a/lEaHigyH)
-
-After you know your group name in github classroom (or if you need a partner) fill out this form to tell me your [Project 3 groups](https://docs.google.com/forms/d/e/1FAIpQLSdgnj_qMUuWGNCCeez2dnFYTa3Am2HzTo8Whd5YbBqsy0cE4Q/viewform?usp=header)
-
-:::
-
-# Day 30 Mapping with simple features (sf) and shape files
-
-[VISA info session](www/Visa_April_15.pdf)
-
-[In class activity](./course-materials/in-class-activies/27_mapping.zip)
-
-Maybe fix some things in the final project if time. 
-
-# Day 29: Maps
-
-<!-- [Mapping Review](course-materials/lectures/30_map_review.qmd) -->
-<p><a href="./course-materials/lectures/26_maps-ggplot.qmd">Example: static maps</a></p>
-<p>Simple features and Shape files.</p>
-<ul>
-<li><p><a href="https://geodata.vermont.gov/">Vermont’s Geospacial Data</a></p></li>
-<li><p><a href="https://www.mass.gov/info-details/massgis-data-bicycle-trails">MA Bike Trails</a></p></li>
-<li><p><a href="https://jessecambon.github.io/tidygeocoder/articles/geocoder_services.html">tidygeocoder services</a></p></li>
-</ul>
-<p><a href="./course-materials/in-class-activies/27_mapping.zip">In class activity</a></p>
-<!-- # Day 29 Practice function writing in R  -->
-<!-- [Chapter 7 Problem 1 and 3](https://mdsr-book.github.io/mdsr3e/07-iteration.html#iteration-exercises) -->
-</section>
-<section id="day-28-final-project-website" class="level1">
-<h1>Day 28: Final Project: Website</h1>
-<p>Start thinking about who you want to work with on project 3: 2 or 3 people.</p>
-<p>The final project instructions can be found <a href="./course-materials/Final-Project/Project.html">here</a>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="global-options" class="level2">
+<h2 class="anchored" data-anchor-id="global-options">Global Options</h2>
+<p>You can change options globally by editing the YAML.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>execute<span class="sc">:</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  echo<span class="sc">:</span> true</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  code<span class="sc">-</span>fold<span class="sc">:</span> true</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Website work
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p><a href="https://classroom.github.com/a/BrlY_cSN">Empty repo</a></p></li>
-<li><p>Move all your website files to that repo</p>
-<ul>
-<li>Recall they are in your lab 1 folder.</li>
-</ul></li>
-<li><p>Add your project 1 to your website.</p>
-<ul>
-<li><p>You could just link it to the main page</p></li>
-<li><p><a href="https://quarto.org/docs/websites/website-navigation.html#side-navigations">Add it to the side bar</a>.</p></li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Clean up your project
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p>#| echo: False - to hide code from a code chunk.</p></li>
-<li><p>#| eval: False - to not include the output of the code.</p></li>
-<li><p>#| warnings: False - drop the warnings from functions.</p></li>
-<li><p><a href="https://rstudio.github.io/cheatsheets/html/quarto.html">More options</a></p></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Day 24 Functions and The Tidyverse
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>No class next Wednesday April 2, finish up your projects.</p>
-<p><a href="course-materials/lectures/24_data_masking.qmd">Data Masking</a></p>
-<p><a href="course-materials/in-class-activies/function_writing_practice.qmd">Practice function writing</a></p>
-<p><a href="https://rlang.r-lib.org/reference/topic-data-mask.html">More on masking</a></p>
-<section id="links-worth-keeping" class="level2">
-<h2 class="anchored" data-anchor-id="links-worth-keeping">Links worth keeping</h2>
-<p><a href="https://www.sql-practice.com/">sql-practice</a></p>
+<p>You can change options locally by adding #| in code chunks.</p>
 </section>
-<section id="add-this-to-canvas" class="level2">
-<h2 class="anchored" data-anchor-id="add-this-to-canvas">Add this to canvas</h2>
-<p>Help us help you: take screenshots of your screen and post them to Canvas.</p>
-<ul>
-<li><p>macOS: Command+Shift+3 to take shot of whole screen, Command+Shift+4 to take subportion</p></li>
-<li><p>Windows: Shift-Windows Key-S and Snip &amp; Sketch</p></li>
-<li><p>Linux: Print screen</p></li>
-<li><p>Chromebook: Shift + Ctrl + Show windows</p></li>
-</ul>
+<section id="showing-code" class="level2">
+<h2 class="anchored" data-anchor-id="showing-code">Showing code</h2>
+<p><code>#| echo: True</code> option</p>
+<p><code>#| code-fold: True</code> option</p>
 </section>
-</div>
-</div>
-</div>
-<section id="colors" class="level2">
-<h2 class="anchored" data-anchor-id="colors">colors</h2>
+<section id="running-code" class="level2">
+<h2 class="anchored" data-anchor-id="running-code">Running code</h2>
+<p><code>#| eval: True</code> option (default)</p>
+<p>Runs the code in the chunk.</p>
+<p><code>#| include: True</code> option (default)</p>
+<p>Runs the code and shows the results.</p>
 </section>
-<section id="note-on-colors" class="level2">
-<h2 class="anchored" data-anchor-id="note-on-colors">Note on colors</h2>
-<p>We will discuss colors on Monday when you get to them in ex 6:</p>
-<p>You can reread <a href="https://mdsr-book.github.io/mdsr3e/02-datavizI.html#sec-color">this section</a> if you forget what sequential,diverging,qualitative mean.</p>
-<p>Or check out the colors examples on the <a href="https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf">cheat sheet</a>.</p>
-<p>Intuitive <a href="https://jhudatascience.org/tidyversecourse/dataviz.html#colors">Color Examples</a></p>
+<section id="open-lab-5-to-experiment." class="level2">
+<h2 class="anchored" data-anchor-id="open-lab-5-to-experiment.">Open Lab 5 to experiment.</h2>
 </section>
-<section id="wrangling" class="level2">
-<h2 class="anchored" data-anchor-id="wrangling">wrangling</h2>
-<p><a href="https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf">dpylr cheatsheet for wrangling</a></p>
-<p><a href="./course-materials/in-class-activies/Wrangling_Baby_Names.qmd">Wrangle babynames</a> –&gt;</p>
+<section id="creating-other-documents" class="level2">
+<h2 class="anchored" data-anchor-id="creating-other-documents">Creating other documents</h2>
+<p><a href="https://quarto.org/docs/presentations/">Presentations</a></p>
+<p><a href="https://quarto.org/docs/websites/">Websites</a></p>
+<p><a href="https://quarto.org/docs/books/">Books</a></p>
+<p><a href="https://quarto.org/docs/output-formats/pdf-basics.html">Pdfs</a></p>
+</section>
+<section id="working-directory" class="level1">
+<h1>Working Directory</h1>
+<section id="what-is-a-directory" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-directory">What is a directory</h2>
+<p>A directory is the current folder R considers when working with your file.</p>
+<p>Most computer languages need the directory to be specified so the computer know where to find files.</p>
+</section>
+<section id="working-directory-1" class="level2">
+<h2 class="anchored" data-anchor-id="working-directory-1">Working directory</h2>
+<p>We have been creating R projects to specify a working directory.</p>
+<p>This is the easiest method for maintaining a working directory.</p>
+</section>
+<section id="what-is-my-working-directory" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-my-working-directory">What is my working directory?</h2>
+<p>RStudio tells you the working directory in the console.</p>
+<p>Here R is looking for files in my /MTH190/Lab 6 folder</p>
+<p><img src="./images/wd_lab_6.png" class="img-fluid"></p>
+<p>If I close the project R will look in the home folder.</p>
+<p>File &gt; Close Project</p>
+<p><img src="./images/wd_home.png" class="img-fluid"></p>
+</section>
+<section id="another-working-directory" class="level2">
+<h2 class="anchored" data-anchor-id="another-working-directory">Another working directory</h2>
+<p>When rendering a quarto document the working directory is automatically set to the folder the quarto document resides in.</p>
+<p>This can be confusing. Let’s work through an example.</p>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>This will be easiest to follow if you are on the server.</p>
+<ol type="1">
+<li>Close any project you are currently working in so your working directory is the home directory.</li>
+</ol>
+<p>Your console should look like this:</p>
+<p><img src="./images/wd_home.png" class="img-fluid"></p>
+</section>
+<section id="the-server-is-a-linux-system" class="level2">
+<h2 class="anchored" data-anchor-id="the-server-is-a-linux-system">The server is a Linux System</h2>
+<p>This is a side note:</p>
+<p>You can also type <code>getwd()</code> into the console to verify your directory. This shows my home directory is:</p>
+<pre><code>"/u00/rstudio_homes/administration.hcc/nschwab"</code></pre>
+<p>This is the same as ~</p>
+</section>
+<section id="make-a-folder" class="level2">
+<h2 class="anchored" data-anchor-id="make-a-folder">Make a folder</h2>
+<ol start="2" type="1">
+<li><p>Let’s make a folder and call it practice_wd.</p></li>
+<li><p>In that folder make a new quarto document.</p></li>
+</ol>
+<p>Notice: Our working directory and the directory our quarto document are in are different.</p>
+<p>We’ll leave it that way.</p>
+<p>(The easiest way to make them match to to start a new R project in the practice_wd folder)</p>
+</section>
+<section id="check-the-documents-working-directory" class="level2">
+<h2 class="anchored" data-anchor-id="check-the-documents-working-directory">Check the document’s working directory</h2>
+<p>Make a new chunk and type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then render the document.</p>
+<p>You should notice that the working directory is in the practice_wd folder.</p>
+<pre><code>"/u00/rstudio_homes/administration.hcc/nschwab/practice_wd"</code></pre>
+</section>
+<section id="wd-confusion" class="level2">
+<h2 class="anchored" data-anchor-id="wd-confusion">WD Confusion</h2>
+<p>This is confusing for students because while not rendered R is looking for files in the current working directory (home ~) but when rendered R will look in the folder the quarto document is in (~_wd)</p>
+<p>This will be a big deal when we read data into the document.</p>
+</section>
+<section id="a-csv-file" class="level2">
+<h2 class="anchored" data-anchor-id="a-csv-file">A csv file</h2>
+<p>The code below will make a dummy data csv file for practice put it into a code chunk in your practice.qmd file.</p>
+<p>Note: It should save to your quarto document’s working directory (~_wd)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make some dummy data</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>my_teacher_supports_me, <span class="sc">~</span><span class="st">`</span><span class="at">my_parents_support_me</span><span class="st">`</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly Agree"</span>,<span class="st">"Strongly Agree"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Strongly Agree"</span>,<span class="st">" Agree"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Neutral"</span>,<span class="st">"Agree"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Agree"</span>,<span class="st">" Neutral"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cn">NA</span>, <span class="st">"Agree"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Disagree"</span>,<span class="st">"Disagree"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(df,<span class="st">"dummy_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="read-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="read-the-data">Read the data</h2>
+<p>Make a new chunk and read in the data.</p>
+<p>If you run this chunk you will get an error:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"dummy_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Error: 'dummy_data' does not exist in current working directory ('/u00/rstudio_homes/administration.hcc/nschwab/practice_wd').</code></pre>
+</section>
+<section id="rendering-everything-works" class="level2">
+<h2 class="anchored" data-anchor-id="rendering-everything-works">Rendering everything works</h2>
+<p>When rendering everything works fine.</p>
+<p>If the current working directory and the directory for the quarto file match this is not a problem.</p>
+<p>This is why we make R Projects before each lab and project.</p>
+</section>
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions</h2>
 
 
 </section>
@@ -1091,7 +945,7 @@ Day 24 Functions and The Tidyverse
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="./credits.html">
+    <a class="nav-link" href="../../credits.html">
 <p>credits</p>
 </a>
   </li>  
@@ -1103,5 +957,4 @@ Day 24 Functions and The Tidyverse
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

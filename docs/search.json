@@ -494,7 +494,7 @@
     "href": "course-materials/lectures/19_pivots.html#pivot_longer",
     "title": "Tidy data and pivots",
     "section": "pivot_longer()",
-    "text": "pivot_longer()\nThis data is not tidy how can we make it longer for computers?\n\n\n# A tibble: 3 × 5\n  Country        `1979` `1989` `1999` `2009`\n  &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 France        NA          NA    0.3    0.4\n2 South Africa  NA          NA   14.8   17.2\n3 United States  0.0318     NA    0.5    0.6\n\n\nHow you think we could do that with pivot_longer()"
+    "text": "pivot_longer()\nThis data is not tidy how can we make it longer for computers?\n\n\nCode\ngs4_deauth()\nhiv_key &lt;- \"1kWH_xdJDM4SMfT_Kzpkk-1yuxWChfurZuWYjfmv51EA\"\nhiv &lt;- read_sheet(hiv_key) |&gt;\n  rename(Country = 1) |&gt;\n  filter(\n    Country %in% c(\"United States\", \"France\", \"South Africa\")\n  ) |&gt;\n  select(Country, `1979`, `1989`, `1999`, `2009`) |&gt;\n  unnest(cols = c(`2009`)) |&gt;\n  mutate(across(matches(\"[0-9]\"), as.double))\nhiv\n\n\n# A tibble: 3 × 5\n  Country        `1979` `1989` `1999` `2009`\n  &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 France        NA          NA    0.3    0.4\n2 South Africa  NA          NA   14.8   17.2\n3 United States  0.0318     NA    0.5    0.6\n\n\nHow you think we could do that with pivot_longer()"
   },
   {
     "objectID": "course-materials/lectures/19_pivots.html#pivot_longer-1",
@@ -508,7 +508,7 @@
     "href": "course-materials/lectures/19_pivots.html#pivot_wider",
     "title": "Tidy data and pivots",
     "section": "pivot_wider()",
-    "text": "pivot_wider()\nThis data is tidy how could we make it wider for humans?\n\n\n# A tibble: 6 × 3\n# Groups:   name [3]\n  name   sex    total\n  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt;\n1 Leslie F     266474\n2 Leslie M     112689\n3 Robin  F     289395\n4 Robin  M      44616\n5 Sue    F     144465\n6 Sue    M        519\n\n\nHow you think we could do that with pivot_wider()"
+    "text": "pivot_wider()\nThis data is tidy how could we make it wider for humans?\n\nlibrary(babynames)\nbabynames |&gt;\n     filter(name %in% c(\"Sue\", \"Robin\", \"Leslie\")) |&gt;\n     group_by(name, sex) |&gt;\n     summarize(total = sum(n))\n\n# A tibble: 6 × 3\n# Groups:   name [3]\n  name   sex    total\n  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt;\n1 Leslie F     266474\n2 Leslie M     112689\n3 Robin  F     289395\n4 Robin  M      44616\n5 Sue    F     144465\n6 Sue    M        519\n\n\nHow you think we could do that with pivot_wider()"
   },
   {
     "objectID": "course-materials/lectures/19_pivots.html#pivot_wider-1",
@@ -661,8 +661,8 @@
     "objectID": "course-materials/lectures/20_scraping.html#ways-to-get-data",
     "href": "course-materials/lectures/20_scraping.html#ways-to-get-data",
     "title": "Web Scrapping",
-    "section": "Ways to get data",
-    "text": "Ways to get data\nWe have looked at several places to find data:\npackages\ncsv files\nAPIs\nIn this lecture we will consider scraping."
+    "section": "",
+    "text": "We have looked at several places to find data:\npackages\ncsv files\nAPIs\nIn this lecture we will consider scraping."
   },
   {
     "objectID": "course-materials/lectures/20_scraping.html#how-does-it-work",
@@ -683,7 +683,7 @@
     "href": "course-materials/lectures/20_scraping.html#rvest",
     "title": "Web Scrapping",
     "section": "rvest",
-    "text": "rvest\nWe will scrape with a package called Rvest.\nrvest (meant to sound like “Harvest”) is a package that is part of the tidyverse, but is not loaded by default.\nThis means you download when you download the tidyverse.\nBut you must still load it after you have loaded the tidyverse.\n\nlibrary(tidyverse)\nlibrary(rvest)"
+    "text": "rvest\nWe will scrape with a package called Rvest.\nrvest (meant to sound like “Harvest”) is a package that is part of the tidyverse, but is not loaded by default.\nThis means you download when you download the tidyverse.\nBut you must still load it after you have loaded the tidyverse.\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.1     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.2.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(rvest)\n\n\nAttaching package: 'rvest'\n\nThe following object is masked from 'package:readr':\n\n    guess_encoding"
   },
   {
     "objectID": "course-materials/lectures/20_scraping.html#the-read-in-the-html",
@@ -746,7 +746,7 @@
     "href": "course-materials/lectures/20_scraping.html#rank-should-be-an-integer-not-a-character",
     "title": "Web Scrapping",
     "section": "Rank should be an integer, not a character",
-    "text": "Rank should be an integer, not a character\nUse mutate to make a new column of the correct type.\n\nolympic_medals = olympic_medals |&gt;\n  mutate(Rank = as.integer(Rank))\n  olympic_medals\n\n# A tibble: 17 × 6\n    Rank .mw-parser-output .tooltip-dotted{border-bo…¹  Gold Silver Bronze Total\n   &lt;int&gt; &lt;chr&gt;                                         &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;\n 1     1 Norway                                           18     12     11    41\n 2     2 United States                                    12     12      9    33\n 3     3 Netherlands                                      10      7      3    20\n 4     4 Italy*                                           10      6     14    30\n 5     5 Germany                                           8     10      8    26\n 6     6 France                                            8      9      6    23\n 7     7 Sweden                                            8      6      4    18\n 8     8 Switzerland                                       6      9      8    23\n 9     9 Austria                                           5      8      5    18\n10    10 Japan                                             5      7     12    24\n11    11 Canada                                            5      7      9    21\n12    12 China                                             5      4      6    15\n13    13 South Korea                                       3      4      3    10\n14    14 Australia                                         3      2      1     6\n15    15 Great Britain                                     3      1      1     5\n16    NA Remaining                                         7     14     15    36\n17    NA Totals (29 entries)                             116    118    115   349\n# ℹ abbreviated name:\n#   ¹​`.mw-parser-output .tooltip-dotted{border-bottom:1px dotted;cursor:help}NOC`"
+    "text": "Rank should be an integer, not a character\nUse mutate to make a new column of the correct type.\n\nolympic_medals = olympic_medals |&gt;\n  mutate(Rank = as.integer(Rank))\n\nWarning: There was 1 warning in `mutate()`.\nℹ In argument: `Rank = as.integer(Rank)`.\nCaused by warning:\n! NAs introduced by coercion\n\n  olympic_medals\n\n# A tibble: 12 × 6\n    Rank .mw-parser-output .tooltip-dotted{border-bo…¹  Gold Silver Bronze Total\n   &lt;int&gt; &lt;chr&gt;                                         &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;\n 1     1 Norway                                           18     12     11    41\n 2     2 United States                                    12     12      9    33\n 3     3 Netherlands                                      10      7      3    20\n 4     4 Italy*                                           10      6     14    30\n 5     5 Germany                                           8     10      8    26\n 6     6 France                                            8      9      6    23\n 7     7 Sweden                                            8      6      4    18\n 8     8 Switzerland                                       6      9      8    23\n 9     9 Austria                                           5      8      5    18\n10    10 Japan                                             5      7     12    24\n11    NA Remaining                                        26     32     35    93\n12    NA Totals (29 entries)                             116    118    115   349\n# ℹ abbreviated name:\n#   ¹​`.mw-parser-output .tooltip-dotted{border-bottom:1px dotted;cursor:help}NOC`"
   },
   {
     "objectID": "course-materials/lectures/20_scraping.html#mw-paser-should-say-name_of_country",
@@ -760,7 +760,7 @@
     "href": "course-materials/lectures/20_scraping.html#all-column-names-should-be-lowercase-to-match-style-clean_names",
     "title": "Web Scrapping",
     "section": "all column names should be lowercase to match style (clean_names())",
-    "text": "all column names should be lowercase to match style (clean_names())\nThe clean_names() function will lower case all column names and use underscores as spaces. This conforms to the tidyverse style guide. It also makes data easier to work with.\n\nlibrary(janitor)\n\nolympic_medals = olympic_medals |&gt; \n  clean_names()"
+    "text": "all column names should be lowercase to match style (clean_names())\nThe clean_names() function will lower case all column names and use underscores as spaces. This conforms to the tidyverse style guide. It also makes data easier to work with.\n\nlibrary(janitor)\n\n\nAttaching package: 'janitor'\n\n\nThe following objects are masked from 'package:stats':\n\n    chisq.test, fisher.test\n\nolympic_medals = olympic_medals |&gt; \n  clean_names()"
   },
   {
     "objectID": "course-materials/lectures/20_scraping.html#lose-the-last-total-row-head",
@@ -774,7 +774,7 @@
     "href": "course-materials/lectures/20_scraping.html#change-remaining-to-other-case_when-or-manually",
     "title": "Web Scrapping",
     "section": "change “remaining” to “other” (case_when(), or manually)",
-    "text": "change “remaining” to “other” (case_when(), or manually)\n\nolympic_medals|&gt;\nmutate(name_of_country = case_when(\n  name_of_country==\"Remaining\" ~ \"Other Countries\",\n  TRUE ~ name_of_country))\n\n# A tibble: 16 × 6\n    rank name_of_country  gold silver bronze total\n   &lt;int&gt; &lt;chr&gt;           &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;\n 1     1 Norway             18     12     11    41\n 2     2 United States      12     12      9    33\n 3     3 Netherlands        10      7      3    20\n 4     4 Italy*             10      6     14    30\n 5     5 Germany             8     10      8    26\n 6     6 France              8      9      6    23\n 7     7 Sweden              8      6      4    18\n 8     8 Switzerland         6      9      8    23\n 9     9 Austria             5      8      5    18\n10    10 Japan               5      7     12    24\n11    11 Canada              5      7      9    21\n12    12 China               5      4      6    15\n13    13 South Korea         3      4      3    10\n14    14 Australia           3      2      1     6\n15    15 Great Britain       3      1      1     5\n16    NA Other Countries     7     14     15    36\n\n# alternative method\n#olympic_medals[16, \"name_of_country\"]&lt;-\"hello\" # Notice the &lt;- here. 16th row of the name_of_country column."
+    "text": "change “remaining” to “other” (case_when(), or manually)\n\nolympic_medals|&gt;\nmutate(name_of_country = case_when(\n  name_of_country==\"Remaining\" ~ \"Other Countries\",\n  TRUE ~ name_of_country))\n\n# A tibble: 12 × 6\n    rank name_of_country      gold silver bronze total\n   &lt;int&gt; &lt;chr&gt;               &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;\n 1     1 Norway                 18     12     11    41\n 2     2 United States          12     12      9    33\n 3     3 Netherlands            10      7      3    20\n 4     4 Italy*                 10      6     14    30\n 5     5 Germany                 8     10      8    26\n 6     6 France                  8      9      6    23\n 7     7 Sweden                  8      6      4    18\n 8     8 Switzerland             6      9      8    23\n 9     9 Austria                 5      8      5    18\n10    10 Japan                   5      7     12    24\n11    NA Other Countries        26     32     35    93\n12    NA Totals (29 entries)   116    118    115   349\n\n# alternative method\n#olympic_medals[16, \"name_of_country\"]&lt;-\"hello\" # Notice the &lt;- here. 16th row of the name_of_country column."
   },
   {
     "objectID": "course-materials/lectures/20_scraping.html#drop-the-total-column",
@@ -2042,5 +2042,313 @@
     "title": "Dplyr Cheatsheet",
     "section": "",
     "text": "This is only a placeholder for the cheatsheet."
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#cheat-sheet",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#cheat-sheet",
+    "title": "Quarto Documents",
+    "section": "Cheat Sheet",
+    "text": "Cheat Sheet\nSee the cheatsheet for all the options.\nQuarto Cheatsheet"
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#global-options",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#global-options",
+    "title": "Quarto Documents",
+    "section": "Global Options",
+    "text": "Global Options\nYou can change options globally by editing the YAML.\n\n---\n...\nexecute: \n  echo: true\n  code-fold: true\n...\n---\n\nYou can change options locally by adding #| in code chunks."
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#options-local-to-chunks",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#options-local-to-chunks",
+    "title": "Quarto Documents",
+    "section": "Options local to chunks",
+    "text": "Options local to chunks"
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#showing-code",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#showing-code",
+    "title": "Quarto Documents",
+    "section": "Showing code",
+    "text": "Showing code\n#| echo: True option\n#| code-fold: True option"
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#running-code",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#running-code",
+    "title": "Quarto Documents",
+    "section": "Running code",
+    "text": "Running code\n#| eval: True option (default)\nRuns the code in the chunk.\n#| include: True option (default)\nRuns the code and shows the results."
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#open-lab-5-to-experiment.",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#open-lab-5-to-experiment.",
+    "title": "Quarto Documents",
+    "section": "Open Lab 5 to experiment.",
+    "text": "Open Lab 5 to experiment."
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#what-is-a-directory",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#what-is-a-directory",
+    "title": "Quarto Documents",
+    "section": "What is a directory",
+    "text": "What is a directory\nA directory is the current folder R considers when working with your file.\nMost computer languages need the directory to be specified so the computer know where to find files."
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#working-directory-1",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#working-directory-1",
+    "title": "Quarto Documents",
+    "section": "Working directory",
+    "text": "Working directory\nWe have been creating R projects to specify a working directory.\nThis is the easiest method for maintaining a working directory."
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#what-is-my-working-directory",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#what-is-my-working-directory",
+    "title": "Quarto Documents",
+    "section": "What is my working directory?",
+    "text": "What is my working directory?\nRStudio tells you the working directory in the console.\nHere R is looking for files in my /MTH190/Lab 6 folder\n\nIf I close the project R will look in the home folder.\nFile &gt; Close Project"
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#another-working-directory",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#another-working-directory",
+    "title": "Quarto Documents",
+    "section": "Another working directory",
+    "text": "Another working directory\nWhen rendering a quarto document the working directory is automatically set to the folder the quarto document resides in.\nThis can be confusing. Let’s work through an example."
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#examples",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#examples",
+    "title": "Quarto Documents",
+    "section": "Examples",
+    "text": "Examples\nThis will be easiest to follow if you are on the server.\n\nClose any project you are currently working in so your working directory is the home directory.\n\nYour console should look like this:\n\nYOu can also type getwd() into the console to verify your directory. This shows my home directory is:\n\"/u00/rstudio_homes/administration.hcc/nschwab\""
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#example",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#example",
+    "title": "Quarto Documents",
+    "section": "Example",
+    "text": "Example\nThis will be easiest to follow if you are on the server.\n\nClose any project you are currently working in so your working directory is the home directory.\n\nYour console should look like this:"
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#the-server-is-a-linux-system",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#the-server-is-a-linux-system",
+    "title": "Quarto Documents",
+    "section": "The server is a Linux System",
+    "text": "The server is a Linux System\nThis is a side note:\nYou can also type getwd() into the console to verify your directory. This shows my home directory is:\n\"/u00/rstudio_homes/administration.hcc/nschwab\"\nThis is the same as ~"
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#make-a-folder",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#make-a-folder",
+    "title": "Quarto Documents",
+    "section": "Make a folder",
+    "text": "Make a folder\n\nLet’s make a folder and call it practice_wd.\nIn that folder make a new quarto document.\n\nNotice: Our working directory and the directory our quarto document are in are different.\nWe’ll leave it that way.\n(The easiest way to make them match to to start a new R project in the practice_wd folder)"
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#check-the-documents-working-directory",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#check-the-documents-working-directory",
+    "title": "Quarto Documents",
+    "section": "Check the document’s working directory",
+    "text": "Check the document’s working directory\nMake a new chunk and type:\n\ngetwd()\n\nThen render the document.\nYou should notice that the working directory is in the practice_wd folder.\n\"/u00/rstudio_homes/administration.hcc/nschwab/practice_wd\""
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#wd-confusion",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#wd-confusion",
+    "title": "Quarto Documents",
+    "section": "WD Confusion",
+    "text": "WD Confusion\nThis is confusing for students because while not rendered R is looking for files in the current working directory (home ~) but when rendered R will look in the folder the quarto document is in (~_wd)\nThis will be a big deal when we read data into the document."
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#a-csv-file",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#a-csv-file",
+    "title": "Quarto Documents",
+    "section": "A csv file",
+    "text": "A csv file\nThe code below will make a dummy data csv file for practice put it into a code chunk in your practice.qmd file.\nNote: It should save to your quarto document’s working directory (~_wd)\n\n#Make some dummy data\ndf = dplyr::tribble(\n    ~my_teacher_supports_me, ~`my_parents_support_me`,\n    \"Strongly Agree\",\"Strongly Agree\",\n    \"Strongly Agree\",\" Agree\",\n    \"Neutral\",\"Agree\",\n    \"Agree\",\" Neutral\",\n    NA, \"Agree\",\n    \"Disagree\",\"Disagree\"\n)\nreadr::write_csv(df,\"dummy_data.csv\")"
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#read-the-data",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#read-the-data",
+    "title": "Quarto Documents",
+    "section": "Read the data",
+    "text": "Read the data\nMake a new chunk and read in the data.\nIf you run this chunk you will get an error:\n\nreadr::read_csv(\"dummy_data.csv\")\n\nError: 'dummy_data' does not exist in current working directory ('/u00/rstudio_homes/administration.hcc/nschwab/practice_wd')."
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#rendering-everything-works",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#rendering-everything-works",
+    "title": "Quarto Documents",
+    "section": "Rendering everything works",
+    "text": "Rendering everything works\nWhen rendering everything works fine.\nIf the current working directory and the directory for the quarto file match this is not a problem.\nThis is why we make R Projects before each lab and project."
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#questions",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#questions",
+    "title": "Quarto Documents",
+    "section": "Questions",
+    "text": "Questions"
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#pre-quarto",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#pre-quarto",
+    "title": "Quarto Documents",
+    "section": "Pre-Quarto",
+    "text": "Pre-Quarto\n\nMarkdown is a general document format that my documents use and support. It is still a common standard.\nJupyter notebooks were made for doing data analysis in Python.\nRMarkdown was made specifically for document types involving built in R script.\nPosit introduced quarto that supports working with Python, R, Julia and other languages."
+  },
+  {
+    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#creating-other-documents",
+    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#creating-other-documents",
+    "title": "Quarto Documents",
+    "section": "Creating other documents",
+    "text": "Creating other documents\nPresentations\nWebsites\nBooks\nPdfs"
+  },
+  {
+    "objectID": "course-materials/lectures/20_scraping.html",
+    "href": "course-materials/lectures/20_scraping.html",
+    "title": "Web Scrapping",
+    "section": "",
+    "text": "We have looked at several places to find data:\npackages\ncsv files\nAPIs\nIn this lecture we will consider scraping."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html",
+    "title": "Quarto Documents",
+    "section": "",
+    "text": "See the cheatsheet for all the options.\nQuarto Cheatsheet"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#cheat-sheet",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#cheat-sheet",
+    "title": "Quarto Documents",
+    "section": "",
+    "text": "See the cheatsheet for all the options.\nQuarto Cheatsheet"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#pre-quarto",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#pre-quarto",
+    "title": "Quarto Documents",
+    "section": "Pre-Quarto",
+    "text": "Pre-Quarto\n\nMarkdown is a general document format that my documents use and support. It is still a common standard.\nJupyter notebooks were made for doing data analysis in Python.\nRMarkdown was made specifically for document types involving built in R script.\nPosit introduced quarto that supports working with Python, R, Julia and other languages."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#global-options",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#global-options",
+    "title": "Quarto Documents",
+    "section": "Global Options",
+    "text": "Global Options\nYou can change options globally by editing the YAML.\n\n---\n...\nexecute: \n  echo: true\n  code-fold: true\n...\n---\n\nYou can change options locally by adding #| in code chunks."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#showing-code",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#showing-code",
+    "title": "Quarto Documents",
+    "section": "Showing code",
+    "text": "Showing code\n#| echo: True option\n#| code-fold: True option"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#running-code",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#running-code",
+    "title": "Quarto Documents",
+    "section": "Running code",
+    "text": "Running code\n#| eval: True option (default)\nRuns the code in the chunk.\n#| include: True option (default)\nRuns the code and shows the results."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#open-lab-5-to-experiment.",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#open-lab-5-to-experiment.",
+    "title": "Quarto Documents",
+    "section": "Open Lab 5 to experiment.",
+    "text": "Open Lab 5 to experiment."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#creating-other-documents",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#creating-other-documents",
+    "title": "Quarto Documents",
+    "section": "Creating other documents",
+    "text": "Creating other documents\nPresentations\nWebsites\nBooks\nPdfs"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-a-directory",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-a-directory",
+    "title": "Quarto Documents",
+    "section": "What is a directory",
+    "text": "What is a directory\nA directory is the current folder R considers when working with your file.\nMost computer languages need the directory to be specified so the computer know where to find files."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#working-directory-1",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#working-directory-1",
+    "title": "Quarto Documents",
+    "section": "Working directory",
+    "text": "Working directory\nWe have been creating R projects to specify a working directory.\nThis is the easiest method for maintaining a working directory."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-my-working-directory",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-my-working-directory",
+    "title": "Quarto Documents",
+    "section": "What is my working directory?",
+    "text": "What is my working directory?\nRStudio tells you the working directory in the console.\nHere R is looking for files in my /MTH190/Lab 6 folder\n\nIf I close the project R will look in the home folder.\nFile &gt; Close Project"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#another-working-directory",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#another-working-directory",
+    "title": "Quarto Documents",
+    "section": "Another working directory",
+    "text": "Another working directory\nWhen rendering a quarto document the working directory is automatically set to the folder the quarto document resides in.\nThis can be confusing. Let’s work through an example."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#example",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#example",
+    "title": "Quarto Documents",
+    "section": "Example",
+    "text": "Example\nThis will be easiest to follow if you are on the server.\n\nClose any project you are currently working in so your working directory is the home directory.\n\nYour console should look like this:"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#the-server-is-a-linux-system",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#the-server-is-a-linux-system",
+    "title": "Quarto Documents",
+    "section": "The server is a Linux System",
+    "text": "The server is a Linux System\nThis is a side note:\nYou can also type getwd() into the console to verify your directory. This shows my home directory is:\n\"/u00/rstudio_homes/administration.hcc/nschwab\"\nThis is the same as ~"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#make-a-folder",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#make-a-folder",
+    "title": "Quarto Documents",
+    "section": "Make a folder",
+    "text": "Make a folder\n\nLet’s make a folder and call it practice_wd.\nIn that folder make a new quarto document.\n\nNotice: Our working directory and the directory our quarto document are in are different.\nWe’ll leave it that way.\n(The easiest way to make them match to to start a new R project in the practice_wd folder)"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#check-the-documents-working-directory",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#check-the-documents-working-directory",
+    "title": "Quarto Documents",
+    "section": "Check the document’s working directory",
+    "text": "Check the document’s working directory\nMake a new chunk and type:\n\ngetwd()\n\nThen render the document.\nYou should notice that the working directory is in the practice_wd folder.\n\"/u00/rstudio_homes/administration.hcc/nschwab/practice_wd\""
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#wd-confusion",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#wd-confusion",
+    "title": "Quarto Documents",
+    "section": "WD Confusion",
+    "text": "WD Confusion\nThis is confusing for students because while not rendered R is looking for files in the current working directory (home ~) but when rendered R will look in the folder the quarto document is in (~_wd)\nThis will be a big deal when we read data into the document."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#a-csv-file",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#a-csv-file",
+    "title": "Quarto Documents",
+    "section": "A csv file",
+    "text": "A csv file\nThe code below will make a dummy data csv file for practice put it into a code chunk in your practice.qmd file.\nNote: It should save to your quarto document’s working directory (~_wd)\n\n#Make some dummy data\ndf = dplyr::tribble(\n    ~my_teacher_supports_me, ~`my_parents_support_me`,\n    \"Strongly Agree\",\"Strongly Agree\",\n    \"Strongly Agree\",\" Agree\",\n    \"Neutral\",\"Agree\",\n    \"Agree\",\" Neutral\",\n    NA, \"Agree\",\n    \"Disagree\",\"Disagree\"\n)\nreadr::write_csv(df,\"dummy_data.csv\")"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#read-the-data",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#read-the-data",
+    "title": "Quarto Documents",
+    "section": "Read the data",
+    "text": "Read the data\nMake a new chunk and read in the data.\nIf you run this chunk you will get an error:\n\nreadr::read_csv(\"dummy_data.csv\")\n\nError: 'dummy_data' does not exist in current working directory ('/u00/rstudio_homes/administration.hcc/nschwab/practice_wd')."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#rendering-everything-works",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#rendering-everything-works",
+    "title": "Quarto Documents",
+    "section": "Rendering everything works",
+    "text": "Rendering everything works\nWhen rendering everything works fine.\nIf the current working directory and the directory for the quarto file match this is not a problem.\nThis is why we make R Projects before each lab and project."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#questions",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#questions",
+    "title": "Quarto Documents",
+    "section": "Questions",
+    "text": "Questions"
   }
 ]

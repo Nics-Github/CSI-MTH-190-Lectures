@@ -66,7 +66,7 @@ There are two helpful examples [here](https://rvest.tidyverse.org/).
 
 Generally we will first read in the html data with `read_html()`
 
-`read_html()` takes a url as a string and you have to be connected to the internet for it to work properly. 
+`read_html()` takes a url as a string and you have to be connected to the internet for it to work properly.
 
 ```{r}
 winter_olympics = read_html("https://en.wikipedia.org/wiki/2026_Winter_Olympics")
@@ -85,7 +85,7 @@ html_element("#mw-content-text > div.mw-content-ltr.mw-parser-output > table:nth
 
 ## Convert into a table
 
-We use html_table() to create a data frame. 
+We use html_table() to create a data frame.
 
 ```{r}
 winter_olympics |>
@@ -104,7 +104,6 @@ We will not clean this table but we'll clean the next one.
 ## Medal count
 
 Attempt to scrape the 2026 Winter Olympics medal table. We'll clean this one up a bit.
-
 
 ## Medal Count Solution
 
@@ -125,21 +124,21 @@ See [this page for more information.](https://cloud.r-project.org/web/packages/j
 
 ## Items to clean
 
-Try some of these yourself first, see the hint functions for each line: 
+Try some of these yourself first, see the hint functions for each line:
 
-- Rank should be an integer, not a character  (mutate())
+-   Rank should be an integer, not a character (mutate())
 
-- .mw-paser... should say "name_of_country"  (rename())
+-   .mw-paser... should say "name_of_country" (rename())
 
-- all column names should be lowercase to match style (clean_names())
+-   all column names should be lowercase to match style (clean_names())
 
-- lose the last "total row" (head())
+-   lose the last "total row" (head())
 
-- should probably change "remaining" to "other" (case_when(), or manually)
+-   should probably change "remaining" to "other" (case_when(), or manually)
 
-- drop the "total" column (select())
+-   drop the "total" column (select())
 
-- table is not tidy (pivot_longer())
+-   table is not tidy (pivot_longer())
 
 ## Rank should be an integer, not a character
 
@@ -162,7 +161,7 @@ olympic_medals = olympic_medals|>
 
 ## all column names should be lowercase to match style (clean_names())
 
-The clean_names() function will lower case all column names and use underscores as spaces. This conforms to the tidyverse style guide. It also makes data easier to work with. 
+The clean_names() function will lower case all column names and use underscores as spaces. This conforms to the tidyverse style guide. It also makes data easier to work with.
 
 ```{r}
 library(janitor)

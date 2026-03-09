@@ -46,14 +46,11 @@ When you want to make it more human readable you'll pivot wider.
 
 These are new functions we should check the docs.
 
-
-
 ## `pivot_longer()`
 
 This data is not tidy how can we make it longer for computers?
 
 ```{r}
-#| echo: FALSE
 #| code-fold: true
 
 gs4_deauth()
@@ -89,7 +86,7 @@ hiv |>
 This data is tidy how could we make it wider for humans?
 
 ```{r}
-#| echo: false
+#| echo: true
 library(babynames)
 babynames |>
      filter(name %in% c("Sue", "Robin", "Leslie")) |>
@@ -98,7 +95,6 @@ babynames |>
 ```
 
 How you think we could do that with `pivot_wider()`
-
 
 ## `pivot_wider()`
 
@@ -139,7 +135,7 @@ fish_encounters |>
 
 If your values have a common symbol and they should be put into different column that can be done with separate().
 
-We'll see some examples in the next several problems. 
+We'll see some examples in the next several problems.
 
 ## Not Tidy -\> Tidy
 
