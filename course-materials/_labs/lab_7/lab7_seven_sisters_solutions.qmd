@@ -4,7 +4,7 @@ author: "Your name"
 format:
   html:
     self-contained: true
-editor: visual
+editor: source
 execute:
     eval: false
     message: false
@@ -31,19 +31,19 @@ In the process you will practice:
 
 ```{r setup}
 # This is your set up chunk, load your libraries here. 
-library(___)
+library(tidyverse)
 library(rvest)
 
 
 ```
 
-Question: What sensitive data was hidden on the website? What sensitive data is presented in the website?
+Question: Consider the Check out the 2022 race results at this [website](https://aratrace.com/7-sisters-trail-race-4/). What sensitive data is presented in the website?
 
 **Answer :**
 
-`rvest` is a new package, you should take a moment to look up `rvest`.
+## RVest
 
-Check out the 2022 results at this [website](https://aratrace.com/7-sisters-trail-race-4/).
+Rvest is a package for web scraping it was introduced in the scraping lecture on canvas.
 
 In the following chunk we will scrape the 2022 data from the website above.
 
@@ -52,13 +52,13 @@ In the following chunk we will scrape the 2022 data from the website above.
 # This chunk scrapes data from the internet. 
 # In the space below put the url of the 2022 results. It should be a string with quotes. 
 
-seven_sisters_2022 <- "___"
+seven_sisters_2022 <- "https://aratrace.com/7-sisters-trail-race-4/"
 
 # pipe the url into read_html(). 
 
 results_2022 <- seven_sisters_2022 |>
   read_html() |> 
-  html_element("table") |>
+  html_element("#table_1") |> 
   html_table()
 ```
 
@@ -84,8 +84,10 @@ All those spaces in the variable names can cause problems. We can clean them wit
 ```{r}
 # Note: we are directly overwriting the variable names with the names() function. 
 
-names(results_2022) <-  ___(names(results_2022),
-                                    
+names(results_2022) <-  str_replace_all(
+    names(results_2022),
+    pattern = " ",
+    replacement = "_"         
                                     )
 
 names(results_2022)
@@ -97,7 +99,7 @@ names(results_2022)
 The tidyverse style guide tells us to make variables lowercase. So we should do that. Find the function in the cheatsheet that will make the column names lowercase and add it below.
 
 ```{r lower-case}
-names(results_2022) <-  ___(names(results_2022)
+names(results_2022) <-  tolower(names(results_2022)
                                     )
 names(results_2022)
 ```
@@ -271,11 +273,12 @@ results_2017 <- seven_sisters_2017 |>
 
 ```
 
-Question: Based on the runners from the 2017-2019 race which runners do you guess would be present for the 2022 race? Which of those runners actually were present in 2022?
+Question: Based on the runners from the 2017-2019 race which runners do you guess would be present for the 2022 race? Which of those runners actually were present in 2022? 
 
 **Answer:**
 
-Figuring out the diehard runners of a race is not necessarily nefarious. You might be the race coordinator and want to reach out to these people for donations, that seems fine. Alternatively you might be a reporter writing for the local news. Would the original purpose of the data effect what you write about the race? What is the original purpose of the data? Do we want to get consent before we publish first and last names? Do we need to publish the city and state where the runners are from?
+
+Figuring out the diehard runners of a race is not necessarily nefarious. You might be the race coordinator and want to reach out to these people for donations, that seems fine. Alternatively you might be a reporter writing for the local news. Would the original purpose of the data effect what you write about the race? What is the original purpose of the data? Do we want to get consent before we publish first and last names, do we need to publish the city and state where the runners are from? Could this information be used to stalk a runner?
 
 **Answer:**
 

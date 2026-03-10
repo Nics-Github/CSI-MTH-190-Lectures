@@ -92,16 +92,17 @@ When we wrangle we are not altering the original data.
 
 ## What is a tibble?
 
-:::: columns
+::::: columns
 ::: {.column width="50%"}
 ![](https://tibble.tidyverse.org/logo.svg){fig-align="center" width="50%"}
 :::
+
 ::: {.column width="50%"}
 -   Object of class `tbl`
 
 -   [Its kind of different from a data frame.](https://jtr13.github.io/cc21fall1/tibble-vs.-dataframe.html)
 :::
-::::
+:::::
 
 ## New verbs by example
 
@@ -113,12 +114,11 @@ Open R or HCC's [RStudio Server](https://rstudio.hcc.edu).
 
 ## Side Note: Vectors
 
-c() makes a vector in R. 
+c() makes a vector in R.
 
 We use them to hold information. All information must be the same type (int, bool, etc.)
 
-
-If you are familiar with lists or arrays, a vector is very similar to those. 
+If you are familiar with lists or arrays, a vector is very similar to those.
 
 ```{r}
 books = c("The Martian", "The Hail Mary Project", "Artemis")
@@ -149,6 +149,7 @@ mpg |> # doesn't work correctly
 ## group_by and summarize
 
 group_by() works with summarize()
+
 ```{r}
 mpg|>
     group_by(manufacturer)|>
@@ -169,7 +170,7 @@ mpg$year
 
 ## select()
 
-`select()` subsets the columms. Maybe you don't need the whole df. 
+`select()` subsets the columms. Maybe you don't need the whole df.
 
 `names()` is useful for finding column names
 
@@ -179,9 +180,9 @@ new_mpg = mpg |> select(manufacturer, year)
 new_mpg
 ```
 
-## arrange() / slice_*()
+## arrange() / slice\_\*()
 
-arrange() ordered your df by a variable, while slice_max() will take the top so many rows. 
+arrange() ordered your df by a variable, while slice_max() will take the top so many rows.
 
 ```{r}
 mpg |> arrange (desc(displ))

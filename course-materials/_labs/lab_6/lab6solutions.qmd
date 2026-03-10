@@ -106,8 +106,7 @@ Calculate the number of stops in 2011. If you are not sure which function to use
 
 total_stops =
   sqf_2011 |>
-  summarize(Count = n()) |>
-  pull() # <- This makes a value/vector of the total number of stops that we'll use later
+  summarize(Count = n())  # <- This makes a value/vector of the total number of stops that we'll use later
 
 total_stops
 ```
@@ -161,12 +160,12 @@ Fix the code below to calculate the correct number of stops for individuals 14-2
 total_stops_age_recorded =
   sqf_2011 |>
   #Subset to rows where age is not 999
-  filter(age != 999) |> 
+  filter(age <= 100) |> 
   summarize(Count = n()) |>
   pull()
 
 sqf_2011 |>
-  filter(age >= 14 & age <= 24) |>
+  filter(age > 14 & age < 24) |>
   summarize(total_14_24 = n(), 
             percent_14_24 = n() / total_stops_age_recorded * 100)
 ```

@@ -661,8 +661,8 @@
     "objectID": "course-materials/lectures/20_scraping.html#ways-to-get-data",
     "href": "course-materials/lectures/20_scraping.html#ways-to-get-data",
     "title": "Web Scrapping",
-    "section": "",
-    "text": "We have looked at several places to find data:\npackages\ncsv files\nAPIs\nIn this lecture we will consider scraping."
+    "section": "Ways to get data",
+    "text": "Ways to get data\nWe have looked at several places to find data:\npackages\ncsv files\nAPIs\nIn this lecture we will consider scraping."
   },
   {
     "objectID": "course-materials/lectures/20_scraping.html#how-does-it-work",
@@ -683,7 +683,7 @@
     "href": "course-materials/lectures/20_scraping.html#rvest",
     "title": "Web Scrapping",
     "section": "rvest",
-    "text": "rvest\nWe will scrape with a package called Rvest.\nrvest (meant to sound like “Harvest”) is a package that is part of the tidyverse, but is not loaded by default.\nThis means you download when you download the tidyverse.\nBut you must still load it after you have loaded the tidyverse.\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.1     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.2.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(rvest)\n\n\nAttaching package: 'rvest'\n\nThe following object is masked from 'package:readr':\n\n    guess_encoding"
+    "text": "rvest\nWe will scrape with a package called Rvest.\nrvest (meant to sound like “Harvest”) is a package that is part of the tidyverse, but is not loaded by default.\nThis means you download when you download the tidyverse.\nBut you must still load it after you have loaded the tidyverse.\n\nlibrary(tidyverse)\nlibrary(rvest)"
   },
   {
     "objectID": "course-materials/lectures/20_scraping.html#the-read-in-the-html",
@@ -697,14 +697,14 @@
     "href": "course-materials/lectures/20_scraping.html#find-the-right-table",
     "title": "Web Scrapping",
     "section": "Find the right table",
-    "text": "Find the right table\nWe want to find the “selector” for our table.\n\nwinter_olympics |&gt;\nhtml_element(\"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table:nth-child(85)\")\n\n{html_node}\n&lt;table class=\"wikitable\" style=\"margin:0.5em auto; font-size:90%; line-height:1.25em;\"&gt;\n[1] &lt;tbody&gt;\\n&lt;tr&gt;\\n&lt;th colspan=\"2\"&gt;February 2026\\n&lt;/th&gt;\\n&lt;th style=\"width:2.5 ..."
+    "text": "Find the right table\nWe want to find the “selector” for our table.\n\nwinter_olympics |&gt;\nhtml_element(\"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table:nth-child(85)\")\n\n{html_node}\n&lt;table class=\"wikitable\" style=\"margin:0.5em auto; font-size:90%; position:relative; width:75%;\"&gt;\n[1] &lt;tbody&gt;&lt;tr&gt;\\n&lt;td style=\"width:2.5em; background:#00cc33; text-align:cente ..."
   },
   {
     "objectID": "course-materials/lectures/20_scraping.html#convert-into-a-table",
     "href": "course-materials/lectures/20_scraping.html#convert-into-a-table",
     "title": "Web Scrapping",
     "section": "Convert into a table",
-    "text": "Convert into a table\nWe use html_table() to create a data frame.\n\nwinter_olympics |&gt;\nhtml_element(\"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table:nth-child(85)\")|&gt;\nhtml_table()\n\n# A tibble: 20 × 22\n   `February 2026`  `February 2026` `4thWed` `5thThu` `6thFri` `7thSat` `8thSun`\n   &lt;chr&gt;            &lt;chr&gt;           &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   \n 1 Ceremonies       Ceremonies      \"\"       \"\"       \"OC\"     \"\"       \"\"      \n 2 Alpine skiing    Alpine skiing   \"\"       \"\"       \"\"       \"1\"      \"1\"     \n 3 Biathlon         Biathlon        \"\"       \"\"       \"\"       \"\"       \"1\"     \n 4 Bobsleigh        Bobsleigh       \"\"       \"\"       \"\"       \"\"       \"\"      \n 5 Cross-country s… Cross-country … \"\"       \"\"       \"\"       \"1\"      \"1\"     \n 6 Curling          Curling         \"●\"      \"●\"      \"●\"      \"●\"      \"●\"     \n 7 Figure skating   Figure skating  \"\"       \"\"       \"●\"      \"●\"      \"1\"     \n 8 Freestyle skiing Freestyle skii… \"\"       \"\"       \"\"       \"●\"      \"\"      \n 9 Ice hockey       Ice hockey      \"\"       \"●\"      \"●\"      \"●\"      \"●\"     \n10 Luge             Luge            \"\"       \"\"       \"\"       \"●\"      \"1\"     \n11 Nordic combined  Nordic combined \"\"       \"\"       \"\"       \"\"       \"\"      \n12 Short-track spe… Short-track sp… \"\"       \"\"       \"\"       \"\"       \"\"      \n13 Skeleton         Skeleton        \"\"       \"\"       \"\"       \"\"       \"\"      \n14 Ski jumping      Ski jumping     \"\"       \"\"       \"\"       \"1\"      \"\"      \n15 Ski mountaineer… Ski mountainee… \"\"       \"\"       \"\"       \"\"       \"\"      \n16 Snowboarding     Snowboarding    \"\"       \"●\"      \"\"       \"1\"      \"2\"     \n17 Speed skating    Speed skating   \"\"       \"\"       \"\"       \"1\"      \"1\"     \n18 Daily medal eve… Daily medal ev… \"0\"      \"0\"      \"0\"      \"5\"      \"8\"     \n19 Cumulative total Cumulative tot… \"0\"      \"0\"      \"0\"      \"5\"      \"13\"    \n20 February 2026    February 2026   \"4thWed\" \"5thThu\" \"6thFri\" \"7thSat\" \"8thSun\"\n# ℹ 15 more variables: `9thMon` &lt;chr&gt;, `10thTue` &lt;chr&gt;, `11thWed` &lt;chr&gt;,\n#   `12thThu` &lt;chr&gt;, `13thFri` &lt;chr&gt;, `14thSat` &lt;chr&gt;, `15thSun` &lt;chr&gt;,\n#   `16thMon` &lt;chr&gt;, `17thTue` &lt;chr&gt;, `18thWed` &lt;chr&gt;, `19thThu` &lt;chr&gt;,\n#   `20thFri` &lt;chr&gt;, `21stSat` &lt;chr&gt;, `22ndSun` &lt;chr&gt;, Events &lt;chr&gt;"
+    "text": "Convert into a table\nWe use html_table() to create a data frame.\n\nwinter_olympics |&gt;\nhtml_element(\"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table:nth-child(85)\")|&gt;\nhtml_table()\n\n# A tibble: 1 × 10\n  X1    X2               X3    X4            X5    X6    X7    X8    X9    X10  \n  &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1 OC    Opening ceremony ●     Event compet… X     Even… EG    Exhi… CC    Clos…"
   },
   {
     "objectID": "course-materials/lectures/20_scraping.html#cleaning",
@@ -746,7 +746,7 @@
     "href": "course-materials/lectures/20_scraping.html#rank-should-be-an-integer-not-a-character",
     "title": "Web Scrapping",
     "section": "Rank should be an integer, not a character",
-    "text": "Rank should be an integer, not a character\nUse mutate to make a new column of the correct type.\n\nolympic_medals = olympic_medals |&gt;\n  mutate(Rank = as.integer(Rank))\n\nWarning: There was 1 warning in `mutate()`.\nℹ In argument: `Rank = as.integer(Rank)`.\nCaused by warning:\n! NAs introduced by coercion\n\n  olympic_medals\n\n# A tibble: 12 × 6\n    Rank .mw-parser-output .tooltip-dotted{border-bo…¹  Gold Silver Bronze Total\n   &lt;int&gt; &lt;chr&gt;                                         &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;\n 1     1 Norway                                           18     12     11    41\n 2     2 United States                                    12     12      9    33\n 3     3 Netherlands                                      10      7      3    20\n 4     4 Italy*                                           10      6     14    30\n 5     5 Germany                                           8     10      8    26\n 6     6 France                                            8      9      6    23\n 7     7 Sweden                                            8      6      4    18\n 8     8 Switzerland                                       6      9      8    23\n 9     9 Austria                                           5      8      5    18\n10    10 Japan                                             5      7     12    24\n11    NA Remaining                                        26     32     35    93\n12    NA Totals (29 entries)                             116    118    115   349\n# ℹ abbreviated name:\n#   ¹​`.mw-parser-output .tooltip-dotted{border-bottom:1px dotted;cursor:help}NOC`"
+    "text": "Rank should be an integer, not a character\nUse mutate to make a new column of the correct type.\n\nolympic_medals = olympic_medals |&gt;\n  mutate(Rank = as.integer(Rank))\n  olympic_medals\n\n# A tibble: 12 × 6\n    Rank .mw-parser-output .tooltip-dotted{border-bo…¹  Gold Silver Bronze Total\n   &lt;int&gt; &lt;chr&gt;                                         &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;\n 1     1 Norway                                           18     12     11    41\n 2     2 United States                                    12     12      9    33\n 3     3 Netherlands                                      10      7      3    20\n 4     4 Italy*                                           10      6     14    30\n 5     5 Germany                                           8     10      8    26\n 6     6 France                                            8      9      6    23\n 7     7 Sweden                                            8      6      4    18\n 8     8 Switzerland                                       6      9      8    23\n 9     9 Austria                                           5      8      5    18\n10    10 Japan                                             5      7     12    24\n11    NA Remaining                                        26     32     35    93\n12    NA Totals (29 entries)                             116    118    115   349\n# ℹ abbreviated name:\n#   ¹​`.mw-parser-output .tooltip-dotted{border-bottom:1px dotted;cursor:help}NOC`"
   },
   {
     "objectID": "course-materials/lectures/20_scraping.html#mw-paser-should-say-name_of_country",
@@ -760,7 +760,7 @@
     "href": "course-materials/lectures/20_scraping.html#all-column-names-should-be-lowercase-to-match-style-clean_names",
     "title": "Web Scrapping",
     "section": "all column names should be lowercase to match style (clean_names())",
-    "text": "all column names should be lowercase to match style (clean_names())\nThe clean_names() function will lower case all column names and use underscores as spaces. This conforms to the tidyverse style guide. It also makes data easier to work with.\n\nlibrary(janitor)\n\n\nAttaching package: 'janitor'\n\n\nThe following objects are masked from 'package:stats':\n\n    chisq.test, fisher.test\n\nolympic_medals = olympic_medals |&gt; \n  clean_names()"
+    "text": "all column names should be lowercase to match style (clean_names())\nThe clean_names() function will lower case all column names and use underscores as spaces. This conforms to the tidyverse style guide. It also makes data easier to work with.\n\nlibrary(janitor)\n\nolympic_medals = olympic_medals |&gt; \n  clean_names()"
   },
   {
     "objectID": "course-materials/lectures/20_scraping.html#lose-the-last-total-row-head",
@@ -798,627 +798,109 @@
     "text": "admire the clean data frame\n\nhead(olympic_medals)\n\n# A tibble: 6 × 4\n   rank name_of_country medal  number_of_medals\n  &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;             &lt;int&gt;\n1     1 Norway          gold                 18\n2     1 Norway          silver               12\n3     1 Norway          bronze               11\n4     2 United States   gold                 12\n5     2 United States   silver               12\n6     2 United States   bronze                9"
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#ethics-of-your-field",
-    "href": "course-materials/lectures/7_ethics_part_1.html#ethics-of-your-field",
-    "title": "Intro to Data Ethics",
-    "section": "Ethics of Your Field",
-    "text": "Ethics of Your Field\nHandling Personal Data\nBe cautious when feeding information to AI - Personal Data can be reused by models\nConsider the information you collect - Only collect the infromation you need"
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#data-is-collected-by",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#data-is-collected-by",
+    "title": "Where Does Data Come From",
+    "section": "Data is collected by",
+    "text": "Data is collected by\nPolling Organizations\nexample: Yougov and The Economist Collect Data on the most important issues facing the US\nThis data, or a summary of it is often made public\nPublic Researchers\nexample: Nihart et al find plastics n brain tissue\nThis data, or a summary of it is often made public"
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#the-five-ps-of-ethical-data-handling.",
-    "href": "course-materials/lectures/7_ethics_part_1.html#the-five-ps-of-ethical-data-handling.",
-    "title": "Intro to Data Ethics",
-    "section": "The Five Ps of Ethical Data Handling.",
-    "text": "The Five Ps of Ethical Data Handling.\nThe five Ps terminology comes from here the Harvard Business Review.\nHere’s the link.\n\nProvenance\nPurpose\nProtection\nPrivacy\nPreparation"
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#and-collected-by",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#and-collected-by",
+    "title": "Where Does Data Come From",
+    "section": "And collected by",
+    "text": "And collected by\nCompanies\nexample: Meta Collects Data On Its Users\nThis data, or a summary of is not usually made public.\nGovernments\nexample: The Bureau of Labor Statistics Collects and Publishes Employment figures\nThis data, or a summary of it is often made public"
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#copyright-and-chat-gpt",
-    "href": "course-materials/lectures/7_ethics_part_1.html#copyright-and-chat-gpt",
-    "title": "Intro to Data Ethics",
-    "section": "Copyright and Chat GPT",
-    "text": "Copyright and Chat GPT\n\n\n\n\n\nSarah Silverman, Mona Awad and Paul Tremplay sue Open AI for direct infringement.\nUsing copyrighted materials to train their models.\nList of suits is getting longer."
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#we-will-not-be-collecting-data",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#we-will-not-be-collecting-data",
+    "title": "Where Does Data Come From",
+    "section": "We will not be collecting Data",
+    "text": "We will not be collecting Data\nThat task is for a methods course (Psychology has such a course). When you collect data you need to do it in a thoughtful way, which requires a fair amount of training."
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#provenance",
-    "href": "course-materials/lectures/7_ethics_part_1.html#provenance",
-    "title": "Intro to Data Ethics",
-    "section": "Provenance",
-    "text": "Provenance\nWhere does the data originate?\nWas it acquired legally?"
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#we-will-be-using-data",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#we-will-be-using-data",
+    "title": "Where Does Data Come From",
+    "section": "We will be using Data",
+    "text": "We will be using Data\nWe want to use data to gleen information."
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#github",
-    "href": "course-materials/lectures/7_ethics_part_1.html#github",
-    "title": "Intro to Data Ethics",
-    "section": "Github",
-    "text": "Github\n\n\n\n\n\nMicrosoft (owner of github) uses code in repos to train copilot.\nEthical on public repositories?\nPrivate repositories?\nCopilot costs $20 a month or is free."
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#import-data",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#import-data",
+    "title": "Where Does Data Come From",
+    "section": "Import Data",
+    "text": "Import Data\nWe first have to import data into whatever software we are using to analyze it.\nWe’ll import using three methods in this lecture and We’ll see more as the semester progresses.\n\nread_csv()\nread_sheets()\npackages\nAPIs\nScraping from websites"
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#purpose",
-    "href": "course-materials/lectures/7_ethics_part_1.html#purpose",
-    "title": "Intro to Data Ethics",
-    "section": "Purpose",
-    "text": "Purpose\nWould the source of the data agree with how it is being used?\nWhat if the data is re-purposed?"
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-.csv-file.",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-.csv-file.",
+    "title": "Where Does Data Come From",
+    "section": "Importing a .csv file.",
+    "text": "Importing a .csv file.\nA .csv file is a special type of text document. csv is short for “comma separated values.” Essentially its a text file with commas separating the data within the file.\nThere are other ways of separating data (such as with tabs).\nThe tidyverse has a function called read_csv() which will take a .csv file and read it into memory so you can use it."
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#section",
-    "href": "course-materials/lectures/7_ethics_part_1.html#section",
-    "title": "Intro to Data Ethics",
-    "section": "",
-    "text": "Users information scraped from OK Cupid\n\nIf that data is scraped from the site by a third party and made available is that ethical?\nOkCupid, including usernames, age, gender, location, what kind of relationship (or sex) they’re interested in, personality traits\n“The data is already public.” -Emil Kirkegaard"
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-google-sheets-file",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-google-sheets-file",
+    "title": "Where Does Data Come From",
+    "section": "Importing a google sheets file",
+    "text": "Importing a google sheets file\nGooglesheets are also very common ways of storing data. There is a package called googlesheets4 that has the function read_sheets() for reading in data from a google sheet."
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#protection",
-    "href": "course-materials/lectures/7_ethics_part_1.html#protection",
-    "title": "Intro to Data Ethics",
-    "section": "Protection",
-    "text": "Protection\nHow is the data being protected?\nWho is responsible for destroying it?"
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#importing-from-a-package",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#importing-from-a-package",
+    "title": "Where Does Data Come From",
+    "section": "Importing from a package",
+    "text": "Importing from a package\nPackages like the tidyverse already have data built in. Often times these data are for educational purposes and are sometimes very out of date.\nWe’ll import from a package first, as it is the easiest."
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#college-students",
-    "href": "course-materials/lectures/7_ethics_part_1.html#college-students",
-    "title": "Intro to Data Ethics",
-    "section": "College Students",
-    "text": "College Students\n\n\n\n\n\nThere is data that HCC collected about you.Everything you do or make in this class exists on canvas."
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#example-1.",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#example-1.",
+    "title": "Where Does Data Come From",
+    "section": "Example 1.",
+    "text": "Example 1.\nLet’s import txhousing with the tidyverse. This data is loaded automatically when we load the tidyverse.\n\n# first load the tidyverse\nlibrary(tidyverse)\n# next call the data with txhousing to view it.\ntxhousing\n\n# A tibble: 8,602 × 9\n   city     year month sales   volume median listings inventory  date\n   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;\n 1 Abilene  2000     1    72  5380000  71400      701       6.3 2000 \n 2 Abilene  2000     2    98  6505000  58700      746       6.6 2000.\n 3 Abilene  2000     3   130  9285000  58100      784       6.8 2000.\n 4 Abilene  2000     4    98  9730000  68600      785       6.9 2000.\n 5 Abilene  2000     5   141 10590000  67300      794       6.8 2000.\n 6 Abilene  2000     6   156 13910000  66900      780       6.6 2000.\n 7 Abilene  2000     7   152 12635000  73500      742       6.2 2000.\n 8 Abilene  2000     8   131 10710000  75000      765       6.4 2001.\n 9 Abilene  2000     9   104  7615000  64500      771       6.5 2001.\n10 Abilene  2000    10   101  7040000  59300      764       6.6 2001.\n# ℹ 8,592 more rows\n\n\nBenefiets: Data is easy to import. Documentation is often provided with package. Trust the data is good.\nCons: The data is often outdated. Mostly just for educational purposes."
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#preparation",
-    "href": "course-materials/lectures/7_ethics_part_1.html#preparation",
-    "title": "Intro to Data Ethics",
-    "section": "Preparation",
-    "text": "Preparation\nHow is the data cleaned?\nAre data sets being combined to preserve anonymity?\nIs the accuracy of the data verified?"
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#example-2",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#example-2",
+    "title": "Where Does Data Come From",
+    "section": "Example 2",
+    "text": "Example 2\nLet’s read in the data from the plastics in brains study.\nFirst we have to download the data from here.\nNext we have to move it to our current working directory. In most cases this is folder this .qmd file is in, if not we can set it manually in rstudio, which I’ll do in the video of this lecture.\nFinally we have to load the tidyverse and read in the data and save it to memory.\n\nplastic_in_brains = read_csv(\"path/to/name_of_csv.csv\")"
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#lab-7ish",
-    "href": "course-materials/lectures/7_ethics_part_1.html#lab-7ish",
-    "title": "Intro to Data Ethics",
-    "section": "Lab 7ish",
-    "text": "Lab 7ish"
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons",
+    "title": "Where Does Data Come From",
+    "section": "Pros and Cons",
+    "text": "Pros and Cons\nBenefiets: The data is current and exactly what we are interested in.\nCons: The documentation is elsewhere. We have to be sure we trust the supplier of data."
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#privacy",
-    "href": "course-materials/lectures/7_ethics_part_1.html#privacy",
-    "title": "Intro to Data Ethics",
-    "section": "Privacy",
-    "text": "Privacy\nWho will have access to data that can be used to ID a person?\nHow will individuals be anonymized?\nWho has access to that anonymized data."
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#read-from-a-google-sheet.",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#read-from-a-google-sheet.",
+    "title": "Where Does Data Come From",
+    "section": "Read from a google sheet.",
+    "text": "Read from a google sheet.\nFinally I’ll show how we can read in data from a google sheet.\nWe collected class data in a google form. That data is now accessible to us as a sheet.\nTo read in the data:\n1. load the googlesheets4\n2. run read_sheet() with the url from our sheet.\n\nlibrary(googlesheets4)\nclass_data = read_sheet(\"https://docs.google.com/spreadsheets/d/1aNrNX5xWkrtuJHc-bsCC7e07KbnRbVIxaWdbblOCyxA/edit?usp=sharing\")\n\n\nYou will be prompted in the console to cache OAuth Tokens. Select 1 for Yes.\nYou might be asked to install httpuv, you should do that. Finally you may be taken to a webpage to authorize the tidyverse access, do that too.\nYou should only have to do the steps above once."
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#scenario",
-    "href": "course-materials/lectures/7_ethics_part_1.html#scenario",
-    "title": "Intro to Data Ethics",
-    "section": "Scenario",
-    "text": "Scenario\nA citizen of a country files taxes with their government. Paying taxes is rarely optional. In filing there are data related to residence, wages, age, gender, taxes and government ID numbers pertaining to this citizen and their family.\nDiscuss:\n\nProvenance\nPurpose\nProtection\nPreparation\nPrivacy"
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons-1",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons-1",
+    "title": "Where Does Data Come From",
+    "section": "Pros and Cons",
+    "text": "Pros and Cons\nSame as those from importing .csv files."
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#governments-responsibility",
-    "href": "course-materials/lectures/7_ethics_part_1.html#governments-responsibility",
-    "title": "Intro to Data Ethics",
-    "section": "Government’s responsibility",
-    "text": "Government’s responsibility\nWho should access to this data?\nHow should is be secured?\nWhat rights to privacy does this citizen have?\nHow long should the data be held?"
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#apis-and-scraping",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#apis-and-scraping",
+    "title": "Where Does Data Come From",
+    "section": "APIs and Scraping",
+    "text": "APIs and Scraping\nWe’ll discuss API calls and scraping when they come up in the labs."
   },
   {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#current-events",
-    "href": "course-materials/lectures/7_ethics_part_1.html#current-events",
-    "title": "Intro to Data Ethics",
-    "section": "Current Events",
-    "text": "Current Events\nAt the beginning of last year DOGE requested access to tax payer returns to root out fraud.1\nWanted a person without the proper clearance to be able to access tax payer returns. (Gavin Kliger)\nWill be given access if needed in anonymized form. 2\nhttps://www.economist.com/united-states/2025/02/18/is-elon-musks-war-on-fraud-just-cover-for-a-power-grabhttps://www.nytimes.com/2025/02/21/us/politics/irs-doge-gavin-kliger.html"
-  },
-  {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#books",
-    "href": "course-materials/lectures/7_ethics_part_1.html#books",
-    "title": "Intro to Data Ethics",
-    "section": "Books",
-    "text": "Books"
-  },
-  {
-    "objectID": "course-materials/lectures/7_ethics_part_1.html#credits",
-    "href": "course-materials/lectures/7_ethics_part_1.html#credits",
-    "title": "Intro to Data Ethics",
-    "section": "Credits",
-    "text": "Credits\nUnless otherwise cited or linked here are the credits:\n\nThe five ps seem to come from the Harvard Business Review https://hbr.org/2023/07/the-ethics-of-managing-peoples-data 9/30/2024\nSuing Chat GPT https://www.theverge.com/2024/2/13/24072131/sarah-silverman-paul-tremblay-openai-chatgpt-copyright-lawsuit"
-  },
-  {
-    "objectID": "course-materials/lectures/30_map_review.html#map-code",
-    "href": "course-materials/lectures/30_map_review.html#map-code",
-    "title": "Map Review",
-    "section": "Map code",
-    "text": "Map code\nYour map code is probably in lab 1 or the website project."
-  },
-  {
-    "objectID": "course-materials/lectures/30_map_review.html#quick-review",
-    "href": "course-materials/lectures/30_map_review.html#quick-review",
-    "title": "Map Review",
-    "section": "Quick Review",
-    "text": "Quick Review\nQuick Review of maps from the beginning of the semester.\nSimple Maps with the maps package"
-  },
-  {
-    "objectID": "course-materials/lectures/30_map_review.html#get-into-trouble",
-    "href": "course-materials/lectures/30_map_review.html#get-into-trouble",
-    "title": "Map Review",
-    "section": "Get into trouble",
-    "text": "Get into trouble\nR gets confused when we have two packages loaded with the same name.\nNote that in the case below the maps maps wins out. We even get a message."
-  },
-  {
-    "objectID": "course-materials/lectures/30_map_review.html#now-try-the-map-from-purr",
-    "href": "course-materials/lectures/30_map_review.html#now-try-the-map-from-purr",
-    "title": "Map Review",
-    "section": "Now try the map from purr",
-    "text": "Now try the map from purr\nThis is a silly example. Just to show we sometimes have to be explicit with R when choosing our functions\n\n\n\n$name\n   [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE\n  [13] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE\n  [25]  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE\n  [37]  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE\n  [49]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n  [61]  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE\n  [73] FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE\n  [85]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE\n  [97] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE\n [109] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE\n [121] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE\n [133]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [145]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [157] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [169] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE\n [181] FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE\n [193] FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE\n [205]  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE\n [217] FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE\n [229]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n [241]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE\n [253] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE\n [265]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE\n [277]  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE\n [289]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE\n [301]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE\n [313] FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE\n [325] FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE\n [337] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE\n [349]  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n [361]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE\n [373]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [385]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE\n [397]  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE\n [409] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE  TRUE\n [421] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE\n [433]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE\n [445]  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE\n [457]  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [469]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [481]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [493]  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE\n [505]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE\n [517]  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE\n [529] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [541]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE\n [553]  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE\n [565] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE\n [577] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE\n [589] FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n [601]  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE\n [613]  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE\n [625] FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE\n [637]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE\n [649]  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE\n [661]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [673]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE\n [685] FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE\n [697] FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE\n [709] FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE\n [721]  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE\n [733]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE\n [745] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE\n [757]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE\n [769]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n [781]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [793]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [805]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [817]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [829]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE\n [841]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE\n [853]  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE\n [865] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE\n [877]  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE\n [889]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE\n [901]  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE\n [913] FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE\n [925]  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [937]  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n [949]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [961] FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE\n [973]  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE\n [985]  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE\n [997] FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE"
-  },
-  {
-    "objectID": "course-materials/lectures/30_map_review.html#more-geospacial-map-review",
-    "href": "course-materials/lectures/30_map_review.html#more-geospacial-map-review",
-    "title": "Map Review",
-    "section": "More geospacial map review",
-    "text": "More geospacial map review\nWe also made fancier maps"
-  },
-  {
-    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#tidy-data",
-    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#tidy-data",
-    "title": "Data Frames Variable Types and Tidy Data",
-    "section": "Tidy Data",
-    "text": "Tidy Data\n\nColumns are variables.\nRows are observations.\nIndividual entries are called values.\nThe data we will deal with in this course is rectangular."
-  },
-  {
-    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#variables",
-    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#variables",
-    "title": "Data Frames Variable Types and Tidy Data",
-    "section": "Variables",
-    "text": "Variables\nVariables can be categorical or numeric.\nVariable names should be descriptiver and conform to the style guide."
-  },
-  {
-    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#observations",
-    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#observations",
-    "title": "Data Frames Variable Types and Tidy Data",
-    "section": "Observations",
-    "text": "Observations\nEach observation represents one member of the sample.\nIf the data is tidy the number of rows equals the number of observations."
-  },
-  {
-    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#values",
-    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#values",
-    "title": "Data Frames Variable Types and Tidy Data",
-    "section": "Values",
-    "text": "Values\nAll the values of one variable should be the same type (either numic or categorical)."
-  },
-  {
-    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#example",
-    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#example",
-    "title": "Data Frames Variable Types and Tidy Data",
-    "section": "Example",
-    "text": "Example\nLet’s view() the Violations data from mdsr\n\n# You may need to install mdsr uncomment the line below, then recommend it. \n#install.packages(\"mdsr\")\nlibrary(mdsr)\nlibrary(tidyverse)\nview(Violations)\n\n\nIs each row an observation?\nIs each column a variable?\nAre all values the same type?\nIs the data tidy?"
-  },
-  {
-    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#how-r-code-variables",
-    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#how-r-code-variables",
-    "title": "Data Frames Variable Types and Tidy Data",
-    "section": "How R code variables",
-    "text": "How R code variables\nR give you a hint as to the types of variables in each column, look at the variable names.\ncategorical: str\nnumeric: int, dbl (float), POSIXct (times)"
-  },
-  {
-    "objectID": "course-materials/lectures/8_data_viz_cheatsheet.html",
-    "href": "course-materials/lectures/8_data_viz_cheatsheet.html",
-    "title": "Data Viz Cheatsheet",
-    "section": "",
-    "text": "This is only a placeholder for the cheatsheet."
-  },
-  {
-    "objectID": "course-materials/website/Resources.html#moderndive",
-    "href": "course-materials/website/Resources.html#moderndive",
-    "title": "Resources",
-    "section": "ModernDive",
-    "text": "ModernDive"
-  },
-  {
-    "objectID": "course-materials/website/Resources.html#data-science-in-a-box",
-    "href": "course-materials/website/Resources.html#data-science-in-a-box",
-    "title": "Resources",
-    "section": "Data Science in a box",
-    "text": "Data Science in a box"
-  },
-  {
-    "objectID": "course-materials/website/Resources.html#data-visualization-ggplot2",
-    "href": "course-materials/website/Resources.html#data-visualization-ggplot2",
-    "title": "Resources",
-    "section": "Data Visualization: ggplot2",
-    "text": "Data Visualization: ggplot2"
-  },
-  {
-    "objectID": "course-materials/website/Resources.html#data-transformation-dplyr",
-    "href": "course-materials/website/Resources.html#data-transformation-dplyr",
-    "title": "Resources",
-    "section": "Data transformation: dplyr",
-    "text": "Data transformation: dplyr"
-  },
-  {
-    "objectID": "course-materials/website/Resources.html#data-import-tidyr",
-    "href": "course-materials/website/Resources.html#data-import-tidyr",
-    "title": "Resources",
-    "section": "Data Import: tidyr",
-    "text": "Data Import: tidyr"
-  },
-  {
-    "objectID": "course-materials/website/Resources.html#rmarkdown-cheat-sheet",
-    "href": "course-materials/website/Resources.html#rmarkdown-cheat-sheet",
-    "title": "Resources",
-    "section": "RMarkdown Cheat sheet",
-    "text": "RMarkdown Cheat sheet"
-  },
-  {
-    "objectID": "course-materials/website/Resources.html#style-guide",
-    "href": "course-materials/website/Resources.html#style-guide",
-    "title": "Resources",
-    "section": "Style Guide",
-    "text": "Style Guide\nThe Tidyverse Style Guide"
-  },
-  {
-    "objectID": "course-materials/website/schwab.html",
-    "href": "course-materials/website/schwab.html",
-    "title": "Nic Schwab",
-    "section": "",
-    "text": "Nicholas Schwab is a lecture in Statistical and Data Sciences. He is a tenured professor at Holyoke Community College. When not teaching data science, he enjoys rock climbing, biking, and reading childrens’ books with his kids."
-  },
-  {
-    "objectID": "course-materials/website/schwab.html#education",
-    "href": "course-materials/website/schwab.html#education",
-    "title": "Nic Schwab",
-    "section": "Education",
-    "text": "Education\n\nMS in Data Science (~2026)\nUniversity of Texas at Austin\nAustin, Texas\nMA in Mathematics (2009)\nAppalchain State University\nBoone, NC\nBA in Mathematics (2007)\nUC Santa Cruz\nSanta Cruz, CA"
-  },
-  {
-    "objectID": "course-materials/website/schwab.html#experience",
-    "href": "course-materials/website/schwab.html#experience",
-    "title": "Nic Schwab",
-    "section": "Experience",
-    "text": "Experience\n\nProfessor of Computer Science\nHolyoke Community College\nHolyoke, MA 2025–present\nLecturer Statistics and Data Sciences\nSmith College\nNorthampton, MA 2023–2025\nProfessor of Mathematics\nHolyoke Community College\nHolyoke, MA 2014–2025"
-  },
-  {
-    "objectID": "credits.html",
-    "href": "credits.html",
-    "title": "MTH 190 Intro To Data Science",
-    "section": "",
-    "text": "This course would not have been possible without the DSC-WAV grant that was put together by faculty at the Five Colleges.\nThe workshop during summer 2021 help inspire me to begin studying data science. Ben Baumer, Nick Horton and Ethan Meyers led that workshop.\nFinally the faculty at Smith College and UT Austin created or inspired many of the labs and projects in this course. Thie course incorporates work from Ben Baumer, Lindsay Poirier, Shiya Cao and Albert Kim. They are given credit on the appropriate labs and projects."
-  },
-  {
-    "objectID": "credits.html#credit",
-    "href": "credits.html#credit",
-    "title": "MTH 190 Intro To Data Science",
-    "section": "",
-    "text": "This course would not have been possible without the DSC-WAV grant that was put together by faculty at the Five Colleges.\nThe workshop during summer 2021 help inspire me to begin studying data science. Ben Baumer, Nick Horton and Ethan Meyers led that workshop.\nFinally the faculty at Smith College and UT Austin created or inspired many of the labs and projects in this course. Thie course incorporates work from Ben Baumer, Lindsay Poirier, Shiya Cao and Albert Kim. They are given credit on the appropriate labs and projects."
-  },
-  {
-    "objectID": "readme.html",
-    "href": "readme.html",
-    "title": "CSI-MTH 190",
-    "section": "",
-    "text": "Source code to generate the course lecture page for Holyoke Community College: Introduction to Data Science https://nics-github.github.io/CSI-MTH-190-Lectures/. Most of the content is in either:\n\n_quarto.yml: Set theme of webpage along with links in navigational bar.\nindex.qmd: A single Moodle-style page that lists all announcements and lectures notes in reverse-chronological order.\nPS.qmd: All problem sets/homeworks.\nprojects.qmd: Details on the mini-projects and term project.\nsyllabus.qmd: Course info/description, topics, materials, evaluation, and expectations.\n\n\n\nThis webpage is built/compiled using R Markdown Websites. To compile this webpage for yourself, do the following:\n\nGet the contents of this directory/repository:\n\nIf you are not familiar with GitHub, click the green “Clone or download” button on the top-right -&gt; Download ZIP -&gt; Unzip SDS192-master.zip.\nIf you are familiar with GitHub, clone this repository.\n\nDouble-click the SDS192.Rproj to open RStudio.\nIf you haven’t already, install the following R packages:\n\nrmarkdown and devtools\nAt the top of index.Rmd: all CRAN R packages listed .\nAt the top of index.Rmd: the emo and patchwork packages must be installed from GitHub using the devtools::install_github() function.\n\nGo to the “Build” pane of RStudio -&gt; More -&gt; Configure Build Tools… -&gt; Ensure that “Project build tools” is set to “Webpage”.\nClick “Build Website”.\nThe website will display in the Viewer pane. The resulting index.html file and all other files for the webpage will be saved in the docs/ folder.\n\n\n\n\nTo publish/deploy this webpage and make it viewable on the web, you need to either:\n\nCopy the contents of the docs/ folder to your personal webpage or whatever domain hosting service you use.\nUse GitHub pages as I do. RStudio’s R Markdown Websites page gives instructions on how.\n\n\n\n\nThe format for this site was borrowed from Albert Kim’s SDS 192 course\nIf not created by me or referred to in some other way the activities and projects for this course are from:\n\nThe above mentioned website\nData Science in a box.\nBen Baumer’s SDS 192 course page"
-  },
-  {
-    "objectID": "readme.html#how-to-build-this-webpage",
-    "href": "readme.html#how-to-build-this-webpage",
-    "title": "CSI-MTH 190",
-    "section": "",
-    "text": "This webpage is built/compiled using R Markdown Websites. To compile this webpage for yourself, do the following:\n\nGet the contents of this directory/repository:\n\nIf you are not familiar with GitHub, click the green “Clone or download” button on the top-right -&gt; Download ZIP -&gt; Unzip SDS192-master.zip.\nIf you are familiar with GitHub, clone this repository.\n\nDouble-click the SDS192.Rproj to open RStudio.\nIf you haven’t already, install the following R packages:\n\nrmarkdown and devtools\nAt the top of index.Rmd: all CRAN R packages listed .\nAt the top of index.Rmd: the emo and patchwork packages must be installed from GitHub using the devtools::install_github() function.\n\nGo to the “Build” pane of RStudio -&gt; More -&gt; Configure Build Tools… -&gt; Ensure that “Project build tools” is set to “Webpage”.\nClick “Build Website”.\nThe website will display in the Viewer pane. The resulting index.html file and all other files for the webpage will be saved in the docs/ folder."
-  },
-  {
-    "objectID": "readme.html#how-to-publish-this-webpage",
-    "href": "readme.html#how-to-publish-this-webpage",
-    "title": "CSI-MTH 190",
-    "section": "",
-    "text": "To publish/deploy this webpage and make it viewable on the web, you need to either:\n\nCopy the contents of the docs/ folder to your personal webpage or whatever domain hosting service you use.\nUse GitHub pages as I do. RStudio’s R Markdown Websites page gives instructions on how."
-  },
-  {
-    "objectID": "readme.html#credit",
-    "href": "readme.html#credit",
-    "title": "CSI-MTH 190",
-    "section": "",
-    "text": "The format for this site was borrowed from Albert Kim’s SDS 192 course\nIf not created by me or referred to in some other way the activities and projects for this course are from:\n\nThe above mentioned website\nData Science in a box.\nBen Baumer’s SDS 192 course page"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "CSI-MTH 190: Intro to Data Science",
-    "section": "",
-    "text": "Part 1: Visualizations"
-  },
-  {
-    "objectID": "index.html#links-worth-keeping",
-    "href": "index.html#links-worth-keeping",
-    "title": "CSI-MTH 190: Intro to Data Science",
-    "section": "Links worth keeping",
-    "text": "Links worth keeping\nsql-practice"
-  },
-  {
-    "objectID": "index.html#add-this-to-canvas",
-    "href": "index.html#add-this-to-canvas",
-    "title": "CSI-MTH 190: Intro to Data Science",
-    "section": "Add this to canvas",
-    "text": "Add this to canvas\nHelp us help you: take screenshots of your screen and post them to Canvas.\n\nmacOS: Command+Shift+3 to take shot of whole screen, Command+Shift+4 to take subportion\nWindows: Shift-Windows Key-S and Snip & Sketch\nLinux: Print screen\nChromebook: Shift + Ctrl + Show windows"
-  },
-  {
-    "objectID": "index.html#colors",
-    "href": "index.html#colors",
-    "title": "CSI-MTH 190: Intro to Data Science",
-    "section": "colors",
-    "text": "colors"
-  },
-  {
-    "objectID": "index.html#note-on-colors",
-    "href": "index.html#note-on-colors",
-    "title": "CSI-MTH 190: Intro to Data Science",
-    "section": "Note on colors",
-    "text": "Note on colors\nWe will discuss colors on Monday when you get to them in ex 6:\nYou can reread this section if you forget what sequential,diverging,qualitative mean.\nOr check out the colors examples on the cheat sheet.\nIntuitive Color Examples"
-  },
-  {
-    "objectID": "index.html#wrangling",
-    "href": "index.html#wrangling",
-    "title": "CSI-MTH 190: Intro to Data Science",
-    "section": "wrangling",
-    "text": "wrangling\ndpylr cheatsheet for wrangling\nWrangle babynames –&gt;"
-  },
-  {
-    "objectID": "chapter 7 examples.html",
-    "href": "chapter 7 examples.html",
-    "title": "map() practice",
-    "section": "",
-    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.1     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.2.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(mosaicData)\n\nDoing problems 1 and 3 from here\nProblem 1 (Easy): Use the HELPrct data from the mosaicData to calculate the mean of all numeric variables (be sure to exclude missing values).\n\n\nHELPrct |&gt;\n  summarise(\n    across(.cols = where(is.numeric),\n           .fns = ~mean(. , na.rm = TRUE))\n  )\n\n       age anysubstatus     cesd       d1 daysanysub dayslink drugrisk      e2b\n1 35.65342    0.7723577 32.84768 3.059603   75.30738 255.6056 1.887168 2.504673\n     female       i1       i2       id   indtot linkstatus      mcs      pcs\n1 0.2362031 17.90728 24.54746 233.4018 35.72848  0.3781903 31.67668 48.04854\n    pss_fr  sexrisk avg_drinks max_drinks hospitalizations\n1 6.706402 4.642384   17.90728   24.54746         3.059603\n\n\nProblem 3 (Medium): Use routines from the purrr package and the HELPrct data frame from the mosaicData package to fit a regression model predicting cesd as a function of age separately for each of the levels of the substance variable. Generate a formatted table (with suitable caption) of results (estimates and confidence intervals) for the slope parameter for each level of the grouping variable.\n(Hint: Use group_by() and group_modify() to fit the regression model on each part. Note that broom::tidy() is useful in having the output of the model be a data frame.)\n\nHELPrct |&gt; select(substance, cesd, age) |&gt;\ngroup_by(substance)|&gt;\n  group_modify(.f = ~broom::tidy( lm(cesd~age, data = .))) |&gt; \n  filter(term ==\"age\") |&gt;\n  mutate(CI_low = estimate - 2*std.error, CI_high = estimate + 2*std.error) |&gt;\n  select(-statistic, - p.value, - std.error) |&gt;\n  kableExtra::kable(caption = \"The likelyhood someone uses a substance increates with age.\", digits = 1)\n\n\nThe likelyhood someone uses a substance increates with age.\n\n\nsubstance\nterm\nestimate\nCI_low\nCI_high\n\n\n\n\nalcohol\nage\n0.3\n0.1\n0.6\n\n\ncocaine\nage\n-0.3\n-0.6\n0.0\n\n\nheroin\nage\n-0.2\n-0.5\n0.0\n\n\n\n\n\nActivity 2\nMake a function that takes a df and a variable then produces a scatter plot of that variable vs cesd. Use it to plot multiple graphs of the first 6 numeric variables HELPrct. Hint: check out the extended example from 7.7\n\nlibrary(tidyverse)\nlibrary(mosaicData)\n\nmy_func &lt;- function(data,variable2){\n  data |&gt;\n    ggplot(aes(x = cesd, y = .data[[variable2]]))+\n    geom_point()\n}\n\nmy_func(HELPrct, \"age\")\n\n\n\n\n\n\n\nnumeric_names_only &lt;- HELPrct |&gt;\n  select(\"age\":\"d1\")|&gt;\n  names()\n\n\nmap(.x = numeric_names_only,\n    .f = my_func,\n    data= HELPrct\n      )|&gt;\n  patchwork::wrap_plots(ncol = 2)\n\nWarning: Removed 207 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n\nlibrary(tidyverse)\nlibrary(mosaicData)\n\nmy_func &lt;- function(data,variable2){\n  data |&gt;\n    ggplot(aes(x = cesd, y = variable2 ))+\n    geom_point()\n}\n\n\nlibrary(NHANES)\n\nbmi_plot &lt;- function(.data, x_var) {\n  ggplot(.data, aes(y = BMI)) +\n    aes_string(x = x_var) + \n    geom_jitter(alpha = 0.3) + \n    geom_smooth() + \n    labs(\n      title = paste(\"BMI by\", x_var),\n      subtitle = \"NHANES\",\n      caption = \"US National Center for Health Statistics (NCHS)\"\n    )\n}\nbmi_plot(NHANES, \"Age\")\n\nWarning: `aes_string()` was deprecated in ggplot2 3.0.0.\nℹ Please use tidy evaluation idioms with `aes()`.\nℹ See also `vignette(\"ggplot2-in-packages\")` for more information.\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 366 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 366 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\nc(\"Age\", \"HHIncomeMid\", \"PhysActiveDays\", \n  \"TVHrsDay\", \"AlcoholDay\", \"Pulse\") |&gt;\n  map(bmi_plot, .data = NHANES) |&gt;\n  patchwork::wrap_plots(ncol = 2)\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 366 rows containing non-finite outside the scale range\n(`stat_smooth()`).\nRemoved 366 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 1148 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 1148 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 5442 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Failed to fit group -1.\nCaused by error in `smooth.construct.cr.smooth.spec()`:\n! x has insufficient unique values to support 10 knots: reduce k.\n\n\nWarning: Removed 5442 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 366 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 366 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 5113 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 5113 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 1502 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 1502 rows containing missing values or values outside the scale range\n(`geom_point()`)."
-  },
-  {
-    "objectID": "course-materials/Final-Project/Project.html",
-    "href": "course-materials/Final-Project/Project.html",
-    "title": "Final Project",
-    "section": "",
-    "text": "For your final project you will build a website displaying your three projects from the semester.\nYou do not need to post it on the internet.\nIf you do post it on the internet I will tell you when I’m done grading so you may take it down.\nYou do not need to remake your projects, but you may want to proof read the blog posts.\nYou do not need to include your name on any of your work and you need to get permission from your partner to include their name.\n(If you are actually making a digital portfolio, that you plan to keep on the internet, your name would be included in the about me section.)"
-  },
-  {
-    "objectID": "course-materials/Final-Project/Project.html#final-portfolio",
-    "href": "course-materials/Final-Project/Project.html#final-portfolio",
-    "title": "Final Project",
-    "section": "",
-    "text": "For your final project you will build a website displaying your three projects from the semester.\nYou do not need to post it on the internet.\nIf you do post it on the internet I will tell you when I’m done grading so you may take it down.\nYou do not need to remake your projects, but you may want to proof read the blog posts.\nYou do not need to include your name on any of your work and you need to get permission from your partner to include their name.\n(If you are actually making a digital portfolio, that you plan to keep on the internet, your name would be included in the about me section.)"
-  },
-  {
-    "objectID": "course-materials/Final-Project/Project.html#requirements",
-    "href": "course-materials/Final-Project/Project.html#requirements",
-    "title": "Final Project",
-    "section": "Requirements:",
-    "text": "Requirements:\n\nEach of your projects must be individual files on different webpages. They must be rendered to html. Please check your live website to make sure everything looks good and the links work.\nYou must remove the code, warnings and errors from each rendered file.\nYour website will have 5 pages minimum:\n\nLanding page - This must have an image of some data graphic, this could be anything you made, including work from SDS 100, 220 or a lab. From the landing page people should be able to navigate to your three projects and your about me section.\nOne page per project.\nAn about page so people can contact you to hire you. You can choose to have genuine information here but no contact information until you are ready to graduate. You can also choose to post fake information that seems legitimate and professional. You cannot add identifying info about your partner here. Once again fake information is completely okay, I’ll be able to verify your github username.\n\nYou will make use of the nav bar.\nYour website should look professional. Use any of the skills from 192 or 100. Consider headers and links.\nYour website must be pushed to github and turned on and working.* Please test it by visiting you site. When you are done submit the link to your site to the forum on moodle.\nWhen I’m done grading I’ll let you know and you can turn off your portfolio.\n(Optional) add a 404 page."
-  },
-  {
-    "objectID": "course-materials/Final-Project/Project.html#website-options",
-    "href": "course-materials/Final-Project/Project.html#website-options",
-    "title": "Final Project",
-    "section": "Website options:",
-    "text": "Website options:\n\nHere is the website for quarto websites.\nChange the theme of your website.\nCustomize your website using ideas from here."
-  },
-  {
-    "objectID": "course-materials/Final-Project/Project.html#some-examples-of-digital-portfolios",
-    "href": "course-materials/Final-Project/Project.html#some-examples-of-digital-portfolios",
-    "title": "Final Project",
-    "section": "Some examples of digital portfolios",
-    "text": "Some examples of digital portfolios\nA perfect Digital Portfolio takes time to make, yours does not need to be perfect. It is just a start, you can add work to it throughout your college and post-college career.\nErin Schwab\nProf. Poirier\nBen Baumer\nA website with examples"
-  },
-  {
-    "objectID": "course-materials/Final-Project/Project.html#a-few-things-to-note",
-    "href": "course-materials/Final-Project/Project.html#a-few-things-to-note",
-    "title": "Final Project",
-    "section": "A few things to note:",
-    "text": "A few things to note:\n\nI am meant to protect your identity as students. Eventually you will want contact information on your portfolio, but leave it off for now. Don’t even mention Smith College.\nAfter your website is graded I’ll let you know and you should turn it off.\nThis is meant to be a simple skill that past students expressed that they wished they knew how to do. It should not be very very time consuming. Make something that meet requirements then move on. You can perfect it later.\nIf you would prefer to not post a website online, you still have to make one, then you have to invite me to your repo so I can download it and make sure it works. You have to let me know you are doing this before the due date."
-  },
-  {
-    "objectID": "course-materials/Final-Project/Project.html#grading",
-    "href": "course-materials/Final-Project/Project.html#grading",
-    "title": "Final Project",
-    "section": "Grading:",
-    "text": "Grading:\nEach of the following bullets is worth one point:\n\n1 Each project is on a different webpage\n1 Code, warnings , messages, etc. are removed.\n\nThere are five pages:\n\n1 landing page\n3 per project\n1 an about page\n1 nav bar use\n1 professional appearance\n1 website rendered and on github"
-  },
-  {
-    "objectID": "course-materials/website/credits.html",
-    "href": "course-materials/website/credits.html",
-    "title": "Credits",
-    "section": "",
-    "text": "The format for this site was borrowed from Albert Kim’s SDS 192 course"
-  },
-  {
-    "objectID": "course-materials/website/credits.html#site-credit",
-    "href": "course-materials/website/credits.html#site-credit",
-    "title": "Credits",
-    "section": "",
-    "text": "The format for this site was borrowed from Albert Kim’s SDS 192 course"
-  },
-  {
-    "objectID": "course-materials/website/credits.html#activities-projects-etc.",
-    "href": "course-materials/website/credits.html#activities-projects-etc.",
-    "title": "Credits",
-    "section": "Activities, Projects, etc.",
-    "text": "Activities, Projects, etc.\nIf not created by me or referred to in some other way the activities and projects for this course are from:\n\nThe above mentioned website\nData Science in a box.\nBen Baumer’s SDS 192 course page"
-  },
-  {
-    "objectID": "course-materials/lectures/23_maps-ggplot.html#libraries",
-    "href": "course-materials/lectures/23_maps-ggplot.html#libraries",
-    "title": "Static Maps w/ ggplot",
-    "section": "Libraries",
-    "text": "Libraries\n\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tidygeocoder)\nlibrary(maps)"
-  },
-  {
-    "objectID": "course-materials/lectures/23_maps-ggplot.html#tidygeocoder",
-    "href": "course-materials/lectures/23_maps-ggplot.html#tidygeocoder",
-    "title": "Static Maps w/ ggplot",
-    "section": "tidygeocoder",
-    "text": "tidygeocoder\nLet’s find the latitude and longitude for a couple of places.\n\naddresses&lt;- tibble(address=c(\"Smith College\", \"2 Tyler Ct, Northampton, MA 01060\", \"Holyoke Community College\")) |&gt;\ngeocode(address, method=\"osm\") |&gt;\n  mutate(name = c(\"Smith College\",\"McConnell Hall\",\"Holyoke Community College\"))\n\naddresses\n\n# A tibble: 3 × 4\n  address                             lat  long name                     \n  &lt;chr&gt;                             &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                    \n1 Smith College                      42.3 -72.6 Smith College            \n2 2 Tyler Ct, Northampton, MA 01060  42.3 -72.6 McConnell Hall           \n3 Holyoke Community College          42.2 -72.7 Holyoke Community College"
-  },
-  {
-    "objectID": "course-materials/lectures/23_maps-ggplot.html#my-first-map",
-    "href": "course-materials/lectures/23_maps-ggplot.html#my-first-map",
-    "title": "Static Maps w/ ggplot",
-    "section": "My first map",
-    "text": "My first map\nLet’s plot those with ggplot.\n\nggplot(addresses) +\n  geom_point(aes(long,lat)) \n\n\nNot very exciting. We’ll add it it in a moment."
-  },
-  {
-    "objectID": "course-materials/lectures/23_maps-ggplot.html#mass-map-data",
-    "href": "course-materials/lectures/23_maps-ggplot.html#mass-map-data",
-    "title": "Static Maps w/ ggplot",
-    "section": "Mass Map data",
-    "text": "Mass Map data\nLet’s build a map of Massachusetts with the map_data() function\n\n# map_data comes from ggplot2\n\nma_counties &lt;- map_data(\"county\", \"massachusetts\") |&gt;\n  select( long, lat, group, id = subregion)\n\nhead(ma_counties)\n\n       long      lat group         id\n1 -70.67435 41.73997     1 barnstable\n2 -70.53683 41.79727     1 barnstable\n3 -70.53683 41.79727     1 barnstable\n4 -70.51392 41.78008     1 barnstable\n5 -70.47954 41.75716     1 barnstable\n6 -70.41078 41.73425     1 barnstable"
-  },
-  {
-    "objectID": "course-materials/lectures/23_maps-ggplot.html#mass-map",
-    "href": "course-materials/lectures/23_maps-ggplot.html#mass-map",
-    "title": "Static Maps w/ ggplot",
-    "section": "Mass Map",
-    "text": "Mass Map\nNotice there are a lot of points for barnstable. Those are the vertices of a polygon. Let’s draw the polygon with the points.\n\nma_counties |&gt; ggplot(aes(long,lat,group=group))+\n  geom_polygon(fill = \"white\", colour = \"grey50\")+\n  geom_point()  \n\n  #coord_sf()"
-  },
-  {
-    "objectID": "course-materials/lectures/23_maps-ggplot.html#mapping-projections",
-    "href": "course-materials/lectures/23_maps-ggplot.html#mapping-projections",
-    "title": "Static Maps w/ ggplot",
-    "section": "Mapping projections",
-    "text": "Mapping projections\nCoordinate Reference Systems (CRS) - Is the type of map projection employed To get a 3D Earth to a 2D surface.\nWhich one will coord_sf default to?\n\n?coord_sf\n\nThis is the crs commonly used in gps."
-  },
-  {
-    "objectID": "course-materials/lectures/23_maps-ggplot.html#west-wing-explanation",
-    "href": "course-materials/lectures/23_maps-ggplot.html#west-wing-explanation",
-    "title": "Static Maps w/ ggplot",
-    "section": "West wing explanation",
-    "text": "West wing explanation\nWest Wing"
-  },
-  {
-    "objectID": "course-materials/lectures/23_maps-ggplot.html#adding-the-4326-crs",
-    "href": "course-materials/lectures/23_maps-ggplot.html#adding-the-4326-crs",
-    "title": "Static Maps w/ ggplot",
-    "section": "Adding the 4326 crs",
-    "text": "Adding the 4326 crs\n\nma_counties |&gt; ggplot(aes(long,lat,group=group))+\n  geom_polygon(fill = \"white\", colour = \"grey50\")+\n  geom_point()+\n  coord_sf()"
-  },
-  {
-    "objectID": "course-materials/lectures/23_maps-ggplot.html#add-some-cities",
-    "href": "course-materials/lectures/23_maps-ggplot.html#add-some-cities",
-    "title": "Static Maps w/ ggplot",
-    "section": "Add some cities",
-    "text": "Add some cities\nLet’s grab just Massachusetts cities from the data frame us.cities.\n\n# us.cities comes from the maps package\n\nma_cities &lt;- us.cities |&gt;\n  filter(country.etc ==\"MA\") |&gt;\n  select(name, long, lat)\n\nhead(ma_cities)\n\n                name   long   lat\n1         Andover MA -71.14 42.65\n2       Arlington MA -71.16 42.42\n3       Attleboro MA -71.30 41.93\n4 Barnstable Town MA -70.30 41.70\n5         Beverly MA -70.84 42.56\n6       Billerica MA -71.26 42.56"
-  },
-  {
-    "objectID": "course-materials/lectures/23_maps-ggplot.html#exercise",
-    "href": "course-materials/lectures/23_maps-ggplot.html#exercise",
-    "title": "Static Maps w/ ggplot",
-    "section": "Exercise:",
-    "text": "Exercise:\nPlot MA cities onto our county map. Then clean up our map.\n\nma_counties |&gt; ggplot(aes(long,lat))+\n  geom_polygon(fill = \"white\", colour = \"grey50\",aes(group=group)) +\n  #geom_point(data=ma_cities,.......)\n  \n  #This is the default mapping. Think GPS\n coord_sf(default_crs= st_crs(4326) )\n\n          # This is Mercator\n          # st_crs(3857))"
-  },
-  {
-    "objectID": "course-materials/lectures/23_maps-ggplot.html#shape-files",
-    "href": "course-materials/lectures/23_maps-ggplot.html#shape-files",
-    "title": "Static Maps w/ ggplot",
-    "section": "Shape files",
-    "text": "Shape files\nOften times map data is saved as a shape file.\nThe US government has shape files here."
-  },
-  {
-    "objectID": "course-materials/lectures/5_notes_on_style.html#the-tidyverse-style-guide",
-    "href": "course-materials/lectures/5_notes_on_style.html#the-tidyverse-style-guide",
-    "title": "Notes On Style",
-    "section": "The Tidyverse Style Guide",
-    "text": "The Tidyverse Style Guide\nTidyverse style guide"
-  },
-  {
-    "objectID": "course-materials/lectures/5_notes_on_style.html#files-names",
-    "href": "course-materials/lectures/5_notes_on_style.html#files-names",
-    "title": "Notes On Style",
-    "section": "1. files names",
-    "text": "1. files names\nI will use underscores _, not spaces to name your files. You can also use -\n\nAvoid special symbols.\nCalled snake case.\n\ngood name\nmy_file.qmd\npoor name\nmy file!.qmd"
-  },
-  {
-    "objectID": "course-materials/lectures/5_notes_on_style.html#syntax",
-    "href": "course-materials/lectures/5_notes_on_style.html#syntax",
-    "title": "Notes On Style",
-    "section": "2. Syntax",
-    "text": "2. Syntax\nsyntax is how the code looks\n\nvariables should be in snake case and lower case\nvariables should be nouns\nfunctions should be verbs (functions is an optional topic)\nnames should be meaningful and concise.\nDon’t reuse built in R names (TRUE, mean, c, n, etc. )\n\n\n# good\nfirst_name = \"Nic\" \n\n# nmean is a built in function and should not be overwritten\nmean = \"Schwab\""
-  },
-  {
-    "objectID": "course-materials/lectures/5_notes_on_style.html#or",
-    "href": "course-materials/lectures/5_notes_on_style.html#or",
-    "title": "Notes On Style",
-    "section": "<- or =",
-    "text": "&lt;- or =\nThe R community likes to use the &lt;- for variable assignment. However in most other languages = is used, and it works in R.\nI will generally use = in this course. For us they are effectly the same.\n\nfirst_name = \"Nic\"\n# same as \nfirst_name &lt;- \"Nic\""
-  },
-  {
-    "objectID": "course-materials/lectures/5_notes_on_style.html#more-syntax",
-    "href": "course-materials/lectures/5_notes_on_style.html#more-syntax",
-    "title": "Notes On Style",
-    "section": "2.5 More Syntax",
-    "text": "2.5 More Syntax\nConsider spacing and commas like in English writing.\nMore space for readability is ok. Don’t over do it.\n\n# good\nx &lt;- 1\ny &lt;- 2\ntotal &lt;- sum(c(x, y))\n  \n# Not as good\nnew_total&lt;-x+y-total \n\n# Maybe too much space\nsum( c( x , y , total ) )\n\n[1] 6"
-  },
-  {
-    "objectID": "course-materials/lectures/5_notes_on_style.html#pipes-and-plus",
-    "href": "course-materials/lectures/5_notes_on_style.html#pipes-and-plus",
-    "title": "Notes On Style",
-    "section": "Pipes and plus",
-    "text": "Pipes and plus\nIn general |&gt; and + should end lines.\nWe will discuss these operators more later."
-  },
-  {
-    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#prereqs",
-    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#prereqs",
-    "title": "Taxonomy of Graphs part 1: Categorical",
-    "section": "PreReqs",
-    "text": "PreReqs\nI assume you’ve read chapter 2.2, if you haven’t, go back and read it before this lecture."
-  },
-  {
-    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#the-data",
-    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#the-data",
-    "title": "Taxonomy of Graphs part 1: Categorical",
-    "section": "The Data",
-    "text": "The Data\nIn this lecture I’ll use one set of data called starwars to illustrate some of the ideas you should consider when building a graph.\nWe’ll focus mostly on the categorical variables in this lecture. Next week we’ll tackle the numeric variables.\n\nlibrary(tidyverse)\nlibrary(mdsr)\nhead(starwars)\n\n# A tibble: 6 × 14\n  name      height  mass hair_color skin_color eye_color birth_year sex   gender\n  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; \n1 Luke Sky…    172    77 blond      fair       blue            19   male  mascu…\n2 C-3PO        167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…\n3 R2-D2         96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…\n4 Darth Va…    202   136 none       white      yellow          41.9 male  mascu…\n5 Leia Org…    150    49 brown      light      brown           19   fema… femin…\n6 Owen Lars    178   120 brown, gr… light      blue            52   male  mascu…\n# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,\n#   vehicles &lt;list&gt;, starships &lt;list&gt;"
-  },
-  {
-    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-length",
-    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-length",
-    "title": "Taxonomy of Graphs part 1: Categorical",
-    "section": "Visual Cues Length",
-    "text": "Visual Cues Length\nShow length with a bar chart\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color))"
-  },
-  {
-    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-length-again",
-    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-length-again",
-    "title": "Taxonomy of Graphs part 1: Categorical",
-    "section": "Visual Cues Length again",
-    "text": "Visual Cues Length again\nShow length with a bar chart\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color))+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
-  },
-  {
-    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-color",
-    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-color",
-    "title": "Taxonomy of Graphs part 1: Categorical",
-    "section": "Visual Cues Color",
-    "text": "Visual Cues Color\nToo many colors are not helpful. Below I fill each rectangle by hair_color.\nAnd we now have a redundant mapping.\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color, fill = hair_color))+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
-  },
-  {
-    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-color-again",
-    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-color-again",
-    "title": "Taxonomy of Graphs part 1: Categorical",
-    "section": "Visual Cues Color again",
-    "text": "Visual Cues Color again\nLimit your colors to show another variable. Here I’ll fill by sex.\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color, fill = sex))+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
-  },
-  {
-    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#you-try",
-    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#you-try",
-    "title": "Taxonomy of Graphs part 1: Categorical",
-    "section": "You try:",
-    "text": "You try:\nTake a moment and copy the code below into r, fill by eye_color. What do you think about the graph?\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color ))+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
-  },
-  {
-    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-scale",
-    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-scale",
-    "title": "Taxonomy of Graphs part 1: Categorical",
-    "section": "Visual Cues Scale",
-    "text": "Visual Cues Scale\nIn the graph below the scale is categorical on the x-axis and numeric on the y-axis.\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color, fill = sex))+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
-  },
-  {
-    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-context",
-    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-context",
-    "title": "Taxonomy of Graphs part 1: Categorical",
-    "section": "Visual Cues Context",
-    "text": "Visual Cues Context\nHere I add a title, x and y axes and a source of the data.\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color, fill = sex))+\n    labs(x = \"Hair Color\",\n        y = \"number of characters\",\n        title = \"Hair Color of Starwars Characters\",\n        caption = \"data from dplyr r package\")+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
-  },
-  {
-    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#touch-ups",
-    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#touch-ups",
-    "title": "Taxonomy of Graphs part 1: Categorical",
-    "section": "Touch ups",
-    "text": "Touch ups\nYou can add a theme to the graph to easily make things look more professional. Pick your favorite theme and go with it.\nAlso I eliminated the x-axis label as it was redundant with the title.\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color, fill = sex))+\n    labs(x = \"Hair Color\",\n        y = \"number of characters\",\n        title = \"Hair Color of Starwars Characters\",\n        caption = \"data from dplyr r package\")+\n    theme_mdsr()+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
+    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#you-are-ready-to-go-on-to-the-next-lecture.",
+    "href": "course-materials/lectures/4_where_does_data_come_from.html#you-are-ready-to-go-on-to-the-next-lecture.",
+    "title": "Where Does Data Come From",
+    "section": "You are ready to go on to the next lecture.",
+    "text": "You are ready to go on to the next lecture.\nYou will need to read in our class data using google sheets to go on to the next lecture and homework assignment."
   },
   {
     "objectID": "course-materials/lectures/13_Building_a_graph.html#reference-lecture-8-taxonomy-of-graphics",
@@ -1547,109 +1029,767 @@
     "text": "Conclusion\nThere was a lot done during this lecture. I only want you to know what you are able to do. You will not need to do all of this all the time.\nYou will also be able to use the cheat sheet and AI to help you figure out how to do a certain thing with the tidyverse."
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#data-is-collected-by",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#data-is-collected-by",
-    "title": "Where Does Data Come From",
-    "section": "Data is collected by",
-    "text": "Data is collected by\nPolling Organizations\nexample: Yougov and The Economist Collect Data on the most important issues facing the US\nThis data, or a summary of it is often made public\nPublic Researchers\nexample: Nihart et al find plastics n brain tissue\nThis data, or a summary of it is often made public"
+    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#prereqs",
+    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#prereqs",
+    "title": "Taxonomy of Graphs part 1: Categorical",
+    "section": "PreReqs",
+    "text": "PreReqs\nI assume you’ve read chapter 2.2, if you haven’t, go back and read it before this lecture."
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#and-collected-by",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#and-collected-by",
-    "title": "Where Does Data Come From",
-    "section": "And collected by",
-    "text": "And collected by\nCompanies\nexample: Meta Collects Data On Its Users\nThis data, or a summary of is not usually made public.\nGovernments\nexample: The Bureau of Labor Statistics Collects and Publishes Employment figures\nThis data, or a summary of it is often made public"
+    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#the-data",
+    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#the-data",
+    "title": "Taxonomy of Graphs part 1: Categorical",
+    "section": "The Data",
+    "text": "The Data\nIn this lecture I’ll use one set of data called starwars to illustrate some of the ideas you should consider when building a graph.\nWe’ll focus mostly on the categorical variables in this lecture. Next week we’ll tackle the numeric variables.\n\nlibrary(tidyverse)\nlibrary(mdsr)\nhead(starwars)\n\n# A tibble: 6 × 14\n  name      height  mass hair_color skin_color eye_color birth_year sex   gender\n  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; \n1 Luke Sky…    172    77 blond      fair       blue            19   male  mascu…\n2 C-3PO        167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…\n3 R2-D2         96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…\n4 Darth Va…    202   136 none       white      yellow          41.9 male  mascu…\n5 Leia Org…    150    49 brown      light      brown           19   fema… femin…\n6 Owen Lars    178   120 brown, gr… light      blue            52   male  mascu…\n# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,\n#   vehicles &lt;list&gt;, starships &lt;list&gt;"
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#we-will-not-be-collecting-data",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#we-will-not-be-collecting-data",
-    "title": "Where Does Data Come From",
-    "section": "We will not be collecting Data",
-    "text": "We will not be collecting Data\nThat task is for a methods course (Psychology has such a course). When you collect data you need to do it in a thoughtful way, which requires a fair amount of training."
+    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-length",
+    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-length",
+    "title": "Taxonomy of Graphs part 1: Categorical",
+    "section": "Visual Cues Length",
+    "text": "Visual Cues Length\nShow length with a bar chart\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color))"
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#we-will-be-using-data",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#we-will-be-using-data",
-    "title": "Where Does Data Come From",
-    "section": "We will be using Data",
-    "text": "We will be using Data\nWe want to use data to gleen information."
+    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-length-again",
+    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-length-again",
+    "title": "Taxonomy of Graphs part 1: Categorical",
+    "section": "Visual Cues Length again",
+    "text": "Visual Cues Length again\nShow length with a bar chart\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color))+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#import-data",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#import-data",
-    "title": "Where Does Data Come From",
-    "section": "Import Data",
-    "text": "Import Data\nWe first have to import data into whatever software we are using to analyze it.\nWe’ll import using three methods in this lecture and We’ll see more as the semester progresses.\n\nread_csv()\nread_sheets()\npackages\nAPIs\nScraping from websites"
+    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-color",
+    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-color",
+    "title": "Taxonomy of Graphs part 1: Categorical",
+    "section": "Visual Cues Color",
+    "text": "Visual Cues Color\nToo many colors are not helpful. Below I fill each rectangle by hair_color.\nAnd we now have a redundant mapping.\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color, fill = hair_color))+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-.csv-file.",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-.csv-file.",
-    "title": "Where Does Data Come From",
-    "section": "Importing a .csv file.",
-    "text": "Importing a .csv file.\nA .csv file is a special type of text document. csv is short for “comma separated values.” Essentially its a text file with commas separating the data within the file.\nThere are other ways of separating data (such as with tabs).\nThe tidyverse has a function called read_csv() which will take a .csv file and read it into memory so you can use it."
+    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-color-again",
+    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-color-again",
+    "title": "Taxonomy of Graphs part 1: Categorical",
+    "section": "Visual Cues Color again",
+    "text": "Visual Cues Color again\nLimit your colors to show another variable. Here I’ll fill by sex.\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color, fill = sex))+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-google-sheets-file",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#importing-a-google-sheets-file",
-    "title": "Where Does Data Come From",
-    "section": "Importing a google sheets file",
-    "text": "Importing a google sheets file\nGooglesheets are also very common ways of storing data. There is a package called googlesheets4 that has the function read_sheets() for reading in data from a google sheet."
+    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#you-try",
+    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#you-try",
+    "title": "Taxonomy of Graphs part 1: Categorical",
+    "section": "You try:",
+    "text": "You try:\nTake a moment and copy the code below into r, fill by eye_color. What do you think about the graph?\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color ))+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#importing-from-a-package",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#importing-from-a-package",
-    "title": "Where Does Data Come From",
-    "section": "Importing from a package",
-    "text": "Importing from a package\nPackages like the tidyverse already have data built in. Often times these data are for educational purposes and are sometimes very out of date.\nWe’ll import from a package first, as it is the easiest."
+    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-scale",
+    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-scale",
+    "title": "Taxonomy of Graphs part 1: Categorical",
+    "section": "Visual Cues Scale",
+    "text": "Visual Cues Scale\nIn the graph below the scale is categorical on the x-axis and numeric on the y-axis.\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color, fill = sex))+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#example-1.",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#example-1.",
-    "title": "Where Does Data Come From",
-    "section": "Example 1.",
-    "text": "Example 1.\nLet’s import txhousing with the tidyverse. This data is loaded automatically when we load the tidyverse.\n\n# first load the tidyverse\nlibrary(tidyverse)\n# next call the data with txhousing to view it.\ntxhousing\n\n# A tibble: 8,602 × 9\n   city     year month sales   volume median listings inventory  date\n   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;\n 1 Abilene  2000     1    72  5380000  71400      701       6.3 2000 \n 2 Abilene  2000     2    98  6505000  58700      746       6.6 2000.\n 3 Abilene  2000     3   130  9285000  58100      784       6.8 2000.\n 4 Abilene  2000     4    98  9730000  68600      785       6.9 2000.\n 5 Abilene  2000     5   141 10590000  67300      794       6.8 2000.\n 6 Abilene  2000     6   156 13910000  66900      780       6.6 2000.\n 7 Abilene  2000     7   152 12635000  73500      742       6.2 2000.\n 8 Abilene  2000     8   131 10710000  75000      765       6.4 2001.\n 9 Abilene  2000     9   104  7615000  64500      771       6.5 2001.\n10 Abilene  2000    10   101  7040000  59300      764       6.6 2001.\n# ℹ 8,592 more rows\n\n\nBenefiets: Data is easy to import. Documentation is often provided with package. Trust the data is good.\nCons: The data is often outdated. Mostly just for educational purposes."
+    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-context",
+    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#visual-cues-context",
+    "title": "Taxonomy of Graphs part 1: Categorical",
+    "section": "Visual Cues Context",
+    "text": "Visual Cues Context\nHere I add a title, x and y axes and a source of the data.\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color, fill = sex))+\n    labs(x = \"Hair Color\",\n        y = \"number of characters\",\n        title = \"Hair Color of Starwars Characters\",\n        caption = \"data from dplyr r package\")+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#example-2",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#example-2",
-    "title": "Where Does Data Come From",
-    "section": "Example 2",
-    "text": "Example 2\nLet’s read in the data from the plastics in brains study.\nFirst we have to download the data from here.\nNext we have to move it to our current working directory. In most cases this is folder this .qmd file is in, if not we can set it manually in rstudio, which I’ll do in the video of this lecture.\nFinally we have to load the tidyverse and read in the data and save it to memory.\n\nplastic_in_brains = read_csv(\"path/to/name_of_csv.csv\")"
+    "objectID": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#touch-ups",
+    "href": "course-materials/lectures/9_taxonomy_of_graphs_categorical.html#touch-ups",
+    "title": "Taxonomy of Graphs part 1: Categorical",
+    "section": "Touch ups",
+    "text": "Touch ups\nYou can add a theme to the graph to easily make things look more professional. Pick your favorite theme and go with it.\nAlso I eliminated the x-axis label as it was redundant with the title.\n\nstarwars |&gt;\n    ggplot()+\n    geom_bar(aes(x=hair_color, fill = sex))+\n    labs(x = \"Hair Color\",\n        y = \"number of characters\",\n        title = \"Hair Color of Starwars Characters\",\n        caption = \"data from dplyr r package\")+\n    theme_mdsr()+\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons",
-    "title": "Where Does Data Come From",
-    "section": "Pros and Cons",
-    "text": "Pros and Cons\nBenefiets: The data is current and exactly what we are interested in.\nCons: The documentation is elsewhere. We have to be sure we trust the supplier of data."
+    "objectID": "course-materials/lectures/5_notes_on_style.html#the-tidyverse-style-guide",
+    "href": "course-materials/lectures/5_notes_on_style.html#the-tidyverse-style-guide",
+    "title": "Notes On Style",
+    "section": "The Tidyverse Style Guide",
+    "text": "The Tidyverse Style Guide\nTidyverse style guide"
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#read-from-a-google-sheet.",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#read-from-a-google-sheet.",
-    "title": "Where Does Data Come From",
-    "section": "Read from a google sheet.",
-    "text": "Read from a google sheet.\nFinally I’ll show how we can read in data from a google sheet.\nWe collected class data in a google form. That data is now accessible to us as a sheet.\nTo read in the data:\n1. load the googlesheets4\n2. run read_sheet() with the url from our sheet.\n\nlibrary(googlesheets4)\nclass_data = read_sheet(\"https://docs.google.com/spreadsheets/d/1aNrNX5xWkrtuJHc-bsCC7e07KbnRbVIxaWdbblOCyxA/edit?usp=sharing\")\n\n\nYou will be prompted in the console to cache OAuth Tokens. Select 1 for Yes.\nYou might be asked to install httpuv, you should do that. Finally you may be taken to a webpage to authorize the tidyverse access, do that too.\nYou should only have to do the steps above once."
+    "objectID": "course-materials/lectures/5_notes_on_style.html#files-names",
+    "href": "course-materials/lectures/5_notes_on_style.html#files-names",
+    "title": "Notes On Style",
+    "section": "1. files names",
+    "text": "1. files names\nI will use underscores _, not spaces to name your files. You can also use -\n\nAvoid special symbols.\nCalled snake case.\n\ngood name\nmy_file.qmd\npoor name\nmy file!.qmd"
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons-1",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#pros-and-cons-1",
-    "title": "Where Does Data Come From",
-    "section": "Pros and Cons",
-    "text": "Pros and Cons\nSame as those from importing .csv files."
+    "objectID": "course-materials/lectures/5_notes_on_style.html#syntax",
+    "href": "course-materials/lectures/5_notes_on_style.html#syntax",
+    "title": "Notes On Style",
+    "section": "2. Syntax",
+    "text": "2. Syntax\nsyntax is how the code looks\n\nvariables should be in snake case and lower case\nvariables should be nouns\nfunctions should be verbs (functions is an optional topic)\nnames should be meaningful and concise.\nDon’t reuse built in R names (TRUE, mean, c, n, etc. )\n\n\n# good\nfirst_name = \"Nic\" \n\n# nmean is a built in function and should not be overwritten\nmean = \"Schwab\""
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#apis-and-scraping",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#apis-and-scraping",
-    "title": "Where Does Data Come From",
-    "section": "APIs and Scraping",
-    "text": "APIs and Scraping\nWe’ll discuss API calls and scraping when they come up in the labs."
+    "objectID": "course-materials/lectures/5_notes_on_style.html#or",
+    "href": "course-materials/lectures/5_notes_on_style.html#or",
+    "title": "Notes On Style",
+    "section": "<- or =",
+    "text": "&lt;- or =\nThe R community likes to use the &lt;- for variable assignment. However in most other languages = is used, and it works in R.\nI will generally use = in this course. For us they are effectly the same.\n\nfirst_name = \"Nic\"\n# same as \nfirst_name &lt;- \"Nic\""
   },
   {
-    "objectID": "course-materials/lectures/4_where_does_data_come_from.html#you-are-ready-to-go-on-to-the-next-lecture.",
-    "href": "course-materials/lectures/4_where_does_data_come_from.html#you-are-ready-to-go-on-to-the-next-lecture.",
-    "title": "Where Does Data Come From",
-    "section": "You are ready to go on to the next lecture.",
-    "text": "You are ready to go on to the next lecture.\nYou will need to read in our class data using google sheets to go on to the next lecture and homework assignment."
+    "objectID": "course-materials/lectures/5_notes_on_style.html#more-syntax",
+    "href": "course-materials/lectures/5_notes_on_style.html#more-syntax",
+    "title": "Notes On Style",
+    "section": "2.5 More Syntax",
+    "text": "2.5 More Syntax\nConsider spacing and commas like in English writing.\nMore space for readability is ok. Don’t over do it.\n\n# good\nx &lt;- 1\ny &lt;- 2\ntotal &lt;- sum(c(x, y))\n  \n# Not as good\nnew_total&lt;-x+y-total \n\n# Maybe too much space\nsum( c( x , y , total ) )\n\n[1] 6"
+  },
+  {
+    "objectID": "course-materials/lectures/5_notes_on_style.html#pipes-and-plus",
+    "href": "course-materials/lectures/5_notes_on_style.html#pipes-and-plus",
+    "title": "Notes On Style",
+    "section": "Pipes and plus",
+    "text": "Pipes and plus\nIn general |&gt; and + should end lines.\nWe will discuss these operators more later."
+  },
+  {
+    "objectID": "course-materials/lectures/23_maps-ggplot.html#libraries",
+    "href": "course-materials/lectures/23_maps-ggplot.html#libraries",
+    "title": "Static Maps w/ ggplot",
+    "section": "Libraries",
+    "text": "Libraries\n\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tidygeocoder)\nlibrary(maps)"
+  },
+  {
+    "objectID": "course-materials/lectures/23_maps-ggplot.html#tidygeocoder",
+    "href": "course-materials/lectures/23_maps-ggplot.html#tidygeocoder",
+    "title": "Static Maps w/ ggplot",
+    "section": "tidygeocoder",
+    "text": "tidygeocoder\nLet’s find the latitude and longitude for a couple of places.\n\naddresses&lt;- tibble(address=c(\"Smith College\", \"2 Tyler Ct, Northampton, MA 01060\", \"Holyoke Community College\")) |&gt;\ngeocode(address, method=\"osm\") |&gt;\n  mutate(name = c(\"Smith College\",\"McConnell Hall\",\"Holyoke Community College\"))\n\naddresses\n\n# A tibble: 3 × 4\n  address                             lat  long name                     \n  &lt;chr&gt;                             &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                    \n1 Smith College                      42.3 -72.6 Smith College            \n2 2 Tyler Ct, Northampton, MA 01060  42.3 -72.6 McConnell Hall           \n3 Holyoke Community College          42.2 -72.7 Holyoke Community College"
+  },
+  {
+    "objectID": "course-materials/lectures/23_maps-ggplot.html#my-first-map",
+    "href": "course-materials/lectures/23_maps-ggplot.html#my-first-map",
+    "title": "Static Maps w/ ggplot",
+    "section": "My first map",
+    "text": "My first map\nLet’s plot those with ggplot.\n\nggplot(addresses) +\n  geom_point(aes(long,lat)) \n\n\nNot very exciting. We’ll add it it in a moment."
+  },
+  {
+    "objectID": "course-materials/lectures/23_maps-ggplot.html#mass-map-data",
+    "href": "course-materials/lectures/23_maps-ggplot.html#mass-map-data",
+    "title": "Static Maps w/ ggplot",
+    "section": "Mass Map data",
+    "text": "Mass Map data\nLet’s build a map of Massachusetts with the map_data() function\n\n# map_data comes from ggplot2\n\nma_counties &lt;- map_data(\"county\", \"massachusetts\") |&gt;\n  select( long, lat, group, id = subregion)\n\nhead(ma_counties)\n\n       long      lat group         id\n1 -70.67435 41.73997     1 barnstable\n2 -70.53683 41.79727     1 barnstable\n3 -70.53683 41.79727     1 barnstable\n4 -70.51392 41.78008     1 barnstable\n5 -70.47954 41.75716     1 barnstable\n6 -70.41078 41.73425     1 barnstable"
+  },
+  {
+    "objectID": "course-materials/lectures/23_maps-ggplot.html#mass-map",
+    "href": "course-materials/lectures/23_maps-ggplot.html#mass-map",
+    "title": "Static Maps w/ ggplot",
+    "section": "Mass Map",
+    "text": "Mass Map\nNotice there are a lot of points for barnstable. Those are the vertices of a polygon. Let’s draw the polygon with the points.\n\nma_counties |&gt; ggplot(aes(long,lat,group=group))+\n  geom_polygon(fill = \"white\", colour = \"grey50\")+\n  geom_point()  \n\n  #coord_sf()"
+  },
+  {
+    "objectID": "course-materials/lectures/23_maps-ggplot.html#mapping-projections",
+    "href": "course-materials/lectures/23_maps-ggplot.html#mapping-projections",
+    "title": "Static Maps w/ ggplot",
+    "section": "Mapping projections",
+    "text": "Mapping projections\nCoordinate Reference Systems (CRS) - Is the type of map projection employed To get a 3D Earth to a 2D surface.\nWhich one will coord_sf default to?\n\n?coord_sf\n\nThis is the crs commonly used in gps."
+  },
+  {
+    "objectID": "course-materials/lectures/23_maps-ggplot.html#west-wing-explanation",
+    "href": "course-materials/lectures/23_maps-ggplot.html#west-wing-explanation",
+    "title": "Static Maps w/ ggplot",
+    "section": "West wing explanation",
+    "text": "West wing explanation\nWest Wing"
+  },
+  {
+    "objectID": "course-materials/lectures/23_maps-ggplot.html#adding-the-4326-crs",
+    "href": "course-materials/lectures/23_maps-ggplot.html#adding-the-4326-crs",
+    "title": "Static Maps w/ ggplot",
+    "section": "Adding the 4326 crs",
+    "text": "Adding the 4326 crs\n\nma_counties |&gt; ggplot(aes(long,lat,group=group))+\n  geom_polygon(fill = \"white\", colour = \"grey50\")+\n  geom_point()+\n  coord_sf()"
+  },
+  {
+    "objectID": "course-materials/lectures/23_maps-ggplot.html#add-some-cities",
+    "href": "course-materials/lectures/23_maps-ggplot.html#add-some-cities",
+    "title": "Static Maps w/ ggplot",
+    "section": "Add some cities",
+    "text": "Add some cities\nLet’s grab just Massachusetts cities from the data frame us.cities.\n\n# us.cities comes from the maps package\n\nma_cities &lt;- us.cities |&gt;\n  filter(country.etc ==\"MA\") |&gt;\n  select(name, long, lat)\n\nhead(ma_cities)\n\n                name   long   lat\n1         Andover MA -71.14 42.65\n2       Arlington MA -71.16 42.42\n3       Attleboro MA -71.30 41.93\n4 Barnstable Town MA -70.30 41.70\n5         Beverly MA -70.84 42.56\n6       Billerica MA -71.26 42.56"
+  },
+  {
+    "objectID": "course-materials/lectures/23_maps-ggplot.html#exercise",
+    "href": "course-materials/lectures/23_maps-ggplot.html#exercise",
+    "title": "Static Maps w/ ggplot",
+    "section": "Exercise:",
+    "text": "Exercise:\nPlot MA cities onto our county map. Then clean up our map.\n\nma_counties |&gt; ggplot(aes(long,lat))+\n  geom_polygon(fill = \"white\", colour = \"grey50\",aes(group=group)) +\n  #geom_point(data=ma_cities,.......)\n  \n  #This is the default mapping. Think GPS\n coord_sf(default_crs= st_crs(4326) )\n\n          # This is Mercator\n          # st_crs(3857))"
+  },
+  {
+    "objectID": "course-materials/lectures/23_maps-ggplot.html#shape-files",
+    "href": "course-materials/lectures/23_maps-ggplot.html#shape-files",
+    "title": "Static Maps w/ ggplot",
+    "section": "Shape files",
+    "text": "Shape files\nOften times map data is saved as a shape file.\nThe US government has shape files here."
+  },
+  {
+    "objectID": "course-materials/website/credits.html",
+    "href": "course-materials/website/credits.html",
+    "title": "Credits",
+    "section": "",
+    "text": "The format for this site was borrowed from Albert Kim’s SDS 192 course"
+  },
+  {
+    "objectID": "course-materials/website/credits.html#site-credit",
+    "href": "course-materials/website/credits.html#site-credit",
+    "title": "Credits",
+    "section": "",
+    "text": "The format for this site was borrowed from Albert Kim’s SDS 192 course"
+  },
+  {
+    "objectID": "course-materials/website/credits.html#activities-projects-etc.",
+    "href": "course-materials/website/credits.html#activities-projects-etc.",
+    "title": "Credits",
+    "section": "Activities, Projects, etc.",
+    "text": "Activities, Projects, etc.\nIf not created by me or referred to in some other way the activities and projects for this course are from:\n\nThe above mentioned website\nData Science in a box.\nBen Baumer’s SDS 192 course page"
+  },
+  {
+    "objectID": "course-materials/Final-Project/Project.html",
+    "href": "course-materials/Final-Project/Project.html",
+    "title": "Final Project",
+    "section": "",
+    "text": "For your final project you will build a website displaying your three projects from the semester.\nYou do not need to post it on the internet.\nIf you do post it on the internet I will tell you when I’m done grading so you may take it down.\nYou do not need to remake your projects, but you may want to proof read the blog posts.\nYou do not need to include your name on any of your work and you need to get permission from your partner to include their name.\n(If you are actually making a digital portfolio, that you plan to keep on the internet, your name would be included in the about me section.)"
+  },
+  {
+    "objectID": "course-materials/Final-Project/Project.html#final-portfolio",
+    "href": "course-materials/Final-Project/Project.html#final-portfolio",
+    "title": "Final Project",
+    "section": "",
+    "text": "For your final project you will build a website displaying your three projects from the semester.\nYou do not need to post it on the internet.\nIf you do post it on the internet I will tell you when I’m done grading so you may take it down.\nYou do not need to remake your projects, but you may want to proof read the blog posts.\nYou do not need to include your name on any of your work and you need to get permission from your partner to include their name.\n(If you are actually making a digital portfolio, that you plan to keep on the internet, your name would be included in the about me section.)"
+  },
+  {
+    "objectID": "course-materials/Final-Project/Project.html#requirements",
+    "href": "course-materials/Final-Project/Project.html#requirements",
+    "title": "Final Project",
+    "section": "Requirements:",
+    "text": "Requirements:\n\nEach of your projects must be individual files on different webpages. They must be rendered to html. Please check your live website to make sure everything looks good and the links work.\nYou must remove the code, warnings and errors from each rendered file.\nYour website will have 5 pages minimum:\n\nLanding page - This must have an image of some data graphic, this could be anything you made, including work from SDS 100, 220 or a lab. From the landing page people should be able to navigate to your three projects and your about me section.\nOne page per project.\nAn about page so people can contact you to hire you. You can choose to have genuine information here but no contact information until you are ready to graduate. You can also choose to post fake information that seems legitimate and professional. You cannot add identifying info about your partner here. Once again fake information is completely okay, I’ll be able to verify your github username.\n\nYou will make use of the nav bar.\nYour website should look professional. Use any of the skills from 192 or 100. Consider headers and links.\nYour website must be pushed to github and turned on and working.* Please test it by visiting you site. When you are done submit the link to your site to the forum on moodle.\nWhen I’m done grading I’ll let you know and you can turn off your portfolio.\n(Optional) add a 404 page."
+  },
+  {
+    "objectID": "course-materials/Final-Project/Project.html#website-options",
+    "href": "course-materials/Final-Project/Project.html#website-options",
+    "title": "Final Project",
+    "section": "Website options:",
+    "text": "Website options:\n\nHere is the website for quarto websites.\nChange the theme of your website.\nCustomize your website using ideas from here."
+  },
+  {
+    "objectID": "course-materials/Final-Project/Project.html#some-examples-of-digital-portfolios",
+    "href": "course-materials/Final-Project/Project.html#some-examples-of-digital-portfolios",
+    "title": "Final Project",
+    "section": "Some examples of digital portfolios",
+    "text": "Some examples of digital portfolios\nA perfect Digital Portfolio takes time to make, yours does not need to be perfect. It is just a start, you can add work to it throughout your college and post-college career.\nErin Schwab\nProf. Poirier\nBen Baumer\nA website with examples"
+  },
+  {
+    "objectID": "course-materials/Final-Project/Project.html#a-few-things-to-note",
+    "href": "course-materials/Final-Project/Project.html#a-few-things-to-note",
+    "title": "Final Project",
+    "section": "A few things to note:",
+    "text": "A few things to note:\n\nI am meant to protect your identity as students. Eventually you will want contact information on your portfolio, but leave it off for now. Don’t even mention Smith College.\nAfter your website is graded I’ll let you know and you should turn it off.\nThis is meant to be a simple skill that past students expressed that they wished they knew how to do. It should not be very very time consuming. Make something that meet requirements then move on. You can perfect it later.\nIf you would prefer to not post a website online, you still have to make one, then you have to invite me to your repo so I can download it and make sure it works. You have to let me know you are doing this before the due date."
+  },
+  {
+    "objectID": "course-materials/Final-Project/Project.html#grading",
+    "href": "course-materials/Final-Project/Project.html#grading",
+    "title": "Final Project",
+    "section": "Grading:",
+    "text": "Grading:\nEach of the following bullets is worth one point:\n\n1 Each project is on a different webpage\n1 Code, warnings , messages, etc. are removed.\n\nThere are five pages:\n\n1 landing page\n3 per project\n1 an about page\n1 nav bar use\n1 professional appearance\n1 website rendered and on github"
+  },
+  {
+    "objectID": "chapter 7 examples.html",
+    "href": "chapter 7 examples.html",
+    "title": "map() practice",
+    "section": "",
+    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.1     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.2.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(mosaicData)\n\nDoing problems 1 and 3 from here\nProblem 1 (Easy): Use the HELPrct data from the mosaicData to calculate the mean of all numeric variables (be sure to exclude missing values).\n\n\nHELPrct |&gt;\n  summarise(\n    across(.cols = where(is.numeric),\n           .fns = ~mean(. , na.rm = TRUE))\n  )\n\n       age anysubstatus     cesd       d1 daysanysub dayslink drugrisk      e2b\n1 35.65342    0.7723577 32.84768 3.059603   75.30738 255.6056 1.887168 2.504673\n     female       i1       i2       id   indtot linkstatus      mcs      pcs\n1 0.2362031 17.90728 24.54746 233.4018 35.72848  0.3781903 31.67668 48.04854\n    pss_fr  sexrisk avg_drinks max_drinks hospitalizations\n1 6.706402 4.642384   17.90728   24.54746         3.059603\n\n\nProblem 3 (Medium): Use routines from the purrr package and the HELPrct data frame from the mosaicData package to fit a regression model predicting cesd as a function of age separately for each of the levels of the substance variable. Generate a formatted table (with suitable caption) of results (estimates and confidence intervals) for the slope parameter for each level of the grouping variable.\n(Hint: Use group_by() and group_modify() to fit the regression model on each part. Note that broom::tidy() is useful in having the output of the model be a data frame.)\n\nHELPrct |&gt; select(substance, cesd, age) |&gt;\ngroup_by(substance)|&gt;\n  group_modify(.f = ~broom::tidy( lm(cesd~age, data = .))) |&gt; \n  filter(term ==\"age\") |&gt;\n  mutate(CI_low = estimate - 2*std.error, CI_high = estimate + 2*std.error) |&gt;\n  select(-statistic, - p.value, - std.error) |&gt;\n  kableExtra::kable(caption = \"The likelyhood someone uses a substance increates with age.\", digits = 1)\n\n\nThe likelyhood someone uses a substance increates with age.\n\n\nsubstance\nterm\nestimate\nCI_low\nCI_high\n\n\n\n\nalcohol\nage\n0.3\n0.1\n0.6\n\n\ncocaine\nage\n-0.3\n-0.6\n0.0\n\n\nheroin\nage\n-0.2\n-0.5\n0.0\n\n\n\n\n\nActivity 2\nMake a function that takes a df and a variable then produces a scatter plot of that variable vs cesd. Use it to plot multiple graphs of the first 6 numeric variables HELPrct. Hint: check out the extended example from 7.7\n\nlibrary(tidyverse)\nlibrary(mosaicData)\n\nmy_func &lt;- function(data,variable2){\n  data |&gt;\n    ggplot(aes(x = cesd, y = .data[[variable2]]))+\n    geom_point()\n}\n\nmy_func(HELPrct, \"age\")\n\n\n\n\n\n\n\nnumeric_names_only &lt;- HELPrct |&gt;\n  select(\"age\":\"d1\")|&gt;\n  names()\n\n\nmap(.x = numeric_names_only,\n    .f = my_func,\n    data= HELPrct\n      )|&gt;\n  patchwork::wrap_plots(ncol = 2)\n\nWarning: Removed 207 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n\nlibrary(tidyverse)\nlibrary(mosaicData)\n\nmy_func &lt;- function(data,variable2){\n  data |&gt;\n    ggplot(aes(x = cesd, y = variable2 ))+\n    geom_point()\n}\n\n\nlibrary(NHANES)\n\nbmi_plot &lt;- function(.data, x_var) {\n  ggplot(.data, aes(y = BMI)) +\n    aes_string(x = x_var) + \n    geom_jitter(alpha = 0.3) + \n    geom_smooth() + \n    labs(\n      title = paste(\"BMI by\", x_var),\n      subtitle = \"NHANES\",\n      caption = \"US National Center for Health Statistics (NCHS)\"\n    )\n}\nbmi_plot(NHANES, \"Age\")\n\nWarning: `aes_string()` was deprecated in ggplot2 3.0.0.\nℹ Please use tidy evaluation idioms with `aes()`.\nℹ See also `vignette(\"ggplot2-in-packages\")` for more information.\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 366 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 366 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\nc(\"Age\", \"HHIncomeMid\", \"PhysActiveDays\", \n  \"TVHrsDay\", \"AlcoholDay\", \"Pulse\") |&gt;\n  map(bmi_plot, .data = NHANES) |&gt;\n  patchwork::wrap_plots(ncol = 2)\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 366 rows containing non-finite outside the scale range\n(`stat_smooth()`).\nRemoved 366 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 1148 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 1148 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 5442 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Failed to fit group -1.\nCaused by error in `smooth.construct.cr.smooth.spec()`:\n! x has insufficient unique values to support 10 knots: reduce k.\n\n\nWarning: Removed 5442 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 366 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 366 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 5113 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 5113 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 1502 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 1502 rows containing missing values or values outside the scale range\n(`geom_point()`)."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CSI-MTH 190: Intro to Data Science",
+    "section": "",
+    "text": "Part 1: Visualizations"
+  },
+  {
+    "objectID": "index.html#links-worth-keeping",
+    "href": "index.html#links-worth-keeping",
+    "title": "CSI-MTH 190: Intro to Data Science",
+    "section": "Links worth keeping",
+    "text": "Links worth keeping\nsql-practice"
+  },
+  {
+    "objectID": "index.html#add-this-to-canvas",
+    "href": "index.html#add-this-to-canvas",
+    "title": "CSI-MTH 190: Intro to Data Science",
+    "section": "Add this to canvas",
+    "text": "Add this to canvas\nHelp us help you: take screenshots of your screen and post them to Canvas.\n\nmacOS: Command+Shift+3 to take shot of whole screen, Command+Shift+4 to take subportion\nWindows: Shift-Windows Key-S and Snip & Sketch\nLinux: Print screen\nChromebook: Shift + Ctrl + Show windows"
+  },
+  {
+    "objectID": "index.html#colors",
+    "href": "index.html#colors",
+    "title": "CSI-MTH 190: Intro to Data Science",
+    "section": "colors",
+    "text": "colors"
+  },
+  {
+    "objectID": "index.html#note-on-colors",
+    "href": "index.html#note-on-colors",
+    "title": "CSI-MTH 190: Intro to Data Science",
+    "section": "Note on colors",
+    "text": "Note on colors\nWe will discuss colors on Monday when you get to them in ex 6:\nYou can reread this section if you forget what sequential,diverging,qualitative mean.\nOr check out the colors examples on the cheat sheet.\nIntuitive Color Examples"
+  },
+  {
+    "objectID": "index.html#wrangling",
+    "href": "index.html#wrangling",
+    "title": "CSI-MTH 190: Intro to Data Science",
+    "section": "wrangling",
+    "text": "wrangling\ndpylr cheatsheet for wrangling\nWrangle babynames –&gt;"
+  },
+  {
+    "objectID": "readme.html",
+    "href": "readme.html",
+    "title": "CSI-MTH 190",
+    "section": "",
+    "text": "Source code to generate the course lecture page for Holyoke Community College: Introduction to Data Science https://nics-github.github.io/CSI-MTH-190-Lectures/. Most of the content is in either:\n\n_quarto.yml: Set theme of webpage along with links in navigational bar.\nindex.qmd: A single Moodle-style page that lists all announcements and lectures notes in reverse-chronological order.\nPS.qmd: All problem sets/homeworks.\nprojects.qmd: Details on the mini-projects and term project.\nsyllabus.qmd: Course info/description, topics, materials, evaluation, and expectations.\n\n\n\nThis webpage is built/compiled using R Markdown Websites. To compile this webpage for yourself, do the following:\n\nGet the contents of this directory/repository:\n\nIf you are not familiar with GitHub, click the green “Clone or download” button on the top-right -&gt; Download ZIP -&gt; Unzip SDS192-master.zip.\nIf you are familiar with GitHub, clone this repository.\n\nDouble-click the SDS192.Rproj to open RStudio.\nIf you haven’t already, install the following R packages:\n\nrmarkdown and devtools\nAt the top of index.Rmd: all CRAN R packages listed .\nAt the top of index.Rmd: the emo and patchwork packages must be installed from GitHub using the devtools::install_github() function.\n\nGo to the “Build” pane of RStudio -&gt; More -&gt; Configure Build Tools… -&gt; Ensure that “Project build tools” is set to “Webpage”.\nClick “Build Website”.\nThe website will display in the Viewer pane. The resulting index.html file and all other files for the webpage will be saved in the docs/ folder.\n\n\n\n\nTo publish/deploy this webpage and make it viewable on the web, you need to either:\n\nCopy the contents of the docs/ folder to your personal webpage or whatever domain hosting service you use.\nUse GitHub pages as I do. RStudio’s R Markdown Websites page gives instructions on how.\n\n\n\n\nThe format for this site was borrowed from Albert Kim’s SDS 192 course\nIf not created by me or referred to in some other way the activities and projects for this course are from:\n\nThe above mentioned website\nData Science in a box.\nBen Baumer’s SDS 192 course page"
+  },
+  {
+    "objectID": "readme.html#how-to-build-this-webpage",
+    "href": "readme.html#how-to-build-this-webpage",
+    "title": "CSI-MTH 190",
+    "section": "",
+    "text": "This webpage is built/compiled using R Markdown Websites. To compile this webpage for yourself, do the following:\n\nGet the contents of this directory/repository:\n\nIf you are not familiar with GitHub, click the green “Clone or download” button on the top-right -&gt; Download ZIP -&gt; Unzip SDS192-master.zip.\nIf you are familiar with GitHub, clone this repository.\n\nDouble-click the SDS192.Rproj to open RStudio.\nIf you haven’t already, install the following R packages:\n\nrmarkdown and devtools\nAt the top of index.Rmd: all CRAN R packages listed .\nAt the top of index.Rmd: the emo and patchwork packages must be installed from GitHub using the devtools::install_github() function.\n\nGo to the “Build” pane of RStudio -&gt; More -&gt; Configure Build Tools… -&gt; Ensure that “Project build tools” is set to “Webpage”.\nClick “Build Website”.\nThe website will display in the Viewer pane. The resulting index.html file and all other files for the webpage will be saved in the docs/ folder."
+  },
+  {
+    "objectID": "readme.html#how-to-publish-this-webpage",
+    "href": "readme.html#how-to-publish-this-webpage",
+    "title": "CSI-MTH 190",
+    "section": "",
+    "text": "To publish/deploy this webpage and make it viewable on the web, you need to either:\n\nCopy the contents of the docs/ folder to your personal webpage or whatever domain hosting service you use.\nUse GitHub pages as I do. RStudio’s R Markdown Websites page gives instructions on how."
+  },
+  {
+    "objectID": "readme.html#credit",
+    "href": "readme.html#credit",
+    "title": "CSI-MTH 190",
+    "section": "",
+    "text": "The format for this site was borrowed from Albert Kim’s SDS 192 course\nIf not created by me or referred to in some other way the activities and projects for this course are from:\n\nThe above mentioned website\nData Science in a box.\nBen Baumer’s SDS 192 course page"
+  },
+  {
+    "objectID": "credits.html",
+    "href": "credits.html",
+    "title": "MTH 190 Intro To Data Science",
+    "section": "",
+    "text": "This course would not have been possible without the DSC-WAV grant that was put together by faculty at the Five Colleges.\nThe workshop during summer 2021 help inspire me to begin studying data science. Ben Baumer, Nick Horton and Ethan Meyers led that workshop.\nFinally the faculty at Smith College and UT Austin created or inspired many of the labs and projects in this course. Thie course incorporates work from Ben Baumer, Lindsay Poirier, Shiya Cao and Albert Kim. They are given credit on the appropriate labs and projects."
+  },
+  {
+    "objectID": "credits.html#credit",
+    "href": "credits.html#credit",
+    "title": "MTH 190 Intro To Data Science",
+    "section": "",
+    "text": "This course would not have been possible without the DSC-WAV grant that was put together by faculty at the Five Colleges.\nThe workshop during summer 2021 help inspire me to begin studying data science. Ben Baumer, Nick Horton and Ethan Meyers led that workshop.\nFinally the faculty at Smith College and UT Austin created or inspired many of the labs and projects in this course. Thie course incorporates work from Ben Baumer, Lindsay Poirier, Shiya Cao and Albert Kim. They are given credit on the appropriate labs and projects."
+  },
+  {
+    "objectID": "course-materials/website/schwab.html",
+    "href": "course-materials/website/schwab.html",
+    "title": "Nic Schwab",
+    "section": "",
+    "text": "Nicholas Schwab is a lecture in Statistical and Data Sciences. He is a tenured professor at Holyoke Community College. When not teaching data science, he enjoys rock climbing, biking, and reading childrens’ books with his kids."
+  },
+  {
+    "objectID": "course-materials/website/schwab.html#education",
+    "href": "course-materials/website/schwab.html#education",
+    "title": "Nic Schwab",
+    "section": "Education",
+    "text": "Education\n\nMS in Data Science (~2026)\nUniversity of Texas at Austin\nAustin, Texas\nMA in Mathematics (2009)\nAppalchain State University\nBoone, NC\nBA in Mathematics (2007)\nUC Santa Cruz\nSanta Cruz, CA"
+  },
+  {
+    "objectID": "course-materials/website/schwab.html#experience",
+    "href": "course-materials/website/schwab.html#experience",
+    "title": "Nic Schwab",
+    "section": "Experience",
+    "text": "Experience\n\nProfessor of Computer Science\nHolyoke Community College\nHolyoke, MA 2025–present\nLecturer Statistics and Data Sciences\nSmith College\nNorthampton, MA 2023–2025\nProfessor of Mathematics\nHolyoke Community College\nHolyoke, MA 2014–2025"
+  },
+  {
+    "objectID": "course-materials/website/Resources.html#moderndive",
+    "href": "course-materials/website/Resources.html#moderndive",
+    "title": "Resources",
+    "section": "ModernDive",
+    "text": "ModernDive"
+  },
+  {
+    "objectID": "course-materials/website/Resources.html#data-science-in-a-box",
+    "href": "course-materials/website/Resources.html#data-science-in-a-box",
+    "title": "Resources",
+    "section": "Data Science in a box",
+    "text": "Data Science in a box"
+  },
+  {
+    "objectID": "course-materials/website/Resources.html#data-visualization-ggplot2",
+    "href": "course-materials/website/Resources.html#data-visualization-ggplot2",
+    "title": "Resources",
+    "section": "Data Visualization: ggplot2",
+    "text": "Data Visualization: ggplot2"
+  },
+  {
+    "objectID": "course-materials/website/Resources.html#data-transformation-dplyr",
+    "href": "course-materials/website/Resources.html#data-transformation-dplyr",
+    "title": "Resources",
+    "section": "Data transformation: dplyr",
+    "text": "Data transformation: dplyr"
+  },
+  {
+    "objectID": "course-materials/website/Resources.html#data-import-tidyr",
+    "href": "course-materials/website/Resources.html#data-import-tidyr",
+    "title": "Resources",
+    "section": "Data Import: tidyr",
+    "text": "Data Import: tidyr"
+  },
+  {
+    "objectID": "course-materials/website/Resources.html#rmarkdown-cheat-sheet",
+    "href": "course-materials/website/Resources.html#rmarkdown-cheat-sheet",
+    "title": "Resources",
+    "section": "RMarkdown Cheat sheet",
+    "text": "RMarkdown Cheat sheet"
+  },
+  {
+    "objectID": "course-materials/website/Resources.html#style-guide",
+    "href": "course-materials/website/Resources.html#style-guide",
+    "title": "Resources",
+    "section": "Style Guide",
+    "text": "Style Guide\nThe Tidyverse Style Guide"
+  },
+  {
+    "objectID": "course-materials/lectures/8_data_viz_cheatsheet.html",
+    "href": "course-materials/lectures/8_data_viz_cheatsheet.html",
+    "title": "Data Viz Cheatsheet",
+    "section": "",
+    "text": "This is only a placeholder for the cheatsheet."
+  },
+  {
+    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#tidy-data",
+    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#tidy-data",
+    "title": "Data Frames Variable Types and Tidy Data",
+    "section": "Tidy Data",
+    "text": "Tidy Data\n\nColumns are variables.\nRows are observations.\nIndividual entries are called values.\nThe data we will deal with in this course is rectangular."
+  },
+  {
+    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#variables",
+    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#variables",
+    "title": "Data Frames Variable Types and Tidy Data",
+    "section": "Variables",
+    "text": "Variables\nVariables can be categorical or numeric.\nVariable names should be descriptiver and conform to the style guide."
+  },
+  {
+    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#observations",
+    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#observations",
+    "title": "Data Frames Variable Types and Tidy Data",
+    "section": "Observations",
+    "text": "Observations\nEach observation represents one member of the sample.\nIf the data is tidy the number of rows equals the number of observations."
+  },
+  {
+    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#values",
+    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#values",
+    "title": "Data Frames Variable Types and Tidy Data",
+    "section": "Values",
+    "text": "Values\nAll the values of one variable should be the same type (either numic or categorical)."
+  },
+  {
+    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#example",
+    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#example",
+    "title": "Data Frames Variable Types and Tidy Data",
+    "section": "Example",
+    "text": "Example\nLet’s view() the Violations data from mdsr\n\n# You may need to install mdsr uncomment the line below, then recommend it. \n#install.packages(\"mdsr\")\nlibrary(mdsr)\nlibrary(tidyverse)\nview(Violations)\n\n\nIs each row an observation?\nIs each column a variable?\nAre all values the same type?\nIs the data tidy?"
+  },
+  {
+    "objectID": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#how-r-code-variables",
+    "href": "course-materials/lectures/6_Data_Frames_Variable_Types_Tidy_Data.html#how-r-code-variables",
+    "title": "Data Frames Variable Types and Tidy Data",
+    "section": "How R code variables",
+    "text": "How R code variables\nR give you a hint as to the types of variables in each column, look at the variable names.\ncategorical: str\nnumeric: int, dbl (float), POSIXct (times)"
+  },
+  {
+    "objectID": "course-materials/lectures/30_map_review.html#map-code",
+    "href": "course-materials/lectures/30_map_review.html#map-code",
+    "title": "Map Review",
+    "section": "Map code",
+    "text": "Map code\nYour map code is probably in lab 1 or the website project."
+  },
+  {
+    "objectID": "course-materials/lectures/30_map_review.html#quick-review",
+    "href": "course-materials/lectures/30_map_review.html#quick-review",
+    "title": "Map Review",
+    "section": "Quick Review",
+    "text": "Quick Review\nQuick Review of maps from the beginning of the semester.\nSimple Maps with the maps package"
+  },
+  {
+    "objectID": "course-materials/lectures/30_map_review.html#get-into-trouble",
+    "href": "course-materials/lectures/30_map_review.html#get-into-trouble",
+    "title": "Map Review",
+    "section": "Get into trouble",
+    "text": "Get into trouble\nR gets confused when we have two packages loaded with the same name.\nNote that in the case below the maps maps wins out. We even get a message."
+  },
+  {
+    "objectID": "course-materials/lectures/30_map_review.html#now-try-the-map-from-purr",
+    "href": "course-materials/lectures/30_map_review.html#now-try-the-map-from-purr",
+    "title": "Map Review",
+    "section": "Now try the map from purr",
+    "text": "Now try the map from purr\nThis is a silly example. Just to show we sometimes have to be explicit with R when choosing our functions\n\n\n\n$name\n   [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE\n  [13] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE\n  [25]  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE\n  [37]  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE\n  [49]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n  [61]  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE\n  [73] FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE\n  [85]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE\n  [97] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE\n [109] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE\n [121] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE\n [133]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [145]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [157] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [169] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE\n [181] FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE\n [193] FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE\n [205]  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE\n [217] FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE\n [229]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n [241]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE\n [253] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE\n [265]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE\n [277]  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE\n [289]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE\n [301]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE\n [313] FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE\n [325] FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE\n [337] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE\n [349]  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n [361]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE\n [373]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [385]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE\n [397]  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE\n [409] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE  TRUE\n [421] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE\n [433]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE\n [445]  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE\n [457]  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [469]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [481]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [493]  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE\n [505]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE\n [517]  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE\n [529] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [541]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE\n [553]  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE\n [565] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE\n [577] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE\n [589] FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n [601]  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE\n [613]  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE\n [625] FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE\n [637]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE\n [649]  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE\n [661]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [673]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE\n [685] FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE\n [697] FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE\n [709] FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE\n [721]  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE\n [733]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE\n [745] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE\n [757]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE\n [769]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n [781]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [793]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [805]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [817]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [829]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE\n [841]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE\n [853]  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE\n [865] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE\n [877]  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE\n [889]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE\n [901]  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE\n [913] FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE\n [925]  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [937]  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n [949]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n [961] FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE\n [973]  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE\n [985]  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE\n [997] FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE"
+  },
+  {
+    "objectID": "course-materials/lectures/30_map_review.html#more-geospacial-map-review",
+    "href": "course-materials/lectures/30_map_review.html#more-geospacial-map-review",
+    "title": "Map Review",
+    "section": "More geospacial map review",
+    "text": "More geospacial map review\nWe also made fancier maps"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#ethics-of-your-field",
+    "href": "course-materials/lectures/7_ethics_part_1.html#ethics-of-your-field",
+    "title": "Intro to Data Ethics",
+    "section": "Ethics of Your Field",
+    "text": "Ethics of Your Field\nHandling Personal Data\nBe cautious when feeding information to AI - Personal Data can be reused by models\nConsider the information you collect - Only collect the infromation you need"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#the-five-ps-of-ethical-data-handling.",
+    "href": "course-materials/lectures/7_ethics_part_1.html#the-five-ps-of-ethical-data-handling.",
+    "title": "Intro to Data Ethics",
+    "section": "The Five Ps of Ethical Data Handling.",
+    "text": "The Five Ps of Ethical Data Handling.\nThe five Ps terminology comes from here the Harvard Business Review.\nHere’s the link.\n\nProvenance\nPurpose\nProtection\nPrivacy\nPreparation"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#copyright-and-chat-gpt",
+    "href": "course-materials/lectures/7_ethics_part_1.html#copyright-and-chat-gpt",
+    "title": "Intro to Data Ethics",
+    "section": "Copyright and Chat GPT",
+    "text": "Copyright and Chat GPT\n\n\n\n\n\nSarah Silverman, Mona Awad and Paul Tremplay sue Open AI for direct infringement.\nUsing copyrighted materials to train their models.\nList of suits is getting longer."
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#provenance",
+    "href": "course-materials/lectures/7_ethics_part_1.html#provenance",
+    "title": "Intro to Data Ethics",
+    "section": "Provenance",
+    "text": "Provenance\nWhere does the data originate?\nWas it acquired legally?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#github",
+    "href": "course-materials/lectures/7_ethics_part_1.html#github",
+    "title": "Intro to Data Ethics",
+    "section": "Github",
+    "text": "Github\n\n\n\n\n\nMicrosoft (owner of github) uses code in repos to train copilot.\nEthical on public repositories?\nPrivate repositories?\nCopilot costs $20 a month or is free."
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#purpose",
+    "href": "course-materials/lectures/7_ethics_part_1.html#purpose",
+    "title": "Intro to Data Ethics",
+    "section": "Purpose",
+    "text": "Purpose\nWould the source of the data agree with how it is being used?\nWhat if the data is re-purposed?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#section",
+    "href": "course-materials/lectures/7_ethics_part_1.html#section",
+    "title": "Intro to Data Ethics",
+    "section": "",
+    "text": "Users information scraped from OK Cupid\n\nIf that data is scraped from the site by a third party and made available is that ethical?\nOkCupid, including usernames, age, gender, location, what kind of relationship (or sex) they’re interested in, personality traits\n“The data is already public.” -Emil Kirkegaard"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#protection",
+    "href": "course-materials/lectures/7_ethics_part_1.html#protection",
+    "title": "Intro to Data Ethics",
+    "section": "Protection",
+    "text": "Protection\nHow is the data being protected?\nWho is responsible for destroying it?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#college-students",
+    "href": "course-materials/lectures/7_ethics_part_1.html#college-students",
+    "title": "Intro to Data Ethics",
+    "section": "College Students",
+    "text": "College Students\n\n\n\n\n\nThere is data that HCC collected about you.Everything you do or make in this class exists on canvas."
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#preparation",
+    "href": "course-materials/lectures/7_ethics_part_1.html#preparation",
+    "title": "Intro to Data Ethics",
+    "section": "Preparation",
+    "text": "Preparation\nHow is the data cleaned?\nAre data sets being combined to preserve anonymity?\nIs the accuracy of the data verified?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#lab-7ish",
+    "href": "course-materials/lectures/7_ethics_part_1.html#lab-7ish",
+    "title": "Intro to Data Ethics",
+    "section": "Lab 7ish",
+    "text": "Lab 7ish"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#privacy",
+    "href": "course-materials/lectures/7_ethics_part_1.html#privacy",
+    "title": "Intro to Data Ethics",
+    "section": "Privacy",
+    "text": "Privacy\nWho will have access to data that can be used to ID a person?\nHow will individuals be anonymized?\nWho has access to that anonymized data."
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#scenario",
+    "href": "course-materials/lectures/7_ethics_part_1.html#scenario",
+    "title": "Intro to Data Ethics",
+    "section": "Scenario",
+    "text": "Scenario\nA citizen of a country files taxes with their government. Paying taxes is rarely optional. In filing there are data related to residence, wages, age, gender, taxes and government ID numbers pertaining to this citizen and their family.\nDiscuss:\n\nProvenance\nPurpose\nProtection\nPreparation\nPrivacy"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#governments-responsibility",
+    "href": "course-materials/lectures/7_ethics_part_1.html#governments-responsibility",
+    "title": "Intro to Data Ethics",
+    "section": "Government’s responsibility",
+    "text": "Government’s responsibility\nWho should access to this data?\nHow should is be secured?\nWhat rights to privacy does this citizen have?\nHow long should the data be held?"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#current-events",
+    "href": "course-materials/lectures/7_ethics_part_1.html#current-events",
+    "title": "Intro to Data Ethics",
+    "section": "Current Events",
+    "text": "Current Events\nAt the beginning of last year DOGE requested access to tax payer returns to root out fraud.1\nWanted a person without the proper clearance to be able to access tax payer returns. (Gavin Kliger)\nWill be given access if needed in anonymized form. 2\nhttps://www.economist.com/united-states/2025/02/18/is-elon-musks-war-on-fraud-just-cover-for-a-power-grabhttps://www.nytimes.com/2025/02/21/us/politics/irs-doge-gavin-kliger.html"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#books",
+    "href": "course-materials/lectures/7_ethics_part_1.html#books",
+    "title": "Intro to Data Ethics",
+    "section": "Books",
+    "text": "Books"
+  },
+  {
+    "objectID": "course-materials/lectures/7_ethics_part_1.html#credits",
+    "href": "course-materials/lectures/7_ethics_part_1.html#credits",
+    "title": "Intro to Data Ethics",
+    "section": "Credits",
+    "text": "Credits\nUnless otherwise cited or linked here are the credits:\n\nThe five ps seem to come from the Harvard Business Review https://hbr.org/2023/07/the-ethics-of-managing-peoples-data 9/30/2024\nSuing Chat GPT https://www.theverge.com/2024/2/13/24072131/sarah-silverman-paul-tremblay-openai-chatgpt-copyright-lawsuit"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#cheat-sheet",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#cheat-sheet",
+    "title": "Quarto Documents",
+    "section": "Cheat Sheet",
+    "text": "Cheat Sheet\nSee the cheatsheet for all the options.\nQuarto Cheatsheet"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#pre-quarto",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#pre-quarto",
+    "title": "Quarto Documents",
+    "section": "Pre-Quarto",
+    "text": "Pre-Quarto\n\nMarkdown is a general document format that my documents use and support. It is still a common standard.\nJupyter notebooks were made for doing data analysis in Python.\nRMarkdown was made specifically for document types involving built in R script.\nPosit introduced quarto that supports working with Python, R, Julia and other languages."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#global-options",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#global-options",
+    "title": "Quarto Documents",
+    "section": "Global Options",
+    "text": "Global Options\nYou can change options globally by editing the YAML.\n\n---\n...\nexecute: \n  echo: true\n  code-fold: true\n...\n---\n\nYou can change options locally by adding #| in code chunks."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#showing-code",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#showing-code",
+    "title": "Quarto Documents",
+    "section": "Showing code",
+    "text": "Showing code\n#| echo: True option\n#| code-fold: True option"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#running-code",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#running-code",
+    "title": "Quarto Documents",
+    "section": "Running code",
+    "text": "Running code\n#| eval: True option (default)\nRuns the code in the chunk.\n#| include: True option (default)\nRuns the code and shows the results."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#open-lab-5-to-experiment.",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#open-lab-5-to-experiment.",
+    "title": "Quarto Documents",
+    "section": "Open Lab 5 to experiment.",
+    "text": "Open Lab 5 to experiment."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#creating-other-documents",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#creating-other-documents",
+    "title": "Quarto Documents",
+    "section": "Creating other documents",
+    "text": "Creating other documents\nPresentations\nWebsites\nBooks\nPdfs"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-a-directory",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-a-directory",
+    "title": "Quarto Documents",
+    "section": "What is a directory",
+    "text": "What is a directory\nA directory is the current folder R considers when working with your file.\nMost computer languages need the directory to be specified so the computer know where to find files."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#working-directory-1",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#working-directory-1",
+    "title": "Quarto Documents",
+    "section": "Working directory",
+    "text": "Working directory\nWe have been creating R projects to specify a working directory.\nThis is the easiest method for maintaining a working directory."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-my-working-directory",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-my-working-directory",
+    "title": "Quarto Documents",
+    "section": "What is my working directory?",
+    "text": "What is my working directory?\nRStudio tells you the working directory in the console.\nHere R is looking for files in my /MTH190/Lab 6 folder\n\nIf I close the project R will look in the home folder.\nFile &gt; Close Project"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#another-working-directory",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#another-working-directory",
+    "title": "Quarto Documents",
+    "section": "Another working directory",
+    "text": "Another working directory\nWhen rendering a quarto document the working directory is automatically set to the folder the quarto document resides in.\nThis can be confusing. Let’s work through an example."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#example",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#example",
+    "title": "Quarto Documents",
+    "section": "Example",
+    "text": "Example\nThis will be easiest to follow if you are on the server.\n\nClose any project you are currently working in so your working directory is the home directory.\n\nYour console should look like this:"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#the-server-is-a-linux-system",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#the-server-is-a-linux-system",
+    "title": "Quarto Documents",
+    "section": "The server is a Linux System",
+    "text": "The server is a Linux System\nThis is a side note:\nYou can also type getwd() into the console to verify your directory. This shows my home directory is:\n\"/u00/rstudio_homes/administration.hcc/nschwab\"\nThis is the same as ~"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#make-a-folder",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#make-a-folder",
+    "title": "Quarto Documents",
+    "section": "Make a folder",
+    "text": "Make a folder\n\nLet’s make a folder and call it practice_wd.\nIn that folder make a new quarto document.\n\nNotice: Our working directory and the directory our quarto document are in are different.\nWe’ll leave it that way.\n(The easiest way to make them match to to start a new R project in the practice_wd folder)"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#check-the-documents-working-directory",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#check-the-documents-working-directory",
+    "title": "Quarto Documents",
+    "section": "Check the document’s working directory",
+    "text": "Check the document’s working directory\nMake a new chunk and type:\n\ngetwd()\n\nThen render the document.\nYou should notice that the working directory is in the practice_wd folder.\n\"/u00/rstudio_homes/administration.hcc/nschwab/practice_wd\""
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#wd-confusion",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#wd-confusion",
+    "title": "Quarto Documents",
+    "section": "WD Confusion",
+    "text": "WD Confusion\nThis is confusing for students because while not rendered R is looking for files in the current working directory (home ~) but when rendered R will look in the folder the quarto document is in (~_wd)\nThis will be a big deal when we read data into the document."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#a-csv-file",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#a-csv-file",
+    "title": "Quarto Documents",
+    "section": "A csv file",
+    "text": "A csv file\nThe code below will make a dummy data csv file for practice put it into a code chunk in your practice.qmd file.\nNote: It should save to your quarto document’s working directory (~_wd)\n\n#Make some dummy data\ndf = dplyr::tribble(\n    ~my_teacher_supports_me, ~`my_parents_support_me`,\n    \"Strongly Agree\",\"Strongly Agree\",\n    \"Strongly Agree\",\" Agree\",\n    \"Neutral\",\"Agree\",\n    \"Agree\",\" Neutral\",\n    NA, \"Agree\",\n    \"Disagree\",\"Disagree\"\n)\nreadr::write_csv(df,\"dummy_data.csv\")"
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#read-the-data",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#read-the-data",
+    "title": "Quarto Documents",
+    "section": "Read the data",
+    "text": "Read the data\nMake a new chunk and read in the data.\nIf you run this chunk you will get an error:\n\nreadr::read_csv(\"dummy_data.csv\")\n\nError: 'dummy_data' does not exist in current working directory ('/u00/rstudio_homes/administration.hcc/nschwab/practice_wd')."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#rendering-everything-works",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#rendering-everything-works",
+    "title": "Quarto Documents",
+    "section": "Rendering everything works",
+    "text": "Rendering everything works\nWhen rendering everything works fine.\nIf the current working directory and the directory for the quarto file match this is not a problem.\nThis is why we make R Projects before each lab and project."
+  },
+  {
+    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#questions",
+    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#questions",
+    "title": "Quarto Documents",
+    "section": "Questions",
+    "text": "Questions"
   },
   {
     "objectID": "course-materials/lectures/1first-day-survey/Make-graphs.html",
@@ -2042,313 +2182,5 @@
     "title": "Dplyr Cheatsheet",
     "section": "",
     "text": "This is only a placeholder for the cheatsheet."
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#cheat-sheet",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#cheat-sheet",
-    "title": "Quarto Documents",
-    "section": "Cheat Sheet",
-    "text": "Cheat Sheet\nSee the cheatsheet for all the options.\nQuarto Cheatsheet"
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#global-options",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#global-options",
-    "title": "Quarto Documents",
-    "section": "Global Options",
-    "text": "Global Options\nYou can change options globally by editing the YAML.\n\n---\n...\nexecute: \n  echo: true\n  code-fold: true\n...\n---\n\nYou can change options locally by adding #| in code chunks."
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#options-local-to-chunks",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#options-local-to-chunks",
-    "title": "Quarto Documents",
-    "section": "Options local to chunks",
-    "text": "Options local to chunks"
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#showing-code",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#showing-code",
-    "title": "Quarto Documents",
-    "section": "Showing code",
-    "text": "Showing code\n#| echo: True option\n#| code-fold: True option"
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#running-code",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#running-code",
-    "title": "Quarto Documents",
-    "section": "Running code",
-    "text": "Running code\n#| eval: True option (default)\nRuns the code in the chunk.\n#| include: True option (default)\nRuns the code and shows the results."
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#open-lab-5-to-experiment.",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#open-lab-5-to-experiment.",
-    "title": "Quarto Documents",
-    "section": "Open Lab 5 to experiment.",
-    "text": "Open Lab 5 to experiment."
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#what-is-a-directory",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#what-is-a-directory",
-    "title": "Quarto Documents",
-    "section": "What is a directory",
-    "text": "What is a directory\nA directory is the current folder R considers when working with your file.\nMost computer languages need the directory to be specified so the computer know where to find files."
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#working-directory-1",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#working-directory-1",
-    "title": "Quarto Documents",
-    "section": "Working directory",
-    "text": "Working directory\nWe have been creating R projects to specify a working directory.\nThis is the easiest method for maintaining a working directory."
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#what-is-my-working-directory",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#what-is-my-working-directory",
-    "title": "Quarto Documents",
-    "section": "What is my working directory?",
-    "text": "What is my working directory?\nRStudio tells you the working directory in the console.\nHere R is looking for files in my /MTH190/Lab 6 folder\n\nIf I close the project R will look in the home folder.\nFile &gt; Close Project"
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#another-working-directory",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#another-working-directory",
-    "title": "Quarto Documents",
-    "section": "Another working directory",
-    "text": "Another working directory\nWhen rendering a quarto document the working directory is automatically set to the folder the quarto document resides in.\nThis can be confusing. Let’s work through an example."
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#examples",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#examples",
-    "title": "Quarto Documents",
-    "section": "Examples",
-    "text": "Examples\nThis will be easiest to follow if you are on the server.\n\nClose any project you are currently working in so your working directory is the home directory.\n\nYour console should look like this:\n\nYOu can also type getwd() into the console to verify your directory. This shows my home directory is:\n\"/u00/rstudio_homes/administration.hcc/nschwab\""
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#example",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#example",
-    "title": "Quarto Documents",
-    "section": "Example",
-    "text": "Example\nThis will be easiest to follow if you are on the server.\n\nClose any project you are currently working in so your working directory is the home directory.\n\nYour console should look like this:"
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#the-server-is-a-linux-system",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#the-server-is-a-linux-system",
-    "title": "Quarto Documents",
-    "section": "The server is a Linux System",
-    "text": "The server is a Linux System\nThis is a side note:\nYou can also type getwd() into the console to verify your directory. This shows my home directory is:\n\"/u00/rstudio_homes/administration.hcc/nschwab\"\nThis is the same as ~"
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#make-a-folder",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#make-a-folder",
-    "title": "Quarto Documents",
-    "section": "Make a folder",
-    "text": "Make a folder\n\nLet’s make a folder and call it practice_wd.\nIn that folder make a new quarto document.\n\nNotice: Our working directory and the directory our quarto document are in are different.\nWe’ll leave it that way.\n(The easiest way to make them match to to start a new R project in the practice_wd folder)"
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#check-the-documents-working-directory",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#check-the-documents-working-directory",
-    "title": "Quarto Documents",
-    "section": "Check the document’s working directory",
-    "text": "Check the document’s working directory\nMake a new chunk and type:\n\ngetwd()\n\nThen render the document.\nYou should notice that the working directory is in the practice_wd folder.\n\"/u00/rstudio_homes/administration.hcc/nschwab/practice_wd\""
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#wd-confusion",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#wd-confusion",
-    "title": "Quarto Documents",
-    "section": "WD Confusion",
-    "text": "WD Confusion\nThis is confusing for students because while not rendered R is looking for files in the current working directory (home ~) but when rendered R will look in the folder the quarto document is in (~_wd)\nThis will be a big deal when we read data into the document."
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#a-csv-file",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#a-csv-file",
-    "title": "Quarto Documents",
-    "section": "A csv file",
-    "text": "A csv file\nThe code below will make a dummy data csv file for practice put it into a code chunk in your practice.qmd file.\nNote: It should save to your quarto document’s working directory (~_wd)\n\n#Make some dummy data\ndf = dplyr::tribble(\n    ~my_teacher_supports_me, ~`my_parents_support_me`,\n    \"Strongly Agree\",\"Strongly Agree\",\n    \"Strongly Agree\",\" Agree\",\n    \"Neutral\",\"Agree\",\n    \"Agree\",\" Neutral\",\n    NA, \"Agree\",\n    \"Disagree\",\"Disagree\"\n)\nreadr::write_csv(df,\"dummy_data.csv\")"
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#read-the-data",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#read-the-data",
-    "title": "Quarto Documents",
-    "section": "Read the data",
-    "text": "Read the data\nMake a new chunk and read in the data.\nIf you run this chunk you will get an error:\n\nreadr::read_csv(\"dummy_data.csv\")\n\nError: 'dummy_data' does not exist in current working directory ('/u00/rstudio_homes/administration.hcc/nschwab/practice_wd')."
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#rendering-everything-works",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#rendering-everything-works",
-    "title": "Quarto Documents",
-    "section": "Rendering everything works",
-    "text": "Rendering everything works\nWhen rendering everything works fine.\nIf the current working directory and the directory for the quarto file match this is not a problem.\nThis is why we make R Projects before each lab and project."
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#questions",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#questions",
-    "title": "Quarto Documents",
-    "section": "Questions",
-    "text": "Questions"
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#pre-quarto",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#pre-quarto",
-    "title": "Quarto Documents",
-    "section": "Pre-Quarto",
-    "text": "Pre-Quarto\n\nMarkdown is a general document format that my documents use and support. It is still a common standard.\nJupyter notebooks were made for doing data analysis in Python.\nRMarkdown was made specifically for document types involving built in R script.\nPosit introduced quarto that supports working with Python, R, Julia and other languages."
-  },
-  {
-    "objectID": "course-materials/lectures/21_cleaning_quarto_docs.html#creating-other-documents",
-    "href": "course-materials/lectures/21_cleaning_quarto_docs.html#creating-other-documents",
-    "title": "Quarto Documents",
-    "section": "Creating other documents",
-    "text": "Creating other documents\nPresentations\nWebsites\nBooks\nPdfs"
-  },
-  {
-    "objectID": "course-materials/lectures/20_scraping.html",
-    "href": "course-materials/lectures/20_scraping.html",
-    "title": "Web Scrapping",
-    "section": "",
-    "text": "We have looked at several places to find data:\npackages\ncsv files\nAPIs\nIn this lecture we will consider scraping."
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html",
-    "title": "Quarto Documents",
-    "section": "",
-    "text": "See the cheatsheet for all the options.\nQuarto Cheatsheet"
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#cheat-sheet",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#cheat-sheet",
-    "title": "Quarto Documents",
-    "section": "",
-    "text": "See the cheatsheet for all the options.\nQuarto Cheatsheet"
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#pre-quarto",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#pre-quarto",
-    "title": "Quarto Documents",
-    "section": "Pre-Quarto",
-    "text": "Pre-Quarto\n\nMarkdown is a general document format that my documents use and support. It is still a common standard.\nJupyter notebooks were made for doing data analysis in Python.\nRMarkdown was made specifically for document types involving built in R script.\nPosit introduced quarto that supports working with Python, R, Julia and other languages."
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#global-options",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#global-options",
-    "title": "Quarto Documents",
-    "section": "Global Options",
-    "text": "Global Options\nYou can change options globally by editing the YAML.\n\n---\n...\nexecute: \n  echo: true\n  code-fold: true\n...\n---\n\nYou can change options locally by adding #| in code chunks."
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#showing-code",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#showing-code",
-    "title": "Quarto Documents",
-    "section": "Showing code",
-    "text": "Showing code\n#| echo: True option\n#| code-fold: True option"
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#running-code",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#running-code",
-    "title": "Quarto Documents",
-    "section": "Running code",
-    "text": "Running code\n#| eval: True option (default)\nRuns the code in the chunk.\n#| include: True option (default)\nRuns the code and shows the results."
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#open-lab-5-to-experiment.",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#open-lab-5-to-experiment.",
-    "title": "Quarto Documents",
-    "section": "Open Lab 5 to experiment.",
-    "text": "Open Lab 5 to experiment."
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#creating-other-documents",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#creating-other-documents",
-    "title": "Quarto Documents",
-    "section": "Creating other documents",
-    "text": "Creating other documents\nPresentations\nWebsites\nBooks\nPdfs"
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-a-directory",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-a-directory",
-    "title": "Quarto Documents",
-    "section": "What is a directory",
-    "text": "What is a directory\nA directory is the current folder R considers when working with your file.\nMost computer languages need the directory to be specified so the computer know where to find files."
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#working-directory-1",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#working-directory-1",
-    "title": "Quarto Documents",
-    "section": "Working directory",
-    "text": "Working directory\nWe have been creating R projects to specify a working directory.\nThis is the easiest method for maintaining a working directory."
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-my-working-directory",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#what-is-my-working-directory",
-    "title": "Quarto Documents",
-    "section": "What is my working directory?",
-    "text": "What is my working directory?\nRStudio tells you the working directory in the console.\nHere R is looking for files in my /MTH190/Lab 6 folder\n\nIf I close the project R will look in the home folder.\nFile &gt; Close Project"
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#another-working-directory",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#another-working-directory",
-    "title": "Quarto Documents",
-    "section": "Another working directory",
-    "text": "Another working directory\nWhen rendering a quarto document the working directory is automatically set to the folder the quarto document resides in.\nThis can be confusing. Let’s work through an example."
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#example",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#example",
-    "title": "Quarto Documents",
-    "section": "Example",
-    "text": "Example\nThis will be easiest to follow if you are on the server.\n\nClose any project you are currently working in so your working directory is the home directory.\n\nYour console should look like this:"
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#the-server-is-a-linux-system",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#the-server-is-a-linux-system",
-    "title": "Quarto Documents",
-    "section": "The server is a Linux System",
-    "text": "The server is a Linux System\nThis is a side note:\nYou can also type getwd() into the console to verify your directory. This shows my home directory is:\n\"/u00/rstudio_homes/administration.hcc/nschwab\"\nThis is the same as ~"
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#make-a-folder",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#make-a-folder",
-    "title": "Quarto Documents",
-    "section": "Make a folder",
-    "text": "Make a folder\n\nLet’s make a folder and call it practice_wd.\nIn that folder make a new quarto document.\n\nNotice: Our working directory and the directory our quarto document are in are different.\nWe’ll leave it that way.\n(The easiest way to make them match to to start a new R project in the practice_wd folder)"
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#check-the-documents-working-directory",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#check-the-documents-working-directory",
-    "title": "Quarto Documents",
-    "section": "Check the document’s working directory",
-    "text": "Check the document’s working directory\nMake a new chunk and type:\n\ngetwd()\n\nThen render the document.\nYou should notice that the working directory is in the practice_wd folder.\n\"/u00/rstudio_homes/administration.hcc/nschwab/practice_wd\""
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#wd-confusion",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#wd-confusion",
-    "title": "Quarto Documents",
-    "section": "WD Confusion",
-    "text": "WD Confusion\nThis is confusing for students because while not rendered R is looking for files in the current working directory (home ~) but when rendered R will look in the folder the quarto document is in (~_wd)\nThis will be a big deal when we read data into the document."
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#a-csv-file",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#a-csv-file",
-    "title": "Quarto Documents",
-    "section": "A csv file",
-    "text": "A csv file\nThe code below will make a dummy data csv file for practice put it into a code chunk in your practice.qmd file.\nNote: It should save to your quarto document’s working directory (~_wd)\n\n#Make some dummy data\ndf = dplyr::tribble(\n    ~my_teacher_supports_me, ~`my_parents_support_me`,\n    \"Strongly Agree\",\"Strongly Agree\",\n    \"Strongly Agree\",\" Agree\",\n    \"Neutral\",\"Agree\",\n    \"Agree\",\" Neutral\",\n    NA, \"Agree\",\n    \"Disagree\",\"Disagree\"\n)\nreadr::write_csv(df,\"dummy_data.csv\")"
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#read-the-data",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#read-the-data",
-    "title": "Quarto Documents",
-    "section": "Read the data",
-    "text": "Read the data\nMake a new chunk and read in the data.\nIf you run this chunk you will get an error:\n\nreadr::read_csv(\"dummy_data.csv\")\n\nError: 'dummy_data' does not exist in current working directory ('/u00/rstudio_homes/administration.hcc/nschwab/practice_wd')."
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#rendering-everything-works",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#rendering-everything-works",
-    "title": "Quarto Documents",
-    "section": "Rendering everything works",
-    "text": "Rendering everything works\nWhen rendering everything works fine.\nIf the current working directory and the directory for the quarto file match this is not a problem.\nThis is why we make R Projects before each lab and project."
-  },
-  {
-    "objectID": "course-materials/lectures/21_quarto_docs_and_working_dir.html#questions",
-    "href": "course-materials/lectures/21_quarto_docs_and_working_dir.html#questions",
-    "title": "Quarto Documents",
-    "section": "Questions",
-    "text": "Questions"
   }
 ]
