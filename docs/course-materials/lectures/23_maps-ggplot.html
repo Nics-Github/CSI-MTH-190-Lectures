@@ -208,28 +208,28 @@ Schwab
 <section id="libraries" class="slide level2">
 <h2>Libraries</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(sf)</span>
-<span id="cb1-3"><a></a><span class="fu">library</span>(tidygeocoder)</span>
-<span id="cb1-4"><a></a><span class="fu">library</span>(maps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)  </span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(sf)     <span class="co"># For spacial features, cordinate systems</span></span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(tidygeocoder)   <span class="co"># For finding lat and log data</span></span>
+<span id="cb1-4"><a></a><span class="fu">library</span>(maps)   <span class="co"># For some US state data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="tidygeocoder" class="slide level2">
 <h2>tidygeocoder</h2>
 <p>Let’s find the latitude and longitude for a couple of places.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>addresses<span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">address=</span><span class="fu">c</span>(<span class="st">"Smith College"</span>, <span class="st">"2 Tyler Ct, Northampton, MA 01060"</span>, <span class="st">"Holyoke Community College"</span>)) <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>addresses<span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">address=</span><span class="fu">c</span>(<span class="st">"University of Massachusetts Amherst"</span>, <span class="st">"577 Western Ave, Westfield, MA 01085"</span>, <span class="st">"Holyoke Community College"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a></a><span class="fu">geocode</span>(address, <span class="at">method=</span><span class="st">"osm"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Smith College"</span>,<span class="st">"McConnell Hall"</span>,<span class="st">"Holyoke Community College"</span>))</span>
+<span id="cb2-3"><a></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"UMass Amherst"</span>,<span class="st">"Westfield State"</span>,<span class="st">"Holyoke Community College"</span>))</span>
 <span id="cb2-4"><a></a></span>
 <span id="cb2-5"><a></a>addresses</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
-  address                             lat  long name                     
-  &lt;chr&gt;                             &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                    
-1 Smith College                      42.3 -72.6 Smith College            
-2 2 Tyler Ct, Northampton, MA 01060  42.3 -72.6 McConnell Hall           
-3 Holyoke Community College          42.2 -72.7 Holyoke Community College</code></pre>
+  address                                lat  long name                     
+  &lt;chr&gt;                                &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                    
+1 University of Massachusetts Amherst   42.4 -72.5 UMass Amherst            
+2 577 Western Ave, Westfield, MA 01085  42.1 -72.8 Westfield State          
+3 Holyoke Community College             42.2 -72.7 Holyoke Community College</code></pre>
 </div>
 </div>
 </section>
@@ -268,9 +268,10 @@ Schwab
 <h2>Mass Map</h2>
 <p>Notice there are a lot of points for barnstable. Those are the vertices of a polygon. Let’s draw the polygon with the points.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>ma_counties <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(long,lat,<span class="at">group=</span>group))<span class="sc">+</span></span>
-<span id="cb7-2"><a></a>  <span class="fu">geom_polygon</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>)<span class="sc">+</span></span>
-<span id="cb7-3"><a></a>  <span class="fu">geom_point</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>ma_counties <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(long,lat,<span class="at">group=</span>group))<span class="sc">+</span></span>
+<span id="cb7-3"><a></a>  <span class="fu">geom_polygon</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>)<span class="sc">+</span></span>
+<span id="cb7-4"><a></a>  <span class="fu">geom_point</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>  <span class="co">#coord_sf()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

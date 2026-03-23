@@ -1,0 +1,78 @@
+---
+title: "just to get and shink the world cube data"
+
+---
+Workflow -
+
+Download files to the cwd (currently CSI-MTH-190-Lectures)
+
+filter to only event_id == 333
+
+result attempts are filtered by result_333 ids 
+
+zip files and upload to canvas for students.
+
+Check the Readme.md to WCA_Readme.md
+
+```{r}
+library(tidyverse)
+getwd()
+```
+
+```{r}
+#| eval: False
+
+#This currently does not work. 
+#Grab and unzip files
+unzip_dir = "course-materials/_projects/project_2_xlsx/wca_data"
+wc_data_tsv = "https://www.worldcubeassociation.org/export/results/v2/tsv"
+download.file(
+    url = "https://www.worldcubeassociation.org/export/results/v2/tsv",
+    destfile = unzip_dir)
+#unzip(wc_data_tsv, exdir = unzip_dir, overwrite = TRUE))
+
+```
+
+```{r}
+# I should clean this up, but I don't care enough to do it
+# read -> filter to 333 events only -> write
+results = read_tsv("course-materials/_projects/project_2_xlsx/WCA_data/WCA_export_results.tsv")
+results_333 = results |>filter(event_id == "333")
+write_tsv(results_333,"course-materials/_projects/project_2_xlsx/WCA_data/WCA_export_results_333.tsv")
+scrambles = read_tsv("course-materials/_projects/project_2_xlsx/WCA_data/WCA_export_scrambles.tsv")
+scrambles_333 = scrambles |> filter(event_id== "333")
+write_tsv(results_333,"course-materials/_projects/project_2_xlsx/WCA_data/WCA_export_scrambles_333.tsv")
+ranksaverage = read_tsv("course-materials/_projects/project_2_xlsx/WCA_data/WCA_export_ranks_average.tsv")
+ranksaverage_333 = ranksaverage |> filter(event_id== "333")
+write_tsv(results_333,"course-materials/_projects/project_2_xlsx/WCA_data/WCA_export_ranksaverage_333.tsv")
+ranksingle = read_tsv("course-materials/_projects/project_2_xlsx/WCA_data/WCA_export_ranks_single.tsv")
+ranksingle_333 = ranksingle |> filter(event_id== "333")
+write_tsv(results_333,"course-materials/_projects/project_2_xlsx/WCA_data/WCA_export_ranksingle_333.tsv")
+result_attempts = read_tsv("course-materials/_projects/project_2_xlsx/WCA_data/WCA_export_result_attempts.tsv")
+result_ids = results_333 |> pull("id")
+resultattempts_333 = result_attempts |> filter(result_id %in% result_ids)
+write_tsv(resultattempts_333, "course-materials/_projects/project_2_xlsx/WCA_data/WCA_export_resultattempts_333.tsv")
+```
+
+```{r}
+
+#| message: false
+
+## Loading all the data files
+## DO NOT CHANGE THIS CODE
+championships <- read_tsv("WCA_data/WCA_export_championships.tsv")
+competitions <- read_tsv("WCA_data/WCA_export_competitions.tsv")
+continents <- read_tsv("WCA_data/WCA_export_continents.tsv")
+countries <- read_tsv("WCA_data/WCA_export_countries.tsv")
+eligible_country_iso2s_for_championship <- read_tsv("WCA_data/WCA_export_eligible_country_iso2s_for_championship.tsv")
+events <- read_tsv("WCA_data/WCA_export_events.tsv")
+formats <- read_tsv("WCA_data/WCA_export_formats.tsv")
+persons <- read_tsv("WCA_data/WCA_export_persons.tsv")
+ranksaverage <- read_tsv("WCA_data/WCA_export_ranksaverage_333.tsv")
+rankssingle <- read_tsv("WCA_data/WCA_export_ranksingle_333.tsv")
+results <- read_tsv("WCA_data/WCA_export_results_333.tsv")
+results_attempt <- read_tsv("WCA_data/WCA_export_resultattempts_333.tsv")
+roundtypes <- read_tsv("WCA_data/WCA_export_round_types.tsv")
+scrambles <- read_tsv("WCA_data/WCA_export_scrambles_333.tsv")
+```
+

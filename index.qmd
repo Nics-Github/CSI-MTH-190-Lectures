@@ -116,11 +116,9 @@ Part 2: Wrangling
 
 Part 3: Application - Maps
 
--   [23 Maps part 1](./course-materials/lectures/23_maps-ggplot.qmd)
+-   [22 Maps part 1](./course-materials/lectures/22_maps-ggplot.qmd)
 
--   [24 Maps part 2](./course-materials/lectures/23_maps-ggplot.qmd)
-
--   [25 Maps part 3]
+-   [23 Maps part 2]
 
 # Week 11
 
