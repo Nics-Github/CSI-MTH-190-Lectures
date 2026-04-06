@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Schwab">
-  <title>CSI-MTH-190 – Web Scrapping</title>
+  <title>CSI-MTH-190 – Chloropleth and Population Maps</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -194,8 +194,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Web Scrapping</h1>
-  <p class="subtitle">and cleaning</p>
+  <h1 class="title">Chloropleth and Population Maps</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -206,236 +205,91 @@ Schwab
 </div>
 
 </section>
-<section id="ways-to-get-data" class="slide level2">
-<h2>Ways to get data</h2>
-<p>We have looked at several places to find data:</p>
-<p>packages</p>
-<p>csv files</p>
-<p>APIs</p>
-<p>In this lecture we will consider scraping.</p>
-</section>
-<section id="how-does-it-work" class="slide level2">
-<h2>How does it work?</h2>
-<p>Every web page is an html file.</p>
-<p>html stands for HyperText Markup Language.</p>
-<p>html has markers to tell the web browser how to display the page.</p>
-<p>There are several markers that could be used for scraping.</p>
-<p>We will focus primarily on the &lt;table&gt; marker</p>
-</section>
-<section id="how-to-see-markers" class="slide level2">
-<h2>How to see markers</h2>
-<p>You can right click on a website an select “inspect” to view a page’s html file.</p>
-<p>We’ll consider the Wikipedia page for the 2026 Winter Olympics.</p>
-<p>There are a lot of tables on this site.</p>
-<p><a href="https://en.wikipedia.org/wiki/2026_Winter_Olympics" class="uri">https://en.wikipedia.org/wiki/2026_Winter_Olympics</a></p>
-</section>
-<section id="rvest" class="slide level2">
-<h2>rvest</h2>
-<p>We will scrape with a package called Rvest.</p>
-<p>rvest (meant to sound like “Harvest”) is a package that is part of the tidyverse, but is not loaded by default.</p>
-<p>This means you download when you download the tidyverse.</p>
-<p>But you must still load it after you have loaded the tidyverse.</p>
+<section id="do-not-accidentally-make-population-maps" class="slide level2">
+<h2>Do not accidentally make population maps</h2>
+<p>Let’s make a population map of Mass by county</p>
+<p>We need to weight our data in some way.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(rvest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>mass_pop_under_5 <span class="ot">=</span> <span class="fu">read_sf</span>(<span class="st">"mass_under_5"</span>)</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-4"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mass_pop_under_5, <span class="fu">aes</span>(<span class="at">fill =</span> pop)) <span class="sc">+</span></span>
+<span id="cb1-5"><a></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">direction =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb1-6"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Population under 5"</span>,</span>
+<span id="cb1-7"><a></a>  <span class="at">caption =</span> <span class="st">"American Community Survey, 2023"</span>)<span class="sc">+</span></span>
+<span id="cb1-8"><a></a>    <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
 </div>
-</section>
-<section id="the-read-in-the-html" class="slide level2">
-<h2>The read in the html</h2>
-<p>There are two helpful examples <a href="https://rvest.tidyverse.org/">here</a>.</p>
-<p>Generally we will first read in the html data with <code>read_html()</code></p>
-<p><code>read_html()</code> takes a url as a string and you have to be connected to the internet for it to work properly.</p>
+<img data-src="24_Chloropleth_maps_files/figure-revealjs/A population map-1.png" width="960" class="r-stretch"></section>
+<section id="graph-the-under-5s" class="slide level2">
+<h2>Graph the Under 5s</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>winter_olympics <span class="ot">=</span> <span class="fu">read_html</span>(<span class="st">"https://en.wikipedia.org/wiki/2026_Winter_Olympics"</span>)</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a>winter_olympics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>{html_document}
-&lt;html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-menu-disabled vector-feature-language-in-main-page-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-1 vector-feature-appearance-pinned-clientpref-1 skin-theme-clientpref-day vector-sticky-header-enabled wp25eastereggs-enable-clientpref-1 wp25eastereggs-companion-enabled wp25eastereggs-companion-phone vector-toc-available skin-theme-clientpref-thumb-standard" lang="en" dir="ltr"&gt;
-[1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
-[2] &lt;body class="skin--responsive skin-vector skin-vector-search-vue mediawik ...</code></pre>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb2-2"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mass_pop_under_5, <span class="fu">aes</span>(<span class="at">fill =</span> tot_udr_5)) <span class="sc">+</span></span>
+<span id="cb2-3"><a></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">direction =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb2-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Children under 5"</span>,</span>
+<span id="cb2-5"><a></a>  <span class="at">caption =</span> <span class="st">"American Community Survey, 2023"</span>)<span class="sc">+</span></span>
+<span id="cb2-6"><a></a>    <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
 </div>
-</div>
-</section>
-<section id="find-the-right-table" class="slide level2">
-<h2>Find the right table</h2>
-<p>We want to find the “selector” for our table.</p>
+<img data-src="24_Chloropleth_maps_files/figure-revealjs/Another population map-1.png" width="960" class="r-stretch"></section>
+<section id="normalize-the-data" class="slide level2">
+<h2>Normalize the Data</h2>
+<p>One way to do this is:</p>
+<p>Divide the totals under 5 by the total population per county for proportion per county.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>winter_olympics <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a></a><span class="fu">html_element</span>(<span class="st">"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table:nth-child(85)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>{html_node}
-&lt;table class="wikitable" style="margin:0.5em auto; font-size:90%; position:relative; width:75%;"&gt;
-[1] &lt;tbody&gt;&lt;tr&gt;\n&lt;td style="width:2.5em; background:#00cc33; text-align:cente ...</code></pre>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-2"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mass_pop_under_5, <span class="fu">aes</span>(<span class="at">fill =</span> prop_udr_5)) <span class="sc">+</span></span>
+<span id="cb3-3"><a></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">direction =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb3-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of Children under 5"</span>,</span>
+<span id="cb3-5"><a></a>  <span class="at">caption =</span> <span class="st">"American Community Survey, 2023"</span>)<span class="sc">+</span></span>
+<span id="cb3-6"><a></a>    <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
 </div>
-</div>
-</section>
-<section id="convert-into-a-table" class="slide level2">
-<h2>Convert into a table</h2>
-<p>We use html_table() to create a data frame.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>winter_olympics <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a></a><span class="fu">html_element</span>(<span class="st">"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table:nth-child(85)"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a></a><span class="fu">html_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 10
-  X1    X2               X3    X4            X5    X6    X7    X8    X9    X10  
-  &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
-1 OC    Opening ceremony ●     Event compet… X     Even… EG    Exhi… CC    Clos…</code></pre>
-</div>
-</div>
-</section>
-<section id="cleaning" class="slide level2">
-<h2>Cleaning</h2>
-<p>Note: We’d have to clean this table a fair bit. Its not tidy and there are strange symbols.</p>
-<p>Also everything is a character vector.</p>
-<p>We will not clean this table but we’ll clean the next one.</p>
-</section>
-<section id="medal-count" class="slide level2">
-<h2>Medal count</h2>
-<p>Attempt to scrape the 2026 Winter Olympics medal table. We’ll clean this one up a bit.</p>
-</section>
-<section id="medal-count-solution" class="slide level2">
-<h2>Medal Count Solution</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>winter_olympics <span class="ot">=</span> <span class="fu">read_html</span>(<span class="st">"https://en.wikipedia.org/wiki/2026_Winter_Olympics"</span>)</span>
-<span id="cb8-2"><a></a></span>
-<span id="cb8-3"><a></a>olympic_medals <span class="ot">=</span> winter_olympics <span class="sc">|&gt;</span></span>
-<span id="cb8-4"><a></a>  <span class="fu">html_element</span>(<span class="st">"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table.wikitable.sortable.sticky-header-multi.plainrowheaders.jquery-tablesorter"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb8-5"><a></a>  <span class="fu">html_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="cleaning-with-janitor" class="slide level2">
-<h2>Cleaning with Janitor</h2>
-<p>We can clean this table with the <code>dplyr</code> and <code>janitor</code> packages. <code>janitor</code> is not part of the <code>tidyverse</code>, but it works with tidy data.</p>
-<p>See <a href="https://cloud.r-project.org/web/packages/janitor/vignettes/janitor.html">this page for more information.</a></p>
-</section>
-<section id="items-to-clean" class="slide level2">
-<h2>Items to clean</h2>
-<p>Try some of these yourself first, see the hint functions for each line:</p>
+<img data-src="24_Chloropleth_maps_files/figure-revealjs/Not a population map-1.png" width="960" class="r-stretch"></section>
+<section id="exercise" class="slide level2">
+<h2>Exercise</h2>
+<p>Load in the mass_retirees data. Make two maps:</p>
 <ul>
-<li><p>Rank should be an integer, not a character (mutate())</p></li>
-<li><p>.mw-paser… should say “name_of_country” (rename())</p></li>
-<li><p>all column names should be lowercase to match style (clean_names())</p></li>
-<li><p>lose the last “total row” (head())</p></li>
-<li><p>should probably change “remaining” to “other” (case_when(), or manually)</p></li>
-<li><p>drop the “total” column (select())</p></li>
-<li><p>table is not tidy (pivot_longer())</p></li>
+<li>One which graphs retiree population per county,</li>
+<li>one which graphs the proportion of retirees per county.</li>
 </ul>
-</section>
-<section id="rank-should-be-an-integer-not-a-character" class="slide level2">
-<h2>Rank should be an integer, not a character</h2>
-<p>Use mutate to make a new column of the correct type.</p>
+<p>Which counties in Massachusetts have the highest proportion of retirees ?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a></a>  <span class="fu">mutate</span>(<span class="at">Rank =</span> <span class="fu">as.integer</span>(Rank))</span>
-<span id="cb9-3"><a></a>  olympic_medals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 6
-    Rank .mw-parser-output .tooltip-dotted{border-bo…¹  Gold Silver Bronze Total
-   &lt;int&gt; &lt;chr&gt;                                         &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;
- 1     1 Norway                                           18     12     11    41
- 2     2 United States                                    12     12      9    33
- 3     3 Netherlands                                      10      7      3    20
- 4     4 Italy*                                           10      6     14    30
- 5     5 Germany                                           8     10      8    26
- 6     6 France                                            8      9      6    23
- 7     7 Sweden                                            8      6      4    18
- 8     8 Switzerland                                       6      9      8    23
- 9     9 Austria                                           5      8      5    18
-10    10 Japan                                             5      7     12    24
-11    NA Remaining                                        26     32     35    93
-12    NA Totals (29 entries)                             116    118    115   349
-# ℹ abbreviated name:
-#   ¹​`.mw-parser-output .tooltip-dotted{border-bottom:1px dotted;cursor:help}NOC`</code></pre>
-</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>mass_retirees <span class="ot">=</span> <span class="fu">read_sf</span>(<span class="st">"mass_retiree"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
-<section id="mw-paser-should-say-name_of_country" class="slide level2">
-<h2>.mw-paser… should say “name_of_country”</h2>
-<p>We’ll use rename()</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals<span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a></a>  <span class="fu">rename</span>( <span class="at">name_of_country =</span> <span class="st">`</span><span class="at">.mw-parser-output .tooltip-dotted{border-bottom:1px dotted;cursor:help}NOC</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="section" class="slide level2">
+<h2></h2>
 </section>
-<section id="all-column-names-should-be-lowercase-to-match-style-clean_names" class="slide level2">
-<h2>all column names should be lowercase to match style (clean_names())</h2>
-<p>The clean_names() function will lower case all column names and use underscores as spaces. This conforms to the tidyverse style guide. It also makes data easier to work with.</p>
+<section id="solutions" class="slide level2">
+<h2>Solutions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span>(janitor)</span>
-<span id="cb12-2"><a></a></span>
-<span id="cb12-3"><a></a>olympic_medals <span class="ot">=</span> olympic_medals <span class="sc">|&gt;</span> </span>
-<span id="cb12-4"><a></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="24_Chloropleth_maps_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
 </div>
-</section>
-<section id="lose-the-last-total-row-head" class="slide level2">
-<h2>lose the last “total row” (head())</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a></a><span class="fu">head</span>(<span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="change-remaining-to-other-case_when-or-manually" class="slide level2">
-<h2>change “remaining” to “other” (case_when(), or manually)</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>olympic_medals<span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a></a><span class="fu">mutate</span>(<span class="at">name_of_country =</span> <span class="fu">case_when</span>(</span>
-<span id="cb14-3"><a></a>  name_of_country<span class="sc">==</span><span class="st">"Remaining"</span> <span class="sc">~</span> <span class="st">"Other Countries"</span>,</span>
-<span id="cb14-4"><a></a>  <span class="cn">TRUE</span> <span class="sc">~</span> name_of_country))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 6
-    rank name_of_country      gold silver bronze total
-   &lt;int&gt; &lt;chr&gt;               &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;
- 1     1 Norway                 18     12     11    41
- 2     2 United States          12     12      9    33
- 3     3 Netherlands            10      7      3    20
- 4     4 Italy*                 10      6     14    30
- 5     5 Germany                 8     10      8    26
- 6     6 France                  8      9      6    23
- 7     7 Sweden                  8      6      4    18
- 8     8 Switzerland             6      9      8    23
- 9     9 Austria                 5      8      5    18
-10    10 Japan                   5      7     12    24
-11    NA Other Countries        26     32     35    93
-12    NA Totals (29 entries)   116    118    115   349</code></pre>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="24_Chloropleth_maps_files/figure-revealjs/unnamed-chunk-7-2.png" width="960"></p>
+</figure>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># alternative method</span></span>
-<span id="cb16-2"><a></a><span class="co">#olympic_medals[16, "name_of_country"]&lt;-"hello" # Notice the &lt;- here. 16th row of the name_of_country column.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="drop-the-total-column" class="slide level2">
-<h2>drop the “total” column</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>olympic_medals <span class="ot">=</span> </span>
-<span id="cb17-2"><a></a>  olympic_medals <span class="sc">|&gt;</span></span>
-<span id="cb17-3"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="tidy-up-the-table" class="slide level2">
-<h2>tidy up the table</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a></a><span class="fu">pivot_longer</span>(</span>
-<span id="cb18-3"><a></a>  <span class="at">cols =</span> <span class="fu">c</span>(gold,silver,bronze),</span>
-<span id="cb18-4"><a></a>  <span class="at">names_to =</span> <span class="st">"medal"</span>, </span>
-<span id="cb18-5"><a></a>  <span class="at">values_to =</span> <span class="st">"number_of_medals"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="admire-the-clean-data-frame" class="slide level2">
-<h2>admire the clean data frame</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">head</span>(olympic_medals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 4
-   rank name_of_country medal  number_of_medals
-  &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;             &lt;int&gt;
-1     1 Norway          gold                 18
-2     1 Norway          silver               12
-3     1 Norway          bronze               11
-4     2 United States   gold                 12
-5     2 United States   silver               12
-6     2 United States   bronze                9</code></pre>
 </div>
 </div>
 

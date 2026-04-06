@@ -120,6 +120,8 @@ Part 3: Application - Maps
 
 -   [23 Maps part 2]
 
+-   [24 Maps part 3](./course-materials/lectures/24_Chloropleth_maps.qmd
+
 # Week 11
 
 -   [26 Maps part 4]

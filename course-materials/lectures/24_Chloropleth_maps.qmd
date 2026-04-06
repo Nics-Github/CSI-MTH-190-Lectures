@@ -1,0 +1,198 @@
+---
+title: "Chloropleth and Population Maps"
+author: "Schwab"
+format: 
+  revealjs:
+    theme: beige
+editor: visual
+execute: 
+  echo: true
+  warning: false
+  code-fold: true
+---
+
+```{r, echo=FALSE}
+# Load all packages here. It's good practice to load all packages at the
+# beginning of a qmd file so that collaborators can see in one shot all packages
+# they'll need installed:
+library(tidyverse)
+library(rvest) # This is for scraping VT ski areas
+library(janitor) # cleaning
+
+# Libraries for Mapping
+library(sf) # shape files
+library(maps) # we get the maps of VT and MA from here. 
+library(tidygeocoder) # geocoding. 
+library(tidycensus)
+census_api_key("4acec63df8eee0def6e28f09f8ae46d8cc229184")
+```
+
+## Do not accidentally make population maps
+
+Let's make a population map of Mass by county
+
+We need to weight our data in some way.
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| include: false
+
+# Where do all the under 5 year olds live?
+
+mass_pop <- 
+  tidycensus::get_acs(
+    geography = "county", 
+    variables = c(population = "B01003_001", under_5m="B01001_003", under_5f= "B01001_027"),
+    state = "MA",
+    # We'll need to pivot wider, but that doesn't work with simple features. 
+    geometry = TRUE
+  )|>
+  # Add centroids to each region using purrr package
+ tidyr::separate(NAME, c("County", "State"), sep = ", ") |> 
+ tidyr::separate(County, c("County", "Fluff"), sep = " ") 
+
+under_5 = mass_pop |> 
+  select(County,variable,estimate)|>
+  pivot_wider(names_from = variable, values_from = estimate)|>
+  group_by(County)|>
+  reframe(County, pop = population, tot_udr_5 = under_5f+under_5m, prop_udr_5 = (under_5m+under_5f)/population)
+
+mass_pop_under_5 = left_join(mass_pop, under_5, by= "County") |>
+  select(-c(variable,estimate,moe))|>
+  distinct()
+
+```
+
+```{r}
+#| eval: false
+#| echo: false
+st_write(mass_pop_under_5, "course-materials/lectures/mass_pop_under_5.shp")
+
+```
+
+```{r}
+#| code-fold: true
+#| label: A population map
+
+
+mass_pop_under_5 = read_sf("mass_under_5")
+
+ggplot() +
+  geom_sf(data = mass_pop_under_5, aes(fill = pop)) +
+  scale_fill_distiller(direction = 1)+
+  labs(title = "Population under 5",
+  caption = "American Community Survey, 2023")+
+    theme_void()
+
+```
+
+## Graph the Under 5s
+
+```{r}
+#| code-fold: true
+#| label: Another population map
+
+ggplot() +
+  geom_sf(data = mass_pop_under_5, aes(fill = tot_udr_5)) +
+  scale_fill_distiller(direction = 1)+
+  labs(title = "Children under 5",
+  caption = "American Community Survey, 2023")+
+    theme_void()
+```
+
+## Normalize the Data
+
+One way to do this is:
+
+Divide the totals under 5 by the total population per county for proportion per county.
+
+```{r}
+#| code-fold: true
+#| label: Not a population map
+
+ggplot() +
+  geom_sf(data = mass_pop_under_5, aes(fill = prop_udr_5)) +
+  scale_fill_distiller(direction = 1)+
+  labs(title = "Proportion of Children under 5",
+  caption = "American Community Survey, 2023")+
+    theme_void()
+```
+
+## Exercise
+
+Load in the mass_retirees data. Make two maps:
+
+-   One which graphs retiree population per county,
+-   one which graphs the proportion of retirees per county.
+
+Which counties in Massachusetts have the highest proportion of retirees ?
+
+```{r}
+#| echo: false
+#| eval: false
+#| include: false
+#| warning: false
+
+library(tidyverse)
+library(tidycensus)
+
+# Write your code below
+mass_prop_retirees <- 
+  tidycensus::get_acs(
+    geography = "county", 
+    variables = c(population = "B01003_001",age_1="B01001_044", age_2='B01001_045', age_3='B01001_046',age_4='B01001_047', age_5 = 'B01001_048', age_6 = 'B01001_044'),
+    state = "MA",
+    geometry = FALSE
+  ) |>
+  # Add centroids to each region using purrr package
+ tidyr::separate(NAME, c("County", "State"), sep = ", ") |> 
+ tidyr::separate(County, c("County", "Fluff"), sep = " ") 
+
+mass_prop_retirees <- mass_prop_retirees |> 
+  select(County,variable,estimate)|>
+  pivot_wider(names_from = variable, values_from = estimate) |>
+  mutate(retire_prop = (age_1+age_2+age_3+age_4+age_5)/population)
+
+# Do a left join, a right join will lose the multipolygon-ness
+mass_prop = left_join(mass_pop, mass_prop_retirees, by= "County") |>
+  select(-c(Fluff,variable,estimate,moe, age_1:age_5), retiree = population)|>
+  distinct()
+```
+
+```{r}
+#| eval: false
+#| echo: false
+
+st_write(mass_prop, "course-materials/lectures/mass_retiree/mass_retiree.shp")
+```
+
+```{r}
+#| code-fold: true
+
+mass_retirees = read_sf("mass_retiree")
+
+```
+
+## 
+
+## Solutions
+
+```{r}
+#| echo: false
+
+ggplot() +
+  geom_sf(data = mass_retirees, aes(fill = retiree)) +
+  scale_fill_distiller(direction = 1)+
+  labs(title = "Number of People over 65",
+  caption = "American Community Survey, 2023")+
+    theme_void()
+
+ggplot() +
+  geom_sf(data = mass_retirees, aes(fill = rtr_prp)) +
+  scale_fill_distiller(direction = 1)+
+  labs(title = "Proportion of People over 65",
+  caption = "American Community Survey, 2023")+
+    theme_void()  
+```

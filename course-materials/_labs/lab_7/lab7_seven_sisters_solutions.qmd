@@ -1,12 +1,12 @@
 ---
-title: "lab5_seven_sisters"
-author: "Your name"
+title: "lab7_seven_sisters"
+author: "Solutions-Schwab"
 format:
   html:
     self-contained: true
 editor: source
 execute:
-    eval: false
+    eval: true
     message: false
 ---
 
@@ -39,7 +39,7 @@ library(rvest)
 
 Question: Consider the Check out the 2022 race results at this [website](https://aratrace.com/7-sisters-trail-race-4/). What sensitive data is presented in the website?
 
-**Answer :**
+**Answer :** Names, city, state
 
 ## RVest
 
@@ -68,7 +68,7 @@ Drop all of the variables that tell us nothing (hint: use `select(- c("var1","va
 
 ```{r drop}
 results_2022 <- results_2022 |>
-  select(___)
+  select(-c(`row-Place`, Details))
 ```
 
 # Goal 2: Clean the names
@@ -117,9 +117,9 @@ results_2022 <- results_2022 |>
       as.numeric(
         as.duration(
     # You need to indicate the correct time format here.
-          ___(net_elapsed)
+          hms(net_elapsed)
           )
-    )/__
+    )/60
   # In the line above divide by 60 to change times to minutes. 
   )
 ```
@@ -128,14 +128,14 @@ results_2022 <- results_2022 |>
 
 I want to know which runners from 2022 also ran in 2019. In the years 2021 and 2020 the race was cancelled for COVID reasons. So we need to scrape the 2019 data. The web address below has been updated. Please alter the code from above to scrape the 2019 data
 
-```{r scrape-2021-data}
+```{r scrape-2019-data}
 
 seven_sisters_2019 <- "https://aratrace.com/7-sisters-trail-race-3/"
 
 results_2019 <- seven_sisters_2019 |>
-  ___
-  ___
-  ___
+  read_html() |> 
+  html_element("#table_1") |> 
+  html_table()
 ```
 
 # Goal 5: Drop variables and clean names again
@@ -149,9 +149,9 @@ library(janitor)
 
 results_2019 <- results_2019 |> 
   #This line should cleans names
-  ____() |>
+  clean_names() |>
   #This line removes empty columns
-  ____( which = "cols" )
+  remove_empty( which = "cols" )
 
 ```
 
@@ -167,9 +167,9 @@ results_2019<- results_2019 |>
     chip_elapsed = # You can change this to net_elapsed if you'd like.
       as.numeric(
         as.duration(
-          ___(chip_elapsed)
+          hms(chip_elapsed)
           )
-        )/__
+        )/60
     )
 
 ```
@@ -180,7 +180,7 @@ results_2019<- results_2019 |>
 
 ```{r rename}
 results_2019 <- results_2019 |>
-  rename( )
+  rename( net_elapsed = chip_elapsed)
 ```
 
 # Goal 8: Join the tables
@@ -192,9 +192,9 @@ You will need to join the two tables in a way that answers the questions. You wi
 ```{r}
 # Join the tables
 results_joined <- results_2022 |> 
-  ____(results_2019,
-       by = c("",""),
-       suffix = c("",""))
+  inner_join(results_2019,
+       by = c("first_name","last_name"),
+       suffix = c("2022","2019"))
 ```
 
 # Goal 9: Change blank space to NA
@@ -210,7 +210,7 @@ We cannot have that. We need to fill those with NAs. We can use `na_if()` from t
 
 ```{r}
 results_joined <- results_joined |>
-  mutate(state = 
+  mutate(state = na_if(state, "")
          )
 
 ```
@@ -222,28 +222,40 @@ We can finally answer the questions we started with! Answer the following either
 > How many runners ran in both the 2022 and 2019 Seven Sisters races?
 
 ```{r}
-
+nrow(results_joined)
 ```
 
-**Answer:**
+**Answer:** 92 runners ran both races
 
 # Question 2
 
 > Which states does this group hail from?
 
 ```{r}
-
+results_joined |>
+count(state)
 ```
+
+**Answer:** CT, MA, NH, NJ, NY, PA, RI, VT
 
 # Question 3
 
 > On average did this group improve their net running time and by how much? Give a sentence to describe this number in context. (Hint: Make a new column to do some subtraction, caution a negative value might be an improvement).
 
 ```{r}
+# results negative
+results_joined |>
+mutate (diff_in_time = net_elapsed2022 - net_elapsed2019)|>
+summarize(mean(diff_in_time) )
+
+# results positive
+results_joined |>
+mutate (diff_in_time = net_elapsed2019 - net_elapsed2022)|>
+summarize(mean(diff_in_time) )
 
 ```
 
-**Answer:**
+**Answer:** They improved from from 2019 to 2022, but not by much. Unfortunately we don't cover enoguh stats in this class to say wether this value is significant or not. 
 
 # Question 4.
 
@@ -270,20 +282,30 @@ results_2017 <- seven_sisters_2017 |>
 
 ```{r}
 # Do your joins here. 
-
+results_2017_2019 = results_2019 |> 
+inner_join(results_2018, by= c("first_name","last_name"))|> 
+inner_join(results_2017, by= c("first_name","last_name")) |>
+select(first_name,last_name)
 ```
+
+```{r}
+results_2017_2019 |>
+inner_join(results_2022, by= c("first_name","last_name"))|>
+select(first_name,last_name)
+```
+
 
 Question: Based on the runners from the 2017-2019 race which runners do you guess would be present for the 2022 race? Which of those runners actually were present in 2022? 
 
-**Answer:**
+**Answer:** I predict there will be 43 runners listed in the data frame above at the 2022 race. Of those 43, 17 runners returned in 2022. 
 
 
 Figuring out the diehard runners of a race is not necessarily nefarious. You might be the race coordinator and want to reach out to these people for donations, that seems fine. Alternatively you might be a reporter writing for the local news. Would the original purpose of the data effect what you write about the race? What is the original purpose of the data? Do we want to get consent before we publish first and last names, do we need to publish the city and state where the runners are from? Could this information be used to stalk a runner?
 
-**Answer:**
+**Answer:** Answers may vary. The original purpose of the data is for the runners and the race coordinators to track times. We definitely want consent before publishing names in an article. We probably would be okay with publishing states, maybe so on cities but checking with the runner before publishing an article that included their names and locations would be polite. 
 
-Bonus. Make your document alittle cooler by inserting the logo from the 7 sisters race here. Use Insert \> image from the visual mode. The come back to source mode to see how this gets coded.
+Bonus. Make your document a little cooler by inserting the logo from the 7 sisters race here. Use Insert \> image from the visual mode. The come back to source mode to see how this gets coded.
 
 Here's the logo's url:
 
-https://7sisterstrailrace.com/wp-content/uploads/C3FD1C0B-463E-4C31-88EE-716D1899AC7D.png
+![](https://7sisterstrailrace.com/wp-content/uploads/C3FD1C0B-463E-4C31-88EE-716D1899AC7D.png)
