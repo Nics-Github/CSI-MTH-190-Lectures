@@ -118,13 +118,15 @@ Part 3: Application - Maps
 
 -   [22 Maps part 1](./course-materials/lectures/22_maps-ggplot.qmd)
 
--   [23 Maps part 2]
+-   [23 Maps part 2](./course-materials/_labs/non_lab_maps_2/)
 
--   [24 Maps part 3](./course-materials/lectures/24_Chloropleth_maps.qmd
+-   [24 Maps part 3](./course-materials/lectures/24_Chloropleth_maps.qmd)
 
 # Week 11
 
--   [26 Maps part 4]
+-   [24 Maps part 3](./course-materials/lectures/24_Chloropleth_maps.qmd)
+
+-   [25 Finding Data Demo]() (see canvas)
 
 # Week 12
 
