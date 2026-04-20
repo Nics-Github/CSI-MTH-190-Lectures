@@ -20,3 +20,5 @@ SDS192.Rproj
 course-materials/_projects/project_2_xlsx/WCA_data_3_20_2026.tsv
 course-materials/_projects/project_2_xlsx/WCA_data
 course-materials/_projects/project_2_xlsx/Project_2.zip
+
+**/*.quarto_ipynb

@@ -198,9 +198,9 @@ ggplot(data = best_sell_hardcover)+
 
 Copy the code from above and remove the posittion arguement from geom_bar() This will make your graph stacked. Reorder your x-axis, by placing the `reorder()` function around the x aesthetic, and assign the following arguments:
 
--   the values to be reordered: `publisher`
--   the values will serve as the basis for reordering: `publisher`
--   and a function to determine how values will be reordered: `length`
+- the values to be reordered: `publisher`
+- the values will serve as the basis for reordering: `publisher`
+- and a function to determine how values will be reordered: `length`
 
 ```{r}
 # Paste the code below and adjust it
@@ -258,9 +258,9 @@ ggplot(data = best_sell_hardcover)+
 
 I want to reorder my x-axis, so I will place the `reorder()` function around my x aesthetic, and assign the following arguments:
 
--   the values to be reordered: `album_name`
--   the values will serve as the basis for reordering: `valence` (yours will be the song feature of your choice)
--   and a function to determine how values will be reordered: `median`
+- the values to be reordered: `album_name`
+- the values will serve as the basis for reordering: `valence` (yours will be the song feature of your choice)
+- and a function to determine how values will be reordered: `median`
 
 ```{r}
 # Paste the code below and adjust it

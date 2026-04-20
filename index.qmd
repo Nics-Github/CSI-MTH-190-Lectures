@@ -136,18 +136,19 @@ Part 3: Application - Maps
 
 Part 4: Parallel to SQL
 
--   [27 SQL]
+-   [26 SQL](/course-materials/lectures/26_Intro_to_SQL.qmd)
+
+-   [27 SQL-Practice.com](https://www.sql-practice.com/)
 
 # Week 14
 
--   [28 SQL 1]()
+-   [28 SQL in R]()
 
--   [29 SQL 2]()
+-   [Lab 8]()
 
 # Week 15
 
--   [30 SQL 3]()
-
+-   [Project 4 Intro]()
 
 
 <!-- Discuss the difference between `%in%` and `==`
