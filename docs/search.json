@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "course-materials/lectures/24_Chloropleth_maps.html#do-not-accidentally-make-population-maps",
+    "href": "course-materials/lectures/24_Chloropleth_maps.html#do-not-accidentally-make-population-maps",
+    "title": "Choropleth and Population Maps",
+    "section": "Do not accidentally make population maps",
+    "text": "Do not accidentally make population maps\nLet’s make a population map of Mass by county\nWe need to weight our data in some way."
+  },
+  {
+    "objectID": "course-materials/lectures/24_Chloropleth_maps.html#graph-population",
+    "href": "course-materials/lectures/24_Chloropleth_maps.html#graph-population",
+    "title": "Choropleth and Population Maps",
+    "section": "Graph population",
+    "text": "Graph population\n\n\nCode\nmass_pop_under_5 = read_sf(\"24_data/mass_pop_under_5\")\n\nggplot() +\n  geom_sf(data = mass_pop_under_5, aes(fill = pop)) +\n  scale_fill_distiller(direction = 1)+\n  labs(title = \"Population\",\n  caption = \"American Community Survey, 2023\")+\n    theme_void()"
+  },
+  {
+    "objectID": "course-materials/lectures/24_Chloropleth_maps.html#graph-the-under-5s",
+    "href": "course-materials/lectures/24_Chloropleth_maps.html#graph-the-under-5s",
+    "title": "Choropleth and Population Maps",
+    "section": "Graph the Under 5s",
+    "text": "Graph the Under 5s\n\n\nCode\nggplot() +\n  geom_sf(data = mass_pop_under_5, aes(fill = tot_udr_5)) +\n  scale_fill_distiller(direction = 1)+\n  labs(title = \"Children under 5\",\n  caption = \"American Community Survey, 2023\")+\n    theme_void()"
+  },
+  {
+    "objectID": "course-materials/lectures/24_Chloropleth_maps.html#normalize-the-data",
+    "href": "course-materials/lectures/24_Chloropleth_maps.html#normalize-the-data",
+    "title": "Choropleth and Population Maps",
+    "section": "Normalize the Data",
+    "text": "Normalize the Data\nOne way to do this is:\nDivide the totals under 5 by the total population per county for proportion per county.\n\n\nCode\nggplot() +\n  geom_sf(data = mass_pop_under_5, aes(fill = prop_udr_5)) +\n  scale_fill_distiller(direction = 1)+\n  labs(title = \"Proportion of Children under 5\",\n  caption = \"American Community Survey, 2023\")+\n    theme_void()"
+  },
+  {
+    "objectID": "course-materials/lectures/24_Chloropleth_maps.html#exercise",
+    "href": "course-materials/lectures/24_Chloropleth_maps.html#exercise",
+    "title": "Choropleth and Population Maps",
+    "section": "Exercise",
+    "text": "Exercise\nLoad in the mass_retirees data. Make two maps:\n\nOne which graphs retiree population per county,\none which graphs the proportion of retirees per county.\n\nWhich counties in Massachusetts have the highest proportion of retirees ?\n\n\nCode\nmass_retirees = read_sf(\"24_data/mass_retiree\")"
+  },
+  {
+    "objectID": "course-materials/lectures/24_Chloropleth_maps.html#solutions",
+    "href": "course-materials/lectures/24_Chloropleth_maps.html#solutions",
+    "title": "Choropleth and Population Maps",
+    "section": "Solutions",
+    "text": "Solutions"
+  }
+]

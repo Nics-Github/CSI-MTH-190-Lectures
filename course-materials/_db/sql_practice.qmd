@@ -1,0 +1,36 @@
+---
+title: "An Introduction to SQL"
+subtitle: "Through SQLite" 
+
+---
+
+```{r}
+library(DBI)
+```
+
+```{r}
+mydb <- dbConnect(RSQLite::SQLite(), "course-materials/_db/netflixdb.sqlite")
+# dbDisconnect(mydb) # <- run this to disconnect
+
+```
+
+```{r}
+# List the tables
+dbListTables(mydb)
+# We care about: episode, movie, season, tv_show, view_summary
+```
+
+```{r}
+# Get field summary
+dbListFields(mydb, "movie")
+# or 
+# With Data Types
+dbGetQuery(mydb, "PRAGMA table_info('movie')")
+#
+```
+
+```{r}
+
+
+```
+

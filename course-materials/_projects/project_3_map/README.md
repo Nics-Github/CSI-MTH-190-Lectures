@@ -1,57 +1,49 @@
 # Project-3
 
-In this third project you and your partner will create twos maps from mass schools data. You will use the school location data to get started. It can be found at this [site](https://gis.data.mass.gov/maps/c929cd35022a41b6b5f7da7e0c205cec). There is also a map of the data [here](https://gis.data.mass.gov/maps/a7ccf184af704f5fbd17d69f935554d6) and [here](https://maps.massgis.digital.mass.gov/MassMapper/MassMapper.html?bl=MassGIS%20Basemap__100&l=massgis%3AGISDATA.SCHOOLS_PT__GISDATA.SCHOOLS_PT%3A%3ALabels__ON__100%2Cmassgis%3AGISDATA.SCHOOLS_PT__GISDATA.SCHOOLS_PT%3A%3ADefault__ON__100&b=-70.97820281982423%2C41.62564433527126%2C-70.91640472412111%2C41.65569559188851). These maps have the locations of the schools on them as well as some other information. 
+In this third project you will create at least one map from data that you find on the internet.  These maps will be well formatted and used to answer a question of your choosing.
 
 # Components: 
 
 
 ## Asking and answering a question:
-Your task is to come up with a question that can be answered with a chloropleth map. You must get your question approved and answer it using the data above. You may use additional data if necessary. Remember you do not want to recreate a population map. Rather you want to scale the data in some way (Think proportions: schools per population, private schools per public school in an area, etc. ). You will likely need to use some kind of data manipulation. 
+Your task is to come up with a question that can be answered with a chloropleth map. You may use multiple sources for the data if necessary. Remember you do not want to accidentilly recreate a population map. Rather you want to normalize the data in some way (Think proportions ). You are welcome to use code we've created while learning about maps, but you must use fresh data (no monarch butterflies, bike paths in Mass, or ski areas in VT. You will likely need to use some kind of data wrangling. 
 
-You will also need to produce a short write up introducing the data, explaining what you have learned about your data and how your map answers the question posed above.
+You will also need to produce a short write up introducing the data, explaining what you have learned about your data and how your map answers the question you created. This write up should be less than 400 words. 
 
 
 ## Project Organization: 
 
-You will make a new quarto file. You will read in all data necessary to that file as well as load any packages you might need, like the tidyverse. You'll need to cite your data and an add a .gitignore file if your data is larger than a few megabytes. 
+You will make a new quarto file, I encourage you to copy the YAML from a previous lab, specifically you need embed-resources: true. You will load any packages you might need to complete the project, like the tidyverse. You'll need to cite your source. 
 
-It is important that you render and push all html files related to your maps. If you do not include the html files that go with your maps I will not be able to see them. You do not need to push your data (especially if it is large), but you must cite your data's source. 
-
-# Organization
-
-You'll have to organize your project. 
--  You'll need to download the data and store it in a folder. 
--  If the data is larger than 25mb you'll need to add a .gitignore file
--  You'll need to make a quarto file and include a yaml.
--  You have to read the data into the quarto file. 
+It is important that your final product looks professional. I'll require that you fold your code, hide warnings ,etc. 
 
 # Citation:
 
-You will need to cite your data's source. In addition to your data you will likely have to read some articles for domain knowledge, any of those that are referenced should be cited as well. 
+You will need to cite your data's source on your final map. In addition to your data you will likely have to read some articles for domain knowledge, any of those that are referenced should be referenced if needed in your write up. 
 
 # Rubric: 
 
 ### Question:
 
--    1 point - You come up with a question you think you can answer with your data. 
+-    1 point - You come up with a question you think you can answer with your data. You can change this while you are working. 
 
 ### Mapping data:
 
--    1 point - Demonstrates an ability to Map data with chloropleth maps
+-    1 point - Demonstrate an ability to map data with chloropleth maps
 
--    1 point - Demonstrates an ability to label maps appropriately
+-    1 point - Demonstrates an ability to label maps appropriately (title, source, etc)
 
--    1 point - Source of map data is clear
+-    1 point - Map does not have extraneous information (i.e. no lat and long)
 
--    1 point - Map does not have extraneous information (i.e. lat and long)
+-    1 point - Color and scale should be used appropriately (i.e. darker means more, discrete variables should be colored with brewer, etc. )
 
 ### Coding and write up:
 
 -    1 point - Code is appropriately commented and readable
 
--    1 point - The document is rendered on time.
+-    1 point - Code is folded, embed-resources: true is included in the YAML
 
--    1 point - The data is introduced, along with the question
+-    1 point - The data is introduced, along with the question.
 
 -    1 point - The question is clearly answered in a concluding paragraph. 
 

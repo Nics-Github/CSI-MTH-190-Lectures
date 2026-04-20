@@ -280,58 +280,90 @@ ggplot()+
 
 ```
 
-# 3. Choropleth maps using census data
+## Choropleth Maps
 
 ```{r}
-# Get MA county sf object, that includes population estimate column in data
-mass_pop_orig <- 
-  tidycensus::get_acs(
-    geography = "county", 
-    variables = "B01003_001", 
-    state = "MA",
-    geometry = TRUE
-  ) |> 
-  # Add centroids to each region using purrr package
-  mutate(
-    lng = purrr::map_dbl(geometry, ~st_centroid(.x)[[1]]),
-    lat = purrr::map_dbl(geometry, ~st_centroid(.x)[[2]])
-  )  
-mass_pop_orig
-
-# Unfortunately the original NAME variable above is very long and redundant.
-# Create a new data frame with the just the county name using the separate()
-# function from the tidyr package. 
-mass_pop <- mass_pop_orig |> 
-  tidyr::separate(NAME, c("County", "State"), sep = ", ") |> 
-  tidyr::separate(County, c("County", "Fluff"), sep = " ") 
-
-# Plot gradient choropleth map based on numerical variable estimate
-ggplot() +
-  geom_sf(data = mass_pop, aes(fill = estimate)) +
-  geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +
-  labs(fill = "Population\nEstimate")
-
-# What if instead we want a bin based choropleth map. Use the cut_number()
-# function to convert the numerical variable estimate 
-# to a categorical variable with 3 levels!
-mass_pop <- mass_pop |>
-  mutate(estimate_discrete = cut_number(estimate, 3))
-mass_pop
-
-# Plot!
-ggplot() +
-  geom_sf(data = mass_pop, aes(fill = estimate_discrete)) +
-  geom_text(data = mass_pop, aes(x = lng, y = lat, label = County)) +
-  labs(fill = "Population\nEstimate")
+library(tidyverse)
+library(sf)
 ```
 
-## Exercise
-
-Use the `tidycensus` package to conduct a spatial analysis of the Census data it contains for Massachusetts.
-
-[Instructions for using the tidycensus package](https://walker-data.com/tidycensus/articles/basic-usage.html)
+```{r}
+mass_under_5 = read_sf("mass_under_5")
+```
 
 ```{r}
-# Write your code below
+# Pop of mass
+
+ggplot()+
+  geom_sf(data = mass_under_5, aes( fill = pop))+
+  scale_fill_distiller(direction = 1) + # dark is more
+  theme_void()+
+  labs( 
+    title = "Population of Massachusetts by County",
+    caption = "America Community Survey, 2024")
+
+```
+
+```{r}
+ggplot()+
+  geom_sf(data = mass_under_5, aes( fill = tot_udr_5))+
+  scale_fill_distiller(direction = 1) + # dark is more
+  theme_void()+
+  labs( 
+    title = "Total Under 5 y.o. by County",
+    caption = "America Community Survey, 2024")
+
+
+```
+
+```{r}
+mass_under_5 = mass_under_5 |>
+  mutate(prop = tot_udr_5/pop)
+
+ggplot()+
+  geom_sf(data = mass_under_5, aes( fill = prop))+
+  scale_fill_distiller(direction = 1) + # dark is more
+  theme_void()+
+  labs( 
+    title = "Prop Under 5 y.o. by County",
+    caption = "America Community Survey, 2024")
+
+  
+```
+
+```{r}
+mass_retiree = read_sf("mass_retiree")
+
+ggplot()+
+  geom_sf(data = mass_retiree, aes( fill = pop))+
+  scale_fill_distiller(direction = 1) + # dark is more
+  theme_void()+
+  labs( 
+    title = "People Over 65 by County",
+    caption = "America Community Survey, 2024")
+
+mass_retiree = read_sf("mass_retiree")
+```
+
+```{r}
+ggplot()+
+  geom_sf(data = mass_retiree, aes( fill = rtr_prp))+
+  scale_fill_distiller(direction = 1) + # dark is more
+  theme_void()+
+  labs( 
+    title = "Prop Over 65 by County",
+    caption = "America Community Survey, 2024")
+
+mass_retiree = mass_retiree |> rename(pop = retiree )
+```
+
+```{r}
+ggplot()+
+  geom_sf(data = mass_retiree, aes( fill = rtr_prp*pop))+
+  scale_fill_distiller(direction = 1) + # dark is more
+  theme_void()+
+  labs( 
+    title = "People Over 65 by County",
+    caption = "America Community Survey, 2024")
 
 ```

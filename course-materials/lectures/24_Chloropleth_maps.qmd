@@ -1,10 +1,10 @@
 ---
-title: "Chloropleth and Population Maps"
+title: "Choropleth and Population Maps"
 author: "Schwab"
 format: 
   revealjs:
     theme: beige
-editor: visual
+
 execute: 
   echo: true
   warning: false
@@ -68,31 +68,31 @@ mass_pop_under_5 = left_join(mass_pop, under_5, by= "County") |>
 ```{r}
 #| eval: false
 #| echo: false
-st_write(mass_pop_under_5, "course-materials/lectures/mass_pop_under_5.shp")
+st_write(mass_pop_under_5, "course-materials/lectures/24_data/mass_pop_under_5/mass_pop_under_5.shp")
 
 ```
 
+## Graph population
+
 ```{r}
 #| code-fold: true
-#| label: A population map
 
-
-mass_pop_under_5 = read_sf("mass_under_5")
+mass_pop_under_5 = read_sf("24_data/mass_pop_under_5")
 
 ggplot() +
   geom_sf(data = mass_pop_under_5, aes(fill = pop)) +
   scale_fill_distiller(direction = 1)+
-  labs(title = "Population under 5",
+  labs(title = "Population",
   caption = "American Community Survey, 2023")+
     theme_void()
 
 ```
 
+
 ## Graph the Under 5s
 
 ```{r}
 #| code-fold: true
-#| label: Another population map
 
 ggplot() +
   geom_sf(data = mass_pop_under_5, aes(fill = tot_udr_5)) +
@@ -110,7 +110,7 @@ Divide the totals under 5 by the total population per county for proportion per 
 
 ```{r}
 #| code-fold: true
-#| label: Not a population map
+
 
 ggplot() +
   geom_sf(data = mass_pop_under_5, aes(fill = prop_udr_5)) +
@@ -164,14 +164,13 @@ mass_prop = left_join(mass_pop, mass_prop_retirees, by= "County") |>
 ```{r}
 #| eval: false
 #| echo: false
-
-st_write(mass_prop, "course-materials/lectures/mass_retiree/mass_retiree.shp")
+st_write(mass_prop, "course-materials/lectures/24_data/mass_retiree/mass_retiree.shp")
 ```
 
 ```{r}
 #| code-fold: true
 
-mass_retirees = read_sf("mass_retiree")
+mass_retirees = read_sf("24_data/mass_retiree")
 
 ```
 
