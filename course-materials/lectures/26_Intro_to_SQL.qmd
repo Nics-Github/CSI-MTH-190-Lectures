@@ -9,8 +9,6 @@ execute:
   echo: true
 ---
 
-# Setup
-
 ## Big Idea
 
 Data can live in a flat file (.csv) or relational database.
@@ -21,13 +19,13 @@ Often data is stored in a database on a server and called up on demand.
 
 To do this we use the Structured Query Language (SQL).
 
-## Dialects of SQL
+## A bit about SQL
 
-There are SQL, SQL Server, MySQL, PostgreSQL, Oracle, and others.
+There are SQL, SQLite, SQL Server, MySQL, PostgreSQL, Oracle, "NoSQL" and others.
 
 SQL is a declarative programming language.
 
-## Relational
+SQL Databases are relational
 
 ## SQL is old
 
@@ -54,7 +52,7 @@ We'll focus on hospitals.
 
 There are four tables in hospitals.
 
-They are related, we can see the relationship using the schema.
+They are related through keys, we can see the relationship using the schema.
 
 Most databases are relational.
 

@@ -2027,7 +2027,7 @@
     "href": "course-materials/lectures/26_Intro_to_SQL.html#tables-data-frames",
     "title": "SQL",
     "section": "Tables (Data Frames)",
-    "text": "Tables (Data Frames)\nThere are four tables in hospitals.\nThey are related, we can see the relationship using the schema.\nMost databases are relational."
+    "text": "Tables (Data Frames)\nThere are four tables in hospitals.\nThey are related through keys, we can see the relationship using the schema.\nMost databases are relational."
   },
   {
     "objectID": "course-materials/lectures/26_Intro_to_SQL.html#variable-types",
@@ -2259,5 +2259,12 @@
     "title": "Dplyr Cheatsheet",
     "section": "",
     "text": "This is only a placeholder for the cheatsheet."
+  },
+  {
+    "objectID": "course-materials/lectures/26_Intro_to_SQL.html#a-bit-about-sql",
+    "href": "course-materials/lectures/26_Intro_to_SQL.html#a-bit-about-sql",
+    "title": "SQL",
+    "section": "A bit about SQL",
+    "text": "A bit about SQL\nThere are SQL, SQLite, SQL Server, MySQL, PostgreSQL, Oracle, “NoSQL” and others.\nSQL is a declarative programming language.\nSQL Databases are relational"
   }
 ]
