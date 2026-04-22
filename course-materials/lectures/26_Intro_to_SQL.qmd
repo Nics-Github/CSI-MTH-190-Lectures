@@ -2,7 +2,6 @@
 title: "SQL"
 subtitle: "Classic Data Science"
 author: "Schwab"
-editor: visual
 format: 
   revealjs: 
     theme: beige
@@ -10,9 +9,7 @@ execute:
   echo: true
 ---
 
-# Setup
-
-# Big Idea
+## Big Idea
 
 Data can live in a flat file (.csv) or relational database.
 
@@ -22,23 +19,27 @@ Often data is stored in a database on a server and called up on demand.
 
 To do this we use the Structured Query Language (SQL).
 
-# Dialects of SQL
+## A bit about SQL
 
-There are SQL, SQL Server, MySQL, PostgreSQL, Oracle, and others.
+There are SQL, SQLite, SQL Server, MySQL, PostgreSQL, Oracle, "NoSQL" and others.
 
-# SQL is old
+SQL is a declarative programming language.
+
+SQL Databases are relational
+
+## SQL is old
 
 IT was developed in the 1970s by IBM, but is still in use and important for data science
 
 [Here are the 2024 programming language rankings.](https://spectrum.ieee.org/top-programming-languages-2024)
 
-# SQL-Practice
+## SQL-Practice
 
 We'll use this SQL practice to get started.
 
 https://www.sql-practice.com/
 
-# The Database db
+## The Database db
 
 Here there are two small databases.
 
@@ -47,45 +48,45 @@ Here there are two small databases.
 
 We'll focus on hospitals.
 
-# Tables (Data Frames)
+## Tables (Data Frames)
 
 There are four tables in hospitals.
 
-They are related, we can see the relationship using the schema.
+They are related through keys, we can see the relationship using the schema.
 
 Most databases are relational.
 
-# Variable Types
+## Variable Types
 
--   Categorical
+- Categorical
 
-    -   SQL: Text, CHAR
+  - SQL: Text, CHAR
 
--   Numeric
+- Numeric
 
-    -   SQL: DATE, INT
+  - SQL: DATE, INT
 
 [There are more,](https://www.w3schools.com/sql/sql_datatypes.asp) but they all fall under Categorical or Numeric.
 
-# SQL commands
+## SQL commands
 
-| SQL      | dplyr                                   |
-|----------|-----------------------------------------|
-| SELECT   | Choose a column...                      |
-| FROM     | ...the data frame                       |
-| WHERE    | A condition on a variable               |
-| GROUP BY | Subset the data for computation         |
-| HAVING   | A condition on grouped variables        |
-| ORDER BY | Used to arrange the data (use DESC too) |
-| LIMIT    | Shows only the first so many rows       |
-| COUNT    | Used with Select to count rows          |
-| IS NULL  | Used when searching for missing values  |
+| SQL | What it does | dplyr |
+|----|----|----|
+| SELECT | Choose a column... | select, mutate, count, and more |
+| FROM | ...the data frame |  |
+| WHERE | A condition on a variable | filter() |
+| GROUP BY | Subset the data for computation | group_by() |
+| HAVING | A condition on grouped variables | filter() for groups |
+| ORDER BY | Used to arrange the data (use DESC too) | arrange(), head(), slice_min() slice_max() |
+| LIMIT | Shows only the first so many rows | head(), tail() |
+| COUNT | Used with Select to count rows | count() |
+| IS NULL | Used when searching for missing values | is.na() |
 
 # Example 1
 
 How many doctors are there?
 
-# Answer 1
+## Answer 1
 
 We can probably just count the data to answer this.
 
@@ -98,11 +99,11 @@ SELECT COUNT(doctor_id)
 FROM doctors
 ```
 
-# Example 2
+## Example 2
 
 How many cardiologists are there? What are their names?
 
-# Answer 2
+## Answer 2
 
 We can count them, but if there were lots of doctors at several hospitals this would be hard.
 
@@ -116,7 +117,7 @@ FROM doctors
 WHERE specialty = "Cardiologist"
 ```
 
-# Like and Wild cards
+## Like and Wild cards
 
 You can use a combination of the command LIKE and a wild card % to answer the question above.
 
@@ -134,7 +135,7 @@ WHERE specialty LIKE "Card%"
 
 Who is the oldest patient?
 
-# Answer 3a
+## Answer 3a
 
 Here we can order the data (or use the min function to find the earliest date).
 
@@ -160,7 +161,7 @@ last_name
 FROM patients
 ```
 
-# Practice
+## Practice
 
 There are some built in problems on this platform.
 
@@ -168,8 +169,16 @@ Try questions 1 - 4
 
 ![](./images/Questions_1_4_SQL_0.png)
 
-# Why use R?
+## Why use R?
 
 We use R because SQL is good for looking up data, but not for visualizing it, creating custom functions, building websites to show off our work or machine learning.
 
+In SQL, with the wrong permissions you can really mess up your database. 
+
 R is good at these things.
+
+## CSI 242 ADM
+
+At HCC we have a clas dedicated to creating and running a database. 
+
+It is called Applied Database Management. 

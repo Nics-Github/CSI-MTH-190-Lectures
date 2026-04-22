@@ -7,8 +7,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.33">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.37">
 
   <meta name="author" content="Schwab">
   <title>CSI-MTH-190 – Tidy data and pivots</title>
@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -96,7 +99,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-340d960e8755bbda5148eb2f88c02f59.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-5c8106c274dac56d8e05e3022a5a12af.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -230,7 +233,7 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">gs4_deauth</span>()</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">gs4_deauth</span>()</span>
 <span id="cb1-2"><a></a>hiv_key <span class="ot">&lt;-</span> <span class="st">"1kWH_xdJDM4SMfT_Kzpkk-1yuxWChfurZuWYjfmv51EA"</span></span>
 <span id="cb1-3"><a></a>hiv <span class="ot">&lt;-</span> <span class="fu">read_sheet</span>(hiv_key) <span class="sc">|&gt;</span></span>
 <span id="cb1-4"><a></a>  <span class="fu">rename</span>(<span class="at">Country =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
@@ -240,7 +243,7 @@ Schwab
 <span id="cb1-8"><a></a>  <span class="fu">select</span>(Country, <span class="st">`</span><span class="at">1979</span><span class="st">`</span>, <span class="st">`</span><span class="at">1989</span><span class="st">`</span>, <span class="st">`</span><span class="at">1999</span><span class="st">`</span>, <span class="st">`</span><span class="at">2009</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
 <span id="cb1-9"><a></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2009</span><span class="st">`</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb1-10"><a></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">matches</span>(<span class="st">"[0-9]"</span>), as.double))</span>
-<span id="cb1-11"><a></a>hiv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a></a>hiv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
@@ -259,8 +262,8 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>hiv <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1979</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2009</span><span class="st">`</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"hiv_rate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>hiv <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">`</span><span class="at">1979</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2009</span><span class="st">`</span>, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"hiv_rate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 3
@@ -285,11 +288,11 @@ Schwab
 <h2><code>pivot_wider()</code></h2>
 <p>This data is tidy how could we make it wider for humans?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">library</span>(babynames)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">library</span>(babynames)</span>
 <span id="cb5-2"><a></a>babynames <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a></a>     <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Sue"</span>, <span class="st">"Robin"</span>, <span class="st">"Leslie"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb5-4"><a></a>     <span class="fu">group_by</span>(name, sex) <span class="sc">|&gt;</span></span>
-<span id="cb5-5"><a></a>     <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a></a>     <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
 # Groups:   name [3]
@@ -311,12 +314,12 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(babynames)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(babynames)</span>
 <span id="cb7-2"><a></a>babynames <span class="sc">|&gt;</span></span>
 <span id="cb7-3"><a></a>     <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Sue"</span>, <span class="st">"Robin"</span>, <span class="st">"Leslie"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb7-4"><a></a>     <span class="fu">group_by</span>(name, sex) <span class="sc">|&gt;</span></span>
 <span id="cb7-5"><a></a>     <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n))<span class="sc">|&gt;</span></span>
-<span id="cb7-6"><a></a>     <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sex,<span class="at">values_from =</span> total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-6"><a></a>     <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sex,<span class="at">values_from =</span> total)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
@@ -333,7 +336,7 @@ Schwab
 <h2>fish_encounters</h2>
 <p>This data is tidy try to make it wider.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>fish_encounters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>fish_encounters</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 114 × 3
    fish  station  seen
@@ -356,8 +359,8 @@ Schwab
 <h2>fish_encounters 2</h2>
 <p>The solution to the previous slide.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>fish_encounters <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> station,<span class="at">values_from =</span> <span class="st">"seen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>fish_encounters <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> station,<span class="at">values_from =</span> <span class="st">"seen"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 19 × 12
    fish  Release I80_1 Lisbon  Rstr Base_TD   BCE   BCW  BCE2  BCW2   MAE   MAW
@@ -600,7 +603,7 @@ Schwab
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -712,13 +715,14 @@ Schwab
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
