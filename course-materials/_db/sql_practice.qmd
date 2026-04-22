@@ -1,36 +1,223 @@
 ---
-title: "An Introduction to SQL"
+title: "An Introduction to SQL in RStudio"
 subtitle: "Through SQLite" 
-
+author: "Nic Schwab"
+date: "April 22,2026"
 ---
 
+In this bit of livecoding we'll be focused on bringing SQL queries into Rstudio using the DBI and RSQLite packages.
+
+We'll have to write the queries in SQL as we are communicating with the database. (You can use packages like dbplyr to use tidyverse functions to query databases, but we haven't got time for that.)
+
+We'll start with the Netflix database.
+
+
+# Setup
 ```{r}
 library(DBI)
 ```
 
 ```{r}
+# You may need to run install.packages("RSQLite") try it a few times because the server
 mydb <- dbConnect(RSQLite::SQLite(), "course-materials/_db/netflixdb.sqlite")
 # dbDisconnect(mydb) # <- run this to disconnect
-
 ```
 
+### The Tables
 ```{r}
-# List the tables
+#List the tables
 dbListTables(mydb)
-# We care about: episode, movie, season, tv_show, view_summary
+ 
 ```
 
+Included in our Database schema are: season, movie, tv_show, view_summary. episode is not in our Schema, but might have information about TV shows. The other tables have to do with infromation during the creation of our database. 
+
+
+### Tables columns, and variable types
 ```{r}
 # Get field summary
-dbListFields(mydb, "movie")
+dbListFields(mydb, "tv_show")
 # or 
-# With Data Types
+# With Data Types with the PRAGMA command combined with the table_info() function
 dbGetQuery(mydb, "PRAGMA table_info('movie')")
 #
 ```
 
+These can be seen more easily on the schema. 
+
+## Netflix Examples
+
+According to the github repository this is a, "Sample database based on the data from the [Netflix Engagement Report](https://about.netflix.com/en/news/what-we-watched-the-first-half-of-2024) and the [Netflix Global Top 10](https://www.netflix.com/tudum/top10) weekly list, it includes movies and TV shows for learning and practice purposes."
+
+### Examine the Schema
+
+![](db/chinook_schema)
+
+
+
+### Times
+
+What do duration, start_date, and end_date look like?
+
 ```{r}
+
+dbGetQuery(mydb, 
+"SELECT duration, start_date, end_date
+FROM view_summary")
+```
+
+These are times, in milliseconds, since Jan 1, 1970. This is a fairly common way of keeping time. This is called the "unixepoch."
+
+### Convert those times
+
+We can use date() or datetime() to convert them. We first divide by 1000 to get them into seconds.
+
+```{r}
+dbGetQuery(
+    mydb, 
+    "SELECT date(start_date/1000, 'unixepoch') AS start_time
+    FROM view_summary"
+)
+
+```
+
+### Question 1
+
+What is the data range of this data? Hint: Use MAX and MIN inside of the date() function,
+
+```{r}
+dbGetQuery(
+    mydb, 
+    "SELECT date(MIN(start_date/1000), 'unixepoch') AS first_st, 
+    date(MAX(end_date/1000), 'unixepoch') AS last_st
+    FROM view_summary"
+)
+
+```
+
+### Question 2
+
+What does view_rank look like? What does an NA likely mean?
+
+```{r}
+dbGetQuery(
+    mydb, 
+    "SELECT view_rank
+    FROM view_summary"
+)
+```
+
+### Question 3
+
+Find the movies in the top 3. ORDER BY view_rank and use LIMIT to only see the first 300. Why do you think some movies are listed multiple times? 
+
+```{r}
+dbGetQuery(
+    mydb, 
+    "SELECT movie.title, view_rank
+    FROM view_summary
+    JOIN movie ON movie_id = movie.id
+    WHERE view_rank < 4
+    ORDER By view_rank
+    LIMIT 300"
+)
 
 
 ```
 
+### Question 4
+
+What are the top 10 movies for Dec 24 to Dec 31 2025? You will have to use the BETWEEN command (or \< \>). Notice that two -- will commend a quiery in SQL. Why do you think there are there two movies for every rank?
+
+```{r}
+dbGetQuery(
+    mydb, 
+    "SELECT movie.title, view_rank, date(start_date/1000, 'unixepoch') AS date
+    FROM view_summary
+    JOIN movie ON movie_id = movie.id
+    --WHERE date(start_date/1000, 'unixepoch') BETWEEN '2025-12-24' AND '2025-12-31'
+    WHERE '2025-12-24'< date(start_date/1000, 'unixepoch')AND 
+    date(start_date/1000, 'unixepoch') < '2025-12-31'
+    ORDER BY view_rank"
+)
+
+```
+
+### Question 6
+
+What are the locales listed in movie? You can use the DISTINCT command to elimiate repetitions.
+
+```{r}
+dbGetQuery(
+    mydb, 
+    "SELECT DISTINCT locale
+    FROM movie"
+)
+
+```
+
+### Question 7
+
+Which movies had the most weeks in the top 10?
+
+```{r}
+dbGetQuery(
+    mydb, 
+    "SELECT DISTINCT title , MAX(cumulative_weeks_in_top10) As cw_10
+    FROM view_summary
+    JOIN movie ON movie_id = movie.id
+    GROUP BY title
+    ORDER BY cw_10 DESC
+    LIMIT 10
+    "
+)
+
+```
+
+### Question 8
+
+What was the average running time for all movies?
+
+```{r}
+dbGetQuery(
+    mydb, 
+    "SELECT AVG(runtime) As run_time
+    FROM movie
+    "
+)
+
+```
+
+
+### Question 9
+
+What was the min, max, and average running time for all movies grouped by the cumulative weeks in the top 10? Notice anything strange?
+
+```{r}
+dbGetQuery(
+    mydb, 
+    "SELECT MAX(cumulative_weeks_in_top10) As cw_10, AVG(runtime), MIN(runtime),MAX(runtime)
+    FROM view_summary
+    JOIN movie ON movie_id = movie.id
+    GROUP BY cumulative_weeks_in_top10
+    ORDER BY cw_10 DESC
+    "
+)
+
+```
+
+## Question 10
+
+Get to the bottom of the movie with a running time of 3892 minutes. Is it really a movie?
+
+```{r}
+dbGetQuery(
+    mydb, 
+    "SELECT title, runtime
+    FROM movie
+    WHERE runtime = 3892 
+    "
+)
+
+
+```

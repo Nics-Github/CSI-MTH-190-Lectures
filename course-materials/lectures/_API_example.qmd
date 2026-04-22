@@ -1,0 +1,32 @@
+---
+title: "Untitled"
+format: html
+---
+
+```{r}
+library(jsonlite)
+library(tidyverse)
+celeste = fromJSON("https://www.speedrun.com/api/v2/GetGameLeaderboard2?_r=eyJwYXJhbXMiOnsiY2F0ZWdvcnlJZCI6IjdranBsMWdrIiwiZW11bGF0b3IiOjAsImdhbWVJZCI6Im8xeTlqOXY2Iiwib2Jzb2xldGUiOjAsInBsYXRmb3JtSWRzIjpbXSwicmVnaW9uSWRzIjpbXSwidGltZXIiOjIsInZlcmlmaWVkIjoxLCJ2YWx1ZXMiOltdLCJ2aWRlbyI6MH0sInBhZ2UiOjIsInZhcnkiOjE3NzYzNTczMTB9")
+
+leader_board = as_tibble( celeste$playerList) 
+
+```
+
+```{r}
+library(rvest)
+celeste <- "https://www.speedrun.com/celeste?h=Any&page=3&x=7kjpl1gk"
+
+# pipe the url into read_html(). 
+
+results_2022 <- celeste |>
+  read_html() |> 
+  html_element("table") |>
+  html_table()
+
+```
+
+
+```{r}
+celeste =fromJSON("https://www.speedrun.com/api/v1/runs?game=o1y9j9v6&max=2000")
+
+```
