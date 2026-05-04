@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nic Schwab">
+<meta name="dcterms.date" content="2026-04-22">
+
+<title>An Introduction to SQL in RStudio</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="sql_practice_solutions_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sql_practice_solutions_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="sql_practice_solutions_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="sql_practice_solutions_files/libs/quarto-html/popper.min.js"></script>
+<script src="sql_practice_solutions_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="sql_practice_solutions_files/libs/quarto-html/anchor.min.js"></script>
+<link href="sql_practice_solutions_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sql_practice_solutions_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="sql_practice_solutions_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="sql_practice_solutions_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="sql_practice_solutions_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">An Introduction to SQL in RStudio</h1>
+<p class="subtitle lead">Through SQLite</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nic Schwab </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 22, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In this bit of livecoding we’ll be focused on bringing SQL queries into Rstudio using the DBI and RSQLite packages.</p>
+<p>We’ll have to write the queries in SQL as we are communicating with the database. (You can use packages like dbplyr to use tidyverse functions to query databases, but we haven’t got time for that.)</p>
+<p>We’ll start with the Netflix database.</p>
+<section id="setup" class="level1">
+<h1>Setup</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You may need to run install.packages("RSQLite") try it a few times because the server</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#mydb &lt;- dbConnect(RSQLite::SQLite(), "course-materials/_labs/non_lab_sql/netflixdb.sqlite")</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for use when rendering:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>mydb <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="st">"netflixdb.sqlite"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># dbDisconnect(mydb) # &lt;- run this to disconnect</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="the-tables" class="level3">
+<h3 class="anchored" data-anchor-id="the-tables">The Tables</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#List the tables</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(mydb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "BATCH_JOB_EXECUTION"          "BATCH_JOB_EXECUTION_CONTEXT" 
+ [3] "BATCH_JOB_EXECUTION_PARAMS"   "BATCH_JOB_EXECUTION_SEQ"     
+ [5] "BATCH_JOB_INSTANCE"           "BATCH_JOB_SEQ"               
+ [7] "BATCH_STEP_EXECUTION"         "BATCH_STEP_EXECUTION_CONTEXT"
+ [9] "BATCH_STEP_EXECUTION_SEQ"     "episode"                     
+[11] "movie"                        "season"                      
+[13] "sqlite_sequence"              "tv_show"                     
+[15] "view_summary"                </code></pre>
+</div>
+</div>
+<p>Included in our Database schema are: season, movie, tv_show, view_summary. episode is not in our Schema, but might have information about TV shows. The other tables have to do with infromation during the creation of our database.</p>
+</section>
+<section id="tables-columns-and-variable-types" class="level3">
+<h3 class="anchored" data-anchor-id="tables-columns-and-variable-types">Tables columns, and variable types</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get field summary</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListFields</span>(mydb, <span class="st">"tv_show"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "available_globally" "release_date"       "created_date"      
+[4] "id"                 "modified_date"      "locale"            
+[7] "original_title"     "title"             </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># With Data Types with the PRAGMA command combined with the table_info() function</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(mydb, <span class="st">"PRAGMA table_info('movie')"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  cid               name         type notnull dflt_value pk
+1   0 available_globally      boolean       0         NA  0
+2   1       release_date         date       0         NA  0
+3   2       created_date    timestamp       1         NA  0
+4   3                 id      INTEGER       0         NA  1
+5   4      modified_date    timestamp       1         NA  0
+6   5            runtime       bigint       0         NA  0
+7   6             locale  varchar(10)       0         NA  0
+8   7     original_title varchar(255)       0         NA  0
+9   8              title varchar(255)       1         NA  0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>These can be seen more easily on the schema.</p>
+</section>
+<section id="netflix-examples" class="level2">
+<h2 class="anchored" data-anchor-id="netflix-examples">Netflix Examples</h2>
+<p>According to the github repository this is a, “Sample database based on the data from the <a href="https://about.netflix.com/en/news/what-we-watched-the-first-half-of-2024">Netflix Engagement Report</a> and the <a href="https://www.netflix.com/tudum/top10">Netflix Global Top 10</a> weekly list, it includes movies and TV shows for learning and practice purposes.”</p>
+<section id="examine-the-schema" class="level3">
+<h3 class="anchored" data-anchor-id="examine-the-schema">Examine the Schema</h3>
+<p><img src="db/chinook_schema.png" class="img-fluid"></p>
+</section>
+<section id="times" class="level3">
+<h3 class="anchored" data-anchor-id="times">Times</h3>
+<p>What do duration, start_date, and end_date look like?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(mydb, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="st">"SELECT duration, start_date, end_date</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">FROM view_summary</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">LIMIT 10"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        duration    start_date      end_date
+1  SEMI_ANNUALLY 1704067200000 1719705600000
+2  SEMI_ANNUALLY 1704067200000 1719705600000
+3  SEMI_ANNUALLY 1704067200000 1719705600000
+4  SEMI_ANNUALLY 1704067200000 1719705600000
+5  SEMI_ANNUALLY 1704067200000 1719705600000
+6  SEMI_ANNUALLY 1688169600000 1703980800000
+7  SEMI_ANNUALLY 1704067200000 1719705600000
+8         WEEKLY 1717372800000 1717891200000
+9         WEEKLY 1716768000000 1717286400000
+10        WEEKLY 1716163200000 1716681600000</code></pre>
+</div>
+</div>
+<p>These are times, in milliseconds, since Jan 1, 1970. This is a fairly common way of keeping time. This is called the “unixepoch.”</p>
+</section>
+<section id="convert-those-times" class="level3">
+<h3 class="anchored" data-anchor-id="convert-those-times">Convert those times</h3>
+<p>We can use date() or datetime() to convert them. We first divide by 1000 to get them into seconds.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    mydb, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT date(start_date/1000, 'unixepoch') AS start_time</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM view_summary</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="st">    LIMIT 10"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   start_time
+1  2024-01-01
+2  2024-01-01
+3  2024-01-01
+4  2024-01-01
+5  2024-01-01
+6  2023-07-01
+7  2024-01-01
+8  2024-06-03
+9  2024-05-27
+10 2024-05-20</code></pre>
+</div>
+</div>
+</section>
+<section id="question-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
+<p>What is the data range of this data? Hint: Use MAX and MIN inside of the date() function,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    mydb, </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT date(MIN(start_date/1000), 'unixepoch') AS first_st, </span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="st">    date(MAX(end_date/1000), 'unixepoch') AS last_st</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM view_summary"</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    first_st    last_st
+1 2023-06-12 2026-04-05</code></pre>
+</div>
+</div>
+</section>
+<section id="question-2" class="level3">
+<h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
+<p>What does view_rank look like? What does an NA likely mean?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    mydb, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT view_rank</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM view_summary</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="st">    LIMIT 20"</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   view_rank
+1         NA
+2         NA
+3         NA
+4         NA
+5         NA
+6         NA
+7         NA
+8          6
+9          4
+10         4
+11         1
+12         1
+13        NA
+14        10
+15         2
+16         1
+17         1
+18        NA
+19        NA
+20         8</code></pre>
+</div>
+</div>
+</section>
+<section id="question-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
+<p>Find the movies in the top 3. ORDER BY view_rank and use LIMIT to only see the first 300. Why do you think some movies are listed multiple times?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    mydb, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT movie.title, view_rank</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM view_summary</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="st">    JOIN movie ON movie_id = movie.id</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE view_rank &lt; 4</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER By view_rank</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="st">    LIMIT 300"</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                           title view_rank
+1                            Mother of the Bride         1
+2                            Mother of the Bride         1
+3                                          Atlas         1
+4                                          Atlas         1
+5                                     Irish Wish         1
+6                                Despicable Me 3         1
+7           Rebel Moon — Part Two: The Scargiver         1
+8           Rebel Moon — Part Two: The Scargiver         1
+9         Rebel Moon — Part One: A Child of Fire         1
+10        Rebel Moon — Part One: A Child of Fire         1
+11                               Badland Hunters         1
+12                               Badland Hunters         1
+13                               Badland Hunters         1
+14                               The Equalizer 3         1
+15                                     Mea Culpa         1
+16                                 The Tearsmith         1
+17                                     The Abyss         1
+18                                     The Abyss         1
+19                             What Jennifer Did         1
+20                             The Wages of Fear         1
+21                             The Wages of Fear         1
+22                                Code 8 Part II         1
+23                           Colors of Evil: Red         1
+24                        Leave the World Behind         1
+25                        Leave the World Behind         1
+26                                       Players         1
+27           Through My Window 3: Looking at You         1
+28                               A Family Affair         1
+29                                  Honeymoonish         1
+30                                  Extraction 2         1
+31                                  Extraction 2         1
+32                                  Extraction 2         1
+33                     The Greatest Night in Pop         1
+34                                   The Courier         1
+35                                   The Courier         1
+36                                     Unfrosted         1
+37                                   Art of Love         1
+38                                       Reptile         1
+39                                       Reptile         1
+40                                       Reptile         1
+41                                       Nowhere         1
+42                                       Nowhere         1
+43                                     Cat &amp; Dog         1
+44                                    The Killer         1
+45                                    The Killer         1
+46                                 Hidden Strike         1
+47                                 Hidden Strike         1
+48                                  The Out-Laws         1
+49                                  The Out-Laws         1
+50                                  The Out-Laws         1
+51                          My Name Is Loh Kiwan         1
+52                           Love at First Sight         1
+53                           Love at First Sight         1
+54                                  Golden Kamuy         1
+55           Through My Window 2: Across the Sea         1
+56           Through My Window 2: Across the Sea         1
+57                                     Locked In         1
+58                               The Monkey King         1
+59                              Burning Betrayal         1
+60                                     Ballerina         1
+61                       A Vampire in the Family         1
+62                        Last Call for Istanbul         1
+63                        Last Call for Istanbul         1
+64                            Bird Box Barcelona         1
+65                            Bird Box Barcelona         1
+66                                    Jaane Jaan         1
+67                                The Conference         1
+68   A Life Too Short: The Isabella Nardoni Case         1
+69   A Life Too Short: The Isabella Nardoni Case         1
+70     Mission Raniganj: The Great Bharat Rescue         1
+71                           The Great Seduction         1
+72                              A Day and a Half         1
+73                                      Anaconda         1
+74                                   War Machine         1
+75                                   War Machine         1
+76              Peaky Blinders: The Immortal Man         1
+77              Peaky Blinders: The Immortal Man         1
+78                            KPop Demon Hunters         1
+79                            KPop Demon Hunters         1
+80                            KPop Demon Hunters         1
+81                            KPop Demon Hunters         1
+82                            KPop Demon Hunters         1
+83                            KPop Demon Hunters         1
+84                            KPop Demon Hunters         1
+85                            KPop Demon Hunters         1
+86                            KPop Demon Hunters         1
+87                                        Humint         1
+88                                    Mardaani 3         1
+89                                    Dhurandhar         1
+90                                    Dhurandhar         1
+91                                 Made in Korea         1
+92                                 Made in Korea         1
+93                                     Firebreak         1
+94                        Jurassic World Rebirth         1
+95                                       Accused         1
+96                            A Father's Miracle         1
+97                       Joe’s College Road Trip         1
+98                       Joe’s College Road Trip         1
+99                                       The Rip         1
+100                                      The Rip         1
+101                                      The Rip         1
+102                                State of Fear         1
+103              The Investigation of Lucy Letby         1
+104                               Tere Ishk Mein         1
+105                   People We Meet on Vacation         1
+106                              The Great Flood         1
+107                              The Great Flood         1
+108                              The Great Flood         1
+109                              The Great Flood         1
+110                             De De Pyaar De 2         1
+111                                      Troll 2         1
+112                                      Troll 2         1
+113  Evil Influencer: The Jodi Hildebrandt Story         1
+114       Wake Up Dead Man: A Knives Out Mystery         1
+115       Wake Up Dead Man: A Knives Out Mystery         1
+116                        Dr. Seuss' The Grinch         1
+117                              My Secret Santa         1
+118                            Jingle Bell Heist         1
+119               Sunny Sanskari ki Tulsi Kumari         1
+120                           Champagne Problems         1
+121                                 Frankenstein         1
+122                                 Frankenstein         1
+123                                  Jolly LLB 3         1
+124                                     Caramelo         1
+125                                     Caramelo         1
+126                                        Mango         1
+127                                        Mango         1
+128                          A HOUSE OF DYNAMITE         1
+129                          A HOUSE OF DYNAMITE         1
+130                        The Woman in Cabin 10         1
+131                        The Woman in Cabin 10         1
+132                                   The Elixir         1
+133                                   The Elixir         1
+134                                  Fall for Me         1
+135                                  Fall for Me         1
+136                                 French Lover         1
+137                    The Secret Life of Pets 2         1
+138                              The Wrong Paris         1
+139                               She Said Maybe         1
+140                               She Said Maybe         1
+141                               Love Untangled         1
+142                                     Saiyaara         1
+143      Unknown Number: The High School Catfish         1
+144                                        Brick         1
+145                                        Brick         1
+146                                        Brick         1
+147                                         K.O.         1
+148                                         K.O.         1
+149                               My Oxford Year         1
+150                              Happy Gilmore 2         1
+151                              Happy Gilmore 2         1
+152                                Exterritorial         1
+153                                Exterritorial         1
+154                                Exterritorial         1
+155                                Counterattack         1
+156                                Counterattack         1
+157           Blood Brothers: Fury of the Dragon         1
+158                               A Normal Woman         1
+159                                 Wall to Wall         1
+160                              The Old Guard 2         1
+161                                       Raid 2         1
+162                                       Raid 2         1
+163                                        STRAW         1
+164                                        STRAW         1
+165                                        STRAW         1
+166                               A Widow's Game         1
+167                               A Widow's Game         1
+168                                Bad Influence         1
+169                                     iHostage         1
+170                                     iHostage         1
+171                                       Nonnas         1
+172                                       Nonnas         1
+173                      Fear Street: Prom Queen         1
+174                      Fear Street: Prom Queen         1
+175                                        Havoc         1
+176                                        Havoc         1
+177                                The Life List         1
+178                                The Life List         1
+179                                The Life List         1
+180                                The Life List         1
+181                               Back in Action         1
+182                               Back in Action         1
+183                               Back in Action         1
+184                                The Dad Quest         1
+185                              Promised Hearts         1
+186                           The Electric State         1
+187                           The Electric State         1
+188                                  Revelations         1
+189                                  Revelations         1
+190                          Plankton: The Movie         1
+191                                    Delicious         1
+192                        Venom: The Last Dance         1
+193                               La Dolce Villa         1
+194                               La Dolce Villa         1
+195                            Honeymoon Crasher         1
+196                            Honeymoon Crasher         1
+197                               Kinda Pregnant         1
+198                                Lucca's World         1
+199                     Bogotá: City of the Lost         1
+200                                     Ad Vitam         1
+201                                     Ad Vitam         1
+202                                     Ad Vitam         1
+203                                  Under Paris         1
+204                                  Under Paris         1
+205                                  Under Paris         1
+206                                     Carry-On         1
+207                                     Carry-On         1
+208                                     Carry-On         1
+209                                     Carry-On         1
+210                                    Number 24         1
+211                         The Children's Train         1
+212                         The Children's Train         1
+213                                  Family Pack         1
+214                                  Family Pack         1
+215                                      Ferry 2         1
+216                                      Ferry 2         1
+217                            Our Little Secret         1
+218                            Our Little Secret         1
+219                                        GTMAX         1
+220                                        GTMAX         1
+221                          The Merry Gentlemen         1
+222                                   Hot Frosty         1
+223                                       Let Go         1
+224                                       Let Go         1
+225                       Meet Me Next Christmas         1
+226                                   Don't Move         1
+227                                   Don't Move         1
+228                                Lonely Planet         1
+229                                      Justice         1
+230                               The Platform 2         1
+231                               The Platform 2         1
+232                        The Menendez Brothers         1
+233                                  Rebel Ridge         1
+234                                  Rebel Ridge         1
+235                                  Rebel Ridge         1
+236  Miss Peregrine's Home for Peculiar Children         1
+237                                       Uglies         1
+238                           Officer Black Belt         1
+239                           Officer Black Belt         1
+240                           Officer Black Belt         1
+241                                    The Union         1
+242                                    The Union         1
+243                            (Un)lucky Sisters         1
+244                                     Incoming         1
+245                        Kalki 2898 AD (Hindi)         1
+246                               Mission: Cross         1
+247                               Mission: Cross         1
+248                     I Can't Live Without You         1
+249 Saving Bikini Bottom: The Sandy Cheeks Movie         1
+250 Saving Bikini Bottom: The Sandy Cheeks Movie         1
+251                               Non Negotiable         1
+252                               Non Negotiable         1
+253                              Find Me Falling         1
+254                              Find Me Falling         1
+255                      Vanished into the Night         1
+256                      Vanished into the Night         1
+257                    Beverly Hills Cop: Axel F         1
+258                    Beverly Hills Cop: Axel F         1
+259                              Trigger Warning         1
+260                                  Inheritance         1
+261                                  Inheritance         1
+262                                      Hit Man         1
+263                                      Hit Man         1
+264                                  City Hunter         1
+265                                Love, Divided         1
+266                                       Damsel         1
+267                                       Damsel         1
+268                          Heart of the Hunter         1
+269                          Heart of the Hunter         1
+270                          Society of the Snow         1
+271                          Society of the Snow         1
+272                          Society of the Snow         1
+273                                         Lift         1
+274                                         Lift         1
+275                                         Lift         1
+276                                          Leo         1
+277                                          Leo         1
+278                                 Blood Vessel         1
+279                                 Blood Vessel         1
+280                                   Believer 2         1
+281                                    Wingwomen         1
+282                                    Wingwomen         1
+283                                     Old Dads         1
+284                                     Old Dads         1
+285                            Once Upon a Crime         1
+286     You Are So Not Invited to My Bat Mitzvah         1
+287     You Are So Not Invited to My Bat Mitzvah         1
+288                               Heart of Stone         1
+289                               Heart of Stone         1
+290                                     Paradise         1
+291                                     Paradise         1
+292                                     Paradise         1
+293                              Make Me Believe         1
+294                                   You Do You         1
+295                                        Atlas         2
+296                                   Irish Wish         2
+297                                   Irish Wish         2
+298                Woody Woodpecker Goes to Camp         2
+299                Woody Woodpecker Goes to Camp         2
+300       Rebel Moon — Part One: A Child of Fire         2</code></pre>
+</div>
+</div>
+</section>
+<section id="question-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
+<p>What are the top 10 movies for Dec 24 to Dec 31 2025? You will have to use the BETWEEN command (or &lt; &gt;). Notice that two – will commend a quiery in SQL. Why do you think there are there two movies for every rank?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    mydb, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT movie.title, view_rank, date(start_date/1000, 'unixepoch') AS date</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM view_summary</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="st">    JOIN movie ON movie_id = movie.id</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="st">    --WHERE date(start_date/1000, 'unixepoch') BETWEEN '2025-12-24' AND '2025-12-31'</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE '2025-12-24'&lt; date(start_date/1000, 'unixepoch')AND </span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="st">    date(start_date/1000, 'unixepoch') &lt; '2025-12-31'</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY view_rank"</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                          title view_rank       date
+1                               The Great Flood         1 2025-12-29
+2   Evil Influencer: The Jodi Hildebrandt Story         1 2025-12-29
+3                            KPop Demon Hunters         2 2025-12-29
+4                                           Haq         2 2025-12-29
+5        Wake Up Dead Man: A Knives Out Mystery         3 2025-12-29
+6                            A Time For Bravery         3 2025-12-29
+7                                  Goodbye June         4 2025-12-29
+8                                  Single Salma         4 2025-12-29
+9                                       Troll 2         5 2025-12-29
+10                        Dr. Seuss' The Grinch         5 2025-12-29
+11                                Me Before You         6 2025-12-29
+12                                   100 Meters         6 2025-12-29
+13                                   Madagascar         7 2025-12-29
+14 Ekō from the Infinite Chronicles of Kurichan         7 2025-12-29
+15            Spider-Man: Into the Spider-Verse         8 2025-12-29
+16                                      RaPo 22         8 2025-12-29
+17                                 Wrath of Man         9 2025-12-29
+18          Raat Akeli Hai - The Bansal Murders         9 2025-12-29
+19                                 Uptown Girls        10 2025-12-29
+20                                Revolver Rita        10 2025-12-29</code></pre>
+</div>
+</div>
+</section>
+<section id="question-6" class="level3">
+<h3 class="anchored" data-anchor-id="question-6">Question 6</h3>
+<p>What are the locales listed in movie? You can use the DISTINCT command to elimiate repetitions.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    mydb, </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT DISTINCT locale</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM movie"</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  locale
+1   &lt;NA&gt;
+2     en</code></pre>
+</div>
+</div>
+</section>
+<section id="question-7" class="level3">
+<h3 class="anchored" data-anchor-id="question-7">Question 7</h3>
+<p>Which movies had the most weeks in the top 10?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    mydb, </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT DISTINCT title , MAX(cumulative_weeks_in_top10) As cw_10</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM view_summary</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="st">    JOIN movie ON movie_id = movie.id</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY title</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY cw_10 DESC</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="st">    LIMIT 10</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="st">    "</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         title cw_10
+1           KPop Demon Hunters    42
+2  The Super Mario Bros. Movie    24
+3                The Boss Baby    24
+4                  Under Paris    21
+5              Despicable Me 2    19
+6            Through My Window    18
+7                         Sing    17
+8        Paw Patrol: The Movie    17
+9                        Troll    15
+10                       Shrek    15</code></pre>
+</div>
+</div>
+</section>
+<section id="question-8" class="level3">
+<h3 class="anchored" data-anchor-id="question-8">Question 8</h3>
+<p>What was the average running time for all movies?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    mydb, </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT AVG(runtime) As run_time</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM movie</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="st">    "</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  run_time
+1 105.6794</code></pre>
+</div>
+</div>
+</section>
+<section id="question-9" class="level3">
+<h3 class="anchored" data-anchor-id="question-9">Question 9</h3>
+<p>What was the min, max, and average running time for all movies grouped by the cumulative weeks in the top 10? Notice anything strange?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    mydb, </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT MAX(cumulative_weeks_in_top10) As cw_10, AVG(runtime), MIN(runtime),MAX(runtime)</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM view_summary</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="st">    JOIN movie ON movie_id = movie.id</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY cumulative_weeks_in_top10</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY cw_10 DESC</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="st">    "</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   cw_10 AVG(runtime) MIN(runtime) MAX(runtime)
+1     42    100.00000          100          100
+2     41    100.00000          100          100
+3     40    100.00000          100          100
+4     39    100.00000          100          100
+5     38    100.00000          100          100
+6     37    100.00000          100          100
+7     36    100.00000          100          100
+8     35    100.00000          100          100
+9     34    100.00000          100          100
+10    33    100.00000          100          100
+11    32    100.00000          100          100
+12    31    100.00000          100          100
+13    30    100.00000          100          100
+14    29    100.00000          100          100
+15    28    100.00000          100          100
+16    27    100.00000          100          100
+17    26    100.00000          100          100
+18    25    100.00000          100          100
+19    24     96.00000           91          100
+20    23     96.00000           91          100
+21    22     96.00000           91          100
+22    21     97.75000           91          103
+23    20     97.75000           91          103
+24    19     97.60000           91          103
+25    18    100.33333           91          114
+26    17     99.37500           85          114
+27    16     99.37500           85          114
+28    15     99.30769           85          114
+29    14     98.71429           85          114
+30    13     98.35714           85          109
+31    12     99.21053           85          145
+32    11     97.34783           85          145
+33    10    100.65517           85          205
+34     9    100.19355           85          205
+35     8    104.24324           85          205
+36     7    105.08511           85          205
+37     6    110.47692           85          205
+38     5    110.87037           85          205
+39     4    112.01005           85          205
+40     3    112.72105           64          205
+41     2    112.09016           55          223
+42     1    110.65296           46          223
+43    NA    105.63942            9         3892</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="question-10" class="level2">
+<h2 class="anchored" data-anchor-id="question-10">Question 10</h2>
+<p>Get to the bottom of the movie with a running time of 3892 minutes. Is it really a movie?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbGetQuery</span>(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    mydb, </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT title, runtime</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM movie</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE runtime = 3892 </span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="st">    "</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                             title runtime
+1 Nihontouitsu Series: Film Series    3892</code></pre>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

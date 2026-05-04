@@ -19,7 +19,10 @@ library(DBI)
 
 ```{r}
 # You may need to run install.packages("RSQLite") try it a few times because the server
-mydb <- dbConnect(RSQLite::SQLite(), "course-materials/_db/netflixdb.sqlite")
+#mydb <- dbConnect(RSQLite::SQLite(), "course-materials/_labs/non_lab_sql/netflixdb.sqlite")
+
+# for use when rendering:
+mydb <- dbConnect(RSQLite::SQLite(), "netflixdb.sqlite")
 # dbDisconnect(mydb) # <- run this to disconnect
 ```
 
@@ -63,7 +66,8 @@ What do duration, start_date, and end_date look like?
 
 dbGetQuery(mydb, 
 "SELECT duration, start_date, end_date
-FROM view_summary")
+FROM view_summary
+LIMIT 10")
 ```
 
 These are times, in milliseconds, since Jan 1, 1970. This is a fairly common way of keeping time. This is called the "unixepoch."
@@ -76,7 +80,8 @@ We can use date() or datetime() to convert them. We first divide by 1000 to get 
 dbGetQuery(
     mydb, 
     "SELECT date(start_date/1000, 'unixepoch') AS start_time
-    FROM view_summary"
+    FROM view_summary
+    LIMIT 10"
 )
 
 ```
@@ -103,7 +108,8 @@ What does view_rank look like? What does an NA likely mean?
 dbGetQuery(
     mydb, 
     "SELECT view_rank
-    FROM view_summary"
+    FROM view_summary
+    LIMIT 20"
 )
 ```
 
