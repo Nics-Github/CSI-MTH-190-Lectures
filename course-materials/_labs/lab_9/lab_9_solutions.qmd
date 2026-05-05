@@ -1,0 +1,134 @@
+---
+title: "lab 9: SQL Queries "
+author: "Solutions: Schwab"
+date: "today"
+format:
+  html:
+    embed-resources: true
+    code-fold: true
+execute: 
+  warning: false
+
+---
+
+## Introduction
+
+You have learned a lot about manipulating and visualizing data in R. You have gotten a little practice doing it in SQL. In this lab you will continue that practice in SQL. Specifically you will: 
+
+1. Become familiar with the Chinook database. 
+2. You will answer a five questions using SQL.
+3. You will formulate your own question and answer it using the Chinook Data. This will also be done in SQL. 
+
+
+## Check the readme
+
+Before you being he questions, take some time to get to know the [Chinook data](https://github.com/lerocha/chinook-database/tree/master)
+
+# Quesions
+
+There are five questions you must answer about the Chinook Data.
+
+You should answer all questions with your query. The LIMIT and ORDER BY commands will be useful. You should have no extra output. 
+
+```{r}
+library(DBI)
+mydb <- dbConnect(RSQLite::SQLite(), "course-materials/_labs/lab_9/chinook.sqlite")
+
+```
+
+```{r}
+# list the tables
+dbListTables(mydb)
+```
+
+```{r}
+#list the variables within the Track table and what type they are. 
+dbGetQuery(mydb, "PRAGMA table_info('Track')")
+
+```
+
+## Question 1
+
+How many artists have more than one album in this data? Which artist has the most albums? (Hint: My answer had more than 50 artist, but less than 60)
+
+```{r}
+dbGetQuery(mydb, 
+    "SELECT Name, Count(Name) As Count
+    FROM Artist
+    JOIN Album ON Artist.ArtistId = Album.ArtistId
+    Group By Name
+    HAVING Count > 1
+    ORDER BY Count 
+")
+
+
+```
+
+## Question 2
+
+From which group is the longest song in this data? How long is that song in seconds? What is the Name of the Track? (Hint: I needed two joins, and the "artist" is not a traditional music artist.)
+
+```{r}
+dbGetQuery(mydb, 
+    "SELECT Artist.Name AS Name, Max(Milliseconds/1000) As seconds , Album.Title, Track.Name
+    FROM Track
+    JOIN Album on Album.AlbumId = Track.AlbumId
+    JOIN Artist on Artist.ArtistId = Album.ArtistId
+    
+")
+```
+
+## Question 3
+
+What is the name and EmployeeId of employee the helped the most customers? (Hint: You should only have 1 row in your answer, not 3 or 8).
+
+```{r}
+dbGetQuery(mydb, 
+    "SELECT Employee.FirstName,Count(Employee.FirstName), SupportRepId
+    FROM Employee
+    JOIN Customer ON EmployeeId = SupportRepId
+    Group By EmployeeId
+    LIMIT 1
+")
+```
+
+## Question 4
+
+Which Customers paid the most money? Where are they from? (Hint: I found 8 of them).
+
+```{r}
+dbGetQuery(mydb, 
+    "SELECT FirstName, LastName, Total, Country, Customer.CustomerId
+    FROM Customer
+    JOIN Invoice ON Customer.CustomerId = Invoice.InvoiceId
+    ORDER BY Total DESC
+    LIMIT 8
+")
+```
+
+## Question 5
+
+Considering the 8 customers from question 4, which track was purchased the most? Who was the artist of that track? How many times was it purchased? (Hint: Recycle the code from problem 4, I did 5 joins for this problem).
+
+```{r}
+dbGetQuery(mydb, 
+    "SELECT  Artist.Name, Track.Name, Title, Count(Title) As count
+    FROM Customer
+    JOIN Invoice ON Customer.CustomerId = Invoice.InvoiceId
+    JOIN InvoiceLine ON Invoice.InvoiceId = InvoiceLine.InvoiceId
+    JOIN Track ON Track.TrackId = InvoiceLine.TrackId
+    JOIN Album ON Album.AlbumId = Track.AlbumId
+    JOIN Artist on Artist.ArtistId = Album.ArtistId
+    WHERE Total == 13.86
+    GROUP BY Track.Name
+    ORDER BY count DESC
+    LIMIT 1
+
+")
+```
+
+# Develop your own question
+
+When developing your own question, you must do at least one join and use some kind of aggragting or filter operation. 
+
+## Your question below
