@@ -7,8 +7,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.37">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Schwab">
   <title>CSI-MTH-190 – Ethics part 3: Bias in Data</title>
@@ -18,9 +18,6 @@
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
   <style>
-    /* Default styles provided by pandoc.
-    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -33,7 +30,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-5c8106c274dac56d8e05e3022a5a12af.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-340d960e8755bbda5148eb2f88c02f59.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -146,7 +143,7 @@ Schwab
 <section id="practice-thinking-about-bias" class="slide level2">
 <h2>Practice thinking about Bias</h2>
 <p>Start thinking about how data may be biased.</p>
-<p>I’ll give an example then we’ll consider three additonal examples.</p>
+<p>I’ll give an example then we’ll consider three additional examples.</p>
 </section>
 <section id="modern-pulse-oximeters-intoduction" class="slide level2">
 <h2>Modern Pulse Oximeters Intoduction</h2>
@@ -155,7 +152,7 @@ Schwab
 </section>
 <section id="hp-calibrated-for-all-skin-tones" class="slide level2">
 <h2>HP Calibrated for all skin tones</h2>
-<p>HP worked with NASA to develoop medical devices.</p>
+<p>HP worked with NASA to develop medical devices.</p>
 <p>Hewlett Packard made an ear pulse oximeter <a href="https://www.wired.com/story/pulse-oximeters-equity/">for all in the 1970s.</a></p>
 <p><a href="https://hparchive.com/Journals/HPJ-1976-10.pdf">HP Journal Article</a></p>
 </section>
@@ -190,7 +187,7 @@ Schwab
 <ul>
 <li><p>Start with a <a href="https://www.kaggle.com/datasets/kmader/skin-cancer-mnist-ham10000">dataset</a> of lots of pictures of potential cancers.</p></li>
 <li><p>Cancer Specialists (Humans) label pictures as cancerous or not.</p></li>
-<li><p>Data (Images of skin) is fed into a nueral network repeatedly until AI can tell appar cancer images. This makes a model.</p></li>
+<li><p>Data (Images of skin) is fed into a neural network repeatedly until AI can tell cancer in images from non-cancerous ones. This makes a model.</p></li>
 <li><p>Model is then used to take a new image and guess if it is cancerous or not.</p></li>
 </ul>
 <p>Any Bias Here? When would it matter?</p>
@@ -198,13 +195,13 @@ Schwab
 <section id="ex.-2-stop-question-frisk" class="slide level2">
 <h2>Ex. 2 Stop Question Frisk</h2>
 <p>Stop Question Fisk is a policing strategy used in New York City as well as other major cities.</p>
-<p>All the data is collected and reported <a href="https://www.nyc.gov/site/nypd/stats/reports-analysis/stopfrisk.page">here</a></p>
-<p>Data is reported on a <a href="https://ccrjustice.org/sites/default/files/attach/2016/03/Floyd%20Monitor%20Status%20Report%20-%20New%20UF250%203-23-16.pdf">form</a> the police officers submit.</p>
+<p>All the data is collected and reported <a href="https://www.nyc.gov/site/nypd/stats/reports-analysis/stopfrisk.page">here</a>.</p>
+<p>Data is reported on a <a href="https://ccrjustice.org/sites/default/files/attach/2016/03/Floyd%20Monitor%20Status%20Report%20-%20New%20UF250%203-23-16.pdf">form</a> police officers submit.</p>
 <p>Any Bias Here? When would it matter?</p>
 </section>
 <section id="ex-3.-babynames" class="slide level2">
 <h2>Ex 3. babynames</h2>
-<p>We will be considering the <a href="https://cran.r-project.org/web/packages/babynames/babynames.pdf"><code>babynames</code> dataset</a> in the next lab.</p>
+<p>We considered the <a href="https://cran.r-project.org/web/packages/babynames/babynames.pdf"><code>babynames</code> dataset</a> in a previous lab.</p>
 <p>This dataset includes all names given to US citizens as collected from the social security administration between 1880 and 2017.</p>
 <p>Any Bias Here? When would it matter?</p>
 </section>
@@ -403,7 +400,7 @@ Schwab
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -477,14 +474,13 @@ Schwab
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
             }
-          }
-          return codeEl.innerText;
+            return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

@@ -19,13 +19,14 @@ See the cheatsheet for all the options.
 
 ## Pre-Quarto
 
-(2004) Markdown is a general document format that my documents use and support. It is still a common standard.
+2004 Markdown is a general document format that many documents use and support. It is still a common standard.
 
-(2005) Jupyter notebooks were made for doing data analysis in Python.
+2012 RMarkdown was made specifically for document types involving built in R script.
 
-(2006) RMarkdown was made specifically for document types involving built in R script.
+2014 Jupyter notebooks were made for doing data analysis in Python.
 
-(2007) Posit introduced quarto that supports working with Python, R, Julia and other languages.
+2022 Posit introduced quarto that supports working with Python, R, Julia and other languages.
+
 
 ## Global Options
 

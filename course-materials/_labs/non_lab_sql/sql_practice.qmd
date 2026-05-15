@@ -2,7 +2,7 @@
 title: "An Introduction to SQL in RStudio"
 subtitle: "Through SQLite" 
 author: "Nic Schwab"
-date: "April 22,2026"
+date: "today"
 ---
 
 In this bit of livecoding we'll be focused on bringing SQL queries into Rstudio using the DBI and RSQLite packages.
@@ -19,7 +19,7 @@ library(DBI)
 
 ```{r}
 # You may need to run install.packages("RSQLite") try it a few times because the server
-mydb <- dbConnect(RSQLite::SQLite(), "course-materials/_db/netflixdb.sqlite")
+mydb <- dbConnect(RSQLite::SQLite(), "netflixdb.sqlite")
 # dbDisconnect(mydb) # <- run this to disconnect
 ```
 

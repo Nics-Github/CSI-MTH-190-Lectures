@@ -7,8 +7,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.37">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Nic Schwab">
   <title>CSI-MTH-190 – The Verbs</title>
@@ -18,9 +18,6 @@
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
   <style>
-    /* Default styles provided by pandoc.
-    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -99,7 +96,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-5c8106c274dac56d8e05e3022a5a12af.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-340d960e8755bbda5148eb2f88c02f59.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -334,34 +331,34 @@ Nic Schwab
 <p>We use them to hold information. All information must be the same type (int, bool, etc.)</p>
 <p>If you are familiar with lists or arrays, a vector is very similar to those.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>books <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"The Martian"</span>, <span class="st">"The Hail Mary Project"</span>, <span class="st">"Artemis"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>books <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"The Martian"</span>, <span class="st">"The Hail Mary Project"</span>, <span class="st">"Artemis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="filter" class="slide level2">
 <h2>filter()</h2>
 <p>%in% vs ==</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="co"># 18 audis</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="co"># 18 audis</span></span>
 <span id="cb2-2"><a></a>    <span class="fu">filter</span> ( manufacturer <span class="sc">==</span> <span class="st">"audi"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a></a>    <span class="fu">nrow</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-3"><a></a>    <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 18</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="co"># 25 fords</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="co"># 25 fords</span></span>
 <span id="cb4-2"><a></a>    <span class="fu">filter</span>(manufacturer <span class="sc">==</span> <span class="st">"ford"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a></a>    <span class="fu">nrow</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a></a>    <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="co"># doesn't work correctly</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="co"># doesn't work correctly</span></span>
 <span id="cb6-2"><a></a>    <span class="fu">filter</span>(manufacturer <span class="sc">==</span> <span class="fu">c</span>(<span class="st">"ford"</span>, <span class="st">"audi"</span>))<span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a></a>    <span class="fu">nrow</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-3"><a></a>    <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="co"># doesn't work correctly</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="co"># doesn't work correctly</span></span>
 <span id="cb8-2"><a></a>    <span class="fu">filter</span>(manufacturer <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ford"</span>, <span class="st">"audi"</span>))<span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a></a>    <span class="fu">nrow</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-3"><a></a>    <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 43</code></pre>
 </div>
@@ -371,10 +368,10 @@ Nic Schwab
 <h2>group_by and summarize</h2>
 <p>group_by() works with summarize()</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>mpg<span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>mpg<span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a></a>    <span class="fu">group_by</span>(manufacturer)<span class="sc">|&gt;</span></span>
 <span id="cb10-3"><a></a>    <span class="co"># n() is a counting function</span></span>
-<span id="cb10-4"><a></a>    <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-4"><a></a>    <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 15 × 2
    manufacturer count
@@ -401,9 +398,9 @@ Nic Schwab
 <h2>mutate()</h2>
 <p>Changes values of colums. You can save the data frame.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>mpg <span class="ot">=</span> mpg <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>mpg <span class="ot">=</span> mpg <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a></a>    <span class="fu">mutate</span>(<span class="at">new_year =</span> <span class="dv">2000</span> <span class="sc">-</span> year )</span>
-<span id="cb12-3"><a></a>mpg<span class="sc">$</span>year</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-3"><a></a>mpg<span class="sc">$</span>year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [1] 1999 1999 2008 2008 1999 1999 2008 1999 1999 2008 2008 1999 1999 2008 2008
  [16] 1999 2008 2008 2008 2008 2008 1999 2008 1999 1999 2008 2008 2008 2008 2008
@@ -429,14 +426,14 @@ Nic Schwab
 <p><code>select()</code> subsets the columms. Maybe you don’t need the whole df.</p>
 <p><code>names()</code> is useful for finding column names</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">names</span>(mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">names</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "manufacturer" "model"        "displ"        "year"         "cyl"         
  [6] "trans"        "drv"          "cty"          "hwy"          "fl"          
 [11] "class"        "new_year"    </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>new_mpg <span class="ot">=</span> mpg <span class="sc">|&gt;</span> <span class="fu">select</span>(manufacturer, year)</span>
-<span id="cb16-2"><a></a>new_mpg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>new_mpg <span class="ot">=</span> mpg <span class="sc">|&gt;</span> <span class="fu">select</span>(manufacturer, year)</span>
+<span id="cb16-2"><a></a>new_mpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 234 × 2
    manufacturer  year
@@ -459,7 +456,7 @@ Nic Schwab
 <h2>arrange() / slice_*()</h2>
 <p>arrange() ordered your df by a variable, while slice_max() will take the top so many rows.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="fu">arrange</span> (<span class="fu">desc</span>(displ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="fu">arrange</span> (<span class="fu">desc</span>(displ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 234 × 12
    manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class
@@ -477,7 +474,7 @@ Nic Schwab
 # ℹ 224 more rows
 # ℹ 1 more variable: new_year &lt;dbl&gt;</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="fu">slice_max</span>(displ, <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>mpg <span class="sc">|&gt;</span> <span class="fu">slice_max</span>(displ, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 12
   manufacturer model       displ  year   cyl trans drv     cty   hwy fl    class
@@ -495,7 +492,7 @@ Nic Schwab
 <h2>Practice wrangling</h2>
 <p><a href="https://mdsr-book.github.io/mdsr3e/04-dataI.html#dataI-exercises">MDSR Problems 1 and 2</a></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a> <span class="co"># Copy this code into a chunk in R to make the Random_subset data frame from problem 1 and 2.</span></span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a> <span class="co"># Copy this code into a chunk in R to make the Random_subset data frame from problem 1 and 2.</span></span>
 <span id="cb22-2"><a></a> <span class="co"># Use the verbs we've discussed to make the subsets from the text.</span></span>
 <span id="cb22-3"><a></a> Random_subset <span class="ot">&lt;-</span>  tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
 <span id="cb22-4"><a></a>     <span class="sc">~</span>year,<span class="sc">~</span>sex,   <span class="sc">~</span>name,         <span class="sc">~</span>n, <span class="sc">~</span>prop,</span>
@@ -509,7 +506,7 @@ Nic Schwab
 <span id="cb22-12"><a></a>      <span class="dv">1981</span>, <span class="st">"F"</span>,     <span class="st">"Sherise"</span>,       <span class="dv">27</span>, <span class="fl">0.0000151</span>,</span>
 <span id="cb22-13"><a></a>      <span class="dv">1920</span>, <span class="st">"F"</span>,     <span class="st">"Marquerite"</span>,    <span class="dv">26</span>, <span class="fl">0.0000209</span>,</span>
 <span id="cb22-14"><a></a>      <span class="dv">1941</span>, <span class="st">"M"</span>,     <span class="st">"Lorraine"</span>,      <span class="dv">24</span>, <span class="fl">0.0000191</span></span>
-<span id="cb22-15"><a></a>   )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-15"><a></a>   )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -703,7 +700,7 @@ Nic Schwab
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -815,14 +812,13 @@ Nic Schwab
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
             }
-          }
-          return codeEl.innerText;
+            return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

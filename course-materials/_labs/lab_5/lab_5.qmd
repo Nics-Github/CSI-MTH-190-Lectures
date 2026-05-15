@@ -1,23 +1,23 @@
 ---
 title: "CSI-MTH 190: Intro to Data Science"
 subtitle: "Lab 5: Intro to Wrangling and Cleaning"
-author: "Nicholas Schwab"
+author: "your name"
 date: "today"
 format:
   html:
     embed-resources: true
 ---
 
-Introduction: In this lab you will practice with some data manipulation functions. They come from the `dplyr` package. Their cheatsheet can be found [here](https://rstudio.github.io/cheatsheets/html/data-transformation.html).
+Introduction: In this lab you will practice with some data manipulation functions. They come from the `dplyr` package. The cheatsheet can be found [here](https://rstudio.github.io/cheatsheets/html/data-transformation.html).
 
 Specifically we'll practice with:
 
-- filter() 
-- mutate() 
-- case_when() 
-- slice_*() 
-- group_by() and 
-- sumarize()
+-   filter()
+-   mutate()
+-   case_when()
+-   slice\_\*()
+-   group_by() and
+-   summarize()
 
 We'll practice on the dataset `babynames`, which lists a summary of every name of every child born in the US and given a social security number since 1880. I'll start with an example then give you some practice problems at the end.
 
@@ -28,10 +28,11 @@ We'll practice on the dataset `babynames`, which lists a summary of every name o
 Together let's navigate to the [github](https://github.com/hadley/babynames) repository to see how to install the released version `babynames`. Then make a new chunk and paste that command:
 
 ```{r}
+#| eval: False
 #install.packages("babynames")
 ```
 
-After you install babynames once, be sure to comment that line of code out, or add #| eval: False. 
+After you install babynames once, be sure to comment that line of code out.
 
 ## Understand the data
 
@@ -53,7 +54,7 @@ view(babynames)
 
 `mutate()` creates new columns. I'd like to add a column that shows the total number of babies born to a name in a given year. To do this we'll have to manipulate n - the number of babies born with a name in a `year` and `prop` - the proportion of the total babies born that year with that name. You'll have to do some algebra:
 
-Start with n/total_births = prop and solve for total.
+Start with n/total_births = prop and solve for total_births.
 
 Then you'll pipe babynames into mutate(total = ...)
 
@@ -69,7 +70,7 @@ view(babynames)
 
 ## case_when()
 
-Sometimes we'd like to rename the levels of a column based on what they currently say. For example sometimes data is stored as 0 for 'no' and 1 for 'yes'. If you want your data to say 'no' and 'yes' instead of 0 and 1 you can change the levels of a variable with a case_when(). `case_when()` comes from the `dplyr` package and the arguments are formulas (i.e y~x). It looks like this: `case_when(old_value~new_value)`
+Sometimes we'd like to rename the levels of a column based on what they currently say. For example sometimes data is stored as 0 for 'no' and 1 for 'yes'. If you want your data to say 'no' and 'yes' instead of 0 and 1 you can change the levels of a variable with a case_when(). `case_when()` comes from the `dplyr` package and the arguments are formulas (i.e y\~x). It looks like this: `case_when(old_value~new_value)`
 
 For example let's change all of the years from before 1900 to "pre-1900", all the years from before 2000 to "pre-2000" and all the years after 2000 to "post-2000"
 
@@ -88,9 +89,9 @@ babynames =
 
 ```
 
-## slice_*()
+## slice\_\*()
 
-The slice family will subset rows based on conditions. `slice_max()` grabs the thes with maximum value. `slice_min()` the rows with the minimum value, there are also other slice_*() functions. Let's use `slice_max()` to find the five years when the most babies were born.
+The slice family will subset rows based on conditions. `slice_max()` grabs the rows with maximum value. `slice_min()` the rows with the minimum value, there are also other slice\_\*() functions. Let's use `slice_max()` to find the five years when the most babies were born.
 
 ```{r}
 babynames |>
@@ -101,7 +102,7 @@ babynames |>
 
 This is not quite what we want. Its the largest number of births per name/sex by year. If we want to get the largest five years we'll have to summarize a bit first.
 
-## group_by and sumarize()
+## group_by and summarize()
 
 If we want to find the top five years, for all the babies born in that year we'll have to first group_by() year. Summarize accordingly then slice_max().
 
@@ -114,7 +115,6 @@ babynames |>
 ```
 
 Note that all of these years coincide with the boomer generation.
-
 
 ## filter()
 
@@ -129,7 +129,7 @@ babynames |>
 
 ```
 
-NOTE: When filtering by multiple values its important to use the %in% operator. When just one value you can use == instead. Also the c() struture in R is called a vector. It is similar to a list or an array in other languages. Data Frames are really just a bunch of vectors put together.
+NOTE: When filtering by multiple values its important to use the %in% operator. When just one value you can use == instead. Also the c() structure in R is called a vector. It is similar to a list or an array in other languages. Data Frames are really just a bunch of vectors put together.
 
 ## Exercises Part 1
 
@@ -148,7 +148,7 @@ In the following set of exercises I will guide you through the process of making
 
 **Solution:** Make a chunk and use `ggplot()` and `geom_line()` complete problem 2.
 
-**Problem 3:** You'll notice there is a problem, depending on your name, your graph probably oscillates to make a jagged appearance. Your task is to figure out why its happening and fix it with `group_by()` and `summarize()`, then pipe it into a new line graph without it oscillating. Then tidy up your line graph with a title, better axes labels and a better looking theme.
+**Problem 3:** You'll notice there is a problem, depending on your name, your graph probably oscillates to make a jagged appearance. Your task is to figure out why its happening and fix it with `group_by()` and `summarize()`, then pipe it into a new line graph without it oscillating. Then tidy up your line graph with a title, better axes labels and a better looking theme. If your graph is not jagged, say so in the solution and move on.
 
 **Solution:**
 
@@ -169,12 +169,18 @@ To do this we'll have to agree on dates for common generation names in the US. H
 | 1997-2012    | Zoomers             |
 | 2013-present | Generation Alpha    |
 
-
-**Problem 4:** Use `case_when()` and `mutate()` to add a new column called "generation_name" that takes the year column and labels it with the correct generation. Save this dataframe as `generations`.
+**Problem 4:** Use `case_when()` and `mutate()` to add a new column called "generation_name" that takes the year column and labels it with the correct generation. Save this dataframe as `generations`. I'll get you started.
 
 **Solution:**
 
-**Problem 5:** Using the `generations` dataframe, group_by() and summarize() find the total number of births by generation, then use `geom_col()` to make a nice bar graph showing the generation_name on the y-axis and the total births on the x-axis. (Hint: it might be nice to use the provided theme: 
+```{r}
+generations = babynames |>
+  mutate(generation_name = case_when(
+    year >= 1883 & year <= 1900 ~ "Lost Generation",
+```
+
+**Problem 5:** Using the `generations` dataframe, group_by() and summarize() find the total number of births by generation, then use `geom_col()` to make a nice bar graph showing the generation_name on the y-axis and the total births on the x-axis. (Hint: it will be helpful to use the provided theme:
+
 ```{r}
 
 
@@ -183,20 +189,26 @@ theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)))
 
 **Solution:**
 
-**Problem 6:** Edit the code above to group by biological sex as well as generations. Then remake the graph to color by sex. What do you notice?  
+**Problem 6:** Edit the code above to group by biological sex as well as generations. Then remake the graph to color by sex. What do you notice?
 
 **Solution:**
 
 ## Exercises part #3
 
-**Problem 7:** Subset the `generations` data to only both the Millennial and Zoomer generations and find the three most popular names from both generations. You will need the `%in%` operator and a vector `c()`.  I found `ungroup()` or a second `group_by()` helpful.  Your answer should have six rows.
+**Problem 7:** Subset the `generations` data to only both the Millennial and Zoomer generations and find the three most popular names from both generations. You will need the `%in%` operator and a vector `c()`. I found `ungroup()` or a second `group_by()` helpful. Your answer should have six rows.
 
 **Solution:**
 
-**Problem 8:** Use `filter()` and `str_detect()` to find the top three names from the Millennial and Zoomer generation that start with "E". You should only have to add **max** one line to your answer to number 7. Save your answer as `gen_top6` for problem 9, make sure the six names and their totals still show in the rendered document.
+**Problem 8:** Use `filter()` and `str_detect()` to find the top three names from the Millennial and Zoomer generation that start with "E". You should only have to add **max** one line to your answer to number 7. Save your answer as `gen_top6` for problem 9, make sure the six names and their totals still show in the rendered document. I'll get you started:
 
 **Solution:**
 
-**Problem 9:** For each generation in the `generations` dataset find the average number of the top 6 names you found in problem 8. Your answer should have 45 rows.   
+```{r}
+generations |>
+  filter(str_detect(name, "^E")) |>
+  filter( generation_name %in% c("Millennials", "Zoomers"))
+```
+
+**Problem 9:** For each generation in the `generations` dataset find the average number of the top 5 names you found in problem 8. Your answer should have 45 rows.
 
 **Solution:**

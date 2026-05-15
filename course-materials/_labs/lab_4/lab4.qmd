@@ -21,7 +21,7 @@ Learning Goals:
 
 ```{r}
 library(tidyverse)
-library(jsonlite) # This is for converting api's hexadecimal data to readable text. 
+library(jsonlite) # This is for converting the api's json files to a data frame. 
 ```
 
 ## Step 1: Make a Developer Key for the New York Times.
@@ -38,7 +38,7 @@ your_key = 'put key here'
 
 ## Step 2: Make a Call to an API
 
-With this API we need to first prepare a GET request. This is a specially formatted url, that will reach out to the server at the New York Times. You can see how these are formatted for the best seller list [here](https://developer.nytimes.com/docs/books-product/1/overview). Most APIs are similar, but each has its own file structure. No spaces are allowed in the url. I've made best_seller_list() function which will do this for you. There is no documentation so read the comments on the arguments. The date and genre default to get the hardcover fiction books from Feb 19, 2025. 
+With this API we need to first prepare a GET request. This is a specially formatted url, that will reach out to the server at the New York Times. You can see how these are formatted for the best seller list [here](https://developer.nytimes.com/docs/books-product/1/overview). Most APIs are similar, but each has its own file structure. No spaces are allowed in the url. I've made best_seller_list() function which will do this for you. There is no documentation so read the comments on the arguments. The date and genre default to get the hardcover fiction books from Feb 19, 2025.
 
 ```{r}
 # Don't edit this function
@@ -103,10 +103,10 @@ view(feb_19_25_hcf_books)
 feb_19_25_hcf_books|>
   ggplot()+
   geom_histogram(
-    aes(weeks_on_list
+    aes(x = 
         ),
-    binwidth = 10,
-    color = "blue"
+    binwidth = ,
+    color = ""
     )
 
 ```
@@ -115,21 +115,13 @@ feb_19_25_hcf_books|>
 
 **Answer**:
 
-## Step 5: Facet Your Previous Plot by Publisher
+## Step 5: Facet Your Previous Plot by Publisher or Author.
 
 Set `nrow` of your choice in the `facet_wrap` function.
 
 ```{r}
 # Paste the code below and adjust it 
-feb_19_25_hcf_books|>
-  ggplot()+
-  geom_histogram(
-    aes(weeks_on_list
-        ),
-    binwidth = 10,
-    color = "blue"
-    )+
-  facet_wrap(~author, nrow = 5)
+
 
 ```
 
@@ -139,8 +131,7 @@ feb_19_25_hcf_books|>
 
 ## Step 6: The y-axis is too busy.
 
-The y-axis doesn't tell us much information, its just a could of books, which is always just 1. We don't need to to show 0.25, 0.50, or 0.75; remove them by adding the layer: scale_y_continuous( breaks = c( 0, 1)). The clean up your graph by adding a title, changing the labels and applying a theme.
-
+The y-axis doesn't tell us much information, its just a count of books, which is always just 1. We don't need to to show 0.25, 0.50, or 0.75; remove them by adding the layer: scale_y_continuous( breaks = c( 0, 1)). The clean up your graph by adding a title, changing the labels and applying a theme.
 
 ## Step 7: Make Another API call for a different genre and date.
 
@@ -150,16 +141,10 @@ The y-axis doesn't tell us much information, its just a could of books, which is
 
 ```
 
-
-
-
 ## Step 8: Make a final plot
 
-In this last step make a final plot of your choosing using the data from the call in step 6, it can be a plot you made previously or something different. Clean it up, don't use default colors, add context and give good titles and labels. Cite your source. Finally apply a theme to lose the grey background. It can be any theme available (i.e. minimal, bw, classic, etc)
+In this last step make a final plot of your choosing using the data from the call in step 6, it can be a plot you made previously or something different. Clean it up, don't use default colors, add context and give good titles and labels. Cite your source. Finally apply a theme to lose the gray background. It can be any theme available (i.e. minimal, bw, classic, etc)
 
-
-
-
-Then write a sentence about something noticable about the books from your date and genre.
+Then write a sentence about something noticeable about the books from your date and genre.
 
 **Answer:**

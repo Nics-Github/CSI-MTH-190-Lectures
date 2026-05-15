@@ -60,7 +60,6 @@ Part 1: Visualizations
 
 -   [7 Data Ethics part 1](./course-materials/lectures/7_ethics_part_1.qmd)
 
--   [7.5 Data Ethics and Tidy Data Examples](./course-materials/lectures/7_5_in_class_ethic_examples.qmd)
 
 # Week 3 
 
@@ -77,6 +76,8 @@ Part 1: Visualizations
 -   [12 Data Ethics part 2](./course-materials/lectures/12_ethics_part_2.qmd)
 
 -   [13 Building a graph](./course-materials/lectures/13_Building_a_graph.qmd)
+
+-   [14 Data Ethics and Tidy Data Examples](./course-materials/lectures/14_in_class_ethic_examples.qmd)
 
 -   [14 Set up for Lab 4]()
 
@@ -120,11 +121,11 @@ Part 3: Application - Maps
 
 -   [23 Maps part 2](./course-materials/_labs/non_lab_maps_2/)
 
--   [24 Maps part 3](./course-materials/lectures/24_Chloropleth_maps.qmd)
+-   [24 Maps part 3](./course-materials/lectures/24_Choropleth_maps.qmd)
 
 # Week 11
 
--   [24 Maps part 3](./course-materials/lectures/24_Chloropleth_maps.qmd)
+-   [24 Maps part 3](./course-materials/lectures/24_Choropleth_maps.qmd)
 
 -   [25 Finding Data Demo]() (see canvas)
 
@@ -151,178 +152,3 @@ Part 4: Parallel to SQL
 -   [Project 4 Intro]()
 
 
-<!-- Discuss the difference between `%in%` and `==`
-
--   [Lecture on Joins](Make this lecture)
-
--   [Pivots](course-materials/lectures/18_pivots.qmd)
-  
--   Short `kable()` [demo](https://www.geeksforgeeks.org/kable-method-in-r/)
-
--   Functions and the tidyverse (Advanced)
--   Iteration (Advanced)
-
-
-
-
-# Project 3 info
-
-Some places to find data: 
-
-[Kaggle](https://www.kaggle.com/)
-
-[US forest service](https://data.fs.usda.gov)
-
-[Mass data website](https://data.mass.gov/)
-
-[google data search](https://datasetsearch.research.google.com/)
-
-Or just google "keyword" + gis or data
-
-Be mindful of the source and validity of your data. 
-
-# Day 33 Lab 7 Mapping Monarchs.
-
-[Alumani Panel](www/Alum_Panel.pdf)
-
-[Here is the lab for today.](https://classroom.github.com/a/QxAl2Zx9)
-
-It is due next Wednesday
-
-
-
-# Day 31 Choropleth Mapping and Leaflet
-
-[Data Jounralism at the Globe Wed from 4-5:15](https://umass-amherst.zoom.us/meeting/register/3R83LNn7ROWw6lAbmltMAw)
-
-[Scott Lacombe today 12:15-1:30](www/Tech_SL.png)
-
-Pushing back office hours 1:40-3:00 pm.
-
-![Cora's map](www/coras_map.jpg)
-
-[Choropleth Mapping](./course-materials/in-class-activies/29_Choropleth_and_Leaflet.qmd)
-
-::: {.callout-note collapse="true"}
-
-# Project 3 info
-
-[Project 3](https://classroom.github.com/a/lEaHigyH)
-
-After you know your group name in github classroom (or if you need a partner) fill out this form to tell me your [Project 3 groups](https://docs.google.com/forms/d/e/1FAIpQLSdgnj_qMUuWGNCCeez2dnFYTa3Am2HzTo8Whd5YbBqsy0cE4Q/viewform?usp=header)
-
-:::
-
-# Day 30 Mapping with simple features (sf) and shape files
-
-[VISA info session](www/Visa_April_15.pdf)
-
-[In class activity](./course-materials/in-class-activies/27_mapping.zip)
-
-Maybe fix some things in the final project if time. 
-
-# Day 29: Maps
-
-<!-- [Mapping Review](course-materials/lectures/30_map_review.qmd) -->
-
-[Example: static maps](./course-materials/lectures/26_maps-ggplot.qmd)
-
-Simple features and Shape files.
-
--   [Vermont's Geospacial Data](https://geodata.vermont.gov/)
-
--   [MA Bike Trails](https://www.mass.gov/info-details/massgis-data-bicycle-trails)
-
--   [tidygeocoder services](https://jessecambon.github.io/tidygeocoder/articles/geocoder_services.html)
-
-[In class activity](./course-materials/in-class-activies/27_mapping.zip)
-
-<!-- # Day 29 Practice function writing in R  -->
-
-<!-- [Chapter 7 Problem 1 and 3](https://mdsr-book.github.io/mdsr3e/07-iteration.html#iteration-exercises) -->
-
-# Day 28: Final Project: Website
-
-Start thinking about who you want to work with on project 3: 2 or 3 people. 
-
-The final project instructions can be found [here](./course-materials/Final-Project/Project.qmd).
-
-::: {.callout-note collapse="true"}
-
-# Website work
-
--   [Empty repo](https://classroom.github.com/a/BrlY_cSN)
-
--   Move all your website files to that repo
-
-    -   Recall they are in your lab 1 folder.
-
--   Add your project 1 to your website.
-
-    -   You could just link it to the main page
-
-    -   [Add it to the side bar](https://quarto.org/docs/websites/website-navigation.html#side-navigations).
-
-:::
-
-::: {.callout-note collapse="true"}
-
-# Clean up your project
-
--   #| echo: False - to hide code from a code chunk.
-
--   #| eval: False - to not include the output of the code.
-
--   #| warnings: False - drop the warnings from functions. 
-
--   [More options](https://rstudio.github.io/cheatsheets/html/quarto.html)
-
-:::
-
-::: {.callout-note collapse="true"}
-
-
-
-# Day 24 Functions and The Tidyverse
-
-No class next Wednesday April 2, finish up your projects. 
-
-[Data Masking](course-materials/lectures/24_data_masking.qmd)
-
-[Practice function writing](course-materials/in-class-activies/function_writing_practice.qmd)
-
-[More on masking](https://rlang.r-lib.org/reference/topic-data-mask.html)
-
-
-
-## Links worth keeping
-
-[sql-practice](https://www.sql-practice.com/)
-
-## Add this to canvas
-Help us help you: take screenshots of your screen and post them to Canvas.
-
--   macOS: Command+Shift+3 to take shot of whole screen, Command+Shift+4 to take subportion
-
--   Windows: Shift-Windows Key-S and Snip & Sketch
-
--   Linux: Print screen
-
--   Chromebook: Shift + Ctrl + Show windows
-:::
-
-## colors
-## Note on colors
-
-We will discuss colors on Monday when you get to them in ex 6:
-
-You can reread [this section](https://mdsr-book.github.io/mdsr3e/02-datavizI.html#sec-color) if you forget what sequential,diverging,qualitative mean.
-
-Or check out the colors examples on the [cheat sheet](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf).
-
-Intuitive [Color Examples](https://jhudatascience.org/tidyversecourse/dataviz.html#colors)
-
-## wrangling
-[dpylr cheatsheet for wrangling](https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf)
-
-[Wrangle babynames](/course-materials/in-class-activies/Wrangling_Baby_Names.qmd) -->

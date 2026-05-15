@@ -8,14 +8,13 @@ format:
     code-fold: true
 execute: 
   warning: false
-
 ---
 
 ## Goals
 
-In this lab you are making several maps. The primary goal is to et you to recognize the difference between a population map, and a normalize map. You will also practice a lot of the wrangling skills that you've build up in this course. Check the rubric, you will be graded on each of your maps.
+In this lab you are making several maps. The primary goal is to get you to recognize the difference between a population map, and a normalize map. You will also practice a lot of the wrangling skills that you've build up in this course. Check the rubric, you will be graded on each of your maps.
 
-Read each chunk carefully as there are several you do not need to run, but I left in case you were interested in the code.  
+Read each chunk carefully as there are several you do not need to run, but I left in case you were interested in the code.
 
 ```{r}
 library(tidyverse)
@@ -30,7 +29,7 @@ Every year Monarch Butterflies fly south for the winter. They start in higher la
 
 ## Import Data
 
-The data is saved both as a csv file in the data/ folder. 
+The data is saved both as a csv file in the data/ folder.
 
 ```{r}
 # Edit and run this chunk to load the data without google sheets (if you are not on the server).
@@ -38,10 +37,9 @@ us_can_recovery_2022 = read_csv("_____")
 mexico_recovery_pre_2023 = read_csv("data/mexico_data.csv")
 ```
 
-
 ## North American Map
 
-I found an old map of north america that we can use for this lab. If you find another reasonably sized North american map with the states and provices on it, please let me know. 
+I found an old map of North America that we can use for this lab. If you find another reasonably sized North American map with the states and provinces on it, please let me know.
 
 ```{r}
 # I made a North America Map for you run the chunk to load it in.
@@ -106,11 +104,12 @@ In the code chunk below add your top 7 butterflies, be sure to jitter them and m
 
 ```
 
-This is not an exciting map, I only see 7ish dots, not seven butterflies travelling south. I guess one butterfly rarely gets spotted again across state boarders. This shows the limits of citizen science. Not many people participate so the data is spotty.
+This is not an exciting map, I only see 7ish dots, not seven butterflies traveling south. I guess one butterfly rarely gets spotted again across state boarders. This shows the limits of citizen science. Not many people participate so the data is spotty.
 
 ## Make a Chrolopleth map of the US and Canada.
 
-Let's see what we can learn when we plot all of the butterflies from 2022 at the same time. I've previously geocoded butterfly location by the state level, as opposed to the city level to save time. The code to do that is below, if you are interested.  Getting location at the state level took `geocode()` 43 seconds instead of 8 minutes at the city level. Once I geocoded the data I used save() to save as an Rdata file, and load() to load it back in when you render. You should comment out the geocoding and save function afterward. (Read more about Rdata files [here](https://nathanieldphillips-yarrr.share.connect.posit.cloud/rdata-files.html)).
+Let's see what we can learn when we plot all of the butterflies from 2022 at the same time. I've previously geocoded butterfly location by the state level, as opposed to the city level to save time. The code to do that is below, if you are interested. Getting location at the state level took `geocode()` 43 seconds instead of 8 minutes at the city level. Once I geocoded the data I used save() to save as an Rdata file, and load() to load it back in when you render. You should comment out the geocoding and save function afterward. (Read more about Rdata files [here](https://nathanieldphillips-yarrr.share.connect.posit.cloud/rdata-files.html)).
+
 ```{r}
 #| eval: false
 
@@ -130,7 +129,7 @@ load("data/butterfly_location_data_state.Rdata")
 
 ```
 
-We would expect locations in the US with more people to have more sightings. So instead of plotting the overall sightings we'll make a Chloropleth map that colors the sightings by state as a percentage of the total sightings. We should always be mindful and ask ourselves if " we are really just creating a population map here? "
+We would expect locations in the US with more people to have more sightings. So instead of plotting the overall sightings we'll make a Chloropleth map that colors the sightings by state as a percentage of the total sightings. We should always be mindful and ask ourselves if " we are really just creating a population map ? "
 
 We have to wrangle the data a bit. Make a df called `butterfly_location_summary` and wrangle to find the following:
 
@@ -138,9 +137,9 @@ We have to wrangle the data a bit. Make a df called `butterfly_location_summary`
 -   The total number of sightings in 2022 (total_nation)
 -   The proportion for each state (prop)
 
-Then we need to join our data frame with `north_am` to get the location data. 
+Then we need to join our data frame with `north_am` to get the location data.
 
--   join the butterfly_location_summary to north_am, be sure to have north_am on the "left" so you don't lose simple features. Choose the correct join, we only care about state/provices tht have has butterfly sightings.
+-   join the butterfly_location_summary to north_am, be sure to have north_am on the "left" so you don't lose simple features. Choose the correct join, we only care about state/provinces that have has butterfly sightings.
 
 ```{r}
 # Wrangle your data
@@ -248,14 +247,11 @@ north_am = north_am |> inner_join(_____) |>
 
 **Graded Question: What does the above map show?**
 
-
-
 ## Where do they end up?
 
 These butterflies end up in Mexico for the winter. Using mexico_recovery_pre_2023 data
 
-I have previously used geocode to geocode the locations of butterflies in Mexico. 
-
+I have previously used geocode to geocode the locations of butterflies in Mexico.
 
 ```{r}
 # eval: False
@@ -296,13 +292,13 @@ north_am = read_sf("data/north_america/")|>
   st_as_sf()
 ```
 
-In Mexico volunteers are paid to collect and report tagged butterflies. Make a final map showing which states these butterflieis end up in. You want your result to looks like the us_mex_can.png below.
+In Mexico volunteers are paid to collect and report tagged butterflies. Make a final map showing which states these butterflies end up in. You want your result to looks like the us_mex_can.png below.
 
 ![](us_mex_can.png)
 
-This is a little challenging, but you can do it! 
+This is a little challenging, but you can do it!
 
-I did this with  pull() and a few joins to make a vector of state/province names. Finally there was some count()-ing, joining, mutating with the coalesce() function and filtering before I drew my graph. You can obviously do it using other functions. 
+I did this with pull() and a few joins to make a vector of state/province names. Finally there was some count()-ing, joining, mutating with the coalesce() function and filtering before I drew my graph. You can also do it using other functions.
 
 **Graded Map 4: Map of total counts US, CA, MEX**
 

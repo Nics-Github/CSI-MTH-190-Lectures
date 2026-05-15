@@ -1,13 +1,15 @@
 ---
-title: "Course Overview"
-subtitle: "CSI-MTH-190"
+title: "Welcome to Data Science "
+subtitle: "CSI-MTH-190: Topics"
 author: "Schwab"
 editor: visual
 format: 
   revealjs: 
     theme: beige
+    code-fold: true
 execute: 
   echo: true
+
 ---
 
 ## Introduction to Programming Language for Data Science (R) and Computing Environment (RStudio)
@@ -24,93 +26,136 @@ execute:
 
 [Hadley Wickham](https://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf)
 
-## Data Collection
+## Web Scraping and Importing Data 
 
-[Collect student data here](https://forms.gle/uRxF8UTkgp45ofY46)
-
-https://forms.gle/uRxF8UTkgp45ofY46
-
-You must be signed into your HCC email account to fill out form.
-
-## Web Scraping and Importing Data ( and a tiny bit of cleaning)
-
-```{r import_student_data}
-library(googlesheets4)
-library(janitor)
-
-student_data <- read_sheet('https://docs.google.com/spreadsheets/d/1aNrNX5xWkrtuJHc-bsCC7e07KbnRbVIxaWdbblOCyxA/edit?usp=sharing')
-
-student_data <- clean_names(student_data)
-
-```
-
-## Data Visualization
+The follow data was taken from [wikipedia](https://en.wikipedia.org/wiki/List_of_best-selling_game_consoles) on May 12, 2026.
 
 ```{r}
-
-# make simple plot of student data. 
 library(tidyverse)
+library(rvest)
 
-student_data |>
-  ggplot(mapping = aes(x = what_is_your_height_in_inches) )+
-  geom_histogram()+
-  labs(
-    title = "Students' height in inches"
-  )
+video_game_sys = read_html("https://en.wikipedia.org/wiki/List_of_best-selling_game_consoles") |>
+html_element("#mw-content-text > div.mw-content-ltr.mw-parser-output > table")|>
+html_table() 
+
+video_game_sys |> head()
+```
+
+## ( a bit of cleaning)
+
+Data is Dirty we have to start by cleaning it up. 
+
+```{r}
+library(janitor)
+video_game_sys = video_game_sys |>
+  clean_names()|>
+  mutate(units_sold= parse_number(units_sold))|>
+  select(-ref)
+
+video_game_sys |> head()
 ```
 
 ## Data Wrangling
 
-```{r wrangle_s_d}
-# wrangle student data. edit plot
-student_data |>
-  
-  select(do_you_have_experience_with_the_statistical_computer_language_r) |>
-  
-  rename(r_experiance = do_you_have_experience_with_the_statistical_computer_language_r )|>
-  
-  group_by(r_experiance)|>
-  
-  summarize(
-    
-    sum()/n()
-    
-  )
-  
+Here we filter for just the big three: Nintendo, Sony, Microsoft.
+
+```{r}
+
+video_game_sys = video_game_sys |>
+  filter( company %in% c("Sony","Nintendo","Microsoft"))
+
+video_game_sys |> head()
 ```
+
+## Data Visualization
+
+This is a bar chart of the number of video game consoles sold by each company. 
+
+```{r}
+# make simple plot of console data. 
+
+video_game_sys |>
+  ggplot()+
+  geom_col(aes(x = company, y = units_sold), fill = "orange")+
+  labs( title = "Number of Systems Sold by Company",
+  y = "units sold (millions)",
+  caption = "wikipedia: List_of_best-selling_game_consoles")+
+  theme_minimal()
+
+```
+
 
 ## Data Management
 
 ```         
--   Security
 -   Keeping yourself organized!
 -   How Data is housed
 ```
 
+
+Data Source: wikipedia
+
+Date: May 12, 2026
+
+We'll also find relevant data online. 
+
 ## Data Ethics
 
-How we collect and use data without doing harm.
+How we collect and use data responsibly.
+
+Consider Personally Identifyable Information. (PII)
+
+Who is collecting the data, and for what purpose?
+
+Is the data being misconstrued (intentionally or not).
 
 ## Introduction to Database Querying with SQL
 
 Wrangle some data with the classic SQL.
 
-[Simple Query?](https://www.w3schools.com/sql/trysql.asp?filename=trysql_editor)
+[Simple Query?](https://www.sql-practice.com/)
 
-## Further Topics based on time and student interest may include:
+## Geospatial Data and Maps
 
-```         
--   Dynamic and Customized Data Graphics
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
 
--   Geospatial Data and Maps
+library(tidyverse)
+library(tidycensus)
 
--   Learning with AI
+#tidycensus::census_api_key("4acec63df8eee0def6e28f09f8ae46d8cc229184", install = TRUE)
+options(tigris_use_cache = TRUE)
+# Write your code below
+mass_prop_retirees <- 
+  tidycensus::get_acs(
+    geography = "county", 
+    variables = c(population = "B01003_001",age_1="B01001_044", age_2='B01001_045', age_3='B01001_046',age_4='B01001_047', age_5 = 'B01001_048', age_6 = 'B01001_044'),
+    state = "MA",
+    geometry = TRUE,
+    cache_table = TRUE
+  )|>
+  # Add centroids to each region using purrr package
+ tidyr::separate(NAME, c("County", "State"), sep = ", ") |> 
+ tidyr::separate(County, c("County", "Fluff"), sep = " ") 
+
+mass_prop_retirees <- mass_prop_retirees |> 
+  select(County,variable,estimate)|>
+  pivot_wider(names_from = variable, values_from = estimate) |>
+  mutate(retire_prop = (age_1+age_2+age_3+age_4+age_5)/population)
+
+ggplot() +
+  geom_sf(data = mass_prop_retirees, aes(fill = retire_prop)) +
+  scale_fill_distiller(direction = 1)+
+  labs(title = "Proportion of People over 65",
+  caption = "American Community Survey, 2023",
+  fill = "prop")+
+    theme_void() +
+    scale_fill_distiller(palette = "Greys", direction = 1)
+
 ```
 
-## Optional and Advnaced Topics:
 
-```         
--   Function writing and data masking in R
 
--   Iteration
-```

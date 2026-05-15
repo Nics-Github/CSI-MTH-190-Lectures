@@ -8,17 +8,15 @@ format:
     code-fold: true
 execute: 
   warning: false
-
 ---
 
 ## Introduction
 
-You have learned a lot about manipulating and visualizing data in R. You have gotten a little practice doing it in SQL. In this lab you will continue that practice in SQL. Specifically you will: 
+You have learned a lot about manipulating and visualizing data in R. You have gotten a little practice doing it in SQL. In this lab you will continue that practice in SQL. Specifically you will:
 
-1. Become familiar with the Chinook database. 
-2. You will answer a five questions using SQL.
-3. You will formulate your own question and answer it using the Chinook Data. This will also be done in SQL. 
-
+1.  Become familiar with the Chinook database.
+2.  You will answer a five questions using SQL.
+3.  You will formulate your own question and answer it using the Chinook Data. This will also be done in SQL.
 
 ## Check the readme
 
@@ -28,7 +26,7 @@ Before you being he questions, take some time to get to know the [Chinook data](
 
 There are five questions you must answer about the Chinook Data.
 
-You should answer all questions with your query. The LIMIT and ORDER BY commands will be useful. You should have no extra output. 
+You should answer all questions with your query. The LIMIT and ORDER BY commands will be useful. You should have no extra output.
 
 ```{r}
 library(DBI)
@@ -61,7 +59,7 @@ dbGetQuery(mydb,
 
 ## Question 2
 
-From which group is the longest song in this data? How long is that song in seconds? What is the Name of the Track? (Hint: I needed two joins, and the "artist" is not a traditional music artist.)
+From which artist is the longest song in this data? How long is that song in seconds? What is the Name of the Track? (Hint: I needed two joins, and the "artist" is not a traditional music artist.)
 
 ```{r}
 dbGetQuery(mydb, 
@@ -71,21 +69,17 @@ dbGetQuery(mydb,
 
 ## Question 3
 
-What is the name and EmployeeId of employee the helped the most customers? (Hint: You should only have 1 row in your answer, not 3 or 8).
+What is the name and employee id of the employee that helped the most customers? (Hint: You should only have 1 row in your answer, not 3 or 8).
 
 ```{r}
 dbGetQuery(mydb, 
-    "SELECT Employee.FirstName,Count(Employee.FirstName), SupportRepId
-    FROM Employee
-    JOIN Customer ON EmployeeId = SupportRepId
-    Group By EmployeeId
-    LIMIT 1
+    "
 ")
 ```
 
 ## Question 4
 
-Which Customers paid the most money? Where are they from? (Hint: I found 8 of them).
+Which customers paid the most money? Where are they from?
 
 ```{r}
 dbGetQuery(mydb, 
@@ -95,7 +89,7 @@ dbGetQuery(mydb,
 
 ## Question 5
 
-Considering the 8 customers from question 4, which track was purchased the most? Who was the artist of that track? How many times was it purchased? (Hint: Recycle the code from problem 4, I did 5 joins for this problem).
+Which track was purchased the most? Who was the artist of that track? How many times was it purchased? (Hint: I did a lot of joins for this problem).
 
 ```{r}
 dbGetQuery(mydb, 
@@ -105,6 +99,6 @@ dbGetQuery(mydb,
 
 # Develop your own question
 
-When developing your own question, you must do at least one join and use some kind of aggragting or filter operation. 
+When developing your own question, you must do at least one join and use some kind of aggregating or filter operation.
 
 ## Your question below

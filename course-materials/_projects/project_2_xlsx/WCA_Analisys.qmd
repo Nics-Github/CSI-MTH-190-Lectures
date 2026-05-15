@@ -16,7 +16,7 @@ format:
 
 # Read in the data 
 # Due to memory constraints on the server, some of the data is commented out, 
-# if you need to data, feel free to uncomment it. 
+# if you want to look at it the data, feel free to uncomment it. 
 championships <- read_tsv("WCA_data/WCA_export_championships.tsv")
 competitions <- read_tsv("WCA_data/WCA_export_competitions.tsv")
 continents <- read_tsv("WCA_data/WCA_export_continents.tsv")

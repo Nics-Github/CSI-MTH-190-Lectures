@@ -11,7 +11,7 @@ execute:
     message: false
 ---
 
-Note: This lab was originally written by my colleagues at Smith College. I've edited it slightly. 
+Note: This lab was originally written by my colleagues at Smith College. I've edited it slightly.
 
 ```{r, include=FALSE}
 # Do not edit this code chunk
@@ -20,22 +20,22 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning = FALSE)
 
 # Today's Dataset
 
-Today we will be working with a data resource from the University of Wisconsin Population Health Institute. It aggregates data from a number of government sources to produce county health indicators for every county in the US. 
+Today we will be working with a data resource from the University of Wisconsin Population Health Institute. It aggregates data from a number of government sources to produce county health indicators for every county in the US.
 
 This lab will teach about some common topics we find when working with data:
 
-- overplotting
-- alpha, size and shape aesthetics
-- color
-- scale
+-   overplotting
+-   alpha, size and shape aesthetics
+-   color
+-   scale
 
-The goal is to get you familiar with these topics. 
+The goal is to get you familiar with these topics.
 
 Something to keep in mind when reviewing this data:
 
-> *While this is a powerful data source for visualizing health disparities, particularly in smaller counties, there can be large degrees of uncertainty in the reporting of certain health measures. We won't be working with this dataset's confidence intervals today, so we do want to consider that the visualizations that we see are not a perfect reflection of county health.  
+> \*While this is a powerful data source for visualizing health disparities, particularly in smaller counties, there can be large degrees of uncertainty in the reporting of certain health measures. We won't be working with this dataset's confidence intervals today, so we do want to consider that the visualizations that we see are not a perfect reflection of county health.
 
-Run the code below to load the dataset we will be working with today. 
+Run the code below to load the dataset we will be working with today.
 
 ```{r}
 # If you cannot read in the file set the current working directory to the same folder your lab is in. Use the gear icon and choose setwd().
@@ -59,7 +59,7 @@ ne_county_health_2021 = county_health_2021 |>
 
 # View the Data
 
-We'll look at the `ne_country_health data_2021` This is the county health data from just the 6 new england state. 
+We'll look at the `ne_country_health data_2021` This is the county health data from just the 6 New England states.
 
 ```{r}
 # Write your code below
@@ -86,11 +86,11 @@ ggplot(data = county_health_2021,
   scale_color_distiller(palette = "Greens")
 ```
 
-Fortunately, there are some adjustments we can make to deal with overplotting. First, we can adjust the transparency of the shapes on our plot by setting the *alpha* argument in our geom function to a number between 0 and 1. We can also reduce the size of the shapes on our plot by setting the *size* argument in our geom function to a number between 0 and 1. 
+Fortunately, there are some adjustments we can make to deal with overplotting. First, we can adjust the transparency of the shapes on our plot by setting the *alpha* argument in our geom function to a number between 0 and 1. We can also reduce the size of the shapes on our plot by setting the *size* argument in our geom function to a number between 0 and 1.
 
 ## Exercise 1: Adjust the Alpha and Size of Points on Plot
 
-Copy and paste the code I created above into the chunk below. In the `geom_point()` function, set the *alpha* aesthetic to 0.75 and the *size* to 0.5. Notice the adjustments to the plot as you update these attributes. 
+Copy and paste the code I created above into the chunk below. In the `geom_point()` function, set the *alpha* aesthetic to 0.75 and the *size* to 0.5. Notice the adjustments to the plot as you update these attributes.
 
 ```{r}
 # Paste the code from above and adjust it
@@ -168,7 +168,7 @@ Your subtitle should be the data's source: County Health Rankings, University of
 
 ## Exercise 5: Divide This Plot by State
 
-Sometimes, the narrative a plot conveys can be misleading until we starting layering in additional variables. For instance, in the above plot we look at the correlation between life expectancy and reported physically unhealthy days in New England counties, but different states in New England might have different relationships between the two variables, so it may make more sense to divide this plot out by state. We can do this by creating small multiples using the `facet_wrap()` function. See Lecture 10 for an example of faceting. 
+Sometimes, the narrative a plot conveys can be misleading until we starting layering in additional variables. For instance, in the above plot we look at the correlation between life expectancy and reported physically unhealthy days in New England counties, but different states in New England might have different relationships between the two variables, so it may make more sense to divide this plot out by state. We can do this by creating small multiples using the `facet_wrap()` function. See Lecture 10 for an example of faceting.
 
 ```{r}
 # Paste the code you wrote in Exercise 4 below and adjust it
@@ -177,19 +177,19 @@ Sometimes, the narrative a plot conveys can be misleading until we starting laye
 
 # Visulization Asthetics
 
-As we discussed (or will discuss), there are three types of color palettes that can be added to a plot:
+As we discussed, there are three types of color palettes that can be added to a plot:
 
-* Sequential: A uni-directional ordering of shades.
-* Diverging: A bi-directional ordering of shades.
-* Qualitative: A discrete set of colors. 
+-   Sequential: A uni-directional ordering of shades.
+-   Diverging: A bi-directional ordering of shades.
+-   Qualitative: A discrete set of colors.
 
-We're going to use the `RBrewer` package to add appropriate palettes to these plots. 
+We're going to use the `RBrewer` package to add appropriate palettes to these plots.
 
 ## Exercise 6: Add a Sequential Color Aesthetic to Plot
 
-* Map the median household income raw value to the *color* aesthetic in your `aes()` function. Be sure to also change this argument in your `labs()` function to update your legend label. Then, append the following argument to the end of your plot: `scale_color_distiller(palette = "Greens", labels = scales::comma)`
-* Set the legend's position to the bottom of the plot.
-* The legend text may overlap. Use this argument `legend.text = element_text(size = 5)` in your `theme()` function to adjust the size of the legend text.
+-   Map the median household income raw value to the *color* aesthetic in your `aes()` function. Be sure to also change this argument in your `labs()` function to update your legend label. Then, append the following argument to the end of your plot: `scale_color_distiller(palette = "Greens", labels = scales::comma)`
+-   Set the legend's position to the bottom of the plot.
+-   The legend text may overlap. Use this argument `legend.text = element_text(size = 5)` in your `theme()` function to adjust the size of the legend text.
 
 ```{r}
 # Paste the code you wrote in Exercise 4 below and adjust it
@@ -219,9 +219,9 @@ You need to delete `labels = scales::comma` in your `scale_color_*()` function. 
 
 Reference the [ggplot2 cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf) to adjust the following plot in these ways:
 
-* Map the median household income raw value to the *size* aesthetic.
-* Change the label for the *size* legend to Median Household Income (hint: you will supply the name of the aesthetic argument in the `labs()` function).
-* Change `scale_color_distiller(palette = "Greens", labels = scales::comma)` to `scale_size_continuous(labels = scales::comma)`.
+-   Map the median household income raw value to the *size* aesthetic.
+-   Change the label for the *size* legend to Median Household Income (hint: you will supply the name of the aesthetic argument in the `labs()` function).
+-   Change `scale_color_distiller(palette = "Greens", labels = scales::comma)` to `scale_size_continuous(labels = scales::comma)`.
 
 ```{r}
 # Paste the code you wrote in Exercise 6 below and adjust it
@@ -236,7 +236,7 @@ Reference the [ggplot2 cheatsheet](https://github.com/rstudio/cheatsheets/blob/m
 
 A different way to differentiate data on a plot is to map the shape aesthetic onto the plot. In this case, rather than all observations in the dataset appearing as points on a plot, observations will appear as different shapes based on their associated values in a *categorical* variable.
 
-Copy the code that you wrote in Exercise 7 into the chunk below. Instead of the color aesthetic, assign the shape of the data on the plot by setting `shape =` to a *categorical* variable of your choice (hint: a categorical variable is a qualitative variable such as state abbreviation. We talked about types of variables in Lec 5). With the caveat that the shape palette can deal with a maximum of 6 discrete values because more than 6 becomes difficult to discriminate. Remember that, in this case, shape is an aesthetic, so this must be added inside of the `aes()` function. Add a label for the legend by setting `shape =` in the `labs()` function to a phrase that describes the shape variable. Remove the `scale_color_*()` function.
+Copy the code that you wrote in Exercise 7 into the chunk below. Instead of the color aesthetic, assign the shape of the data on the plot by setting `shape =` to a *categorical* variable of your choice (hint: a categorical variable is a qualitative variable such as state abbreviation. We talked about types of variables in Lecture 9). With the caveat that the shape palette can deal with a maximum of 6 discrete values because more than 6 becomes difficult to discriminate. Remember that, in this case, shape is an aesthetic, so this must be added inside of the `aes()` function. Add a label for the legend by setting `shape =` in the `labs()` function to a phrase that describes the shape variable. Remove the `scale_color_*()` function.
 
 ```{r}
 # Paste the code you wrote in Exercise 7 below and adjust it
@@ -279,7 +279,7 @@ ggplot(data = county_health_2021,
 
 Due to most states have fewer than 1,000 people newly diagnosed with HIV in 2021, the vast majority of the points on the plot appear at the bottom of the y-axis scale and are indiscernible from one another. This is a case when it makes sense to apply a log scale to the y-axis.
 
-Copy the plot that I created above, and change the y-axis scale from continuous to log10. You might reference the formula specified above or reference the [ggplot2 cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf) for help. 
+Copy the plot that I created above, and change the y-axis scale from continuous to log10. You might reference the formula specified above or reference the [ggplot2 cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf) for help.
 
 ```{r}
 # Paste the code below and adjust it
@@ -310,4 +310,4 @@ This is just an exploratory data analysis. I was wondering if there is a relatio
 
 ```
 
-Remember to Render this lab before you put it on canvas.  
+Remember to Render this lab before you put it on canvas.

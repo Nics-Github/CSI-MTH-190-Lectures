@@ -7,20 +7,17 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.37">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Schwab">
-  <title>CSI-MTH-190 – Course Overview</title>
+  <title>CSI-MTH-190 – Welcome to Data Science</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
   <style>
-    /* Default styles provided by pandoc.
-    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -99,7 +96,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-5c8106c274dac56d8e05e3022a5a12af.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-340d960e8755bbda5148eb2f88c02f59.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -197,8 +194,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Course Overview</h1>
-  <p class="subtitle">CSI-MTH-190</p>
+  <h1 class="title">Welcome to Data Science</h1>
+  <p class="subtitle">CSI-MTH-190: Topics</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -224,96 +221,136 @@ Schwab
 <h2>Grammar of Graphics</h2>
 <p><a href="https://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf">Hadley Wickham</a></p>
 </section>
-<section id="data-collection" class="slide level2">
-<h2>Data Collection</h2>
-<p><a href="https://forms.gle/uRxF8UTkgp45ofY46">Collect student data here</a></p>
-<p>https://forms.gle/uRxF8UTkgp45ofY46</p>
-<p>You must be signed into your HCC email account to fill out form.</p>
-</section>
-<section id="web-scraping-and-importing-data-and-a-tiny-bit-of-cleaning" class="slide level2">
-<h2>Web Scraping and Importing Data ( and a tiny bit of cleaning)</h2>
+<section id="web-scraping-and-importing-data" class="slide level2">
+<h2>Web Scraping and Importing Data</h2>
+<p>The follow data was taken from <a href="https://en.wikipedia.org/wiki/List_of_best-selling_game_consoles">wikipedia</a> on May 12, 2026.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(googlesheets4)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(janitor)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(rvest)</span>
 <span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a>student_data <span class="ot">&lt;-</span> <span class="fu">read_sheet</span>(<span class="st">'https://docs.google.com/spreadsheets/d/1aNrNX5xWkrtuJHc-bsCC7e07KbnRbVIxaWdbblOCyxA/edit?usp=sharing'</span>)</span>
-<span id="cb1-5"><a></a></span>
-<span id="cb1-6"><a></a>student_data <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(student_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a></a>video_game_sys <span class="ot">=</span> <span class="fu">read_html</span>(<span class="st">"https://en.wikipedia.org/wiki/List_of_best-selling_game_consoles"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a></a><span class="fu">html_element</span>(<span class="st">"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a></a><span class="fu">html_table</span>() </span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a>video_game_sys <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  Platform               Type  Company Released.mw-parser-o…¹ `Units sold` Ref. 
+  &lt;chr&gt;                  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;                  &lt;chr&gt;        &lt;chr&gt;
+1 PlayStation 2          Home  Sony    2000                   160&nbsp;million  [1]  
+2 Nintendo Switch #      Hybr… Ninten… 2017                   155.92 mill… [2][…
+3 Nintendo DS            Hand… Ninten… 2004                   154.02&nbsp;mill… [2][…
+4 Game Boy &amp; Game Boy C… Hand… Ninten… 1989, 1998             118.69&nbsp;mill… [2][…
+5 PlayStation 4 #        Home  Sony    2013                   117.2&nbsp;milli… [5]  
+6 PlayStation            Home  Sony    1994                   102.49&nbsp;mill… [6]  
+# ℹ abbreviated name:
+#   ¹​`Released.mw-parser-output .citation{word-wrap:break-word}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}[2]`</code></pre>
+</div>
+</div>
+</section>
+<section id="a-bit-of-cleaning" class="slide level2">
+<h2>( a bit of cleaning)</h2>
+<p>Data is Dirty we have to start by cleaning it up.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(janitor)</span>
+<span id="cb3-2"><a></a>video_game_sys <span class="ot">=</span> video_game_sys <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a></a>  <span class="fu">clean_names</span>()<span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a></a>  <span class="fu">mutate</span>(<span class="at">units_sold=</span> <span class="fu">parse_number</span>(units_sold))<span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>ref)</span>
+<span id="cb3-6"><a></a></span>
+<span id="cb3-7"><a></a>video_game_sys <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  platform                  type     company  released_mw_parser_ou…¹ units_sold
+  &lt;chr&gt;                     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                        &lt;dbl&gt;
+1 PlayStation 2             Home     Sony     2000                          160 
+2 Nintendo Switch #         Hybrid   Nintendo 2017                          156.
+3 Nintendo DS               Handheld Nintendo 2004                          154.
+4 Game Boy &amp; Game Boy Color Handheld Nintendo 1989, 1998                    119.
+5 PlayStation 4 #           Home     Sony     2013                          117.
+6 PlayStation               Home     Sony     1994                          102.
+# ℹ abbreviated name:
+#   ¹​released_mw_parser_output_citation_word_wrap_break_word_mw_parser_output_citation_target_background_color_rgba_0_127_255_0_133_2</code></pre>
+</div>
+</div>
+</section>
+<section id="data-wrangling" class="slide level2">
+<h2>Data Wrangling</h2>
+<p>Here we filter for just the big three: Nintendo, Sony, Microsoft.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>video_game_sys <span class="ot">=</span> video_game_sys <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a></a>  <span class="fu">filter</span>( company <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Sony"</span>,<span class="st">"Nintendo"</span>,<span class="st">"Microsoft"</span>))</span>
+<span id="cb5-3"><a></a></span>
+<span id="cb5-4"><a></a>video_game_sys <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  platform                  type     company  released_mw_parser_ou…¹ units_sold
+  &lt;chr&gt;                     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                        &lt;dbl&gt;
+1 PlayStation 2             Home     Sony     2000                          160 
+2 Nintendo Switch #         Hybrid   Nintendo 2017                          156.
+3 Nintendo DS               Handheld Nintendo 2004                          154.
+4 Game Boy &amp; Game Boy Color Handheld Nintendo 1989, 1998                    119.
+5 PlayStation 4 #           Home     Sony     2013                          117.
+6 PlayStation               Home     Sony     1994                          102.
+# ℹ abbreviated name:
+#   ¹​released_mw_parser_output_citation_word_wrap_break_word_mw_parser_output_citation_target_background_color_rgba_0_127_255_0_133_2</code></pre>
+</div>
 </div>
 </section>
 <section id="data-visualization" class="slide level2">
 <h2>Data Visualization</h2>
+<p>This is a bar chart of the number of video game consoles sold by each company.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># make simple plot of student data. </span></span>
-<span id="cb2-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-3"><a></a></span>
-<span id="cb2-4"><a></a>student_data <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> what_is_your_height_in_inches) )<span class="sc">+</span></span>
-<span id="cb2-6"><a></a>  <span class="fu">geom_histogram</span>()<span class="sc">+</span></span>
-<span id="cb2-7"><a></a>  <span class="fu">labs</span>(</span>
-<span id="cb2-8"><a></a>    <span class="at">title =</span> <span class="st">"Students' height in inches"</span></span>
-<span id="cb2-9"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># make simple plot of console data. </span></span>
+<span id="cb7-2"><a></a></span>
+<span id="cb7-3"><a></a>video_game_sys <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb7-5"><a></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> company, <span class="at">y =</span> units_sold), <span class="at">fill =</span> <span class="st">"orange"</span>)<span class="sc">+</span></span>
+<span id="cb7-6"><a></a>  <span class="fu">labs</span>( <span class="at">title =</span> <span class="st">"Number of Systems Sold by Company"</span>,</span>
+<span id="cb7-7"><a></a>  <span class="at">y =</span> <span class="st">"units sold (millions)"</span>,</span>
+<span id="cb7-8"><a></a>  <span class="at">caption =</span> <span class="st">"wikipedia: List_of_best-selling_game_consoles"</span>)<span class="sc">+</span></span>
+<span id="cb7-9"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 
 </div>
-<img data-src="1_Overview_of_the_course_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
-<section id="data-wrangling" class="slide level2">
-<h2>Data Wrangling</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># wrangle student data. edit plot</span></span>
-<span id="cb3-2"><a></a>student_data <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a></a>  </span>
-<span id="cb3-4"><a></a>  <span class="fu">select</span>(do_you_have_experience_with_the_statistical_computer_language_r) <span class="sc">|&gt;</span></span>
-<span id="cb3-5"><a></a>  </span>
-<span id="cb3-6"><a></a>  <span class="fu">rename</span>(<span class="at">r_experiance =</span> do_you_have_experience_with_the_statistical_computer_language_r )<span class="sc">|&gt;</span></span>
-<span id="cb3-7"><a></a>  </span>
-<span id="cb3-8"><a></a>  <span class="fu">group_by</span>(r_experiance)<span class="sc">|&gt;</span></span>
-<span id="cb3-9"><a></a>  </span>
-<span id="cb3-10"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb3-11"><a></a>    </span>
-<span id="cb3-12"><a></a>    <span class="fu">sum</span>()<span class="sc">/</span><span class="fu">n</span>()</span>
-<span id="cb3-13"><a></a>    </span>
-<span id="cb3-14"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  r_experiance                                           `sum()/n()`
-  &lt;chr&gt;                                                        &lt;dbl&gt;
-1 No                                                               0
-2 No but I have experience with other computer software.           0
-3 Yes                                                              0</code></pre>
-</div>
-</div>
-</section>
+<img data-src="1_Overview_of_the_course_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section id="data-management" class="slide level2">
 <h2>Data Management</h2>
-<pre><code>-   Security
--   Keeping yourself organized!
+<pre><code>-   Keeping yourself organized!
 -   How Data is housed</code></pre>
+<p>Data Source: wikipedia</p>
+<p>Date: May 12, 2026</p>
+<p>We’ll also find relevant data online.</p>
 </section>
 <section id="data-ethics" class="slide level2">
 <h2>Data Ethics</h2>
-<p>How we collect and use data without doing harm.</p>
+<p>How we collect and use data responsibly.</p>
+<p>Consider Personally Identifyable Information. (PII)</p>
+<p>Who is collecting the data, and for what purpose?</p>
+<p>Is the data being misconstrued (intentionally or not).</p>
 </section>
 <section id="introduction-to-database-querying-with-sql" class="slide level2">
 <h2>Introduction to Database Querying with SQL</h2>
 <p>Wrangle some data with the classic SQL.</p>
-<p><a href="https://www.w3schools.com/sql/trysql.asp?filename=trysql_editor">Simple Query?</a></p>
+<p><a href="https://www.sql-practice.com/">Simple Query?</a></p>
 </section>
-<section id="further-topics-based-on-time-and-student-interest-may-include" class="slide level2">
-<h2>Further Topics based on time and student interest may include:</h2>
-<pre><code>-   Dynamic and Customized Data Graphics
-
--   Geospatial Data and Maps
-
--   Learning with AI</code></pre>
-</section>
-<section id="optional-and-advnaced-topics" class="slide level2">
-<h2>Optional and Advnaced Topics:</h2>
-<pre><code>-   Function writing and data masking in R
-
--   Iteration</code></pre>
+<section id="geospatial-data-and-maps" class="slide level2">
+<h2>Geospatial Data and Maps</h2>
 
 
-</section>
+
+<img data-src="1_Overview_of_the_course_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -503,7 +540,7 @@ Schwab
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -615,14 +652,13 @@ Schwab
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
             }
-          }
-          return codeEl.innerText;
+            return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

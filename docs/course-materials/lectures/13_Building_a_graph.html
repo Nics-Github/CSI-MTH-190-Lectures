@@ -7,8 +7,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.37">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Schwab">
   <title>CSI-MTH-190 – Options when building a graph</title>
@@ -18,9 +18,6 @@
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
   <style>
-    /* Default styles provided by pandoc.
-    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -99,7 +96,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-5c8106c274dac56d8e05e3022a5a12af.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-340d960e8755bbda5148eb2f88c02f59.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -226,11 +223,11 @@ Schwab
 <h2>Data</h2>
 <p>When building graphs with the tidyverse we want the data to be a dataframe. You can use the <code>class()</code> function to determine if a data file is a dataframe.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a></a><span class="co">#install.packages(mdsr)</span></span>
 <span id="cb1-3"><a></a><span class="fu">library</span>(mdsr)</span>
 <span id="cb1-4"><a></a><span class="co"># In OO class() returns the object type. </span></span>
-<span id="cb1-5"><a></a><span class="fu">class</span>(iris)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-5"><a></a><span class="fu">class</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data.frame"</code></pre>
 </div>
@@ -242,7 +239,7 @@ Schwab
 <p>We want to know the variable type (numeric or categorical) we are working with so we can choose the best graph for it.</p>
 <p>You can see this by viewing the data.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">head</span>(MLB_teams, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">head</span>(MLB_teams, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 11
   yearID teamID lgID      W     L  WPct attendance normAttend  payroll metroPop
@@ -275,9 +272,9 @@ Schwab
 <p>We generally pipe our data into ggplot() when graphing.</p>
 <p>Note that metroPop is a numeric variable, and should be graphed with a histogram.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>MLB_teams <span class="sc">|&gt;</span>   <span class="co"># &lt;- this is the data</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>MLB_teams <span class="sc">|&gt;</span>   <span class="co"># &lt;- this is the data</span></span>
 <span id="cb5-2"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span>  <span class="co"># &lt;- this is what we are doing</span></span>
-<span id="cb5-3"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop ) )  <span class="co"># &lt;- This is our asthetic</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-3"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop ) )  <span class="co"># &lt;- This is our asthetic</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
@@ -285,9 +282,9 @@ Schwab
 <h2>We can change aes()</h2>
 <p>Using the code above we can easily change aesthetics.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>MLB_teams <span class="sc">|&gt;</span>   <span class="co"># &lt;- this is the data</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>MLB_teams <span class="sc">|&gt;</span>   <span class="co"># &lt;- this is the data</span></span>
 <span id="cb6-2"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span>  <span class="co"># &lt;- this is what we are doing</span></span>
-<span id="cb6-3"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> payroll ) )  <span class="co"># &lt;- This is our asthetic{r}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-3"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> payroll ) )  <span class="co"># &lt;- This is our asthetic{r}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="13_Building_a_graph_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
@@ -297,10 +294,10 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>MLB_teams <span class="sc">|&gt;</span>   <span class="co"># &lt;- this is the data</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>MLB_teams <span class="sc">|&gt;</span>   <span class="co"># &lt;- this is the data</span></span>
 <span id="cb7-2"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span>  <span class="co"># &lt;- this is what we are doing</span></span>
 <span id="cb7-3"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop ) ) <span class="sc">+</span> <span class="co"># &lt;- This is our asthetic</span></span>
-<span id="cb7-4"><a></a>    <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_comma</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-4"><a></a>    <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_comma</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -312,11 +309,11 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>MLB_teams <span class="sc">|&gt;</span>   </span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>MLB_teams <span class="sc">|&gt;</span>   </span>
 <span id="cb8-2"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb8-3"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop ) ) <span class="sc">+</span> </span>
 <span id="cb8-4"><a></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>lgID) <span class="sc">+</span>  <span class="co"># &lt;--  wrap by league</span></span>
-<span id="cb8-5"><a></a>    <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_comma</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-5"><a></a>    <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_comma</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -327,14 +324,14 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(scales) <span class="co"># need this to use cut_short_scale()</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(scales) <span class="co"># need this to use cut_short_scale()</span></span>
 <span id="cb9-2"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
 <span id="cb9-3"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span>  </span>
 <span id="cb9-4"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop ) ) <span class="sc">+</span> </span>
 <span id="cb9-5"><a></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>lgID) <span class="sc">+</span></span>
 <span id="cb9-6"><a></a>    <span class="fu">scale_x_continuous</span>(</span>
 <span id="cb9-7"><a></a>        <span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale_cut =</span> <span class="fu">cut_short_scale</span>() )</span>
-<span id="cb9-8"><a></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-8"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -345,7 +342,7 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">library</span>(scales) <span class="co"># need this to use cut_short_scale()</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">library</span>(scales) <span class="co"># need this to use cut_short_scale()</span></span>
 <span id="cb10-2"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
 <span id="cb10-3"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span>  </span>
 <span id="cb10-4"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop,</span>
@@ -356,7 +353,7 @@ Schwab
 <span id="cb10-9"><a></a>    </span>
 <span id="cb10-10"><a></a>    <span class="fu">scale_x_continuous</span>(</span>
 <span id="cb10-11"><a></a>        <span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale_cut =</span> <span class="fu">cut_short_scale</span>() )</span>
-<span id="cb10-12"><a></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-12"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -367,7 +364,7 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
 <span id="cb11-2"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span>  </span>
 <span id="cb11-3"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop,</span>
 <span id="cb11-4"><a></a>                                 <span class="at">fill =</span> lgID,</span>
@@ -378,7 +375,7 @@ Schwab
 <span id="cb11-9"><a></a>    </span>
 <span id="cb11-10"><a></a>    <span class="fu">scale_x_continuous</span>(</span>
 <span id="cb11-11"><a></a>        <span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale_cut =</span> <span class="fu">cut_short_scale</span>() ),</span>
-<span id="cb11-12"><a></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-12"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -389,7 +386,7 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
 <span id="cb12-2"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span>  </span>
 <span id="cb12-3"><a></a>    <span class="fu">geom_histogram</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop,</span>
 <span id="cb12-4"><a></a>                                 <span class="at">fill =</span> lgID,</span>
@@ -403,7 +400,7 @@ Schwab
 <span id="cb12-12"><a></a>    </span>
 <span id="cb12-13"><a></a>    <span class="fu">scale_x_continuous</span>(</span>
 <span id="cb12-14"><a></a>        <span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale_cut =</span> <span class="fu">cut_short_scale</span>() ),</span>
-<span id="cb12-15"><a></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-15"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -414,7 +411,7 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
 <span id="cb13-2"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span>  </span>
 <span id="cb13-3"><a></a>    <span class="fu">geom_density</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop,</span>
 <span id="cb13-4"><a></a>                                 <span class="at">fill =</span> lgID,</span>
@@ -428,7 +425,7 @@ Schwab
 <span id="cb13-12"><a></a>    </span>
 <span id="cb13-13"><a></a>    <span class="fu">scale_x_continuous</span>(</span>
 <span id="cb13-14"><a></a>        <span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale_cut =</span> <span class="fu">cut_short_scale</span>() ),</span>
-<span id="cb13-15"><a></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-15"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -439,7 +436,7 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
 <span id="cb14-2"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span>  </span>
 <span id="cb14-3"><a></a>    <span class="fu">geom_density</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop,</span>
 <span id="cb14-4"><a></a>                                 <span class="at">fill =</span> lgID,</span>
@@ -456,7 +453,7 @@ Schwab
 <span id="cb14-15"><a></a>    )<span class="sc">+</span></span>
 <span id="cb14-16"><a></a>    <span class="fu">scale_y_continuous</span>(</span>
 <span id="cb14-17"><a></a>        <span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_comma</span>() )</span>
-<span id="cb14-18"><a></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-18"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -467,7 +464,7 @@ Schwab
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>MLB_teams <span class="sc">|&gt;</span>  </span>
 <span id="cb15-2"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span>  </span>
 <span id="cb15-3"><a></a>    <span class="fu">geom_density</span>( <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">x =</span> metroPop,</span>
 <span id="cb15-4"><a></a>                                 <span class="at">fill =</span> lgID,</span>
@@ -483,7 +480,7 @@ Schwab
 <span id="cb15-14"><a></a>    )<span class="sc">+</span></span>
 <span id="cb15-15"><a></a>    <span class="fu">labs</span>(<span class="at">fill =</span><span class="st">"League ID"</span>)<span class="sc">+</span></span>
 <span id="cb15-16"><a></a>    <span class="fu">scale_fill_manual</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"American League"</span>, <span class="st">"National League"</span>),</span>
-<span id="cb15-17"><a></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-17"><a></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -688,7 +685,7 @@ Schwab
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -800,14 +797,13 @@ Schwab
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
             }
-          }
-          return codeEl.innerText;
+            return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

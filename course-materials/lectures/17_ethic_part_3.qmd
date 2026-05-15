@@ -9,13 +9,13 @@ execute:
   warning: false
   message: false
   echo: true
---- 
+---
 
-## Practice thinking about Bias 
+## Practice thinking about Bias
 
 Start thinking about how data may be biased.
 
-I'll give an example then we'll consider three additonal examples.  
+I'll give an example then we'll consider three additional examples.
 
 ## Modern Pulse Oximeters Intoduction
 
@@ -25,7 +25,7 @@ I'll give an example then we'll consider three additonal examples.
 
 ## HP Calibrated for all skin tones
 
-HP worked with NASA to develoop medical devices.
+HP worked with NASA to develop medical devices.
 
 Hewlett Packard made an ear pulse oximeter [for all in the 1970s.](https://www.wired.com/story/pulse-oximeters-equity/)
 
@@ -41,7 +41,7 @@ But there was no discussion of different skin tones.
 
 ## Newer Models Prioritize Convenience
 
-Small device that is battery powered for the finger tip. 
+Small device that is battery powered for the finger tip.
 
 People can keep it in their pocket.
 
@@ -49,32 +49,31 @@ Today there is still bias in these devices.
 
 Brought to light during COVID what many people with darker skin were sent home from ER despite having breathing difficulties.
 
-## Why tell you this story? 
+## Why tell you this story?
 
-The bias in these devices is imparted by the people who design them. 
+The bias in these devices is imparted by the people who design them.
 
 HP collected data to consider skin tones.
 
-If Minolta collected data on skin tone, it was ignored. 
+If Minolta collected data on skin tone, it was ignored.
 
-Those choices matter. 
+Those choices matter.
 
-#  Examples 
+# Examples
 
-Let's practice considering bias in the data. 
+Let's practice considering bias in the data.
 
-
-## Ex 1.  Skin Cancer
+## Ex 1. Skin Cancer
 
 Machine Learning (AI) example:
 
-- Start with a [dataset](https://www.kaggle.com/datasets/kmader/skin-cancer-mnist-ham10000) of lots of pictures of potential cancers.
+-   Start with a [dataset](https://www.kaggle.com/datasets/kmader/skin-cancer-mnist-ham10000) of lots of pictures of potential cancers.
 
-- Cancer Specialists (Humans) label pictures as cancerous or not.
+-   Cancer Specialists (Humans) label pictures as cancerous or not.
 
-- Data (Images of skin) is fed into a nueral network repeatedly until AI can tell appar cancer images. This makes a model.
+-   Data (Images of skin) is fed into a neural network repeatedly until AI can tell cancer in images from non-cancerous ones. This makes a model.
 
-- Model is then used to take a new image and guess if it is cancerous or not. 
+-   Model is then used to take a new image and guess if it is cancerous or not.
 
 Any Bias Here? When would it matter?
 
@@ -82,15 +81,15 @@ Any Bias Here? When would it matter?
 
 Stop Question Fisk is a policing strategy used in New York City as well as other major cities.
 
-All the data is collected and reported [here](https://www.nyc.gov/site/nypd/stats/reports-analysis/stopfrisk.page)
+All the data is collected and reported [here](https://www.nyc.gov/site/nypd/stats/reports-analysis/stopfrisk.page).
 
-Data is reported on a [form](https://ccrjustice.org/sites/default/files/attach/2016/03/Floyd%20Monitor%20Status%20Report%20-%20New%20UF250%203-23-16.pdf) the police officers submit.
+Data is reported on a [form](https://ccrjustice.org/sites/default/files/attach/2016/03/Floyd%20Monitor%20Status%20Report%20-%20New%20UF250%203-23-16.pdf) police officers submit.
 
 Any Bias Here? When would it matter?
 
 ## Ex 3. babynames
 
-We will be considering the [`babynames` dataset](https://cran.r-project.org/web/packages/babynames/babynames.pdf) in the next lab. 
+We considered the [`babynames` dataset](https://cran.r-project.org/web/packages/babynames/babynames.pdf) in a previous lab.
 
 This dataset includes all names given to US citizens as collected from the social security administration between 1880 and 2017.
 

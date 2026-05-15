@@ -25,14 +25,10 @@ library(DBI)
 
 ```{r}
 # You may need to run install.packages("RSQLite") try it a few times because the server
-<<<<<<< HEAD
-mydb <- dbConnect(RSQLite::SQLite(), "course-materials/_labs/non_lab_sql/netflixdb.sqlite")
-=======
 #mydb <- dbConnect(RSQLite::SQLite(), "course-materials/_labs/non_lab_sql/netflixdb.sqlite")
 
 # for use when rendering:
 mydb <- dbConnect(RSQLite::SQLite(), "netflixdb.sqlite")
->>>>>>> 87b57a420692c755fc5c082e6b3425ec0f32bdb1
 # dbDisconnect(mydb) # <- run this to disconnect
 ```
 

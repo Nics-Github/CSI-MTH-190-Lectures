@@ -7,8 +7,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.37">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Schwab">
   <title>CSI-MTH-190 – Web Scrapping</title>
@@ -18,9 +18,6 @@
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
   <style>
-    /* Default styles provided by pandoc.
-    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -99,7 +96,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-5c8106c274dac56d8e05e3022a5a12af.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-340d960e8755bbda5148eb2f88c02f59.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -239,8 +236,8 @@ Schwab
 <p>This means you download when you download the tidyverse.</p>
 <p>But you must still load it after you have loaded the tidyverse.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(rvest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(rvest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="the-read-in-the-html" class="slide level2">
@@ -249,12 +246,12 @@ Schwab
 <p>Generally we will first read in the html data with <code>read_html()</code></p>
 <p><code>read_html()</code> takes a url as a string and you have to be connected to the internet for it to work properly.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>winter_olympics <span class="ot">=</span> <span class="fu">read_html</span>(<span class="st">"https://en.wikipedia.org/wiki/2026_Winter_Olympics"</span>)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>winter_olympics <span class="ot">=</span> <span class="fu">read_html</span>(<span class="st">"https://en.wikipedia.org/wiki/2026_Winter_Olympics"</span>)</span>
 <span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a>winter_olympics</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-3"><a></a>winter_olympics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{html_document}
-&lt;html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-menu-disabled vector-feature-language-in-main-page-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-1 vector-feature-appearance-pinned-clientpref-1 skin-theme-clientpref-day vector-sticky-header-enabled vector-toc-available skin-theme-clientpref-thumb-standard" lang="en" dir="ltr"&gt;
+&lt;html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-menu-disabled vector-feature-language-in-main-page-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-1 vector-feature-appearance-pinned-clientpref-1 skin-theme-clientpref-day vector-sticky-header-enabled vector-toc-available skin-thumbsize-clientpref-standard" lang="en" dir="ltr"&gt;
 [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
 [2] &lt;body class="skin--responsive skin-vector skin-vector-search-vue mediawik ...</code></pre>
 </div>
@@ -264,8 +261,8 @@ Schwab
 <h2>Find the right table</h2>
 <p>We want to find the “selector” for our table.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>winter_olympics <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a></a><span class="fu">html_element</span>(<span class="st">"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table:nth-child(85)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>winter_olympics <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a></a><span class="fu">html_element</span>(<span class="st">"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table:nth-child(85)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{html_node}
 &lt;table class="wikitable" style="margin:0.5em auto; font-size:90%; position:relative; width:75%;"&gt;
@@ -277,9 +274,9 @@ Schwab
 <h2>Convert into a table</h2>
 <p>We use html_table() to create a data frame.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>winter_olympics <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>winter_olympics <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a></a><span class="fu">html_element</span>(<span class="st">"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table:nth-child(85)"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a></a><span class="fu">html_table</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-3"><a></a><span class="fu">html_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 10
   X1    X2               X3    X4            X5    X6    X7    X8    X9    X10  
@@ -301,11 +298,11 @@ Schwab
 <section id="medal-count-solution" class="slide level2">
 <h2>Medal Count Solution</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>winter_olympics <span class="ot">=</span> <span class="fu">read_html</span>(<span class="st">"https://en.wikipedia.org/wiki/2026_Winter_Olympics"</span>)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>winter_olympics <span class="ot">=</span> <span class="fu">read_html</span>(<span class="st">"https://en.wikipedia.org/wiki/2026_Winter_Olympics"</span>)</span>
 <span id="cb8-2"><a></a></span>
 <span id="cb8-3"><a></a>olympic_medals <span class="ot">=</span> winter_olympics <span class="sc">|&gt;</span></span>
 <span id="cb8-4"><a></a>  <span class="fu">html_element</span>(<span class="st">"#mw-content-text &gt; div.mw-content-ltr.mw-parser-output &gt; table.wikitable.sortable.sticky-header-multi.plainrowheaders.jquery-tablesorter"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb8-5"><a></a>  <span class="fu">html_table</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-5"><a></a>  <span class="fu">html_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="cleaning-with-janitor" class="slide level2">
@@ -330,9 +327,9 @@ Schwab
 <h2>Rank should be an integer, not a character</h2>
 <p>Use mutate to make a new column of the correct type.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a></a>  <span class="fu">mutate</span>(<span class="at">Rank =</span> <span class="fu">as.integer</span>(Rank))</span>
-<span id="cb9-3"><a></a>  olympic_medals</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-3"><a></a>  olympic_medals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 6
     Rank .mw-parser-output .tooltip-dotted{border-bo…¹  Gold Silver Bronze Total
@@ -358,34 +355,34 @@ Schwab
 <h2>.mw-paser… should say “name_of_country”</h2>
 <p>We’ll use rename()</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals<span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a></a>  <span class="fu">rename</span>( <span class="at">name_of_country =</span> <span class="st">`</span><span class="at">.mw-parser-output .tooltip-dotted{border-bottom:1px dotted;cursor:help}NOC</span><span class="st">`</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals<span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a></a>  <span class="fu">rename</span>( <span class="at">name_of_country =</span> <span class="st">`</span><span class="at">.mw-parser-output .tooltip-dotted{border-bottom:1px dotted;cursor:help}NOC</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="all-column-names-should-be-lowercase-to-match-style-clean_names" class="slide level2">
 <h2>all column names should be lowercase to match style (clean_names())</h2>
 <p>The clean_names() function will lower case all column names and use underscores as spaces. This conforms to the tidyverse style guide. It also makes data easier to work with.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span>(janitor)</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span>(janitor)</span>
 <span id="cb12-2"><a></a></span>
 <span id="cb12-3"><a></a>olympic_medals <span class="ot">=</span> olympic_medals <span class="sc">|&gt;</span> </span>
-<span id="cb12-4"><a></a>  <span class="fu">clean_names</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-4"><a></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="lose-the-last-total-row-head" class="slide level2">
 <h2>lose the last “total row” (head())</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a></a><span class="fu">head</span>(<span class="dv">16</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a></a><span class="fu">head</span>(<span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="change-remaining-to-other-case_when-or-manually" class="slide level2">
 <h2>change “remaining” to “other” (case_when(), or manually)</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>olympic_medals<span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>olympic_medals<span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a></a><span class="fu">mutate</span>(<span class="at">name_of_country =</span> <span class="fu">case_when</span>(</span>
 <span id="cb14-3"><a></a>  name_of_country<span class="sc">==</span><span class="st">"Remaining"</span> <span class="sc">~</span> <span class="st">"Other Countries"</span>,</span>
-<span id="cb14-4"><a></a>  <span class="cn">TRUE</span> <span class="sc">~</span> name_of_country))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-4"><a></a>  <span class="cn">TRUE</span> <span class="sc">~</span> name_of_country))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 6
     rank name_of_country      gold silver bronze total
@@ -403,32 +400,32 @@ Schwab
 11    NA Other Countries        26     32     35    93
 12    NA Totals (29 entries)   116    118    115   349</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># alternative method</span></span>
-<span id="cb16-2"><a></a><span class="co">#olympic_medals[16, "name_of_country"]&lt;-"hello" # Notice the &lt;- here. 16th row of the name_of_country column.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># alternative method</span></span>
+<span id="cb16-2"><a></a><span class="co">#olympic_medals[16, "name_of_country"]&lt;-"hello" # Notice the &lt;- here. 16th row of the name_of_country column.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="drop-the-total-column" class="slide level2">
 <h2>drop the “total” column</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>olympic_medals <span class="ot">=</span> </span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>olympic_medals <span class="ot">=</span> </span>
 <span id="cb17-2"><a></a>  olympic_medals <span class="sc">|&gt;</span></span>
-<span id="cb17-3"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>total)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-3"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="tidy-up-the-table" class="slide level2">
 <h2>tidy up the table</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>olympic_medals <span class="ot">=</span> olympic_medals <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a></a><span class="fu">pivot_longer</span>(</span>
 <span id="cb18-3"><a></a>  <span class="at">cols =</span> <span class="fu">c</span>(gold,silver,bronze),</span>
 <span id="cb18-4"><a></a>  <span class="at">names_to =</span> <span class="st">"medal"</span>, </span>
-<span id="cb18-5"><a></a>  <span class="at">values_to =</span> <span class="st">"number_of_medals"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-5"><a></a>  <span class="at">values_to =</span> <span class="st">"number_of_medals"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="admire-the-clean-data-frame" class="slide level2">
 <h2>admire the clean data frame</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">head</span>(olympic_medals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">head</span>(olympic_medals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
    rank name_of_country medal  number_of_medals
@@ -633,7 +630,7 @@ Schwab
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -745,14 +742,13 @@ Schwab
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
             }
-          }
-          return codeEl.innerText;
+            return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
